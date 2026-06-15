@@ -81,6 +81,11 @@
     htop
     kitty
     nix-output-monitor
+    zsh
+    waybar
+    tmux
+    eza
+    inputs.zen-browser.packages.${pkgs.system}.default
   ];
 
   programs.nh = {
@@ -90,6 +95,7 @@
     flake = "/etc/nixos"; # Point this to the directory containing your flake.nix
   };
 
+  services.udisks2.enable = true;
   services.displayManager.ly.enable = true;
   programs.hyprland.enable = true;
 

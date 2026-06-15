@@ -2,8 +2,8 @@
   description = "My NixOS Flake Configuration";
 
   inputs = {
-    # Use the unstable or stable nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05"; # for default nixpkgs
+    zen-browser.url = "github:youwen5/zen-browser-flake"; # for zen browser
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
