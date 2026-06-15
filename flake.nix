@@ -11,7 +11,8 @@
       # Change 'nix-port' to your actual hostname (run 'hostname' in terminal to check)
       nix-port = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [
+	specialArgs = { inherit inputs; };
+	modules = [
           ./configuration.nix
         ];
       };
