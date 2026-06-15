@@ -10,6 +10,8 @@
       ./hardware-configuration.nix
     ];
 
+  boot.supportedFilesystems = [ "ntfs" ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -65,6 +67,10 @@
   };
 
 
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+  };
+
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     vim
@@ -78,10 +84,10 @@
   ];
 
   programs.nh = {
-  enable = true;
-  clean.enable = true;
-  clean.extraArgs = "--keep-since 4d --keep 3";
-  flake = "/etc/nixos"; # Point this to the directory containing your flake.nix
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/etc/nixos"; # Point this to the directory containing your flake.nix
   };
 
   services.displayManager.ly.enable = true;
