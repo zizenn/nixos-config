@@ -45,6 +45,8 @@
     timesyncd.enable = true;
   };
 
+  time.timeZone = "Asia/Dhaka";
+
   # --- Programs & Environment ---
   programs = {
     zsh.enable = true;
@@ -61,7 +63,7 @@
     systemPackages = with pkgs; [
       vim neovim git htop kitty tmux eza
       inputs.zen-browser.packages.${pkgs.system}.default
-      bubblewrap firefox shared-mime-info mailcap ca-certificates
+      bubblewrap firefox shared-mime-info mailcap
     ];
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";
