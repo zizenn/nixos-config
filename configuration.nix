@@ -67,9 +67,13 @@
       vim neovim git htop kitty tmux eza
       inputs.zen-browser.packages.${pkgs.system}.default
       bubblewrap firefox shared-mime-info mailcap
+      ca-certificates
+      nss
     ];
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";
+      SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+      NSS_SSL_CBC_RANDOM_IV = "0";
     };
   };
 
