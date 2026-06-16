@@ -12,11 +12,11 @@
     ];
 
   # Map the external file to your specific user account
-  home-manager.users.zizenn = import ./home.nix;
+  #home-manager.users.zizenn = import ./home.nix;
 
   # (Optional) Recommended settings for system-wide integration
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
+  #home-manager.useGlobalPkgs = true;
+  #home-manager.useUserPackages = true;
 
   # boot settings
   boot.supportedFilesystems = [ "ntfs" ];
