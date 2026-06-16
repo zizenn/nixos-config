@@ -35,39 +35,17 @@
 
   networking.hostName = "nix-port"; # Define your hostname.
   time.timeZone = "Asia/Dhaka";
+  services.printing.enable = true;
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
 
   users.users.zizenn.shell = pkgs.zsh;
 
   # amd
-  # Ensure hardware acceleration is enabled for AMD
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true; # Good for Steam/Wine later
-  
-  # Specifically for AMD
   services.xserver.videoDrivers = [ "amdgpu" ];
 
+  # sound
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -76,6 +54,7 @@
   # touchpad support
   services.libinput.enable = true;
 
+  # user stuff
   users.users.zizenn = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
@@ -111,6 +90,11 @@
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
     flake = "/etc/nixos"; # Point this to the directory containing your flake.nix
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   programs.zsh.enable = true;
