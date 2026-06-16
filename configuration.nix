@@ -95,6 +95,10 @@
     xdg-desktop-portal-gtk
   ];
 
+  services.dbus.enable = true;
+  services.upower.enable = true; # Fixes the UPower GDBus error
+  programs.dconf.enable = true;  # Fixes GDBus errors related to settings storage
+
   programs.nh = {
     enable = true;
     clean.enable = true;
