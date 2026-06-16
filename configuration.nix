@@ -13,6 +13,8 @@
     hostName = "nix-port";
     networkmanager.enable = true;
     nameservers = [ "8.8.8.8" "1.1.1.1" ];
+    enableIPv6 = false;
+    interfaces.wlo1.mtu = 1400;
   };
 
   networking.firewall.enable = false;
@@ -79,6 +81,7 @@
       pkgs.mailcap
       pkgs.cacert
       pkgs.nss
+      pkgs.cloudflare-warp
       # inputs.zen-browser.packages.${pkgs.system}.default
     ];
     sessionVariables = {
@@ -87,6 +90,8 @@
       NSS_SSL_CBC_RANDOM_IV = "0";
     };
   };
+
+  systemd.packages = [ pkgs.cloudflare-warp ];
 
   programs.firefox.enable = true;
 
