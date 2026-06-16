@@ -15,6 +15,7 @@
     nameservers = [ "8.8.8.8" "1.1.1.1" ];
     enableIPv6 = false;
     interfaces.wlo1.mtu = 1400;
+    networkmanager.dns = "none";
   };
 
   networking.firewall.enable = false;
