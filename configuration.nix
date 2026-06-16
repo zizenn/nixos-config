@@ -7,6 +7,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
   
   networking = {
     hostName = "nix-port";
@@ -69,7 +70,7 @@
 
   users.users.zizenn = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "video" ];
     shell = pkgs.zsh;
   };
 
