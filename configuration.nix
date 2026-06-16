@@ -11,6 +11,14 @@
       inputs.lanzaboote.nixosModules.lanzaboote
     ];
 
+  # Map the external file to your specific user account
+  home-manager.users.zizenn = import ./home.nix;
+
+  # (Optional) Recommended settings for system-wide integration
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+
+  # boot settings
   boot.supportedFilesystems = [ "ntfs" ];
 
   boot.loader.systemd-boot.enable = false; # Lanzaboote replaces this
@@ -110,6 +118,7 @@
   services.udisks2.enable = true;
   services.displayManager.ly.enable = true;
   programs.hyprland.enable = true;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

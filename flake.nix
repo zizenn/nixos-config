@@ -5,6 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05"; # for default nixpkgs
     zen-browser.url = "github:youwen5/zen-browser-flake"; # for zen browser
     lanzaboote.url = "github:nix-community/lanzaboote/v0.4.1"; # for secure boot
+    <home-manager/nixos> # home manager
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
