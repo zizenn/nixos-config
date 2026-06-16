@@ -61,10 +61,8 @@
     systemPackages = with pkgs; [
       vim neovim git htop kitty tmux eza
       inputs.zen-browser.packages.${pkgs.system}.default
-      bubblewrap firefox shared-mime-info mailcap
-      ca-certificates
+      bubblewrap firefox shared-mime-info mailcap ca-certificates
     ];
-    # Remove NIXOS_OZONE_WL here to test if browser renders correctly first
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";
     };
