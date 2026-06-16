@@ -64,11 +64,20 @@
 
   environment = {
     systemPackages = with pkgs; [
-      vim neovim git htop kitty tmux eza
+      pkgs.vim
+      pkgs.neovim
+      pkgs.git
+      pkgs.htop
+      pkgs.kitty
+      pkgs.tmux
+      pkgs.eza
+      pkgs.bubblewrap
+      pkgs.firefox
+      pkgs.shared-mime-info
+      pkgs.mailcap
+      pkgs.ca-certificates
+      pkgs.nss
       inputs.zen-browser.packages.${pkgs.system}.default
-      bubblewrap firefox shared-mime-info mailcap
-      ca-certificates
-      nss
     ];
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";
