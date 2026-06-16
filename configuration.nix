@@ -75,7 +75,7 @@
       pkgs.firefox
       pkgs.shared-mime-info
       pkgs.mailcap
-      pkgs.ca-certificates
+      pkgs.cacert
       pkgs.nss
       inputs.zen-browser.packages.${pkgs.system}.default
     ];
