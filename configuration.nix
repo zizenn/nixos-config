@@ -42,6 +42,8 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
+  users.users.zizenn.shell = pkgs.zsh;
+
   # amd
   # Ensure hardware acceleration is enabled for AMD
   hardware.graphics.enable = true;
@@ -95,6 +97,7 @@
     flake = "/etc/nixos"; # Point this to the directory containing your flake.nix
   };
 
+  environment.shells = with pkgs; [ zsh ];
   services.udisks2.enable = true;
   services.displayManager.ly.enable = true;
   programs.hyprland.enable = true;
