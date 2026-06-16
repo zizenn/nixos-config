@@ -41,8 +41,12 @@
   users.users.zizenn.shell = pkgs.zsh;
 
   # amd
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true; # Good for Steam/Wine later
+  hardware.graphics = {
+    enable = true;
+    extraPackages = [ pkgs.mesa ];
+    enable32Bit = true; # Good for Steam/Wine later
+  };
+
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # sound
@@ -83,6 +87,8 @@
     pkgs.eza
     inputs.zen-browser.packages.${pkgs.system}.default
     sbctl
+    ffmpeg_7-full
+    libva-utils
   ];
 
   programs.nh = {
@@ -95,6 +101,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "*";
   };
 
   programs.zsh.enable = true;
