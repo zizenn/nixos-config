@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.lanzaboote.nixosModules.lanzaboote
+      #inputs.lanzaboote.nixosModules.lanzaboote
     ];
 
   # Map the external file to your specific user account
@@ -21,12 +21,12 @@
   # boot settings
   boot.supportedFilesystems = [ "ntfs" ];
 
-  boot.loader.systemd-boot.enable = false; # Lanzaboote replaces this
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/etc/secureboot";
-  configurationLimit = 5; 
-  };
+  boot.loader.systemd-boot.enable = true; # Lanzaboote replaces this
+  # boot.lanzaboote = {
+  #   enable = true;
+  #   pkiBundle = "/etc/secureboot";
+  # configurationLimit = 5; 
+  # };
 
   boot.loader.systemd-boot.configurationLimit = 6;
   boot.loader.efi.canTouchEfiVariables = false;
