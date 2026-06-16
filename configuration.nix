@@ -76,6 +76,12 @@
     shell = pkgs.zsh;
   };
 
+  networking = {
+    hostName = "nix-port";
+    networkmanager.enable = true;
+    nameservers = [ "8.8.8.8" "1.1.1.1" ];
+  };
+
   networking.firewall.enable = false;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
