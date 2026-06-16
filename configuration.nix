@@ -6,7 +6,7 @@
   # --- Boot & System ---
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
-  boot.kernelPackages = pkgs.linuxPackages_lts;
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
   
   networking = {
