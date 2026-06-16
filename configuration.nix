@@ -83,7 +83,6 @@
     htop
     kitty
     nix-output-monitor
-    zsh
     waybar
     tmux
     pkgs.eza
@@ -97,6 +96,7 @@
     flake = "/etc/nixos"; # Point this to the directory containing your flake.nix
   };
 
+  programs.zsh.enable = true;
   environment.shells = with pkgs; [ zsh ];
   services.udisks2.enable = true;
   services.displayManager.ly.enable = true;
