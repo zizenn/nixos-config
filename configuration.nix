@@ -74,6 +74,8 @@
       pkgs.bubblewrap
       pkgs.firefox
       pkgs.shared-mime-info
+      pkgs.glib
+      pkgs.xdg-utils
       pkgs.mailcap
       pkgs.cacert
       pkgs.nss
