@@ -37,9 +37,6 @@
   time.timeZone = "Asia/Dhaka";
   services.printing.enable = true;
 
-
-  users.users.zizenn.shell = pkgs.zsh;
-
   # amd
   hardware.graphics = {
     enable = true;
@@ -89,6 +86,13 @@
     sbctl
     ffmpeg_7-full
     libva-utils
+    fontconfig
+    freetype
+    libGL
+    mesa
+    libva
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-gtk
   ];
 
   programs.nh = {
