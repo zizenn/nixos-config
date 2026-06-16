@@ -59,6 +59,7 @@
     systemPackages = with pkgs; [
       vim neovim git htop kitty tmux eza
       inputs.zen-browser.packages.${pkgs.system}.default
+      bubblewrap
     ];
     # Remove NIXOS_OZONE_WL here to test if browser renders correctly first
     sessionVariables = {
