@@ -79,7 +79,7 @@
       pkgs.mailcap
       pkgs.cacert
       pkgs.nss
-      inputs.zen-browser.packages.${pkgs.system}.default
+      # inputs.zen-browser.packages.${pkgs.system}.default
     ];
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";
@@ -87,6 +87,9 @@
       NSS_SSL_CBC_RANDOM_IV = "0";
     };
   };
+
+  programs.firefox.enable = true;
+  programs.firefox.nativeMessagingHosts.enable = true;
 
   users.users.zizenn = {
     isNormalUser = true;
