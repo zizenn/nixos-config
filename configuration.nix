@@ -12,7 +12,10 @@
   networking = {
     hostName = "nix-port";
     networkmanager.enable = true;
+    nameservers = [ "8.8.8.8" "1.1.1.1" ];
   };
+
+  networking.firewall.enable = false;
 
   # --- Graphics (AMD Optimized) ---
   hardware.graphics = {
@@ -75,14 +78,6 @@
     extraGroups = [ "wheel" "networkmanager" "video" ];
     shell = pkgs.zsh;
   };
-
-  networking = {
-    hostName = "nix-port";
-    networkmanager.enable = true;
-    nameservers = [ "8.8.8.8" "1.1.1.1" ];
-  };
-
-  networking.firewall.enable = false;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "26.05";
