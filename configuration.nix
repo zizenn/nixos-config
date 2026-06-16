@@ -17,8 +17,10 @@
   boot.lanzaboote = {
     enable = true;
     pkiBundle = "/etc/secureboot";
+  configurationLimit = 5; 
   };
 
+  boot.loader.systemd-boot.configurationLimit = 6;
   boot.loader.efi.canTouchEfiVariables = false;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.networkmanager.enable = true;
