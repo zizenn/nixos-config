@@ -89,7 +89,6 @@
   };
 
   programs.firefox.enable = true;
-  programs.firefox.nativeMessagingHosts.enable = true;
 
   users.users.zizenn = {
     isNormalUser = true;
