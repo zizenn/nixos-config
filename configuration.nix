@@ -8,11 +8,17 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.lanzaboote.nixosModules.lanzaboote
     ];
 
   boot.supportedFilesystems = [ "ntfs" ];
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = false; # Lanzaboote replaces this
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
+
   boot.loader.efi.canTouchEfiVariables = false;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   networking.networkmanager.enable = true;
@@ -87,6 +93,7 @@
     tmux
     pkgs.eza
     inputs.zen-browser.packages.${pkgs.system}.default
+    sbctl
   ];
 
   programs.nh = {
