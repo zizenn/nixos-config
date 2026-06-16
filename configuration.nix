@@ -42,6 +42,7 @@
     udisks2.enable = true;
     displayManager.ly.enable = true;
     openssh.enable = true;
+    timesyncd.enable = true;
   };
 
   # --- Programs & Environment ---
@@ -60,7 +61,8 @@
     systemPackages = with pkgs; [
       vim neovim git htop kitty tmux eza
       inputs.zen-browser.packages.${pkgs.system}.default
-      bubblewrap firefox
+      bubblewrap firefox shared-mime-info mailcap
+      ca-certificates
     ];
     # Remove NIXOS_OZONE_WL here to test if browser renders correctly first
     sessionVariables = {
