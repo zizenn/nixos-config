@@ -35,9 +35,9 @@
       ${pkgs.awww}/bin/awww img "$WALLPAPER_LINK" || \
         ${pkgs.libnotify}/bin/notify-send "wallselect" "awww failed"
 
-      # run matugen -> renders kitty template automatically
-      # --source-color-index 0 skips the interactive color picker prompt
-      ${pkgs.matugen}/bin/matugen image "$WALLPAPER_LINK" -q --source-color-index 0 || \
+      # run matugen -> renders kitty + nvim templates automatically
+      # resolve symlink since matugen 4.x can't determine image format from symlinks
+      ${pkgs.matugen}/bin/matugen image "$(realpath "$WALLPAPER_LINK")" -q --source-color-index 0 || \
         ${pkgs.libnotify}/bin/notify-send "wallselect" "matugen failed"
 
       # apply colors to running kitty instances
