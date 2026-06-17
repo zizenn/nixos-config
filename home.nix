@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./configs/zsh.nix
+  ];
+
   home.username = "zizenn";
   home.homeDirectory = "/home/zizenn";
 
@@ -49,7 +53,7 @@
     };
   };
 
-    # SYSTEM
+  # SYSTEM
   home.stateVersion = "26.05";
 }
 
