@@ -26,7 +26,7 @@
     # Fixed: Merged all shell configurations into the modern initContent system
     initContent = pkgs.lib.mkMerge [
       # High priority (loads first) for Instant Prompt
-      (lib.mkOrder 550 ''
+      (pkgs.lib.mkOrder 550 ''
         # Powerlevel10k instant prompt (Must load first)
         if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
