@@ -1,62 +1,67 @@
-{ config, pkgs, ... }:
+{ config, pkgs, libs, ... }:
 
 {
   programs.zsh = {
     enable = true;
 
-    # Native Nix integrations for your missing plugins
-    enableAutosuggestions = true;
+    # Fixed: Updated to the new option name
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
     # Oh My Zsh settings
-    ohMyZsh = {
+    oh-my-zsh = {
       enable = true;
       theme = "powerlevel10k/powerlevel10k";
       plugins = [ "git" ]; 
     };
 
-    # Your custom aliases mapped directly to Nix
+    # Your custom aliases
     shellAliases = {
       config = "cd /etc/nixos";
       home = "nh home switch";
       os = "nh os switch";
+      hyprconf = "nvim ~/.config/hypr/hyprland.conf";
     };
 
-    # Instant Prompt (at the very top) and everything else in your original script
-    initExtraBeforeCompInit = ''
-      # Powerlevel10k instant prompt (Must load first)
-      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-      fi
-      typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-    '';
+    # Fixed: Merged all shell configurations into the modern initContent system
+    initContent = pkgs.lib.mkMerge [
+      # High priority (loads first) for Instant Prompt
+      (lib.mkOrder 550 ''
+        # Powerlevel10k instant prompt (Must load first)
+        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+        fi
+        typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+      '')
 
-    initExtra = ''
-      # Yazi cwd shell wrapper
-      function y() {
-      	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-      	command yazi "$@" --cwd-file="$tmp"
-      	IFS= read -r -d \'\' cwd < "$tmp"
-      	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
-      	rm -f -- "$tmp"
-      }
+      # Standard priority (loads last) for functions, binds, and paths
+      (pkgs.lib.mkOrder 1000 ''
+        # Yazi cwd shell wrapper
+        function y() {
+        	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+        	command yazi "$@" --cwd-file="$tmp"
+        	IFS= read -r -d \'\' cwd < "$tmp"
+        	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+        	rm -f -- "$tmp"
+        }
 
-      # OMZ settings (Vi Mode & KeyTimeout)
-      bindkey -v
-      export KEYTIMEOUT=1
+        # OMZ settings (Vi Mode & KeyTimeout)
+        bindkey -v
+        export KEYTIMEOUT=1
 
-      # Sources & extra integrations
-      source <(fzf --zsh)
+        # Sources & extra integrations
+        source <(fzf --zsh)
 
-      # Environment Paths
-      export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+        # Environment Paths
+        export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-      # Runtime styling theme setup
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-    '';
+        # Runtime styling theme setup
+        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+      '')
+    ];
   };
-}
 
+}
