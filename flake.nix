@@ -2,25 +2,35 @@
   description = "my nixos flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05"; # for default nixpkgs
-    zen-browser.url = "github:youwen5/zen-browser-flake"; # for zen browser
-    home-manager.url = "github:nix-community/home-manager"; # home manager
-    home-manager.inputs.nixpkgs.follows = "nixpkgs"; # more home manager
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    zen-browser.url = "github:youwen5/zen-browser-flake";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations = {
       nix-port = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-	specialArgs = { inherit inputs; };
-	modules = [
+        specialArgs = { inherit inputs; };
+        modules = [
           ./configuration.nix
-	  home-manager.nixosModules.home-manager
+        ];
+      };
+    };
+
+    # This block enables "nh home switch" to work
+    homeConfigurations = {
+      "zizenn@nix-port" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+          ./home.nix
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.zizenn = import ./home.nix;
-            home-manager.extraSpecialArgs = { inherit inputs; };
+            home.username = "zizenn";
+            home.homeDirectory = "/home/zizenn";
+            # Set state version to match your target system branch
+            home.stateVersion = "26.05"; 
           }
         ];
       };

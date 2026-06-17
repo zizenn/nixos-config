@@ -29,6 +29,8 @@
     ripgrep
     python3
     ntfs3g
+    gcc
+    tree-sitter
   ];
 
   programs.zsh.enable = true;
