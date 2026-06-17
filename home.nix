@@ -3,6 +3,10 @@
 {
   imports = [
     ./configs/zsh.nix
+    ./configs/kitty.nix
+    ./configs/hyprland.nix
+    ./configs/matugen.nix
+    ./configs/wallpaper.nix
   ];
 
   home.username = "zizenn";

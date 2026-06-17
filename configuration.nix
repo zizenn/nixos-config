@@ -30,11 +30,14 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # --- Desktop Environment & Portals ---
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    plugins = [ pkgs.hyprlandPlugins.hyprsplit ];
+  };
   
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland ];
     config.common.default = "*";
   };
 
@@ -85,7 +88,17 @@
       pkgs.cacert
       pkgs.nss
       pkgs.cloudflare-warp
-      inputs.zen-browser.packages.${pkgs.system}.default
+      # hyprland ecosystem
+      pkgs.brightnessctl
+      pkgs.playerctl
+      pkgs.wl-clipboard
+      pkgs.cliphist
+      pkgs.rofi
+      # pkgs.pywal16
+      pkgs.xhost
+      pkgs.waybar
+      pkgs.hyprpolkitagent
+      pkgs.xdg-desktop-portal-hyprland
     ];
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";
