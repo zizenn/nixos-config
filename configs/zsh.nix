@@ -21,7 +21,7 @@
       home = "nh home switch";
       os = "nh os switch";
       hyprconf = "nvim ~/.config/hypr/hyprland.conf";
-      ls = "eza -1a";
+      ls = "eza -1";
     };
 
     # Fixed: Merged all shell configurations into the modern initContent system
