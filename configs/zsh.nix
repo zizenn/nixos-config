@@ -11,7 +11,7 @@
     # Oh My Zsh settings
     oh-my-zsh = {
       enable = true;
-      theme = "powerlevel10k/powerlevel10k";
+      theme = "";
       plugins = [ "git" ]; 
     };
 
@@ -27,6 +27,8 @@
     initContent = pkgs.lib.mkMerge [
       # High priority (loads first) for Instant Prompt
       (pkgs.lib.mkOrder 550 ''
+        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+
         # Powerlevel10k instant prompt (Must load first)
         if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
