@@ -29,9 +29,16 @@
   programs.zsh.enable = true;
 
   # CONFIGURATION
+    programs.git = {
+    enable = true;
+    extraConfig = {
+      core.editor = "nvim";
+    };
+  };
+
   xdg.configFile."nvim" = {
     source = /home/zizenn/dotfiles/nvim;
-    recursive = true; # This ensures all subfolders are linked
+    recursive = true;
   };
 
   xdg.configFile."hypr" = {
