@@ -39,6 +39,7 @@
     zsh-autosuggestions
     zsh-syntax-highlighting
     eza
+    fastfetch
   ];
 
   programs.zsh.enable = true;

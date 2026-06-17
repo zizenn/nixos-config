@@ -19,6 +19,9 @@
     networkmanager.dns = "none";
   };
 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
   # networking.firewall.enable = false; # disable firewall
 
   # --- Graphics (AMD Optimized) ---
@@ -42,14 +45,18 @@
   services = {
     dbus.enable = true;
     upower.enable = true;
-    pipewire = {
-      enable = true;
-      pulse.enable = true;
-    };
+    blueman.enable = true;
     udisks2.enable = true;
     displayManager.ly.enable = true;
     openssh.enable = true;
     timesyncd.enable = true;
+  };
+
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+    pulse.enable = true;
+    wireplumber.enable = true;
   };
 
   time.timeZone = "Asia/Dhaka";
@@ -91,10 +98,8 @@
       pkgs.wl-clipboard
       pkgs.cliphist
       pkgs.rofi
-      # pkgs.pywal16
       pkgs.xhost
       pkgs.waybar
-      pkgs.hyprlandPlugins.hyprsplit
       pkgs.hyprpolkitagent
       pkgs.xdg-desktop-portal-hyprland
     ];

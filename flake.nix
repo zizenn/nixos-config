@@ -3,10 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
-    zen-browser = {
-      url = "github:youwen5/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -32,7 +28,6 @@
           {
             home.username = "zizenn";
             home.homeDirectory = "/home/zizenn";
-            # Set state version to match your target system branch
             home.stateVersion = "26.05"; 
           }
         ];
