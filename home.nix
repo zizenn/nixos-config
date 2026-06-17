@@ -28,6 +28,7 @@
     mako
     ripgrep
     python3
+    ntfs3g
   ];
 
   programs.zsh.enable = true;

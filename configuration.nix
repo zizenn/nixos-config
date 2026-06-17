@@ -93,6 +93,11 @@
     };
   };
 
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+  ];
+
+
   systemd.packages = [ pkgs.cloudflare-warp ];
 
   programs.firefox.enable = true;
