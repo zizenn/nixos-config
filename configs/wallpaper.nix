@@ -7,7 +7,7 @@
       #!${pkgs.bash}/bin/bash
       set -euo pipefail
 
-      WALLPAPER_DIR="''${XDG_PICTURES_DIR:-$HOME/Pictures}"
+      WALLPAPER_DIR="''${XDG_PICTURES_DIR:-$HOME/Pictures}/Wallpapers"
       WALLPAPER_LINK="$HOME/.wallpaper"
       KITTY_COLORS="$HOME/.config/kitty/current-colors.conf"
 

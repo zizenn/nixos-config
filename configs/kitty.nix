@@ -14,7 +14,7 @@
       cursor_trail = 1;
       hide_window_decorations = true;
       confirm_os_window_close = 0;
-      allow_remote_control = true;
+      allow_remote_control = "socket-only";
       include = "current-colors.conf";
     };
   };
