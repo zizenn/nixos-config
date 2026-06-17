@@ -27,7 +27,7 @@
     opencode
     mako
     ripgrep
-    python
+    python3
   ];
 
   programs.zsh.enable = true;
