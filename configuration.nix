@@ -30,10 +30,7 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # --- Desktop Environment & Portals ---
-  programs.hyprland = {
-    enable = true;
-    plugins = [ pkgs.hyprlandPlugins.hyprsplit ];
-  };
+  programs.hyprland.enable = true;
   
   xdg.portal = {
     enable = true;
@@ -97,6 +94,7 @@
       # pkgs.pywal16
       pkgs.xhost
       pkgs.waybar
+      pkgs.hyprlandPlugins.hyprsplit
       pkgs.hyprpolkitagent
       pkgs.xdg-desktop-portal-hyprland
     ];
