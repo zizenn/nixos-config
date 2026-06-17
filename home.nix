@@ -12,6 +12,7 @@
   home.username = "zizenn";
   home.homeDirectory = "/home/zizenn";
 
+
   # ENVIRONMENT VARIABLES
   home.sessionVariables = {
     SUDO_EDITOR = "nvim";
