@@ -2,7 +2,7 @@
 
 {
   xdg.configFile = {
-    ".config/matugen/config.toml".text = ''
+    "matugen/config.toml".text = ''
       mode = "dark"
       type = "scheme-tonal-spot"
       contrast = 0.0
@@ -12,7 +12,7 @@
       output_path = ["~/.config/kitty/current-colors.conf"]
     '';
 
-    ".config/matugen/templates/kitty.conf".text = ''
+    "matugen/templates/kitty.conf".text = ''
       foreground {{colors.on_surface.default.hex}}
       background {{colors.surface.default.hex}}
       selection_foreground {{colors.on_primary_container.default.hex}}

@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  luaDir = ".config/hypr";
+  luaDir = "hypr";
 in
 {
   xdg.configFile = {
