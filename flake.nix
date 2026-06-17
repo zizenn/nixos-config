@@ -21,7 +21,6 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.your-username = import ./home.nix;
-            # Pass 'inputs' to home.nix if you need access to them
             home-manager.extraSpecialArgs = { inherit inputs; };
           }
         ];

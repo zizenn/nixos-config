@@ -7,6 +7,7 @@
   # ENVIRONMENT VARIABLES
 
   home.sessionVariables = {
+    SUDO_EDITOR = "nvim";
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
