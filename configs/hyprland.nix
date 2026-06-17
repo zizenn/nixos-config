@@ -12,6 +12,10 @@ in
       -- SOURCE EXTRA CONFIGS
       --------------------------------------------------------------------------------
 
+      -- prepend hypr config dir so require() works with symlinked configs
+      package.path = os.getenv("HOME") .. "/.config/hypr/?.lua;"
+                  .. os.getenv("HOME") .. "/.config/hypr/?/init.lua;"
+                  .. package.path
       require("hyprland.animations")
       require("hyprland.autostart")
       require("hyprland.window_rules")
