@@ -23,6 +23,7 @@
     awww
     fzf
     waybar
+    matugen
   ];
 
   programs.git.enable = true;
