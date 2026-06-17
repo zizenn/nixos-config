@@ -3,6 +3,7 @@
 {
   xdg.configFile = {
     "matugen/config.toml".text = ''
+      [config]
       mode = "dark"
       type = "scheme-tonal-spot"
       contrast = 0.0
