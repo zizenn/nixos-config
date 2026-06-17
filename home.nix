@@ -24,6 +24,10 @@
     fzf
     waybar
     matugen
+    opencode
+    mako
+    ripgrep
+    python
   ];
 
   programs.zsh.enable = true;
@@ -31,20 +35,12 @@
   # CONFIGURATION
     programs.git = {
     enable = true;
+    userName = "sakif";
+    userEmail = "zizenn@proton.me";
     extraConfig = {
       core.editor = "nvim";
     };
   };
-
-  # xdg.configFile."nvim" = {
-  #   source = /home/zizenn/dotfiles/nvim;
-  #   recursive = true;
-  # };
-
-  # xdg.configFile."hypr" = {
-  #   source = /home/zizenn/dotfiles/hyprland;
-  #   recursive = true;
-  # };
 
   # SYSTEM
   home.stateVersion = "26.05";
