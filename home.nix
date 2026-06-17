@@ -28,6 +28,8 @@
     ntfs3g
     gcc  
     tree-sitter
+    zsh-autosuggestions
+    zsh-syntax-highlighting
   ];
 
   programs.zsh.enable = true;
@@ -46,7 +48,7 @@
     };
   };
 
-  # SYSTEM
+    # SYSTEM
   home.stateVersion = "26.05";
 }
 

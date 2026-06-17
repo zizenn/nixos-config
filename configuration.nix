@@ -58,6 +58,7 @@
   programs = {
     zsh.enable = true;
     dconf.enable = true; # Required for browser settings persistence
+    nix-ld.enable = true;
     nh = {
       enable = true;
       clean.enable = true;
@@ -97,10 +98,15 @@
     nerd-fonts.jetbrains-mono
   ];
 
-
   systemd.packages = [ pkgs.cloudflare-warp ];
 
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+
   programs.firefox.enable = true;
+  
 
   users.users.zizenn = {
     isNormalUser = true;
