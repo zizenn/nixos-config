@@ -85,7 +85,7 @@
       pkgs.cacert
       pkgs.nss
       pkgs.cloudflare-warp
-      # inputs.zen-browser.packages.${pkgs.system}.default
+      inputs.zen-browser.packages.${pkgs.system}.default
     ];
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";
