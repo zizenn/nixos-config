@@ -5,16 +5,13 @@
   home.homeDirectory = "/home/zizenn";
 
   # ENVIRONMENT VARIABLES
-
   home.sessionVariables = {
     SUDO_EDITOR = "nvim";
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
 
-
   # PACKAGES
-
   home.packages = with pkgs; [
     git
     neovim
@@ -29,22 +26,27 @@
     ripgrep
     python3
     ntfs3g
-    gcc
+    gcc  
     tree-sitter
   ];
 
   programs.zsh.enable = true;
 
   # CONFIGURATION
-    programs.git = {
+  programs.git = {
     enable = true;
-    userName = "sakif";
-    userEmail = "zizenn@proton.me";
-    extraConfig = {
-      core.editor = "nvim";
+    settings = {
+      user = {
+        name = "sakif";
+        email = "zizenn@proton.me";
+      };
+      core = {
+        editor = "nvim";
+      };
     };
   };
 
   # SYSTEM
   home.stateVersion = "26.05";
 }
+
