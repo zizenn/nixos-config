@@ -30,6 +30,7 @@
     tree-sitter
     zsh-autosuggestions
     zsh-syntax-highlighting
+    eza
   ];
 
   programs.zsh.enable = true;
