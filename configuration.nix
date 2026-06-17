@@ -18,7 +18,7 @@
     networkmanager.dns = "none";
   };
 
-  networking.firewall.enable = false;
+  # networking.firewall.enable = false; # disable firewall
 
   # --- Graphics (AMD Optimized) ---
   hardware.graphics = {
@@ -102,6 +102,7 @@
     shell = pkgs.zsh;
   };
 
+  nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "26.05";
 }
