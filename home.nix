@@ -7,6 +7,7 @@
     ./configs/hyprland.nix
     ./configs/matugen.nix
     ./configs/wallpaper.nix
+    ./configs/neovim.nix
   ];
 
   home.username = "zizenn";
