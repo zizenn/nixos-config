@@ -7,7 +7,7 @@
       name = "JetBrainsMono Nerd Font";
       size = 11.0;
     };
-    settings = {
+      settings = {
       shell = "zsh";
       enable_audio_bell = false;
       window_padding_width = 25;
@@ -15,6 +15,7 @@
       hide_window_decorations = true;
       confirm_os_window_close = 0;
       allow_remote_control = "socket-only";
+      listen_on = "unix:/tmp/kitty-zizenn";
       include = "current-colors.conf";
     };
   };

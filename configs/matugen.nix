@@ -17,7 +17,7 @@
       output_path = ["~/.config/nvim/lua/matugen/colors.lua"]
 
       [hooks]
-      post_run = "kitty @ set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null || true"
+      post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done"
     '';
 
     "matugen/templates/nvim-colors.lua".text = ''

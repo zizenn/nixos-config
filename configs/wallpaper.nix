@@ -41,7 +41,9 @@
         ${pkgs.libnotify}/bin/notify-send "wallselect" "matugen failed"
 
       # apply colors to running kitty instances
-      ${pkgs.kitty}/bin/kitty @ set-colors --all --configured "$KITTY_COLORS" 2>/dev/null || true
+      for SOCK in /tmp/kitty-zizenn-*; do
+        [ -S "$SOCK" ] && ${pkgs.kitty}/bin/kitty @ --to="unix:$SOCK" set-colors --all --configured "$KITTY_COLORS" 2>/dev/null || true
+      done 2>/dev/null
     '';
   };
 }
