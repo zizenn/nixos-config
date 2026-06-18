@@ -41,7 +41,7 @@
         ${pkgs.libnotify}/bin/notify-send "wallselect" "matugen failed"
 
       # apply colors to running kitty instances
-      ${pkgs.kitty}/bin/kitty @ set-colors "$KITTY_COLORS" 2>/dev/null || true
+      ${pkgs.kitty}/bin/kitty @ set-colors --all --configured "$KITTY_COLORS" 2>/dev/null || true
     '';
   };
 }

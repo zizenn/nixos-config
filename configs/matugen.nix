@@ -15,6 +15,9 @@
       [templates.neovim]
       input_path = "~/.config/matugen/templates/nvim-colors.lua"
       output_path = ["~/.config/nvim/lua/matugen/colors.lua"]
+
+      [hooks]
+      post_run = "kitty @ set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null || true"
     '';
 
     "matugen/templates/nvim-colors.lua".text = ''
