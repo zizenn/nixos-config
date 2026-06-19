@@ -11,9 +11,13 @@
     ./packages.nix
   ];
 
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = (_: true);
+  };
+
   home.username = "zizenn";
   home.homeDirectory = "/home/zizenn";
-
 
   # ENVIRONMENT VARIABLES
   home.sessionVariables = {
@@ -37,8 +41,6 @@
       };
     };
   };
-
-  allowUnfree = true;
 
   # SYSTEM
   home.stateVersion = "26.05";
