@@ -28,9 +28,8 @@
     quickshell
     pv
     awww
-  socat
-  kdePackages
-  ollama
+    socat
+    ollama
 ];
 
 }
