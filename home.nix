@@ -45,7 +45,8 @@
     gnumake
     nix-search-cli
     jq
-  ];
+    zoxide
+];
 
   programs.zsh.enable = true;
 
