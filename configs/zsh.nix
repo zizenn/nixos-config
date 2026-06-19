@@ -39,6 +39,10 @@
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
         typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+        unset ANTHROPIC_API_KEY
+        export ANTHROPIC_BASE_URL="http://localhost:11434"
+        export ANTHROPIC_AUTH_TOKEN="ollama"
       '')
 
       # Standard priority (loads last) for functions, binds, and paths
@@ -70,10 +74,4 @@
       '')
     ];
   };
-
-    initExtra = ''
-    unset ANTHROPIC_API_KEY
-    export ANTHROPIC_BASE_URL="http://localhost:11434"
-    export ANTHROPIC_AUTH_TOKEN="ollama"
-  '';
 }
