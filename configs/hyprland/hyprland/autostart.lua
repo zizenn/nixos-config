@@ -1,6 +1,6 @@
 local terminal = "kitty"
 local menu = "wofi -n"
-local bar = "waybar"
+local bar = "quickshell -p /home/zizenn/.config/quickshell/shell.qml"
 
 hl.on("hyprland.start", function ()
     -- hyprpolkitagent and pywal

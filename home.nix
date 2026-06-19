@@ -8,6 +8,7 @@
     ./configs/matugen.nix
     ./configs/wallpaper.nix
     ./configs/neovim.nix
+    ./configs/quickshell.nix
     ./packages.nix
   ];
 
