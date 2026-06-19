@@ -30,6 +30,7 @@
     awww
     socat
     ollama
+  unzip
 ];
 
 }
