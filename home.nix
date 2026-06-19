@@ -38,6 +38,8 @@
     };
   };
 
+  allowUnfree = true;
+
   # SYSTEM
   home.stateVersion = "26.05";
 }

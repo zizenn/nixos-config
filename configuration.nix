@@ -131,6 +131,7 @@
     shell = pkgs.zsh;
   };
 
+  allowUnfree = true;
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "26.05";
