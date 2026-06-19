@@ -73,6 +73,7 @@
 
         # Runtime styling theme setup
         eval "$(direnv hook zsh)"
+        eval "$(zoxide init --cmd cd zsh)"
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
       '')
     ];
