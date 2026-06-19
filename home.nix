@@ -24,6 +24,9 @@
     SUDO_EDITOR = "nvim";
     EDITOR = "nvim";
     VISUAL = "nvim";
+    ANTHROPIC_BASE_URL = "http://localhost:11434";
+    ANTHROPIC_AUTH_TOKEN = "ollama";
+    ANTHROPIC_API_KEY = "ollama";
   };
 
   programs.zsh.enable = true;
