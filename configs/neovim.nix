@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 
+let
+  # Theme selection: "matugen" or "kanagawa-dragon"
+  theme = "matugen";
+in
 {
   xdg.configFile = {
     "nvim/lua/matugen/init.lua".text = ''
@@ -297,6 +301,41 @@
       return M
     '';
 
+    "nvim/lua/kanagawa-dragon/init.lua".text = ''
+      local M = {}
+
+      function M.setup(opts)
+        opts = opts or {}
+        require("kanagawa").setup(vim.tbl_deep_extend("force", {
+          compile = false,
+          undercurl = true,
+          commentStyle = { italic = true },
+          functionStyle = {},
+          keywordStyle = { italic = true },
+          statementStyle = { bold = true },
+          typeStyle = {},
+          transparent = false,
+          dimInactive = false,
+          terminalColors = true,
+          colors = {
+            palette = {},
+            theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+          },
+          overrides = function(colors)
+            return {}
+          end,
+          theme = "dragon",
+          background = {
+            dark = "dragon",
+            light = "lotus",
+          },
+        }, opts))
+        vim.cmd.colorscheme("kanagawa-dragon")
+      end
+
+      return M
+    '';
+
     "nvim/lua/plugins/matugen.lua".text = ''
       return {
         dir = vim.fn.stdpath("config") .. "/lua/matugen",
@@ -311,6 +350,51 @@
           end)
         end,
       }
+    '';
+
+    "nvim/lua/plugins/kanagawa-dragon.lua".text = ''
+      return {
+        "rebelot/kanagawa.nvim",
+        name = "kanagawa",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function(_, opts)
+          require("kanagawa-dragon").setup(opts)
+        end,
+      }
+    '';
+
+    "nvim/lua/plugins/theme-switcher.lua".text = ''
+      local selected_theme = "${theme}"
+
+      local function load_theme(name)
+        if name == "kanagawa-dragon" then
+          require("kanagawa-dragon").setup()
+        else
+          require("matugen").setup()
+          vim.schedule(function()
+            pcall(vim.cmd.colorscheme, "matugen")
+          end)
+        end
+      end
+
+      load_theme(selected_theme)
+
+      vim.api.nvim_create_user_command("ThemeSwitch", function(opts)
+        local new_theme = opts.args
+        if new_theme == "matugen" or new_theme == "kanagawa-dragon" then
+          load_theme(new_theme)
+          print("Switched to " .. new_theme)
+        else
+          print("Usage: :ThemeSwitch matugen|kanagawa-dragon")
+        end
+      end, {
+        nargs = 1,
+        complete = function()
+          return { "matugen", "kanagawa-dragon" }
+        end,
+      })
     '';
   };
 }
