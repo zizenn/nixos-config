@@ -25,7 +25,7 @@
       tree = "eza -T";
       pkgadd = "~/Documents/scripts/nixpkgsearch.sh";
       pkgdel = "~/Documents/scripts/nixpkgremove.sh";
-      code = "claude --model qwen3-coder";
+      code = ""ANTHROPIC_BASE_URL=\"http://localhost:11434\" ANTHROPIC_AUTH_TOKEN=\"ollama\" ANTHROPIC_API_KEY=\"ollama\" claude --model qwen3-coder";
     };
 
     # Fixed: Merged all shell configurations into the modern initContent system
