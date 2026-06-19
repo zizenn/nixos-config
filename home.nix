@@ -8,6 +8,7 @@
     ./configs/matugen.nix
     ./configs/wallpaper.nix
     ./configs/neovim.nix
+    ./programs.nix
   ];
 
   home.username = "zizenn";
@@ -20,37 +21,6 @@
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
-
-  # PACKAGES
-  home.packages = with pkgs; [
-    git
-    neovim
-    zsh
-    yazi
-    awww
-    fzf
-    waybar
-    matugen
-    opencode
-    mako
-    ripgrep
-    python3
-    ntfs3g
-    gcc  
-    tree-sitter
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    eza
-    fastfetch
-    gnumake
-    nix-search-cli
-    jq
-    zoxide
-    pavucontrol
-  quickshell
-  pv
-  awww
-];
 
   programs.zsh.enable = true;
 
