@@ -27,6 +27,7 @@
     pavucontrol
     quickshell
     pv
-  ];
+    awww
+];
 
 }
