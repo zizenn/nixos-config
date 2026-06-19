@@ -49,6 +49,7 @@
     pavucontrol
   quickshell
   pv
+  awww
 ];
 
   programs.zsh.enable = true;
