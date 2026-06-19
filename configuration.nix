@@ -59,15 +59,6 @@
     wireplumber.enable = true;
   };
 
-  services.ollama = {
-    enable = true;
-    package = pkgs.ollama-rocm;
-  };
-
-  systemd.services.ollama.environment = {
-    OLLAMA_NUM_GPU_LAYERS = "99";
-  };
-
   time.timeZone = "Asia/Dhaka";
 
   # --- Programs & Environment ---
