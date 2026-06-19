@@ -59,27 +59,27 @@
         	rm -f -- "$tmp"
         }
 
-        # my custom rm function to work with fzf
-        rm() {
-          # Check if -r or --recursive was passed as the first argument
-          if [[ "$1" == "-r" || "$1" == "--recursive" ]]; then
-            # Find directories only, exclude hidden ones, and pass to fzf
-            # Press TAB to select multiple folders, then Enter to delete
-            local targets=$(find . -maxdepth 1 -type d ! -path '.' ! -path '*/.*' | fzf -m --prompt="Select directories to delete: ")
-            
-            if [ -n "$targets" ]; then
-              # Echo the choices first so you see what is happening
-              echo "$targets" | xargs -I {} rm -r "{}"
-            fi
-          else
-            # Find files only (no directories, no hidden files)
-            local targets=$(find . -maxdepth 1 -type f ! -path '*/.*' | fzf -m --prompt="Select files to delete: ")
-            
-            if [ -n "$targets" ]; then
-              echo "$targets" | xargs -I {} rm "{}"
-            fi
-          fi
-        }
+        # my custom rm function to work with fzf currently disabled cuz it messes with stuff
+        # rm() {
+        #   # Check if -r or --recursive was passed as the first argument
+        #   if [[ "$1" == "-r" || "$1" == "--recursive" ]]; then
+        #     # Find directories only, exclude hidden ones, and pass to fzf
+        #     # Press TAB to select multiple folders, then Enter to delete
+        #     local targets=$(find . -maxdepth 1 -type d ! -path '.' ! -path '*/.*' | fzf -m --prompt="Select directories to delete: ")
+        #     
+        #     if [ -n "$targets" ]; then
+        #       # Echo the choices first so you see what is happening
+        #       echo "$targets" | xargs -I {} rm -r "{}"
+        #     fi
+        #   else
+        #     # Find files only (no directories, no hidden files)
+        #     local targets=$(find . -maxdepth 1 -type f ! -path '*/.*' | fzf -m --prompt="Select files to delete: ")
+        #     
+        #     if [ -n "$targets" ]; then
+        #       echo "$targets" | xargs -I {} rm "{}"
+        #     fi
+        #   fi
+        # }
 
         # OMZ settings (Vi Mode & KeyTimeout)
         bindkey -v
