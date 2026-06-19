@@ -72,6 +72,7 @@
         [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
         # Runtime styling theme setup
+        eval "$(direnv hook zsh)"
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
       '')
     ];
