@@ -32,6 +32,7 @@
     ollama
   unzip
   claude-code
+  direnv
 ];
 
 }
