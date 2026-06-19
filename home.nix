@@ -44,6 +44,7 @@
     fastfetch
     gnumake
     nix-search-cli
+    jq
   ];
 
   programs.zsh.enable = true;
