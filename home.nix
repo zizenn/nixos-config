@@ -8,7 +8,7 @@
     ./configs/matugen.nix
     ./configs/wallpaper.nix
     ./configs/neovim.nix
-    ./programs.nix
+    ./packages.nix
   ];
 
   home.username = "zizenn";
