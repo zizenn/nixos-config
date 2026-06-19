@@ -6,7 +6,6 @@
     neovim
     zsh
     yazi
-    awww
     fzf
     waybar
     matugen
@@ -28,7 +27,6 @@
     pavucontrol
     quickshell
     pv
-    awww
   ];
 
 }
