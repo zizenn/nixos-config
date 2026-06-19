@@ -31,6 +31,7 @@
     socat
     ollama
   unzip
+  claude-code
 ];
 
 }
