@@ -33,6 +33,7 @@
   unzip
   claude-code
   direnv
+  bc
 ];
 
 }
