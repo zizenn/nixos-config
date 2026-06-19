@@ -17,7 +17,7 @@
 
     # Your custom aliases
     shellAliases = {
-      config = "z /etc/nixos";
+      config = "cd /etc/nixos";
       home = "nh home switch";
       os = "nh os switch";
       hyprconf = "nvim ~/.config/hypr/hyprland.conf";
@@ -70,6 +70,7 @@
         export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
         export PATH="$HOME/.local/bin/git-fuzzy/bin:$PATH"
         export NVM_DIR="$HOME/.nvm"
+        export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
         [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
