@@ -102,6 +102,7 @@
       pkgs.waybar
       pkgs.hyprpolkitagent
       pkgs.xdg-desktop-portal-hyprland
+      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";

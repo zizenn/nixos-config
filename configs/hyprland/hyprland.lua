@@ -108,6 +108,7 @@ hl.bind("ALT + Space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = 0 }))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/.local/bin/wallselect"))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("~/.local/bin/cliphist-rofi-img"))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("kitty --class nvim-float -e nvim"))
 
 -- Special Script Invoking Executions
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("kitty --class yazi-float -e ~/.config/hypr/scripts/yazi.sh"))
