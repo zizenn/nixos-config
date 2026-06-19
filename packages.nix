@@ -34,6 +34,7 @@
   claude-code
   direnv
   bc
+  fd
 ];
 
 }
