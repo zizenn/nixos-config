@@ -23,6 +23,8 @@
       hyprconf = "nvim ~/.config/hypr/hyprland.conf";
       ls = "eza -1";
       tree = "eza -T";
+      pkgadd = "~/Documents/scripts/nixpkgsearch.sh";
+      pkgdel = "~/Documents/scripts/nixpkgremove.sh";
     };
 
     # Fixed: Merged all shell configurations into the modern initContent system
