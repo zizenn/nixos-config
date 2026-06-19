@@ -46,8 +46,7 @@
     nix-search-cli
     jq
     zoxide
-  sh
-];
+  ];
 
   programs.zsh.enable = true;
 
