@@ -47,6 +47,7 @@
     jq
     zoxide
     pavucontrol
+  quickshell
 ];
 
   programs.zsh.enable = true;
