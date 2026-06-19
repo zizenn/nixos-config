@@ -42,6 +42,7 @@
     zsh-syntax-highlighting
     eza
     fastfetch
+    gnumake
   ];
 
   programs.zsh.enable = true;
