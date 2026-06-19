@@ -43,6 +43,7 @@
     eza
     fastfetch
     gnumake
+    nix-search-cli
   ];
 
   programs.zsh.enable = true;
