@@ -28,6 +28,7 @@
     quickshell
     pv
     awww
+  socat
 ];
 
 }
