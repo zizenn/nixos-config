@@ -17,7 +17,7 @@
 
     # Your custom aliases
     shellAliases = {
-      config = "cd /etc/nixos";
+      config = "z /etc/nixos";
       home = "nh home switch";
       os = "nh os switch";
       hyprconf = "nvim ~/.config/hypr/hyprland.conf";
@@ -26,6 +26,7 @@
       pkgadd = "~/Documents/scripts/nixpkgsearch.sh";
       pkgdel = "~/Documents/scripts/nixpkgremove.sh";
       code = "claude --model qwen3-coder";
+      gf = "git fuzzy "
     };
 
     # Fixed: Merged all shell configurations into the modern initContent system
@@ -67,6 +68,7 @@
 
         # Environment Paths
         export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+        export PATH="$HOME/.local/bin/git-fuzzy/bin:$PATH"
         export NVM_DIR="$HOME/.nvm"
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
         [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
