@@ -46,7 +46,8 @@
     nix-search-cli
     jq
     zoxide
-  ];
+    pavucontrol
+];
 
   programs.zsh.enable = true;
 
