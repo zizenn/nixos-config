@@ -29,6 +29,7 @@
     pv
     awww
   socat
+  kdePackages
 ];
 
 }
