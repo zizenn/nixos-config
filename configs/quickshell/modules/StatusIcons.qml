@@ -15,76 +15,86 @@ Row {
     spacing: 14
     anchors.verticalCenter: parent.verticalCenter
 
-    Row {
-        spacing: 6
-        anchors.verticalCenter: parent.verticalCenter
+    Item {
+        id: wifiGroup
+        implicitWidth: wifiRow.implicitWidth
+        implicitHeight: wifiRow.implicitHeight
 
         MouseArea {
-            id: wifiArea
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             onClicked: root.wifiClicked()
         }
 
-        Text {
-            id: wifiIcon
-            text: "\uf1eb"
-            color: root.wifiConnected
-                ? root.colors.primary
-                : Qt.hsla(
+        Row {
+            id: wifiRow
+            spacing: 6
+
+            Text {
+                id: wifiIcon
+                text: "\uf1eb"
+                color: root.wifiConnected
+                    ? root.colors.primary
+                    : Qt.hsla(
+                        Qt.color(root.colors.cOnSurface).hslHue,
+                        Qt.color(root.colors.cOnSurface).hslSaturation,
+                        Qt.color(root.colors.cOnSurface).hslLightness,
+                        0.4)
+                font.pixelSize: 15
+                font.family: "JetBrainsMono Nerd Font"
+            }
+
+            Text {
+                text: root.wifiConnected ? root.wifiSsid : "offline"
+                color: Qt.hsla(
                     Qt.color(root.colors.cOnSurface).hslHue,
                     Qt.color(root.colors.cOnSurface).hslSaturation,
                     Qt.color(root.colors.cOnSurface).hslLightness,
-                    0.4)
-            font.pixelSize: 15
-            font.family: "JetBrainsMono Nerd Font"
-        }
-
-        Text {
-            text: root.wifiConnected ? root.wifiSsid : "offline"
-            color: Qt.hsla(
-                Qt.color(root.colors.cOnSurface).hslHue,
-                Qt.color(root.colors.cOnSurface).hslSaturation,
-                Qt.color(root.colors.cOnSurface).hslLightness,
-                0.7)
-            font.pixelSize: 11
+                    0.7)
+                font.pixelSize: 11
+            }
         }
     }
 
-    Row {
-        spacing: 6
-        anchors.verticalCenter: parent.verticalCenter
+    Item {
+        id: btGroup
+        implicitWidth: btRow.implicitWidth
+        implicitHeight: btRow.implicitHeight
         visible: root.btPowered
 
         MouseArea {
-            id: btArea
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             onClicked: root.btClicked()
         }
 
-        Text {
-            text: "\uf294"
-            color: root.btCount > 0
-                ? root.colors.primary
-                : Qt.hsla(
+        Row {
+            id: btRow
+            spacing: 6
+
+            Text {
+                text: "\uf294"
+                color: root.btCount > 0
+                    ? root.colors.primary
+                    : Qt.hsla(
+                        Qt.color(root.colors.cOnSurface).hslHue,
+                        Qt.color(root.colors.cOnSurface).hslSaturation,
+                        Qt.color(root.colors.cOnSurface).hslLightness,
+                        0.4)
+                font.pixelSize: 15
+                font.family: "JetBrainsMono Nerd Font"
+            }
+
+            Text {
+                visible: root.btCount > 0
+                text: root.btCount + " dev"
+                color: Qt.hsla(
                     Qt.color(root.colors.cOnSurface).hslHue,
                     Qt.color(root.colors.cOnSurface).hslSaturation,
                     Qt.color(root.colors.cOnSurface).hslLightness,
-                    0.4)
-            font.pixelSize: 15
-            font.family: "JetBrainsMono Nerd Font"
-        }
-
-        Text {
-            visible: root.btCount > 0
-            text: root.btCount + " dev"
-            color: Qt.hsla(
-                Qt.color(root.colors.cOnSurface).hslHue,
-                Qt.color(root.colors.cOnSurface).hslSaturation,
-                Qt.color(root.colors.cOnSurface).hslLightness,
-                0.7)
-            font.pixelSize: 11
+                    0.7)
+                font.pixelSize: 11
+            }
         }
     }
 }
