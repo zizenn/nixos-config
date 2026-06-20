@@ -35,6 +35,7 @@
   direnv
   bc
   fd
+  vesktop
 ];
 
 }
