@@ -47,7 +47,7 @@ PanelWindow {
 
     Timer {
         id: expandDelay
-        interval: 100
+        interval: 260
         onTriggered: showExpanded = true
     }
 
@@ -147,7 +147,7 @@ PanelWindow {
             opacity: islandState === "expanded" ? 1 : 0
             visible: activeSelector === "none"
 
-            Behavior on height { NumberAnimation { duration: 200 } }
+            // No height behavior — pill's own height animation handles the grow
             Behavior on opacity { NumberAnimation { duration: 200 } }
 
             Row {

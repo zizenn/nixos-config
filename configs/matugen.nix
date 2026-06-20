@@ -24,8 +24,28 @@
       input_path = "~/.config/matugen/templates/rofi-colors.rasi"
       output_path = ["~/.config/rofi/colors.rasi"]
 
+      [templates.zen-chrome]
+      input_path = "~/.config/matugen/templates/zen-userChrome.css"
+      output_path = ["~/.config/zen/632wsxku.Default Profile/chrome/matugen-chrome.css"]
+
+      [templates.zen-content]
+      input_path = "~/.config/matugen/templates/zen-userContent.css"
+      output_path = ["~/.config/zen/632wsxku.Default Profile/chrome/matugen-content.css"]
+
+      [templates.pywalfox]
+      input_path = "~/.config/matugen/templates/pywalfox-colors.json"
+      output_path = ["~/.cache/wal/colors.json"]
+
       [hooks]
-      post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done"
+      post_run = ''
+        for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do
+          [ -S "$SOCK" ] && kitty @ --to="unix:$SOCK" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null
+        done
+        # Update PywalFox theme
+        if command -v pywalfox >/dev/null 2>&1; then
+          pywalfox update 2>/dev/null || true
+        fi
+      ''
     '';
 
     "matugen/templates/nvim-colors.lua".text = ''
