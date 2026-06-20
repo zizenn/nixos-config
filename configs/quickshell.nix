@@ -13,6 +13,7 @@
     "quickshell/services/NetworkService.qml".source = ./quickshell/services/NetworkService.qml;
     "quickshell/services/BluetoothService.qml".source = ./quickshell/services/BluetoothService.qml;
     "quickshell/services/ColorService.qml".source = ./quickshell/services/ColorService.qml;
+    "quickshell/services/VolumeService.qml".source = ./quickshell/services/VolumeService.qml;
   };
 
   home.packages = with pkgs; [

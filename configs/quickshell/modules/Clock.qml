@@ -4,7 +4,7 @@ Text {
     id: clock
 
     property var colors: null
-    property string timeStr: Qt.formatTime(new Date(), "hh:mm")
+    property string timeStr: Qt.formatTime(new Date(), "h:mm AP")
 
     text: timeStr
     color: colors ? colors.cOnSurface : "#e2e2e9"
@@ -17,6 +17,6 @@ Text {
         running: true
         repeat: true
         triggeredOnStart: true
-        onTriggered: clock.timeStr = Qt.formatTime(new Date(), "hh:mm")
+        onTriggered: clock.timeStr = Qt.formatTime(new Date(), "h:mm AP")
     }
 }
