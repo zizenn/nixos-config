@@ -7,7 +7,7 @@ Row {
     anchors.verticalCenter: parent.verticalCenter
     visible: true
 
-    readonly property Item rootWindow: window
+    property var rootWindow: null
 
     Repeater {
         model: SystemTray.items
