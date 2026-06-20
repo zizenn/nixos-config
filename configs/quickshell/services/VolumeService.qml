@@ -16,7 +16,7 @@ QtObject {
     }
 
     property Process proc: Process {
-        command: ["bash", "-c", "while true; do wpctl get-volume @DEFAULT_AUDIO_SINK@; sleep 0.15; done"]
+        command: ["wpctl", "get-volume", "@DEFAULT_AUDIO_SINK@"]
         running: true
         stdout: SplitParser {
             onRead: function(data) {
@@ -27,6 +27,9 @@ QtObject {
                 root.volume = v
                 root.muted = m
             }
+        }
+        onExited: {
+            running = true
         }
     }
 }

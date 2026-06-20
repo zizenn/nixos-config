@@ -15,6 +15,7 @@ ShellRoot {
     Connections {
         target: volSvc
         function onVolumeChanged() {
+            console.log("HUD show triggered")
             islandBar.showVolumeHud()
         }
     }
