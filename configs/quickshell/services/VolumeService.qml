@@ -18,8 +18,8 @@ QtObject {
     }
 
     property Process proc: Process {
-        command: ["bash", "-c", "wpctl get-volume @DEFAULT_AUDIO_SINK@"]
-        running: false
+        command: ["bash", "-c", "while true; do wpctl get-volume @DEFAULT_AUDIO_SINK@; sleep 0.15; done"]
+        running: true
         stdout: SplitParser {
             onRead: function(data) {
                 var v = 0.0
@@ -29,16 +29,6 @@ QtObject {
                 root.volume = v
                 root.muted = m
             }
-        }
-    }
-
-    property Timer pollTimer: Timer {
-        interval: 200
-        running: true
-        repeat: true
-        onTriggered: {
-            if (!proc.running)
-                proc.running = true
         }
     }
 }
