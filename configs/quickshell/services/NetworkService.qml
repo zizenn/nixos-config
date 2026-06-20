@@ -9,21 +9,14 @@ QtObject {
     property int strength: 0
     property bool connected: false
 
-    Component.onCompleted: poll()
-
-    Timer {
+    property Timer pollTimer: Timer {
         interval: 10000
         running: true
         repeat: true
         onTriggered: root.poll()
     }
 
-    function poll() {
-        nmcliProc.running = true
-    }
-
-    Process {
-        id: nmcliProc
+    property Process nmcliProc: Process {
         command: ["nmcli", "-t", "-f", "ACTIVE,SSID,SIGNAL", "dev", "wifi"]
         running: false
         stdout: SplitParser {
@@ -42,5 +35,11 @@ QtObject {
                 root.strength = 0
             }
         }
+    }
+
+    Component.onCompleted: poll()
+
+    function poll() {
+        nmcliProc.running = true
     }
 }

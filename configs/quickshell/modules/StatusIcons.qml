@@ -17,7 +17,8 @@ Row {
         anchors.verticalCenter: parent.verticalCenter
 
         Text {
-            text: root.wifiConnected ? "\ufa7c" : "\ue858"
+            id: wifiIcon
+            text: "\uf1eb"
             color: root.wifiConnected
                 ? Colors.primary
                 : Qt.hsla(
@@ -37,7 +38,6 @@ Row {
                 Qt.color(Colors.onSurface).hslLightness,
                 0.7)
             font.pixelSize: 11
-            visible: true
         }
     }
 
@@ -54,10 +54,11 @@ Row {
     Row {
         spacing: 6
         anchors.verticalCenter: parent.verticalCenter
+        visible: root.btPowered
 
         Text {
-            text: root.btPowered ? "\uf294" : "\ue84d"
-            color: root.btPowered
+            text: "\uf294"
+            color: root.btCount > 0
                 ? Colors.primary
                 : Qt.hsla(
                     Qt.color(Colors.onSurface).hslHue,

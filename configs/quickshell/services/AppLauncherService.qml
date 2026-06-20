@@ -9,10 +9,44 @@ QtObject {
     property var allApps: []
     property var filteredApps: []
 
+    property Process scannerProc: Process {
+        command: ["bash", "-c",
+            "find /run/current-system/sw/share/applications ~/.local/share/applications ~/.nix-profile/share/applications /etc/profiles/per-user/$USER/share/applications -name '*.desktop' 2>/dev/null | sort -u | head -500 | while read f; do name=\"\"; exec=\"\"; icon=\"\"; nodisplay=\"\"; while IFS= read -r line; do case \"$line\" in \"Name=\"*) [ -z \"$name\" ] && name=\"${line#Name=}\" ;; \"Exec=\"*) exec=\"${line#Exec=}\" ;; \"Icon=\"*) icon=\"${line#Icon=}\" ;; \"NoDisplay=true\") nodisplay=1 ;; esac; done < \"$f\"; [ -n \"$name\" ] && [ -n \"$exec\" ] && [ -z \"$nodisplay\" ] || continue; iconpath=\"\"; [ -n \"$icon\" ] && [ -f \"$icon\" ] && iconpath=\"$icon\"; [ -z \"$iconpath\" ] && [ -f \"/run/current-system/sw/share/icons/hicolor/48x48/apps/$icon.png\" ] && iconpath=\"/run/current-system/sw/share/icons/hicolor/48x48/apps/$icon.png\"; [ -z \"$iconpath\" ] && [ -f \"/run/current-system/sw/share/icons/hicolor/scalable/apps/$icon.svg\" ] && iconpath=\"/run/current-system/sw/share/icons/hicolor/scalable/apps/$icon.svg\"; [ -z \"$iconpath\" ] && [ -f \"$HOME/.local/share/icons/hicolor/48x48/apps/$icon.png\" ] && iconpath=\"$HOME/.local/share/icons/hicolor/48x48/apps/$icon.png\"; [ -z \"$iconpath\" ] && [ -f \"$HOME/.local/share/icons/hicolor/scalable/apps/$icon.svg\" ] && iconpath=\"$HOME/.local/share/icons/hicolor/scalable/apps/$icon.svg\"; [ -z \"$iconpath\" ] && [ -f \"$HOME/.nix-profile/share/icons/hicolor/48x48/apps/$icon.png\" ] && iconpath=\"$HOME/.nix-profile/share/icons/hicolor/48x48/apps/$icon.png\"; [ -z \"$iconpath\" ] && [ -f \"$HOME/.nix-profile/share/icons/hicolor/scalable/apps/$icon.svg\" ] && iconpath=\"$HOME/.nix-profile/share/icons/hicolor/scalable/apps/$icon.svg\"; echo \"APP|$name|$exec|$iconpath\"; done"]
+        running: false
+        stdout: SplitParser {
+            onRead: function(data) {
+                var parts = data.split("|")
+                if (parts.length >= 4 && parts[0] === "APP") {
+                    root.allAppsRaw.push({
+                        name: parts[1],
+                        exec: parts[2],
+                        iconPath: parts[3] || ""
+                    })
+                }
+            }
+        }
+        onExited: {
+            root.allApps = root.allAppsRaw.sort(function(a, b) {
+                return a.name.localeCompare(b.name)
+            })
+            root.allAppsRaw = []
+            root.filter()
+        }
+    }
+
+    property var allAppsRaw: []
+
+    property Process launcherProcess: Process {
+        running: false
+    }
+
     Component.onCompleted: reload()
 
     function reload() {
-        desktopScanner.running = true
+        allApps = []
+        filteredApps = []
+        allAppsRaw = []
+        scannerProc.running = true
     }
 
     onQueryChanged: filter()
@@ -29,8 +63,7 @@ QtObject {
         var results = []
         for (var i = 0; i < allApps.length; i++) {
             var app = allApps[i]
-            if (app.name.toLowerCase().indexOf(q) !== -1 ||
-                (app.keywords && app.keywords.toLowerCase().indexOf(q) !== -1)) {
+            if (app.name.toLowerCase().indexOf(q) !== -1) {
                 results.push(app)
                 if (results.length >= 8) break
             }
@@ -40,84 +73,7 @@ QtObject {
 
     function launch(exec) {
         var clean = exec.replace(/%[uUfFdDnNickvm]/g, "").trim()
-        launcher.command = ["sh", "-c", clean + " &"]
-        launcher.running = true
-    }
-
-    Process {
-        id: desktopScanner
-        command: ["bash", "-c",
-            "find /run/current-system/sw/share/applications ~/.local/share/applications " +
-            "-name '*.desktop' 2>/dev/null | sort -u | head -300"]
-        running: false
-        stdout: SplitParser {
-            onRead: function(data) {
-                fileReader.paths.push(data.trim())
-            }
-        }
-        onExited: {
-            fileReader.index = 0
-            fileReader.results = []
-            fileReader.readNext()
-        }
-    }
-
-    QtObject {
-        id: fileReader
-        property var paths: []
-        property int index: 0
-        property var results: []
-
-        function readNext() {
-            if (index >= paths.length) {
-                root.allApps = results.sort(function(a, b) {
-                    return a.name.localeCompare(b.name)
-                })
-                root.filter()
-                return
-            }
-            singleReader.command = ["cat", paths[index]]
-            singleReader.running = true
-        }
-    }
-
-    Process {
-        id: singleReader
-        running: false
-        stdout: StdioCollector {
-            id: collector
-            onStreamFinished: singleReader.parse(collector.data)
-        }
-        onExited: {
-            fileReader.index++
-            fileReader.readNext()
-        }
-
-        function parse(text) {
-            var lines = text.split("\n")
-            var inEntry = false
-            var name = "", exec = "", icon = "", noDisplay = false, keywords = ""
-            for (var i = 0; i < lines.length; i++) {
-                var line = lines[i]
-                if (line.charAt(0) === "[") {
-                    inEntry = line === "[Desktop Entry]"
-                    continue
-                }
-                if (!inEntry) continue
-                if (line.indexOf("Name=") === 0 && name === "") name = line.substring(5)
-                else if (line.indexOf("Exec=") === 0) exec = line.substring(5)
-                else if (line.indexOf("Icon=") === 0) icon = line.substring(5)
-                else if (line.indexOf("NoDisplay=") === 0) noDisplay = line.substring(10).toLowerCase() === "true"
-                else if (line.indexOf("Keywords=") === 0) keywords = line.substring(9)
-            }
-            if (name && exec && !noDisplay) {
-                fileReader.results.push({ name: name, exec: exec, icon: icon, keywords: keywords })
-            }
-        }
-    }
-
-    Process {
-        id: launcher
-        running: false
+        launcherProcess.command = ["sh", "-c", clean + " &"]
+        launcherProcess.running = true
     }
 }

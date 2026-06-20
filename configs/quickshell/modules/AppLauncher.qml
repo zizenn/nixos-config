@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import "../colors.js" as Colors
 
 Item {
@@ -10,6 +11,14 @@ Item {
 
     implicitWidth: col.implicitWidth
     implicitHeight: col.implicitHeight
+
+    function requestFocus() {
+        searchInput.forceActiveFocus()
+    }
+
+    onVisibleChanged: {
+        if (visible) requestFocus()
+    }
 
     Column {
         id: col
@@ -37,7 +46,7 @@ Item {
                 spacing: 8
 
                 Text {
-                    text: "\uf4a5"
+                    text: "\uf002"
                     color: Qt.hsla(
                         Qt.color(Colors.onSurface).hslHue,
                         Qt.color(Colors.onSurface).hslSaturation,
@@ -48,7 +57,7 @@ Item {
                     anchors.verticalCenter: parent.verticalCenter
                 }
 
-                TextInput {
+                TextField {
                     id: searchInput
                     width: 280
                     color: Colors.onSurface
@@ -66,6 +75,7 @@ Item {
                         0.3)
                     focus: true
                     clip: true
+                    background: null
 
                     onTextChanged: {
                         if (root.launcherModel)
@@ -114,14 +124,27 @@ Item {
                         anchors { left: parent.left; verticalCenter: parent.verticalCenter; leftMargin: 10 }
                         spacing: 10
 
-                        Image {
+                        Item {
                             width: 22; height: 22
-                            source: modelData.icon.startsWith("/") || modelData.icon.startsWith("file://")
-                                    ? modelData.icon
-                                    : "image://xdgicon/" + modelData.icon
-                            fillMode: Image.PreserveAspectFit
                             anchors.verticalCenter: parent.verticalCenter
-                            smooth: true
+
+                            Image {
+                                id: appIcon
+                                anchors.fill: parent
+                                source: modelData.iconPath ? modelData.iconPath : ""
+                                fillMode: Image.PreserveAspectFit
+                                smooth: true
+                                visible: status === Image.Ready
+                            }
+
+                            Text {
+                                anchors.centerIn: parent
+                                text: modelData.name ? modelData.name.charAt(0).toUpperCase() : "?"
+                                color: Colors.onSurface
+                                font.pixelSize: 11
+                                font.weight: Font.Bold
+                                visible: appIcon.status !== Image.Ready
+                            }
                         }
 
                         Text {

@@ -8,22 +8,14 @@ QtObject {
     property bool powered: false
     property int connectedCount: 0
 
-    Component.onCompleted: poll()
-
-    Timer {
+    property Timer pollTimer: Timer {
         interval: 8000
         running: true
         repeat: true
         onTriggered: root.poll()
     }
 
-    function poll() {
-        btPowered.running = true
-        btDevices.running = true
-    }
-
-    Process {
-        id: btPowered
+    property Process btPoweredProc: Process {
         command: ["bluetoothctl", "show"]
         running: false
         stdout: SplitParser {
@@ -34,19 +26,25 @@ QtObject {
         }
     }
 
-    Process {
-        id: btDevices
+    property Process btDevicesProc: Process {
         command: ["bluetoothctl", "devices", "Connected"]
         running: false
-        property int count: 0
         stdout: SplitParser {
             onRead: function(data) {
-                if (data.indexOf("Device") === 0) btDevices.count++
+                if (data.indexOf("Device") === 0) btDevicesProc.deviceCount++
             }
         }
+        property int deviceCount: 0
         onExited: {
-            root.connectedCount = btDevices.count
-            btDevices.count = 0
+            root.connectedCount = btDevicesProc.deviceCount
+            btDevicesProc.deviceCount = 0
         }
+    }
+
+    Component.onCompleted: poll()
+
+    function poll() {
+        btPoweredProc.running = true
+        btDevicesProc.running = true
     }
 }

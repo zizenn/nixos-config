@@ -22,3 +22,9 @@ hl.window_rule({
     size = "1280 720",
     center = true,
 })
+
+hl.window_rule({
+    match = { title = "quickshell-launcher" },
+    float = true,
+    pin = true,
+})

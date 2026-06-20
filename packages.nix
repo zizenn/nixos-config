@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -36,6 +36,7 @@
   bc
   fd
   vesktop
+  inputs.zen-browser.packages.x86_64-linux.default
 ];
 
 }
