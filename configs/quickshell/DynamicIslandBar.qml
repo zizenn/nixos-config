@@ -1,7 +1,6 @@
 import QtQuick
 import Quickshell
 
-import "colors.js" as Colors
 import "./services" as Services
 import "./modules" as Modules
 
@@ -9,7 +8,7 @@ PanelWindow {
     id: bar
 
     property string islandState: "default"
-    property bool launcherOpen: false
+    property var colors: null
 
     anchors {
         top: true
@@ -54,16 +53,15 @@ PanelWindow {
 
         radius: height / 2
 
-        opacity: bar.launcherOpen ? 0 : 1
         color: Qt.hsla(
-            Qt.color(Colors.surface).hslHue,
-            Qt.color(Colors.surface).hslSaturation,
-            Qt.color(Colors.surface).hslLightness,
+            Qt.color(colors.surface).hslHue,
+            Qt.color(colors.surface).hslSaturation,
+            Qt.color(colors.surface).hslLightness,
             0.82)
         border.color: Qt.hsla(
-            Qt.color(Colors.outline).hslHue,
-            Qt.color(Colors.outline).hslSaturation,
-            Qt.color(Colors.outline).hslLightness,
+            Qt.color(colors.outline).hslHue,
+            Qt.color(colors.outline).hslSaturation,
+            Qt.color(colors.outline).hslLightness,
             0.12)
         border.width: 1
 
@@ -92,22 +90,14 @@ PanelWindow {
                 id: wsDots
                 workspaces: wsSvc.workspaces
                 activeId:   wsSvc.activeId
+                colors: bar.colors
                 onSwitchRequested: function(id) { wsSvc.switchTo(id) }
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            Rectangle {
-                width: 1; height: 14
-                color: Qt.hsla(
-                    Qt.color(Colors.onSurface).hslHue,
-                    Qt.color(Colors.onSurface).hslSaturation,
-                    Qt.color(Colors.onSurface).hslLightness,
-                    0.15)
                 anchors.verticalCenter: parent.verticalCenter
             }
 
             Modules.Clock {
                 anchors.verticalCenter: parent.verticalCenter
+                colors: bar.colors
             }
         }
 
@@ -120,48 +110,28 @@ PanelWindow {
                 leftMargin: 16
                 rightMargin: 16
             }
-            height: sep.height + contentRow.height + 18
+            height: contentRow.height + 18
             opacity: bar.islandState === "expanded" ? 1 : 0
             visible: opacity > 0
             Behavior on opacity { NumberAnimation { duration: 200 } }
 
-            Rectangle {
-                id: sep
-                anchors { top: parent.top; horizontalCenter: parent.horizontalCenter }
-                width: parent.width - 12
-                height: 1
-                color: Qt.hsla(
-                    Qt.color(Colors.outline).hslHue,
-                    Qt.color(Colors.outline).hslSaturation,
-                    Qt.color(Colors.outline).hslLightness,
-                    0.08)
-            }
-
             Row {
                 id: contentRow
                 anchors {
-                    top: sep.bottom
-                    topMargin: 8
+                    top: parent.top
+                    topMargin: 10
                     horizontalCenter: parent.horizontalCenter
                 }
                 spacing: 16
 
                 Modules.TrayIcons {}
 
-                Rectangle {
-                    width: 1; height: 22
-                    color: Qt.hsla(
-                        Qt.color(Colors.outline).hslHue,
-                        Qt.color(Colors.outline).hslSaturation,
-                        Qt.color(Colors.outline).hslLightness,
-                        0.1)
-                }
-
                 Modules.StatusIcons {
                     wifiConnected: netSvc.connected
                     wifiSsid:      netSvc.ssid
                     btPowered:     btSvc.powered
                     btCount:       btSvc.connectedCount
+                    colors: bar.colors
                 }
             }
         }

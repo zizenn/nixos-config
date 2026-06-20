@@ -1,9 +1,9 @@
 import QtQuick
-import "../colors.js" as Colors
 
 Row {
     id: root
 
+    property var colors: null
     property string wifiSsid: ""
     property bool   wifiConnected: false
     property bool   btPowered: false
@@ -20,11 +20,11 @@ Row {
             id: wifiIcon
             text: "\uf1eb"
             color: root.wifiConnected
-                ? Colors.primary
+                ? root.colors.primary
                 : Qt.hsla(
-                    Qt.color(Colors.onSurface).hslHue,
-                    Qt.color(Colors.onSurface).hslSaturation,
-                    Qt.color(Colors.onSurface).hslLightness,
+                    Qt.color(root.colors.cOnSurface).hslHue,
+                    Qt.color(root.colors.cOnSurface).hslSaturation,
+                    Qt.color(root.colors.cOnSurface).hslLightness,
                     0.4)
             font.pixelSize: 15
             font.family: "JetBrainsMono Nerd Font"
@@ -33,22 +33,12 @@ Row {
         Text {
             text: root.wifiConnected ? root.wifiSsid : "offline"
             color: Qt.hsla(
-                Qt.color(Colors.onSurface).hslHue,
-                Qt.color(Colors.onSurface).hslSaturation,
-                Qt.color(Colors.onSurface).hslLightness,
+                Qt.color(root.colors.cOnSurface).hslHue,
+                Qt.color(root.colors.cOnSurface).hslSaturation,
+                Qt.color(root.colors.cOnSurface).hslLightness,
                 0.7)
             font.pixelSize: 11
         }
-    }
-
-    Rectangle {
-        width: 1; height: 14
-        color: Qt.hsla(
-            Qt.color(Colors.outline).hslHue,
-            Qt.color(Colors.outline).hslSaturation,
-            Qt.color(Colors.outline).hslLightness,
-            0.15)
-        anchors.verticalCenter: parent.verticalCenter
     }
 
     Row {
@@ -59,11 +49,11 @@ Row {
         Text {
             text: "\uf294"
             color: root.btCount > 0
-                ? Colors.primary
+                ? root.colors.primary
                 : Qt.hsla(
-                    Qt.color(Colors.onSurface).hslHue,
-                    Qt.color(Colors.onSurface).hslSaturation,
-                    Qt.color(Colors.onSurface).hslLightness,
+                    Qt.color(root.colors.cOnSurface).hslHue,
+                    Qt.color(root.colors.cOnSurface).hslSaturation,
+                    Qt.color(root.colors.cOnSurface).hslLightness,
                     0.4)
             font.pixelSize: 15
             font.family: "JetBrainsMono Nerd Font"
@@ -73,9 +63,9 @@ Row {
             visible: root.btCount > 0
             text: root.btCount + " dev"
             color: Qt.hsla(
-                Qt.color(Colors.onSurface).hslHue,
-                Qt.color(Colors.onSurface).hslSaturation,
-                Qt.color(Colors.onSurface).hslLightness,
+                Qt.color(root.colors.cOnSurface).hslHue,
+                Qt.color(root.colors.cOnSurface).hslSaturation,
+                Qt.color(root.colors.cOnSurface).hslLightness,
                 0.7)
             font.pixelSize: 11
         }

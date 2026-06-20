@@ -1,9 +1,9 @@
 import QtQuick
-import "../colors.js" as Colors
 
 Item {
     id: root
 
+    property var colors: null
     property var workspaces: []
     property int activeId: 1
     signal switchRequested(int id)
@@ -28,10 +28,10 @@ Item {
                 height: 7
                 radius: 3.5
 
-                color: isActive ? Colors.primary : Qt.hsla(
-                    Qt.color(Colors.onSurface).hslHue,
-                    Qt.color(Colors.onSurface).hslSaturation,
-                    Qt.color(Colors.onSurface).hslLightness,
+                color: isActive ? root.colors.primary : Qt.hsla(
+                    Qt.color(root.colors.cOnSurface).hslHue,
+                    Qt.color(root.colors.cOnSurface).hslSaturation,
+                    Qt.color(root.colors.cOnSurface).hslLightness,
                     0.3)
 
                 Behavior on width { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }

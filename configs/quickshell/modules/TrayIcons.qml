@@ -5,6 +5,7 @@ import Quickshell.Services.SystemTray
 Row {
     spacing: 10
     anchors.verticalCenter: parent.verticalCenter
+    visible: SystemTray.items.length > 0
 
     Repeater {
         model: SystemTray.items

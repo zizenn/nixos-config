@@ -17,8 +17,12 @@
       output_path = ["~/.config/nvim/lua/matugen/colors.lua"]
 
       [templates.quickshell]
-      input_path = "~/.config/matugen/templates/quickshell-colors.js"
-      output_path = ["~/.config/quickshell/colors.js"]
+      input_path = "~/.config/matugen/templates/quickshell-colors.json"
+      output_path = ["~/.config/quickshell/colors.json"]
+
+      [templates.rofi]
+      input_path = "~/.config/matugen/templates/rofi-colors.rasi"
+      output_path = ["~/.config/rofi/colors.rasi"]
 
       [hooks]
       post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done"
@@ -53,34 +57,52 @@
       }
     '';
 
-    "matugen/templates/quickshell-colors.js".text = ''
-      .pragma library
+    "matugen/templates/quickshell-colors.json".text = ''
+      {
+        "surface": "{{colors.surface.default.hex}}",
+        "cOnSurface": "{{colors.on_surface.default.hex}}",
+        "surfaceDim": "{{colors.surface_dim.default.hex}}",
+        "surfaceBright": "{{colors.surface_bright.default.hex}}",
+        "surfaceContainer": "{{colors.surface_container.default.hex}}",
+        "surfaceVariant": "{{colors.surface_variant.default.hex}}",
+        "cOnSurfaceVariant": "{{colors.on_surface_variant.default.hex}}",
+        "primary": "{{colors.primary.default.hex}}",
+        "cOnPrimary": "{{colors.on_primary.default.hex}}",
+        "primaryContainer": "{{colors.primary_container.default.hex}}",
+        "cOnPrimaryContainer": "{{colors.on_primary_container.default.hex}}",
+        "secondary": "{{colors.secondary.default.hex}}",
+        "cOnSecondary": "{{colors.on_secondary.default.hex}}",
+        "secondaryContainer": "{{colors.secondary_container.default.hex}}",
+        "cOnSecondaryContainer": "{{colors.on_secondary_container.default.hex}}",
+        "tertiary": "{{colors.tertiary.default.hex}}",
+        "cOnTertiary": "{{colors.on_tertiary.default.hex}}",
+        "error": "{{colors.error.default.hex}}",
+        "cOnError": "{{colors.on_error.default.hex}}",
+        "errorContainer": "{{colors.error_container.default.hex}}",
+        "cOnErrorContainer": "{{colors.on_error_container.default.hex}}",
+        "outline": "{{colors.outline.default.hex}}",
+        "outlineVariant": "{{colors.outline_variant.default.hex}}",
+        "background": "{{colors.background.default.hex}}",
+        "cOnBackground": "{{colors.on_background.default.hex}}"
+      }
+    '';
 
-      var surface = "{{colors.surface.default.hex}}";
-      var onSurface = "{{colors.on_surface.default.hex}}";
-      var surfaceDim = "{{colors.surface_dim.default.hex}}";
-      var surfaceBright = "{{colors.surface_bright.default.hex}}";
-      var surfaceContainer = "{{colors.surface_container.default.hex}}";
-      var surfaceVariant = "{{colors.surface_variant.default.hex}}";
-      var onSurfaceVariant = "{{colors.on_surface_variant.default.hex}}";
-      var primary = "{{colors.primary.default.hex}}";
-      var onPrimary = "{{colors.on_primary.default.hex}}";
-      var primaryContainer = "{{colors.primary_container.default.hex}}";
-      var onPrimaryContainer = "{{colors.on_primary_container.default.hex}}";
-      var secondary = "{{colors.secondary.default.hex}}";
-      var onSecondary = "{{colors.on_secondary.default.hex}}";
-      var secondaryContainer = "{{colors.secondary_container.default.hex}}";
-      var onSecondaryContainer = "{{colors.on_secondary_container.default.hex}}";
-      var tertiary = "{{colors.tertiary.default.hex}}";
-      var onTertiary = "{{colors.on_tertiary.default.hex}}";
-      var error = "{{colors.error.default.hex}}";
-      var onError = "{{colors.on_error.default.hex}}";
-      var errorContainer = "{{colors.error_container.default.hex}}";
-      var onErrorContainer = "{{colors.on_error_container.default.hex}}";
-      var outline = "{{colors.outline.default.hex}}";
-      var outlineVariant = "{{colors.outline_variant.default.hex}}";
-      var background = "{{colors.background.default.hex}}";
-      var onBackground = "{{colors.on_background.default.hex}}";
+    "matugen/templates/rofi-colors.rasi".text = ''
+      * {
+          background:                     {{colors.surface.default.hex}};
+          background-dim:                 rgba({{colors.surface.default.rgb}}, 0.85);
+          foreground:                     {{colors.on_surface.default.hex}};
+          selected-normal-background:     {{colors.primary_container.default.hex}};
+          selected-normal-foreground:     {{colors.on_primary_container.default.hex}};
+          selected-active-background:     {{colors.secondary_container.default.hex}};
+          selected-active-foreground:     {{colors.on_secondary_container.default.hex}};
+          selected-urgent-background:     {{colors.error_container.default.hex}};
+          selected-urgent-foreground:     {{colors.on_error_container.default.hex}};
+          active-background:              {{colors.primary.default.hex}};
+          active-foreground:              {{colors.on_primary.default.hex}};
+          urgent-background:              {{colors.error.default.hex}};
+          urgent-foreground:              {{colors.on_error.default.hex}};
+      }
     '';
 
     "matugen/templates/kitty.conf".text = ''

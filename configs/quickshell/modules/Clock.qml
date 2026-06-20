@@ -1,13 +1,13 @@
 import QtQuick
-import "../colors.js" as Colors
 
 Text {
     id: clock
 
+    property var colors: null
     property string timeStr: Qt.formatTime(new Date(), "hh:mm")
 
     text: timeStr
-    color: Colors.onSurface
+    color: colors ? colors.cOnSurface : "#e2e2e9"
     font.pixelSize: 14
     font.weight: Font.Medium
     font.family: "monospace"

@@ -3,6 +3,10 @@ local menu = "wofi -n"
 local bar = "quickshell -p /home/zizenn/.config/quickshell/shell.qml"
 
 hl.on("hyprland.start", function ()
+
+    -- wallpaper
+    hl.exec_cmd("awww-daemon")
+
     -- hyprpolkitagent and pywal
     hl.exec_cmd("matugen image ~/.wallpaper --source-color-index 0")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
@@ -16,9 +20,6 @@ hl.on("hyprland.start", function ()
     -- clipboard
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
-
-    -- wallpaper
-    hl.exec_cmd("awww-daemon")
 
     -- bar
     hl.exec_cmd(bar)
