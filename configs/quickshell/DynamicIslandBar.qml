@@ -58,15 +58,22 @@ PanelWindow {
 
     Rectangle {
         id: pill
-        anchors { left: parent.left; right: parent.right }
+
+        x: (bar.width - width) / 2
         y: 0
+
+        width: {
+            var top = topRow.implicitWidth + pillPadding * 2
+            var exp = contentRow.implicitWidth + 32 + pillPadding * 2
+            return Math.max(top, exp)
+        }
         height: {
             var h = pillHeight
             if (islandState === "expanded")
                 h += expandedSection.height
             return h
         }
-        radius: 14
+        radius: 10
 
         color: Qt.hsla(
             Qt.color(colors.surface).hslHue,
@@ -81,6 +88,7 @@ PanelWindow {
         border.width: 1
 
         Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutCubic } }
+        Behavior on width  { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } }
         Behavior on height { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } }
         Behavior on radius { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } }
         Behavior on color  { ColorAnimation { duration: 200 } }
@@ -93,33 +101,37 @@ PanelWindow {
             }
         }
 
-        Item {
-            id: topBar
-            anchors { left: parent.left; right: parent.right; top: parent.top }
-            height: pillHeight
+        Row {
+            id: topRow
+            x: pillPadding
+            y: (pillHeight - implicitHeight) / 2
+            spacing: 18
 
             Modules.WorkspaceDots {
-                anchors { left: parent.left; verticalCenter: parent.verticalCenter; leftMargin: pillPadding }
+                id: wsDots
                 workspaces: wsSvc.workspaces
                 activeId:   wsSvc.activeId
                 colors: bar.colors
                 onSwitchRequested: function(id) { wsSvc.switchTo(id) }
+                anchors.verticalCenter: parent.verticalCenter
             }
 
             Modules.Clock {
-                anchors { right: parent.right; verticalCenter: parent.verticalCenter; rightMargin: pillPadding }
+                anchors.verticalCenter: parent.verticalCenter
                 colors: bar.colors
             }
         }
 
         Item {
             id: expandedSection
-            anchors { top: topBar.bottom; left: parent.left; right: parent.right }
+            width: parent.width
             height: islandState === "expanded" ? contentRow.height + 14 : 0
+            anchors { top: topRow.bottom; topMargin: 0 }
             clip: true
             opacity: islandState === "expanded" ? 1 : 0
 
             Behavior on height { NumberAnimation { duration: 200 } }
+            Behavior on opacity { NumberAnimation { duration: 200 } }
 
             Row {
                 id: contentRow
