@@ -7,8 +7,17 @@ Row {
     anchors.verticalCenter: parent.verticalCenter
     visible: SystemTray.items.length > 0
 
+    property var trayItems: SystemTray.items
+
+    Timer {
+        interval: 2000
+        running: true
+        repeat: true
+        onTriggered: trayItems = SystemTray.items
+    }
+
     Repeater {
-        model: SystemTray.items
+        model: trayItems
 
         Item {
             required property SystemTrayItem modelData
