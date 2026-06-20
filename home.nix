@@ -9,6 +9,7 @@
     ./configs/wallpaper.nix
     ./configs/neovim.nix
     ./configs/quickshell.nix
+    ./configs/zen.nix
     ./packages.nix
   ];
 

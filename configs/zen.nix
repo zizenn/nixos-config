@@ -22,11 +22,10 @@ in
   # ZEN CHROME DIRECTORY — links to matugen-rendered CSS
   # ============================================================
   home.file = {
-    # These files import the CSS that matugen renders on each wallpaper change.
-    "${profilePath}/chrome/userChrome.css".text = ''
+    ".config/zen/${profilePath}/chrome/userChrome.css".text = ''
       @import url("matugen-chrome.css");
     '';
-    "${profilePath}/chrome/userContent.css".text = ''
+    ".config/zen/${profilePath}/chrome/userContent.css".text = ''
       @import url("matugen-content.css");
     '';
   };

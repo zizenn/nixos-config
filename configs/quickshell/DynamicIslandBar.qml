@@ -47,7 +47,7 @@ PanelWindow {
 
     Timer {
         id: expandDelay
-        interval: 260
+        interval: 80
         onTriggered: showExpanded = true
     }
 
