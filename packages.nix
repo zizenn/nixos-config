@@ -40,6 +40,7 @@
   pywalfox-native
   steam
   protonmail-desktop
+  zed
 ];
 
 }
