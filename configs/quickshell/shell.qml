@@ -7,6 +7,7 @@ ShellRoot {
     Services.VolumeService  { id: volSvc }
 
     DynamicIslandBar {
+        id: islandBar
         colors: colors
         volSvc: volSvc
     }
@@ -14,7 +15,7 @@ ShellRoot {
     Connections {
         target: volSvc
         function onVolumeChanged() {
-            bar.showVolumeHud()
+            islandBar.showVolumeHud()
         }
     }
 }
