@@ -9,10 +9,20 @@ Row {
 
     property var trayItems: []
 
+    onVisibleChanged: {
+        if (visible) {
+            var arr = []
+            for (var i = 0; i < SystemTray.items.length; i++)
+                arr.push(SystemTray.items[i])
+            trayItems = arr
+        }
+    }
+
     Timer {
         interval: 2000
         running: true
         repeat: true
+        triggeredOnStart: true
         onTriggered: {
             var arr = []
             for (var i = 0; i < SystemTray.items.length; i++)
