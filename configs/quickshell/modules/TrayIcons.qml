@@ -12,8 +12,8 @@ Row {
     onVisibleChanged: {
         if (visible) {
             var arr = []
-            for (var i = 0; i < SystemTray.items.length; i++)
-                arr.push(SystemTray.items[i])
+            for (var i = 0; i < SystemTray.items.count; i++)
+                arr.push(SystemTray.items.get(i))
             trayItems = arr
         }
     }
@@ -25,8 +25,8 @@ Row {
         triggeredOnStart: true
         onTriggered: {
             var arr = []
-            for (var i = 0; i < SystemTray.items.length; i++)
-                arr.push(SystemTray.items[i])
+            for (var i = 0; i < SystemTray.items.count; i++)
+                arr.push(SystemTray.items.get(i))
             trayItems = arr
         }
     }
