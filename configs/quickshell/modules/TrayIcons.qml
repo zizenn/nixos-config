@@ -28,6 +28,7 @@ Row {
                 source: modelData.icon
                 fillMode: Image.PreserveAspectFit
                 smooth: true
+                asynchronous: true
             }
 
             MouseArea {
