@@ -30,8 +30,10 @@ Row {
                     if (!modelData) return
                     if (mouse.button === Qt.LeftButton)
                         modelData.activate()
-                    else
-                        modelData.secondaryActivate()
+                    else if (mouse.button === Qt.RightButton) {
+                        if (modelData.hasMenu)
+                            modelData.display(window, mouse.x, mouse.y)
+                    }
                 }
             }
         }

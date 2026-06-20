@@ -118,7 +118,7 @@ PanelWindow {
         // ── Normal mode ──
         Row {
             id: topRow
-            x: pillPadding
+            anchors.horizontalCenter: parent.horizontalCenter
             y: (pillHeight - implicitHeight) / 2
             spacing: 18
             visible: activeSelector === "none"
