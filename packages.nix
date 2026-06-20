@@ -41,6 +41,7 @@
   steam
   protonmail-desktop
   zed-editor
+  btop
 ];
 
 }
