@@ -19,7 +19,7 @@ PanelWindow {
     }
 
     implicitHeight: {
-        var base = pill.y + pill.height + 8
+        var base = pill.y + pill.height + 4
         var hudBottom = pill.y + pill.height + 12 + volumeHud.height
         var selBottom = pill.y + pill.height + 12 + Math.max(wifiSelector.height, btSelector.height)
         return Math.max(base, hudBottom, selBottom)
@@ -30,6 +30,7 @@ PanelWindow {
 
     property int pillHeight: 38
     property int pillPadding: 24
+    property bool showExpanded: false
 
     Services.WorkspaceService { id: wsSvc }
     Services.NetworkService   { id: netSvc }
@@ -40,24 +41,31 @@ PanelWindow {
             islandState = "expanded"
     }
 
+    onIslandStateChanged: {
+        if (islandState === "expanded") {
+            expandDelay.restart()
+        } else {
+            expandDelay.stop()
+            showExpanded = false
+        }
+    }
+
+    Timer {
+        id: expandDelay
+        interval: 100
+        onTriggered: showExpanded = true
+    }
+
     Rectangle {
         id: pill
-
-        x: (bar.width - width) / 2
-        y: 8
-
-        width: {
-            var top = topRow.implicitWidth + pillPadding * 2
-            var exp = contentRow.implicitWidth + 32 + pillPadding * 2
-            return Math.max(top, exp)
-        }
+        anchors { left: parent.left; right: parent.right }
+        y: 0
         height: {
             var h = pillHeight
             if (islandState === "expanded")
                 h += expandedSection.height
             return h
         }
-
         radius: 14
 
         color: Qt.hsla(
@@ -73,7 +81,6 @@ PanelWindow {
         border.width: 1
 
         Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutCubic } }
-        Behavior on width  { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } }
         Behavior on height { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } }
         Behavior on radius { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } }
         Behavior on color  { ColorAnimation { duration: 200 } }
@@ -86,42 +93,41 @@ PanelWindow {
             }
         }
 
-        Row {
-            id: topRow
-            x: pillPadding
-            y: (pillHeight - implicitHeight) / 2
-            spacing: 18
+        Item {
+            id: topBar
+            anchors { left: parent.left; right: parent.right; top: parent.top }
+            height: pillHeight
 
             Modules.WorkspaceDots {
-                id: wsDots
+                anchors { left: parent.left; verticalCenter: parent.verticalCenter; leftMargin: pillPadding }
                 workspaces: wsSvc.workspaces
                 activeId:   wsSvc.activeId
                 colors: bar.colors
                 onSwitchRequested: function(id) { wsSvc.switchTo(id) }
-                anchors.verticalCenter: parent.verticalCenter
             }
 
             Modules.Clock {
-                anchors.verticalCenter: parent.verticalCenter
+                anchors { right: parent.right; verticalCenter: parent.verticalCenter; rightMargin: pillPadding }
                 colors: bar.colors
             }
         }
 
         Item {
             id: expandedSection
-            width: parent.width
-            height: islandState === "expanded" ? contentRow.height + 18 : 0
-            anchors { top: topRow.bottom; topMargin: 0 }
+            anchors { top: topBar.bottom; left: parent.left; right: parent.right }
+            height: islandState === "expanded" ? contentRow.height + 14 : 0
             clip: true
             opacity: islandState === "expanded" ? 1 : 0
 
             Behavior on height { NumberAnimation { duration: 200 } }
-            Behavior on opacity { NumberAnimation { duration: 200 } }
 
             Row {
                 id: contentRow
-                anchors { top: parent.top; topMargin: 10; horizontalCenter: parent.horizontalCenter }
+                anchors { top: parent.top; topMargin: 8; horizontalCenter: parent.horizontalCenter }
                 spacing: 16
+                opacity: showExpanded ? 1 : 0
+
+                Behavior on opacity { NumberAnimation { duration: 150 } }
 
                 Modules.TrayIcons {}
 
@@ -174,7 +180,7 @@ PanelWindow {
         y: pill.y + pill.height + 12
         width: hudRow.implicitWidth + 24
         height: hudRow.implicitHeight + 20
-        radius: height / 2
+        radius: 14
         color: Qt.hsla(
             Qt.color(colors.surface).hslHue,
             Qt.color(colors.surface).hslSaturation,
