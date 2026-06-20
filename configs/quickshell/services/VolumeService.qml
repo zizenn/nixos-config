@@ -8,12 +8,10 @@ QtObject {
     property real volume: 0.0
     property real prevVolume: 0.0
     property bool muted: false
-    property real lastChange: 0
 
     onVolumeChanged: {
         if (Math.abs(volume - prevVolume) > 0.005) {
             prevVolume = volume
-            lastChange = Date.now()
         }
     }
 
