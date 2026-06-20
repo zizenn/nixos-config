@@ -156,8 +156,9 @@ PanelWindow {
             Qt.color(colors.outline).hslLightness,
             0.12)
         border.width: 1
+        visible: true
         opacity: 0
-        z: 10
+        z: 100
 
         Behavior on opacity { NumberAnimation { duration: 120 } }
 
