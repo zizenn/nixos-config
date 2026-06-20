@@ -5,7 +5,7 @@ import Quickshell.Services.SystemTray
 Row {
     spacing: 10
     anchors.verticalCenter: parent.verticalCenter
-    visible: trayItems.length > 0
+    visible: true
 
     property var trayItems: []
 
@@ -14,6 +14,10 @@ Row {
         for (var i = 0; i < SystemTray.items.length; i++)
             arr.push(SystemTray.items[i])
         trayItems = arr
+        console.log("TRAY: items.length=" + SystemTray.items.length + " copied=" + arr.length)
+        if (arr.length > 0) {
+            console.log("TRAY: first item icon=" + arr[0].icon + " id=" + arr[0].id)
+        }
     }
 
     Timer {
