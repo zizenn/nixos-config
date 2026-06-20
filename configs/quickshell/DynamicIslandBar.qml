@@ -29,7 +29,7 @@ PanelWindow {
     color: "transparent"
 
     property int pillHeight: 38
-    property int pillPadding: 18
+    property int pillPadding: 24
 
     Services.WorkspaceService { id: wsSvc }
     Services.NetworkService   { id: netSvc }
@@ -58,7 +58,7 @@ PanelWindow {
             return h
         }
 
-        radius: height / 2
+        radius: 14
 
         color: Qt.hsla(
             Qt.color(colors.surface).hslHue,
@@ -75,6 +75,7 @@ PanelWindow {
         Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutCubic } }
         Behavior on width  { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } }
         Behavior on height { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } }
+        Behavior on radius { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } }
         Behavior on color  { ColorAnimation { duration: 200 } }
 
         HoverHandler {
