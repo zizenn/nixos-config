@@ -56,12 +56,11 @@ PanelWindow {
         onTriggered: showExpanded = true
     }
 
-    Item {
+    Rectangle {
         id: pill
 
         x: (bar.width - width) / 2
         y: 0
-
         width: {
             var top = topRow.implicitWidth + pillPadding * 2
             var exp = contentRow.implicitWidth + 32 + pillPadding * 2
@@ -73,77 +72,30 @@ PanelWindow {
                 h += expandedSection.height
             return h
         }
+        radius: 12
 
+        color: Qt.hsla(
+            Qt.color(colors.surface).hslHue,
+            Qt.color(colors.surface).hslSaturation,
+            Qt.color(colors.surface).hslLightness,
+            0.82)
+        border.color: Qt.hsla(
+            Qt.color(colors.outline).hslHue,
+            Qt.color(colors.outline).hslSaturation,
+            Qt.color(colors.outline).hslLightness,
+            0.12)
+        border.width: 1
+
+        Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutCubic } }
         Behavior on width  { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } }
         Behavior on height { NumberAnimation { duration: 260; easing.type: Easing.OutCubic } }
-        Behavior on opacity { NumberAnimation { duration: 150; easing.type: Easing.OutCubic } }
+        Behavior on color  { ColorAnimation { duration: 200 } }
 
         HoverHandler {
             id: hover
             onHoveredChanged: {
                 if (activeSelector === "none")
                     bar.islandState = hovered ? "expanded" : "default"
-            }
-        }
-
-        Canvas {
-            id: notchCanvas
-            anchors.fill: parent
-
-            property color topColor: "#000000"
-            property color bottomColor: colors ? Qt.hsla(
-                Qt.color(colors.surface).hslHue,
-                Qt.color(colors.surface).hslSaturation,
-                Qt.color(colors.surface).hslLightness,
-                0.82) : "#1e1e2e"
-            property color borderColor: colors ? Qt.hsla(
-                Qt.color(colors.outline).hslHue,
-                Qt.color(colors.outline).hslSaturation,
-                Qt.color(colors.outline).hslLightness,
-                0.12) : "transparent"
-
-            onBottomColorChanged: requestPaint()
-            onBorderColorChanged: requestPaint()
-            onWidthChanged: requestPaint()
-            onHeightChanged: requestPaint()
-
-            onPaint: {
-                var ctx = getContext("2d")
-                var w = width
-                var h = height
-                var r = 10
-                var slope = 18
-
-                ctx.clearRect(0, 0, w, h)
-
-                var grad = ctx.createLinearGradient(0, 0, 0, h)
-                grad.addColorStop(0.0, topColor)
-                grad.addColorStop(0.4, bottomColor)
-
-                ctx.beginPath()
-                ctx.moveTo(0, 0)
-                ctx.lineTo(w, 0)
-                ctx.lineTo(w - slope, h - r)
-                ctx.quadraticCurveTo(w - slope, h, w - slope - r, h)
-                ctx.lineTo(slope + r, h)
-                ctx.quadraticCurveTo(slope, h, slope, h - r)
-                ctx.closePath()
-                ctx.fillStyle = grad
-                ctx.fill()
-
-                if (colors) {
-                    ctx.beginPath()
-                    ctx.moveTo(0, 0)
-                    ctx.lineTo(w, 0)
-                    ctx.lineTo(w - slope, h - r)
-                    ctx.quadraticCurveTo(w - slope, h, w - slope - r, h)
-                    ctx.lineTo(slope + r, h)
-                    ctx.quadraticCurveTo(slope, h, slope, h - r)
-                    ctx.closePath()
-                    ctx.strokeStyle = borderColor
-                    ctx.lineWidth = 1
-                    ctx.stroke()
-                }
             }
         }
 
