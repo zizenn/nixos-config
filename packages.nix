@@ -42,6 +42,7 @@
   protonmail-desktop
   zed-editor
   btop
+  bat
 ];
 
 }
