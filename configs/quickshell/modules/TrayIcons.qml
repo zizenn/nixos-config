@@ -5,39 +5,20 @@ import Quickshell.Services.SystemTray
 Row {
     spacing: 10
     anchors.verticalCenter: parent.verticalCenter
-    visible: true
-
-    property var trayItems: []
-
-    function refresh() {
-        var arr = []
-        if (SystemTray && SystemTray.items) {
-            for (var i = 0; i < SystemTray.items.length; i++)
-                arr.push(SystemTray.items[i])
-        }
-        trayItems = arr
-    }
+    visible: SystemTray.items.count > 0
 
     Text {
-        text: "tray:" + trayItems.length
+        text: "tray:" + SystemTray.items.count
         color: "red"; font.pixelSize: 10
         anchors.verticalCenter: parent.verticalCenter
         visible: true
     }
 
-    Timer {
-        interval: 2000
-        running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: refresh()
-    }
-
     Repeater {
-        model: trayItems
+        model: SystemTray.items
 
         delegate: Item {
-            required property var modelData
+            required property SystemTrayItem modelData
             width: 20; height: 20
 
             Image {
