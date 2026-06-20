@@ -112,7 +112,7 @@ PanelWindow {
                 var w = width
                 var h = height
                 var r = 10
-                var flare = 14
+                var slope = 18
 
                 ctx.clearRect(0, 0, w, h)
 
@@ -121,28 +121,24 @@ PanelWindow {
                 grad.addColorStop(0.4, bottomColor)
 
                 ctx.beginPath()
-                ctx.moveTo(w / 2, 0)
-                ctx.quadraticCurveTo(0, flare, 0, flare * 2)
-                ctx.lineTo(0, h - r)
-                ctx.quadraticCurveTo(0, h, r, h)
-                ctx.lineTo(w - r, h)
-                ctx.quadraticCurveTo(w, h, w, h - r)
-                ctx.lineTo(w, flare * 2)
-                ctx.quadraticCurveTo(w, flare, w / 2, 0)
+                ctx.moveTo(0, 0)
+                ctx.lineTo(w, 0)
+                ctx.lineTo(w - slope, h - r)
+                ctx.quadraticCurveTo(w - slope, h, w - slope - r, h)
+                ctx.lineTo(slope + r, h)
+                ctx.quadraticCurveTo(slope, h, slope, h - r)
                 ctx.closePath()
                 ctx.fillStyle = grad
                 ctx.fill()
 
                 if (colors) {
                     ctx.beginPath()
-                    ctx.moveTo(w / 2, 0)
-                    ctx.quadraticCurveTo(0, flare, 0, flare * 2)
-                    ctx.lineTo(0, h - r)
-                    ctx.quadraticCurveTo(0, h, r, h)
-                    ctx.lineTo(w - r, h)
-                    ctx.quadraticCurveTo(w, h, w, h - r)
-                    ctx.lineTo(w, flare * 2)
-                    ctx.quadraticCurveTo(w, flare, w / 2, 0)
+                    ctx.moveTo(0, 0)
+                    ctx.lineTo(w, 0)
+                    ctx.lineTo(w - slope, h - r)
+                    ctx.quadraticCurveTo(w - slope, h, w - slope - r, h)
+                    ctx.lineTo(slope + r, h)
+                    ctx.quadraticCurveTo(slope, h, slope, h - r)
                     ctx.closePath()
                     ctx.strokeStyle = borderColor
                     ctx.lineWidth = 1
