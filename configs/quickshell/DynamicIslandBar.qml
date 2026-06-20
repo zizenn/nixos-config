@@ -18,8 +18,8 @@ PanelWindow {
     }
 
     implicitHeight: {
-        var base = islandState === "expanded" ? pillTargetHeight + 24 : pillTargetHeight + 16
-        var hudBottom = pill.y + pill.height + 12 + 40
+        var base = pill.y + pill.height + 8
+        var hudBottom = pill.y + pill.height + 12 + volumeHud.height
         return Math.max(base, hudBottom)
     }
 
@@ -27,18 +27,7 @@ PanelWindow {
     color: "transparent"
 
     property int pillHeight: 38
-    property int pillDefaultWidth: 280
-    property int pillExpandedWidth: 420
-
-    property int pillTargetWidth: {
-        if (islandState === "expanded") return pillExpandedWidth
-        return pillDefaultWidth
-    }
-
-    property int pillTargetHeight: {
-        if (islandState === "expanded") return pillHeight + 8 + expandedSection.height
-        return pillHeight
-    }
+    property int pillPadding: 18
 
     Services.WorkspaceService { id: wsSvc }
     Services.NetworkService   { id: netSvc }
@@ -50,8 +39,17 @@ PanelWindow {
         x: (bar.width - width) / 2
         y: 8
 
-        width:  bar.pillTargetWidth
-        height: bar.pillTargetHeight
+        width: {
+            var top = topRow.implicitWidth + pillPadding * 2
+            var exp = contentRow.implicitWidth + 32 + pillPadding * 2
+            return Math.max(top, exp)
+        }
+        height: {
+            var h = pillHeight
+            if (islandState === "expanded")
+                h += expandedSection.height
+            return h
+        }
 
         radius: height / 2
 
@@ -81,11 +79,8 @@ PanelWindow {
 
         Row {
             id: topRow
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: parent.top
-                topMargin: (bar.pillHeight - implicitHeight) / 2
-            }
+            x: pillPadding
+            y: (pillHeight - implicitHeight) / 2
             spacing: 18
 
             Modules.WorkspaceDots {
@@ -105,25 +100,18 @@ PanelWindow {
 
         Item {
             id: expandedSection
-            anchors {
-                top: topRow.bottom
-                left: parent.left
-                right: parent.right
-                leftMargin: 16
-                rightMargin: 16
-            }
-            height: contentRow.height + 18
-            opacity: bar.islandState === "expanded" ? 1 : 0
-            visible: opacity > 0
+            width: parent.width
+            height: islandState === "expanded" ? contentRow.height + 18 : 0
+            anchors { top: topRow.bottom; topMargin: 0 }
+            clip: true
+            opacity: islandState === "expanded" ? 1 : 0
+
+            Behavior on height { NumberAnimation { duration: 200 } }
             Behavior on opacity { NumberAnimation { duration: 200 } }
 
             Row {
                 id: contentRow
-                anchors {
-                    top: parent.top
-                    topMargin: 10
-                    horizontalCenter: parent.horizontalCenter
-                }
+                anchors { top: parent.top; topMargin: 10; horizontalCenter: parent.horizontalCenter }
                 spacing: 16
 
                 Modules.TrayIcons {}
@@ -143,8 +131,8 @@ PanelWindow {
         id: volumeHud
         x: (bar.width - width) / 2
         y: pill.y + pill.height + 12
-        width: 180
-        height: 40
+        width: hudRow.implicitWidth + 24
+        height: hudRow.implicitHeight + 20
         radius: height / 2
         color: Qt.hsla(
             Qt.color(colors.surface).hslHue,
@@ -163,6 +151,7 @@ PanelWindow {
         Behavior on opacity { NumberAnimation { duration: 120 } }
 
         Row {
+            id: hudRow
             anchors { left: parent.left; verticalCenter: parent.verticalCenter; leftMargin: 12 }
             spacing: 8
 
