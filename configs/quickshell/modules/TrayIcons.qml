@@ -14,7 +14,13 @@ Row {
         running: true
         repeat: true
         triggeredOnStart: true
-        onTriggered: hasItems = (SystemTray && SystemTray.items && SystemTray.items.count > 0)
+        onTriggered: {
+            try {
+                hasItems = SystemTray && SystemTray.items && SystemTray.items.length > 0
+            } catch(e) {
+                hasItems = SystemTray && SystemTray.items && SystemTray.items.count > 0
+            }
+        }
     }
 
     Repeater {
