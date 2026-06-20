@@ -5,22 +5,27 @@ import Quickshell.Services.SystemTray
 Row {
     spacing: 10
     anchors.verticalCenter: parent.verticalCenter
-    visible: SystemTray.items.length > 0
+    visible: trayItems.length > 0
 
-    property var trayItems: SystemTray.items
+    property var trayItems: []
 
     Timer {
         interval: 2000
         running: true
         repeat: true
-        onTriggered: trayItems = SystemTray.items
+        onTriggered: {
+            var arr = []
+            for (var i = 0; i < SystemTray.items.length; i++)
+                arr.push(SystemTray.items[i])
+            trayItems = arr
+        }
     }
 
     Repeater {
         model: trayItems
 
-        Item {
-            required property SystemTrayItem modelData
+        delegate: Item {
+            required property var modelData
             width: 20; height: 20
 
             Image {
