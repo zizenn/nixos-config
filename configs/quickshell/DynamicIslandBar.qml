@@ -69,7 +69,7 @@ PanelWindow {
         width: {
             if (activeSelector === "none") {
                 var top = topRow.implicitWidth + pillPadding * 2
-                var exp = contentRow.implicitWidth + 32 + pillPadding * 2
+                var exp = islandState === "expanded" ? contentRow.implicitWidth + 32 + pillPadding * 2 : 0
                 return Math.max(top, exp)
             }
             if (activeSelector === "wifi")

@@ -5,23 +5,7 @@ import Quickshell.Services.SystemTray
 Row {
     spacing: 10
     anchors.verticalCenter: parent.verticalCenter
-    visible: hasItems
-
-    property bool hasItems: false
-
-    Timer {
-        interval: 2000
-        running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: {
-            try {
-                hasItems = SystemTray && SystemTray.items && SystemTray.items.length > 0
-            } catch(e) {
-                hasItems = SystemTray && SystemTray.items && SystemTray.items.count > 0
-            }
-        }
-    }
+    visible: true
 
     Repeater {
         model: SystemTray.items
