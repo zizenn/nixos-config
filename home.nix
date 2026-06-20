@@ -10,6 +10,7 @@
     ./configs/neovim.nix
     ./configs/quickshell.nix
     ./configs/zen.nix
+    ./configs/zed.nix
     ./packages.nix
   ];
 
