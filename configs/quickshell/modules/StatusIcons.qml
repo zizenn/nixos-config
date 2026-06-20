@@ -9,12 +9,22 @@ Row {
     property bool   btPowered: false
     property int    btCount: 0
 
+    signal wifiClicked()
+    signal btClicked()
+
     spacing: 14
     anchors.verticalCenter: parent.verticalCenter
 
     Row {
         spacing: 6
         anchors.verticalCenter: parent.verticalCenter
+
+        MouseArea {
+            id: wifiArea
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            onClicked: root.wifiClicked()
+        }
 
         Text {
             id: wifiIcon
@@ -45,6 +55,13 @@ Row {
         spacing: 6
         anchors.verticalCenter: parent.verticalCenter
         visible: root.btPowered
+
+        MouseArea {
+            id: btArea
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            onClicked: root.btClicked()
+        }
 
         Text {
             text: "\uf294"

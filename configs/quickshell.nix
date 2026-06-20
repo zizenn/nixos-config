@@ -8,6 +8,8 @@
     "quickshell/modules/WorkspaceDots.qml".source = ./quickshell/modules/WorkspaceDots.qml;
     "quickshell/modules/StatusIcons.qml".source = ./quickshell/modules/StatusIcons.qml;
     "quickshell/modules/TrayIcons.qml".source = ./quickshell/modules/TrayIcons.qml;
+    "quickshell/modules/WifiSelector.qml".source = ./quickshell/modules/WifiSelector.qml;
+    "quickshell/modules/BluetoothSelector.qml".source = ./quickshell/modules/BluetoothSelector.qml;
 
     "quickshell/services/WorkspaceService.qml".source = ./quickshell/services/WorkspaceService.qml;
     "quickshell/services/NetworkService.qml".source = ./quickshell/services/NetworkService.qml;

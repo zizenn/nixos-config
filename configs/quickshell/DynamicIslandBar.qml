@@ -10,6 +10,7 @@ PanelWindow {
     property string islandState: "default"
     property var colors: null
     property var volSvc: null
+    property string activeSelector: "none"
 
     anchors {
         top: true
@@ -20,7 +21,8 @@ PanelWindow {
     implicitHeight: {
         var base = pill.y + pill.height + 8
         var hudBottom = pill.y + pill.height + 12 + volumeHud.height
-        return Math.max(base, hudBottom)
+        var selBottom = pill.y + pill.height + 12 + Math.max(wifiSelector.height, btSelector.height)
+        return Math.max(base, hudBottom, selBottom)
     }
 
     exclusiveZone: 0
@@ -32,6 +34,11 @@ PanelWindow {
     Services.WorkspaceService { id: wsSvc }
     Services.NetworkService   { id: netSvc }
     Services.BluetoothService { id: btSvc }
+
+    onActiveSelectorChanged: {
+        if (activeSelector !== "none")
+            islandState = "expanded"
+    }
 
     Rectangle {
         id: pill
@@ -73,7 +80,8 @@ PanelWindow {
         HoverHandler {
             id: hover
             onHoveredChanged: {
-                bar.islandState = hovered ? "expanded" : "default"
+                if (activeSelector === "none")
+                    bar.islandState = hovered ? "expanded" : "default"
             }
         }
 
@@ -122,9 +130,41 @@ PanelWindow {
                     btPowered:     btSvc.powered
                     btCount:       btSvc.connectedCount
                     colors: bar.colors
+                    onWifiClicked: {
+                        activeSelector = activeSelector === "wifi" ? "none" : "wifi"
+                        if (activeSelector === "wifi") netSvc.scan()
+                    }
+                    onBtClicked: {
+                        activeSelector = activeSelector === "bluetooth" ? "none" : "bluetooth"
+                        if (activeSelector === "bluetooth") btSvc.refreshDevices()
+                    }
                 }
             }
         }
+    }
+
+    Modules.WifiSelector {
+        id: wifiSelector
+        x: (bar.width - width) / 2
+        y: pill.y + pill.height + 12
+        colors: bar.colors
+        netSvc: netSvc
+        wifiSsid: netSvc.ssid
+        wifiConnected: netSvc.connected
+        visible: activeSelector === "wifi"
+        opacity: visible ? 1 : 0
+        Behavior on opacity { NumberAnimation { duration: 120 } }
+    }
+
+    Modules.BluetoothSelector {
+        id: btSelector
+        x: (bar.width - width) / 2
+        y: pill.y + pill.height + 12
+        colors: bar.colors
+        btSvc: btSvc
+        visible: activeSelector === "bluetooth"
+        opacity: visible ? 1 : 0
+        Behavior on opacity { NumberAnimation { duration: 120 } }
     }
 
     Rectangle {
@@ -218,4 +258,3 @@ PanelWindow {
         volumeHud.show()
     }
 }
-
