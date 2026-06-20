@@ -12,6 +12,12 @@ ShellRoot {
         volSvc: volSvc
     }
 
+    Timer {
+        interval: 3000
+        running: true
+        onTriggered: islandBar.showVolumeHud()
+    }
+
     Connections {
         target: volSvc
         function onVolumeChanged() {
