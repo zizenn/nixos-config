@@ -90,7 +90,7 @@
     "matugen/templates/rofi-colors.rasi".text = ''
       * {
           background:                     {{colors.surface.default.hex}};
-          background-dim:                 rgba({{colors.surface.default.rgb}}, 0.85);
+          background-dim:                 {{colors.surface.default.hex}}D9;
           foreground:                     {{colors.on_surface.default.hex}};
           selected-normal-background:     {{colors.primary_container.default.hex}};
           selected-normal-foreground:     {{colors.on_primary_container.default.hex}};
