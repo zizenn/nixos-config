@@ -5,18 +5,16 @@ import Quickshell.Services.SystemTray
 Row {
     spacing: 10
     anchors.verticalCenter: parent.verticalCenter
-    visible: true
+    visible: hasItems
 
-    Text {
-        text: "tray:" + (SystemTray && SystemTray.items ? SystemTray.items.count : "null")
-        color: "red"; font.pixelSize: 10
-        anchors.verticalCenter: parent.verticalCenter
-    }
+    property bool hasItems: false
 
-    Text {
-        text: "hasItems:" + (SystemTray && SystemTray.items && SystemTray.items.count > 0 ? "yes" : "no")
-        color: "yellow"; font.pixelSize: 10
-        anchors.verticalCenter: parent.verticalCenter
+    Timer {
+        interval: 2000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: hasItems = (SystemTray && SystemTray.items && SystemTray.items.count > 0)
     }
 
     Repeater {
