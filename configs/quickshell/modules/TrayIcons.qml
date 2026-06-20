@@ -9,13 +9,11 @@ Row {
 
     property var trayItems: []
 
-    onVisibleChanged: {
-        if (visible) {
-            var arr = []
-            for (var i = 0; i < SystemTray.items.count; i++)
-                arr.push(SystemTray.items.get(i))
-            trayItems = arr
-        }
+    function refresh() {
+        var arr = []
+        for (var i = 0; i < SystemTray.items.length; i++)
+            arr.push(SystemTray.items[i])
+        trayItems = arr
     }
 
     Timer {
@@ -23,12 +21,7 @@ Row {
         running: true
         repeat: true
         triggeredOnStart: true
-        onTriggered: {
-            var arr = []
-            for (var i = 0; i < SystemTray.items.count; i++)
-                arr.push(SystemTray.items.get(i))
-            trayItems = arr
-        }
+        onTriggered: refresh()
     }
 
     Repeater {
@@ -40,7 +33,7 @@ Row {
 
             Image {
                 anchors.fill: parent
-                source: modelData.icon
+                source: modelData ? modelData.icon : ""
                 fillMode: Image.PreserveAspectFit
                 smooth: true
                 asynchronous: true
@@ -51,6 +44,7 @@ Row {
                 acceptedButtons: Qt.LeftButton | Qt.RightButton
                 cursorShape: Qt.PointingHandCursor
                 onClicked: function(mouse) {
+                    if (!modelData) return
                     if (mouse.button === Qt.LeftButton)
                         modelData.activate()
                     else
