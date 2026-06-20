@@ -158,7 +158,7 @@ PanelWindow {
 
                 Behavior on opacity { NumberAnimation { duration: 150 } }
 
-                Modules.TrayIcons { rootWindow: bar }
+                Modules.TrayIcons {}
 
                 Modules.StatusIcons {
                     wifiConnected: netSvc.connected

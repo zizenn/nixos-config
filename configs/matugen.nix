@@ -291,6 +291,63 @@
         *:focus-visible { outline-color: var(--matugen-primary) !important; }
       }
 
+      @-moz-document domain("google.com"), domain("www.google.com") {
+        body, #main, #searchform, .sfbg {
+          background-color: var(--matugen-bg) !important;
+        }
+        a, a:link, a:visited, .yuRUbf a h3, h3.LC20lb {
+          color: var(--matugen-primary) !important;
+        }
+        a:visited, .yuRUbf a:visited h3 {
+          color: var(--matugen-secondary) !important;
+        }
+        input[type="text"], textarea, .gLFyf, .gNO89b, .RNmpXc, .aajZCb {
+          background-color: var(--matugen-surface) !important;
+          color: var(--matugen-on-surface) !important;
+          border-color: var(--matugen-outline) !important;
+        }
+        .g, .rc, .srg, .r {
+          background-color: var(--matugen-surface-container) !important;
+        }
+        .st, .IsZQTc {
+          color: var(--matugen-on-surface-variant) !important;
+        }
+        #hdtbSum, #hdtbMenus, .hdtb-mitem .hdtb-msel, .hdtb-mitem a {
+          background-color: var(--matugen-bg-dim) !important;
+          color: var(--matugen-on-surface) !important;
+        }
+        #nav .nav, #nav a, .navend .n {
+          color: var(--matugen-primary) !important;
+        }
+        #nav .cur {
+          color: var(--matugen-on-surface) !important;
+          font-weight: bold !important;
+        }
+        .sfbg, .big, .mw {
+          background-color: var(--matugen-bg-dim) !important;
+        }
+        #gb, .gb_0d, .gb_Od, .gb_2d, .gb_Pd, .gb_g {
+          background-color: var(--matugen-bg-dim) !important;
+          color: var(--matugen-on-surface) !important;
+        }
+        .gb_t, .gb_5, .gb_8a, .gb_Ub {
+          color: var(--matugen-on-surface) !important;
+        }
+        circle, .gb_W, .gb_V, .gb_1b {
+          fill: var(--matugen-primary) !important;
+          color: var(--matugen-primary) !important;
+        }
+        .fl, .fl a, .fl:visited {
+          color: var(--matugen-primary) !important;
+        }
+        .LC20lb, .DKV0Md {
+          color: var(--matugen-on-surface) !important;
+        }
+        .TbwUpd, .iUh30, .NJjxre {
+          color: var(--matugen-on-surface-variant) !important;
+        }
+      }
+
       @-moz-document domain("github.com"), domain("gist.github.com") {
         :root {
           --color-canvas-default: var(--matugen-bg) !important;
