@@ -7,6 +7,8 @@ Row {
     anchors.verticalCenter: parent.verticalCenter
     visible: true
 
+    required property var parentWindow
+
     Repeater {
         model: SystemTray.items
 
@@ -32,7 +34,7 @@ Row {
                         modelData.activate()
                     else if (mouse.button === Qt.RightButton) {
                         if (modelData.hasMenu)
-                            modelData.display(null, mouse.x, mouse.y)
+                            modelData.display(parentWindow, mouse.x, mouse.y)
                     }
                 }
             }
