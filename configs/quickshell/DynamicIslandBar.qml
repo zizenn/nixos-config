@@ -18,12 +18,7 @@ PanelWindow {
         right: true
     }
 
-    implicitHeight: {
-        var base = pill.y + pill.height + 4
-        var hudBottom = pill.y + pill.height + 12 + volumeHud.height
-        var selBottom = pill.y + pill.height + 12 + Math.max(wifiSelector.height, btSelector.height)
-        return Math.max(base, hudBottom, selBottom)
-    }
+    implicitHeight: pill.y + pill.height + 4
 
     exclusiveZone: 0
     color: "transparent"
@@ -56,17 +51,38 @@ PanelWindow {
         onTriggered: showExpanded = true
     }
 
+    // Click-outside catcher
+    MouseArea {
+        anchors.fill: parent
+        z: -1
+        onClicked: {
+            if (activeSelector !== "none")
+                activeSelector = "none"
+        }
+    }
+
     Rectangle {
         id: pill
 
         x: (bar.width - width) / 2
         y: 0
         width: {
-            var top = topRow.implicitWidth + pillPadding * 2
-            var exp = contentRow.implicitWidth + 32 + pillPadding * 2
-            return Math.max(top, exp)
+            if (activeSelector === "none") {
+                var top = topRow.implicitWidth + pillPadding * 2
+                var exp = contentRow.implicitWidth + 32 + pillPadding * 2
+                return Math.max(top, exp)
+            }
+            if (activeSelector === "wifi")
+                return Math.max(280, wifiBody.implicitWidth + pillPadding * 2)
+            if (activeSelector === "bluetooth")
+                return Math.max(280, btBody.implicitWidth + pillPadding * 2)
+            return pillPadding * 2
         }
         height: {
+            if (activeSelector !== "none") {
+                var selectorContent = activeSelector === "wifi" ? wifiBody : btBody
+                return pillHeight + selectorContent.implicitHeight + 16
+            }
             var h = pillHeight
             if (islandState === "expanded")
                 h += expandedSection.height
@@ -99,11 +115,13 @@ PanelWindow {
             }
         }
 
+        // ── Normal mode ──
         Row {
             id: topRow
             x: pillPadding
             y: (pillHeight - implicitHeight) / 2
             spacing: 18
+            visible: activeSelector === "none"
 
             Modules.WorkspaceDots {
                 id: wsDots
@@ -127,6 +145,7 @@ PanelWindow {
             anchors { top: topRow.bottom; topMargin: 0 }
             clip: true
             opacity: islandState === "expanded" ? 1 : 0
+            visible: activeSelector === "none"
 
             Behavior on height { NumberAnimation { duration: 200 } }
             Behavior on opacity { NumberAnimation { duration: 200 } }
@@ -158,30 +177,289 @@ PanelWindow {
                 }
             }
         }
-    }
 
-    Modules.WifiSelector {
-        id: wifiSelector
-        x: (bar.width - width) / 2
-        y: pill.y + pill.height + 12
-        colors: bar.colors
-        netSvc: netSvc
-        wifiSsid: netSvc.ssid
-        wifiConnected: netSvc.connected
-        visible: activeSelector === "wifi"
-        opacity: visible ? 1 : 0
-        Behavior on opacity { NumberAnimation { duration: 120 } }
-    }
+        // ── Wifi selector mode ──
+        Column {
+            id: wifiBody
+            x: pillPadding
+            y: 8
+            width: parent.width - pillPadding * 2
+            spacing: 8
+            visible: activeSelector === "wifi"
 
-    Modules.BluetoothSelector {
-        id: btSelector
-        x: (bar.width - width) / 2
-        y: pill.y + pill.height + 12
-        colors: bar.colors
-        btSvc: btSvc
-        visible: activeSelector === "bluetooth"
-        opacity: visible ? 1 : 0
-        Behavior on opacity { NumberAnimation { duration: 120 } }
+            Row {
+                spacing: 8
+                width: parent.width
+
+                Text {
+                    text: "\u2190"
+                    color: colors.cOnSurface
+                    font.pixelSize: 14
+                    font.family: "JetBrainsMono Nerd Font"
+                    anchors.verticalCenter: parent.verticalCenter
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: activeSelector = "none"
+                    }
+                }
+
+                Text {
+                    text: "Wi-Fi"
+                    color: colors.cOnSurface
+                    font.pixelSize: 13
+                    font.weight: Font.Medium
+                    font.family: "JetBrainsMono Nerd Font"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
+                Item { width: 1; height: 1 }
+
+                Text {
+                    text: "\uf021"
+                    color: colors.cOnSurface
+                    font.family: "JetBrainsMono Nerd Font"
+                    font.pixelSize: 11
+                    opacity: 0.5
+                    anchors.verticalCenter: parent.verticalCenter
+                    MouseArea {
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: { if (netSvc) netSvc.scan() }
+                    }
+                }
+            }
+
+            Rectangle {
+                height: 1; width: parent.width
+                color: Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.1)
+            }
+
+            Row {
+                spacing: 8
+
+                Text {
+                    text: netSvc && netSvc.enabled ? "On" : "Off"
+                    color: netSvc && netSvc.enabled ? colors.primary : Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.4)
+                    font.pixelSize: 12; font.family: "JetBrainsMono Nerd Font"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
+                Rectangle {
+                    width: 36; height: 18; radius: 9
+                    color: netSvc && netSvc.enabled ? colors.primary : Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.2)
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    Rectangle {
+                        x: netSvc && netSvc.enabled ? 20 : 2; y: 2; width: 14; height: 14; radius: 7; color: "#ffffff"
+                        Behavior on x { NumberAnimation { duration: 100 } }
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent; cursorShape: Qt.PointingHandCursor
+                        onClicked: { if (netSvc) netSvc.setEnabled(!netSvc.enabled) }
+                    }
+                }
+            }
+
+            Column {
+                id: wifiList
+                width: parent.width
+                spacing: 2
+                visible: netSvc && netSvc.enabled
+
+                Text {
+                    text: "Available Networks"
+                    color: Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.5)
+                    font.pixelSize: 10; font.family: "JetBrainsMono Nerd Font"
+                    visible: netSvc && netSvc.availableNetworks && netSvc.availableNetworks.length > 0
+                }
+
+                Repeater {
+                    model: netSvc ? netSvc.availableNetworks : []
+
+                    Rectangle {
+                        required property var modelData
+                        width: wifiList.width
+                        height: 28; radius: 6
+                        color: mouseArea.containsMouse ? Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.08) : "transparent"
+
+                        Row {
+                            x: 8; spacing: 8; anchors.verticalCenter: parent.verticalCenter
+                            Text {
+                                text: {
+                                    var s = modelData.ssid
+                                    if (s === netSvc.ssid && netSvc.connected) return "\u2713 " + s
+                                    return s
+                                }
+                                color: modelData.ssid === netSvc.ssid && netSvc.connected ? colors.primary : colors.cOnSurface
+                                font.pixelSize: 12; font.family: "JetBrainsMono Nerd Font"
+                                elide: Text.ElideRight; maximumLineCount: 1; width: 140
+                            }
+                            Text {
+                                text: {
+                                    var sig = modelData.signal
+                                    if (sig >= 75) return "\u2588\u2588\u2588\u2588"
+                                    if (sig >= 50) return "\u2588\u2588\u2588\u2582"
+                                    if (sig >= 25) return "\u2588\u2588\u2582\u2581"
+                                    return "\u2588\u2582\u2581\u2581"
+                                }
+                                color: Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.6)
+                                font.pixelSize: 10; anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Text {
+                                text: modelData.security && modelData.security !== "--" ? "\uD83D\uDD12" : ""
+                                font.pixelSize: 10; anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        MouseArea {
+                            id: mouseArea
+                            anchors.fill: parent; hoverEnabled: true; cursorShape: Qt.PointingHandCursor
+                            onClicked: { if (netSvc) netSvc.connectToNetwork(modelData.ssid) }
+                        }
+                    }
+                }
+            }
+        }
+
+        // ── Bluetooth selector mode ──
+        Column {
+            id: btBody
+            x: pillPadding
+            y: 8
+            width: parent.width - pillPadding * 2
+            spacing: 8
+            visible: activeSelector === "bluetooth"
+
+            Row {
+                spacing: 8; width: parent.width
+
+                Text {
+                    text: "\u2190"
+                    color: colors.cOnSurface
+                    font.pixelSize: 14; font.family: "JetBrainsMono Nerd Font"
+                    anchors.verticalCenter: parent.verticalCenter
+                    MouseArea {
+                        anchors.fill: parent; cursorShape: Qt.PointingHandCursor
+                        onClicked: activeSelector = "none"
+                    }
+                }
+
+                Text {
+                    text: "Bluetooth"
+                    color: colors.cOnSurface
+                    font.pixelSize: 13; font.weight: Font.Medium; font.family: "JetBrainsMono Nerd Font"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
+                Item { width: 1; height: 1 }
+
+                Text {
+                    text: btSvc && btSvc.discovering ? "\uf28e" : "\uf021"
+                    color: colors.cOnSurface
+                    font.family: "JetBrainsMono Nerd Font"
+                    font.pixelSize: 11; opacity: 0.5
+                    anchors.verticalCenter: parent.verticalCenter
+                    MouseArea {
+                        anchors.fill: parent; cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            if (!btSvc) return
+                            btSvc.discovering ? btSvc.stopDiscovery() : btSvc.startDiscovery()
+                        }
+                    }
+                }
+            }
+
+            Rectangle {
+                height: 1; width: parent.width
+                color: Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.1)
+            }
+
+            Row {
+                spacing: 8
+
+                Text {
+                    text: btSvc && btSvc.powered ? "On" : "Off"
+                    color: btSvc && btSvc.powered ? colors.primary : Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.4)
+                    font.pixelSize: 12; font.family: "JetBrainsMono Nerd Font"
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+
+                Rectangle {
+                    width: 36; height: 18; radius: 9
+                    color: btSvc && btSvc.powered ? colors.primary : Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.2)
+                    anchors.verticalCenter: parent.verticalCenter
+                    Rectangle {
+                        x: btSvc && btSvc.powered ? 20 : 2; y: 2; width: 14; height: 14; radius: 7; color: "#ffffff"
+                        Behavior on x { NumberAnimation { duration: 100 } }
+                    }
+                    MouseArea {
+                        anchors.fill: parent; cursorShape: Qt.PointingHandCursor
+                        onClicked: { if (btSvc) btSvc.setEnabled(!btSvc.powered) }
+                    }
+                }
+            }
+
+            Column {
+                id: btList
+                width: parent.width; spacing: 2
+                visible: btSvc && btSvc.powered
+
+                Text {
+                    text: "Devices"
+                    color: Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.5)
+                    font.pixelSize: 10; font.family: "JetBrainsMono Nerd Font"
+                    visible: btSvc && btSvc.availableDevices && btSvc.availableDevices.length > 0
+                }
+
+                Repeater {
+                    model: btSvc ? btSvc.availableDevices : []
+
+                    Rectangle {
+                        required property var modelData
+                        width: btList.width; height: 28; radius: 6
+                        color: mouseArea.containsMouse ? Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.08) : "transparent"
+
+                        Row {
+                            x: 8; spacing: 8; anchors.verticalCenter: parent.verticalCenter
+                            Text {
+                                text: {
+                                    var d = modelData
+                                    if (d.connected) return "\u2713 " + d.name
+                                    return d.name || d.address
+                                }
+                                color: modelData.connected ? colors.primary : colors.cOnSurface
+                                font.pixelSize: 12; font.family: "JetBrainsMono Nerd Font"
+                                elide: Text.ElideRight; maximumLineCount: 1; width: 150
+                            }
+                            Text {
+                                text: modelData.connected ? "Connected" : ""
+                                color: Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.5)
+                                font.pixelSize: 10; font.family: "JetBrainsMono Nerd Font"
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+
+                        MouseArea {
+                            id: mouseArea
+                            anchors.fill: parent; hoverEnabled: true; cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                if (!btSvc) return
+                                modelData.connected ? btSvc.disconnectDevice(modelData.address) : btSvc.connectToDevice(modelData.address)
+                            }
+                        }
+                    }
+                }
+
+                Text {
+                    text: btSvc && btSvc.discovering ? "Discovering..." : ""
+                    color: Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.4)
+                    font.pixelSize: 10; font.family: "JetBrainsMono Nerd Font"; font.italic: true
+                    visible: btSvc && btSvc.discovering
+                }
+            }
+        }
     }
 
     Rectangle {

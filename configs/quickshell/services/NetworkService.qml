@@ -63,11 +63,21 @@ QtObject {
         }
     }
 
+    property Process radioProc: Process {
+        command: ["nmcli", "-t", "radio", "wifi"]
+        running: false
+        stdout: SplitParser {
+            onRead: function(data) {
+                root.enabled = data.trim() === "enabled"
+            }
+        }
+    }
+
     property Process toggleProc: Process {
         command: []
         running: false
         onExited: {
-            poll()
+            radioProc.running = true
         }
     }
 
@@ -82,6 +92,7 @@ QtObject {
 
     function poll() {
         statusProc.running = true
+        radioProc.running = true
     }
 
     function scan() {
