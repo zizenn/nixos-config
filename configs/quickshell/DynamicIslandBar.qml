@@ -8,6 +8,8 @@ import "./modules" as Modules
 PanelWindow {
     id: bar
 
+    mask: Region { item: pill }
+
     property string islandState: "default"
     property var colors: null
     property var volSvc: null
