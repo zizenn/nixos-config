@@ -44,6 +44,7 @@
   zed-editor
   btop
   bat
+  pywalfox-native
 ];
 
 }
