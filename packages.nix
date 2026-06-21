@@ -45,6 +45,7 @@
   btop
   bat
   pywalfox-native
+  lldb
 ];
 
 }
