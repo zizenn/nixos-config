@@ -14,7 +14,8 @@
     ripgrep
     python3
     ntfs3g
-    gcc  
+    gcc
+    clang-tools
     tree-sitter
     zsh-autosuggestions
     zsh-syntax-highlighting
