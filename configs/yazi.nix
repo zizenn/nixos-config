@@ -8,7 +8,7 @@
 
   xdg.desktopEntries.yazi = {
     name = "yazi";
-    exec = "kitty -e yazi %u"; # Replace 'kitty' with your preferred terminal
+    exec = "kitty --class yazi-float -e yazi %u"; # Replace 'kitty' with your preferred terminal
     terminal = false;
     mimeType = [ "inode/directory" ];
   };
