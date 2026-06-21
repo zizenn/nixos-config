@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Window
 import Quickshell
 
 import "./services" as Services
@@ -466,7 +467,7 @@ PanelWindow {
         id: volumeHud
         anchors.right: parent.right
         anchors.rightMargin: 24
-        anchors.verticalCenter: parent.verticalCenter
+        y: (Screen.height - height) / 2
         width: hudColumn.implicitWidth + 32
         height: hudColumn.implicitHeight + 32
         radius: 16
