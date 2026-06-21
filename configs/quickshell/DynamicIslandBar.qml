@@ -65,7 +65,7 @@ PanelWindow {
         id: pill
 
         x: (bar.width - width) / 2
-        y: 0
+        y: 8
         width: {
             if (activeSelector === "none") {
                 var top = topRow.implicitWidth + pillPadding * 2
@@ -88,7 +88,7 @@ PanelWindow {
                 h += expandedSection.height
             return h
         }
-        radius: 12
+        radius: islandState === "expanded" || activeSelector !== "none" ? 12 : 20
 
         color: Qt.hsla(
             Qt.color(colors.surface).hslHue,
@@ -464,11 +464,12 @@ PanelWindow {
 
     Rectangle {
         id: volumeHud
-        x: (bar.width - width) / 2
-        y: pill.y + pill.height + 12
-        width: hudRow.implicitWidth + 24
-        height: hudRow.implicitHeight + 20
-        radius: 14
+        anchors.right: parent.right
+        anchors.rightMargin: 24
+        anchors.verticalCenter: parent.verticalCenter
+        width: hudColumn.implicitWidth + 32
+        height: hudColumn.implicitHeight + 32
+        radius: 16
         color: Qt.hsla(
             Qt.color(colors.surface).hslHue,
             Qt.color(colors.surface).hslSaturation,
@@ -485,41 +486,41 @@ PanelWindow {
 
         Behavior on opacity { NumberAnimation { duration: 120 } }
 
-        Row {
-            id: hudRow
-            anchors { left: parent.left; verticalCenter: parent.verticalCenter; leftMargin: 12 }
-            spacing: 8
+        Column {
+            id: hudColumn
+            anchors.centerIn: parent
+            spacing: 12
 
             Text {
                 text: volSvc ? (volSvc.muted ? "\uf6a9" : "\uf028") : "\uf028"
                 color: colors.cOnSurface
                 font.family: "JetBrainsMono Nerd Font"
-                font.pixelSize: 14
-                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: 22
+                anchors.horizontalCenter: parent.horizontalCenter
             }
 
             Rectangle {
                 id: track
-                width: 90
-                height: 4
-                radius: 2
+                width: 6
+                height: 100
+                radius: 3
                 color: Qt.hsla(
                     Qt.color(colors.cOnSurface).hslHue,
                     Qt.color(colors.cOnSurface).hslSaturation,
                     Qt.color(colors.cOnSurface).hslLightness,
                     0.15)
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
 
                 Rectangle {
-                    width: track.width * (volSvc ? volSvc.volume : 0)
-                    height: parent.height
-                    radius: 2
+                    width: parent.width
+                    height: track.height * (volSvc ? volSvc.volume : 0)
+                    radius: 3
                     color: volSvc && volSvc.muted
                         ? colors.cOnSurface
                         : colors.primary
-                    anchors { left: parent.left; verticalCenter: parent.verticalCenter }
+                    anchors { bottom: parent.bottom; horizontalCenter: parent.horizontalCenter }
 
-                    Behavior on width { NumberAnimation { duration: 80 } }
+                    Behavior on height { NumberAnimation { duration: 80 } }
                     Behavior on color { ColorAnimation { duration: 80 } }
                 }
             }
@@ -531,9 +532,9 @@ PanelWindow {
                     Qt.color(colors.cOnSurface).hslSaturation,
                     Qt.color(colors.cOnSurface).hslLightness,
                     0.7)
-                font.pixelSize: 11
+                font.pixelSize: 13
                 font.family: "JetBrainsMono Nerd Font"
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
             }
         }
 
