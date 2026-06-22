@@ -68,6 +68,21 @@ function M.setup()
   vim.api.nvim_set_hl(0, "TodoFgWARN", { fg = "#DCD7BA" })
   vim.api.nvim_set_hl(0, "TodoFgPERF", { fg = "#957FB8" })
 
+  -- Cmp (Autocomplete)
+  vim.api.nvim_set_hl(0, "CmpItemAbbr", { fg = "#DCD7BA", bg = "NONE" })
+  vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#7E9CD8", bg = "NONE", bold = true })
+  vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { fg = "#7E9CD8", bg = "NONE", bold = true })
+  vim.api.nvim_set_hl(0, "CmpItemKind", { fg = "#957FB8", bg = "NONE" })
+  vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = "#575279", bg = "NONE" })
+  vim.api.nvim_set_hl(0, "CmpPmenu", { bg = "NONE" })
+  vim.api.nvim_set_hl(0, "CmpPmenuBorder", { fg = "#575279", bg = "NONE" })
+  vim.api.nvim_set_hl(0, "CmpSel", { bg = "#2D4F67", fg = "#DCD7BA" })
+  vim.api.nvim_set_hl(0, "CmpDocBorder", { fg = "#575279", bg = "NONE" })
+
+  -- Fidget
+  vim.api.nvim_set_hl(0, "FidgetTitle", { fg = "#7E9CD8", bg = "NONE" })
+  vim.api.nvim_set_hl(0, "FidgetTask", { fg = "#DCD7BA", bg = "NONE" })
+
   -- Syntax Highlighting
   vim.api.nvim_set_hl(0, "Keyword", { fg = "#957FB8", bold = true })
   vim.api.nvim_set_hl(0, "Function", { fg = "#7E9CD8" })

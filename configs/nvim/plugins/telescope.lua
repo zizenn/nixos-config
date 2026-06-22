@@ -6,14 +6,31 @@ return {
   },
   cmd = "Telescope",
   init = function()
-    local ok, parsers = pcall(require, "nvim-treesitter.parsers")
-    if ok and not parsers.ft_to_lang then
+    -- Telescope still uses the old nvim-treesitter API
+    -- Provide polyfills since the modules were restructured in recent versions
+
+    -- Polyfill nvim-treesitter.parsers (now a metadata table, not a module)
+    local ok_parsers, parsers = pcall(require, "nvim-treesitter.parsers")
+    if ok_parsers and type(parsers) == "table" and not parsers.ft_to_lang then
       parsers.ft_to_lang = function(ft)
         local ok, lang = pcall(vim.treesitter.language.get_lang, ft)
         if ok and lang then return lang end
         local map = { sh = "bash", zsh = "bash" }
         return map[ft] or ft
       end
+      parsers.get_parser = function(bufnr, lang)
+        return vim.treesitter.get_parser(bufnr, lang)
+      end
+    end
+
+    -- Polyfill nvim-treesitter.configs (this module doesn't exist anymore)
+    if not package.loaded["nvim-treesitter.configs"] then
+      package.loaded["nvim-treesitter.configs"] = {
+        is_enabled = function() return true end,
+        get_module = function()
+          return { additional_vim_regex_highlighting = false }
+        end,
+      }
     end
   end,
   opts = function()
