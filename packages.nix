@@ -46,6 +46,7 @@
   lldb
   devenv
   zip
+  lazygit
 ];
 
 }
