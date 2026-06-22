@@ -2,17 +2,10 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "onsails/lspkind.nvim",
-    },
+    dependencies = { "hrsh7th/cmp-nvim-lsp" },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      -- Language servers — add corresponding nix pkgs to packages.nix:
-      --   lua-language-server, nodePackages.bash-language-server,
-      --   nodePackages.typescript-language-server, nodePackages.vscode-langservers-extracted,
-      --   nodePackages.yaml-language-server, marksman, pyright
       local servers = {
         clangd = {},
         ts_ls = {},
@@ -24,39 +17,25 @@ return {
             Lua = {
               runtime = { version = "LuaJIT" },
               diagnostics = { globals = { "vim" } },
-              workspace = {
-                checkThirdParty = false,
-                library = vim.api.nvim_get_runtime_file("", true),
-              },
+              workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
               telemetry = { enable = false },
             },
           },
         },
         bashls = {},
-        jsonls = {},
-        yamlls = {
-          settings = { yaml = { schemaStore = { enable = true } } },
-        },
-        marksman = {},
-        pyright = {
-          settings = { python = { analysis = { autoSearchPaths = true, useLibraryCodeForTypes = true } } },
-        },
+        pyright = {},
       }
 
       for server, config in pairs(servers) do
         config.capabilities = capabilities
         local ok, _ = pcall(vim.lsp.config, server, config)
-        if ok then
-          pcall(vim.lsp.enable, server)
-        end
+        if ok then pcall(vim.lsp.enable, server) end
       end
 
-      -- Global LSP Mappings
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
           local opts = { buffer = ev.buf }
-          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
           vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
           vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
@@ -66,9 +45,6 @@ return {
           vim.keymap.set("n", "<leader>li", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), { bufnr = ev.buf })
           end, opts)
-
-          -- Enable inlay hints by default
-          vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
         end,
       })
     end,
@@ -80,10 +56,8 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
       "L3MON4D3/LuaSnip",
       "saadparwaiz1/cmp_luasnip",
-      "onsails/lspkind.nvim",
     },
     config = function()
       local cmp = require("cmp")
@@ -92,10 +66,6 @@ return {
       cmp.setup({
         snippet = {
           expand = function(args) luasnip.lsp_expand(args.body) end,
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -129,37 +99,6 @@ return {
           { name = "buffer" },
           { name = "path" },
         }),
-        formatting = {
-          fields = { "kind", "abbr", "menu" },
-          format = require("lspkind").cmp_format({
-            mode = "symbol_text",
-            maxwidth = 50,
-            ellipsis_char = "...",
-            before = function(entry, vim_item)
-              vim_item.menu = ({
-                nvim_lsp = "",
-                luasnip = "",
-                buffer = "",
-                path = "",
-              })[entry.source.name]
-              return vim_item
-            end,
-          }),
-        },
-      })
-
-      cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = "path" },
-        }, {
-          { name = "cmdline" },
-        }),
-      })
-
-      cmp.setup.cmdline("/", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = { { name = "buffer" } },
       })
     end,
   },
