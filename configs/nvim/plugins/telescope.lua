@@ -6,12 +6,13 @@ return {
   },
   cmd = "Telescope",
   init = function()
-    -- Polyfill ft_to_lang for telescope <-> treesitter compatibility
     local ok, parsers = pcall(require, "nvim-treesitter.parsers")
     if ok and not parsers.ft_to_lang then
       parsers.ft_to_lang = function(ft)
-        local lang = parsers.filetype_to_parsername(ft)
-        return lang or ft
+        local ok, lang = pcall(vim.treesitter.language.get_lang, ft)
+        if ok and lang then return lang end
+        local map = { sh = "bash", zsh = "bash" }
+        return map[ft] or ft
       end
     end
   end,
