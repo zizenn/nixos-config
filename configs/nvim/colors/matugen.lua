@@ -137,12 +137,6 @@ function M.setup()
   vim.api.nvim_set_hl(0, "VimadeNormal",     { bg = "NONE" })
   vim.api.nvim_set_hl(0, "VimadeNormalFloat",{ bg = "NONE" })
 
-  -- Blink (completion menu)
-  vim.api.nvim_set_hl(0, "BlinkCmpMenu",           { bg = "NONE" })
-  vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection",  { bg = c.dark })
-  vim.api.nvim_set_hl(0, "BlinkCmpDoc",            { bg = "NONE" })
-  vim.api.nvim_set_hl(0, "BlinkCmpDocBorder",      { fg = c.border, bg = "NONE" })
-
   -- Fidget
   vim.api.nvim_set_hl(0, "FidgetTitle", { fg = c.blue, bg = "NONE" })
   vim.api.nvim_set_hl(0, "FidgetTask",  { fg = c.fg, bg = "NONE" })

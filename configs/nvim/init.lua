@@ -44,16 +44,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5
 
--- Centered cursor: auto-zz on movement to keep cursor vertically centered
-vim.api.nvim_create_autocmd("CursorMoved", {
-  group = vim.api.nvim_create_augroup("CenterCursor", { clear = true }),
-  callback = function()
-    if vim.bo.filetype ~= "neo-tree" and vim.bo.filetype ~= "alpha" then
-      vim.cmd("normal! zz")
-    end
-  end,
-})
-
 -- Session management (mini.sessions)
 vim.keymap.set("n", "<leader>qj", function()
   require("mini.sessions").write(".session")

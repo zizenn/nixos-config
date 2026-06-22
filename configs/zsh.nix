@@ -17,7 +17,7 @@
 
     # Your custom aliases
     shellAliases = {
-      config = "cd /etc/nixos";
+      config = "cd ~/nixos";
       home = "nh home switch";
       os = "nh os switch";
       ls = "eza -1";
@@ -26,6 +26,7 @@
       pkgdel = "~/Documents/scripts/nixpkgremove.sh";
       lg = "lazygit";
       cat = "bat";
+      v = "nvim";
     };
 
     # Fixed: Merged all shell configurations into the modern initContent system
