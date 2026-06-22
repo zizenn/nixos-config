@@ -38,14 +38,13 @@
   fd
   vesktop
   inputs.zen-browser.packages.x86_64-linux.default
-  pywalfox-native
   steam
   protonmail-desktop
   zed-editor
   btop
   bat
-  pywalfox-native
   lldb
+  devenv
 ];
 
 }
