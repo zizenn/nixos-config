@@ -185,6 +185,9 @@ PanelWindow {
                         if (activeSelector === "bluetooth") btSvc.refreshDevices()
                     }
                     onPowerClicked: activeSelector = activeSelector === "power" ? "none" : "power"
+                    onCalendarClicked: Qt.createQmlObject(
+                        'import Quickshell.Io; Process { command: ["bash", "-c", "waylandar-dashboard"]; running: true }',
+                        bar)
                 }
             }
         }

@@ -12,6 +12,7 @@ Row {
     signal wifiClicked()
     signal btClicked()
     signal powerClicked()
+    signal calendarClicked()
 
     spacing: 14
     anchors.verticalCenter: parent.verticalCenter
@@ -110,6 +111,20 @@ Row {
             anchors.fill: parent
             cursorShape: Qt.PointingHandCursor
             onClicked: root.powerClicked()
+        }
+    }
+
+    Text {
+        text: "\uf073"
+        color: colors.cOnSurface
+        font.pixelSize: 15
+        font.family: "JetBrainsMono Nerd Font"
+        anchors.verticalCenter: parent.verticalCenter
+
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            onClicked: root.calendarClicked()
         }
     }
 }
