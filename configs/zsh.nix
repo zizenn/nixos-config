@@ -24,7 +24,7 @@
       tree = "eza -T";
       pkgadd = "~/Documents/scripts/nixpkgsearch.sh";
       pkgdel = "~/Documents/scripts/nixpkgremove.sh";
-      gf = "git fuzzy ";
+      lg = "lazygit";
       cat = "bat";
     };
 
