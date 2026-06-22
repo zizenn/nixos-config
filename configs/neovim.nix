@@ -13,11 +13,9 @@ in
     "nvim/lua/matugen/init.lua".source = ./nvim/lua/matugen/init.lua;
     "nvim/lua/kanagawa-dragon/init.lua".source = ./nvim/lua/kanagawa-dragon/init.lua;
 
-    # 3. Dynamic Theme Spec (Maps active theme choice to plugins/theme.lua)
-    "nvim/lua/plugins/theme.lua".source = 
-      if theme == "matugen" 
-      then ./nvim/plugins/theme-matugen.lua 
-      else ./nvim/plugins/theme-kanagawa.lua;
+    # 3. Theme Spec and Native Colorscheme Bridges
+    "nvim/lua/plugins/theme.lua".source = ./nvim/plugins/theme.lua;
+    "nvim/colors/matugen.lua".source = ./nvim/colors/matugen.lua;
 
     # 4. Core IDE Plugins
     "nvim/lua/plugins/lsp.lua".source = ./nvim/plugins/lsp.lua;
