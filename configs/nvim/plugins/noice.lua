@@ -2,6 +2,12 @@ return {
   "folke/noice.nvim",
   event = "VeryLazy",
   dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+  -- Runs early to patch nvim-notify's background fallback before noice boots
+  init = function()
+    require("notify").setup({
+      background_colour = "#111216", -- Dark inkier backdrop to prevent the warning
+    })
+  end,
   opts = {
     lsp = {
       hover = { enabled = false },

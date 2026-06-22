@@ -22,5 +22,8 @@ in
     "nvim/lua/plugins/dap.lua".source = ./nvim/plugins/dap.lua;
     "nvim/lua/plugins/noice.lua".source = ./nvim/plugins/noice.lua;
     "nvim/lua/plugins/dashboard.lua".source = ./nvim/plugins/dashboard.lua;
+    "nvim/lua/plugins/telescope.lua".source = ./nvim/plugins/telescope.lua;
+    "nvim/lua/plugins/neotree.lua".source = ./nvim/plugins/neotree.lua;
+
   };
 }

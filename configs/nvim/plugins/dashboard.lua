@@ -7,14 +7,21 @@ return {
       local alpha = require("alpha")
       local dashboard = require("alpha.themes.dashboard")
 
-      -- 1. Header (ASCII Art)
+      -- 1. Custom Braille Emblem
       dashboard.section.header.val = {
-        "                               _______ ",
-        "    ___  ___  ___  _  __ ___  |  ___  |",
-        "   / _ \\/ _ \\/ _ \\| |/ // _ \\ | |___| |",
-        "  |  __/  __/ (_) |   <|  __/ |  _____|",
-        "   \\___|\\___|\\___/|_|\\_\\\\___| |_|      ",
-        "                                       ",
+        "⠀⠀⠀⡠⠀⡌⠀⠀⠀⠀⠀⠀⠀⠀⢡⠀⢄⠀⠀⠀",
+        "⠀⠀⣰⠃⣸⠁⠀⠀⠀⠀⠀⠀⠀⠀⠈⣇⠘⣆⠀⠀",
+        "⠀⢀⡏⢠⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡄⢹⡀⠀",
+        "⠀⣸⡇⠘⠷⢖⣒⡲⣤⣤⣤⣤⢖⣒⡲⠾⠃⢸⣇⠀",
+        "⠀⠻⠷⠚⠋⣩⡭⢭⣿⣿⣿⣿⡭⢭⣍⠙⠓⠾⠟⠀",
+        "⠀⠀⢀⣠⠞⢉⣴⠏⣽⣿⣿⣯⠹⣦⡍⠳⣄⡀⠀⠀",
+        "⣤⡴⠋⠁⠀⢸⣿⠀⢸⣿⣿⡏⠀⣿⡇⠀⠈⠙⢶⣤",
+        "⢹⡇⠀⠀⠀⢸⣿⠀⠈⣿⣿⠁⠀⣿⡇⠀⠀⠀⢸⡟",
+        "⠸⡇⠀⠀⠀⠀⣿⠀⠀⠘⠃⠀⠀⣿⠁⠀⠀⠀⢸⡇",
+        "⠀⢷⠀⠀⠀⠀⣿⠀⠀⠀⠀⠀⠀⣿⠀⠀⠀⠀⡾⠀",
+        "⠀⠘⡄⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⢠⠃⠀",
+        "⠀⠀⠐⠀⠀⠀⠈⠇⠀⠀⠀⠀⢸⠁⠀⠀⠀⠂⠀⠀",
+        "⠀⠀⠀⠀⠀⠀⠀⠘⠄⠀⠀⠠⠃⠀⠀⠀⠀⠀⠀⠀",
       }
 
       -- 2. Menu Buttons
@@ -30,32 +37,56 @@ return {
       local stats = require("lazy").stats()
       dashboard.section.footer.val = "⚡ Loaded " .. stats.count .. " plugins cleanly."
 
-      -- 4. Vertical Centering Logic
-      -- This creates a dynamic top margin based on your terminal height
+      -- 4. Dynamic Vertical Centering Calculation
       local padding = {
         type = "padding",
         val = function()
           local total_lines = vim.o.lines
-          local content_lines = #dashboard.section.header.val + (#dashboard.section.buttons.val * 2) + 10
-          local top_padding = math.max(2, math.floor((total_lines - content_lines) / 2) - 2)
+          -- Fine-tuned offset logic to pull the layout perfectly into dead-center
+          local content_lines = #dashboard.section.header.val + (#dashboard.section.buttons.val * 2) + 4
+          local top_padding = math.max(2, math.floor((total_lines - content_lines) / 2) - 4)
           return top_padding
         end,
       }
 
-      -- Reconstruct the full layout with the top padding included
+      -- Assemble Layout
       dashboard.config.layout = {
-        padding, -- Injected blank lines at the top
+        padding,
         dashboard.section.header,
-        { type = "padding", val = 2 }, -- Space between header and buttons
+        { type = "padding", val = 2 },
         dashboard.section.buttons,
-        { type = "padding", val = 2 }, -- Space between buttons and footer
+        { type = "padding", val = 2 },
         dashboard.section.footer,
       }
 
-      -- Apply highlight groups
+      -- Highlight colors matching your setup
       dashboard.section.header.opts.hl = "AlphaHeader"
       dashboard.section.buttons.opts.hl = "AlphaButtons"
       dashboard.section.footer.opts.hl = "AlphaFooter"
+
+      -- 5. Autocommands to hide/show UI elements dynamically
+      local group = vim.api.nvim_create_augroup("AlphaUIHooks", { clear = true })
+      
+      -- Hide lines, status columns, and ~ tildes when Alpha opens
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "AlphaReady",
+        group = group,
+        callback = function()
+          vim.opt_local.fillchars = { eob = " " } -- Hides the tilde symbols completely
+          vim.opt_local.laststatus = 0            -- Hides statusline
+          vim.opt_local.ruler = false             -- Hides coordinate position display
+        end,
+      })
+
+      -- Restore everything cleanly the moment you move away from the dashboard
+      vim.api.nvim_create_autocmd("BufUnload", {
+        buffer = 0,
+        group = group,
+        callback = function()
+          vim.opt.laststatus = 3                  -- Globally restores statusline (adjust to 2 if not using global status)
+          vim.opt.ruler = true
+        end,
+      })
 
       alpha.setup(dashboard.config)
     end,
