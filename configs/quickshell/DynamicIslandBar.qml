@@ -81,7 +81,7 @@ PanelWindow {
             if (activeSelector === "bluetooth")
                 return Math.max(280, btBody.implicitWidth + pillPadding * 2)
             if (activeSelector === "power")
-                return 304 + pillPadding * 2
+                return 440
             return pillPadding * 2
         }
         height: {
