@@ -476,10 +476,9 @@ PanelWindow {
     // ── Power menu mode ──
     Column {
         id: powerBody
-        x: 0
-        y: 8
+        y: 6
         width: parent.width
-        spacing: 12
+        spacing: 8
         visible: activeSelector === "power"
 
         Row {
@@ -505,25 +504,22 @@ PanelWindow {
             }
         }
 
-        Grid {
+        Row {
             anchors.horizontalCenter: parent.horizontalCenter
-            columns: 3
-            columnSpacing: 12
-            rowSpacing: 12
+            spacing: 10
 
             Repeater {
                 model: [
-                    { icon: "\uf023",  label: "Lock",     color: colors.cOnSurface, cmd: "loginctl lock-session" },
-                    { icon: "\uf2f5",  label: "Log Out",  color: colors.cOnSurface, cmd: "hyprctl dispatch exit" },
-                    { icon: "\uf186",  label: "Suspend",  color: colors.cOnSurface, cmd: "systemctl suspend" },
-                    { icon: "\uf2dc",  label: "Hibernate", color: colors.cOnSurface, cmd: "systemctl hibernate" },
-                    { icon: "\uf021",  label: "Reboot",   color: "#ff4444", cmd: "systemctl reboot" },
-                    { icon: "\uf011",  label: "Shut Down", color: "#ff4444", cmd: "systemctl poweroff" },
+                    { icon: "\uf023",  label: "Lock",     accent: false, cmd: "loginctl lock-session" },
+                    { icon: "\uf2f5",  label: "Log Out",  accent: false, cmd: "hyprctl dispatch exit" },
+                    { icon: "\uf186",  label: "Suspend",  accent: false, cmd: "systemctl suspend" },
+                    { icon: "\uf021",  label: "Reboot",   accent: true,  cmd: "systemctl reboot" },
+                    { icon: "\uf011",  label: "Shut Down", accent: true,  cmd: "systemctl poweroff" },
                 ]
 
                 Rectangle {
                     required property var modelData
-                    width: 80; height: 80; radius: 16
+                    width: 70; height: 70; radius: 14
                     color: mouseArea.containsMouse
                         ? Qt.hsla(Qt.color(colors.surface).hslHue, Qt.color(colors.surface).hslSaturation, Qt.color(colors.surface).hslLightness, 0.95)
                         : Qt.hsla(Qt.color(colors.surface).hslHue, Qt.color(colors.surface).hslSaturation, Qt.color(colors.surface).hslLightness, 0.85)
@@ -532,20 +528,20 @@ PanelWindow {
 
                     Column {
                         anchors.centerIn: parent
-                        spacing: 6
+                        spacing: 4
 
                         Text {
                             text: modelData.icon
-                            color: modelData.color
+                            color: modelData.accent ? colors.primary : colors.cOnSurface
                             font.family: "JetBrainsMono Nerd Font"
-                            font.pixelSize: 24
+                            font.pixelSize: 22
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
 
                         Text {
                             text: modelData.label
-                            color: modelData.color
-                            font.pixelSize: 11
+                            color: modelData.accent ? colors.primary : colors.cOnSurface
+                            font.pixelSize: 10
                             font.family: "JetBrainsMono Nerd Font"
                             font.weight: Font.Medium
                             anchors.horizontalCenter: parent.horizontalCenter
