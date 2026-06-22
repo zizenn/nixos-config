@@ -81,14 +81,18 @@ PanelWindow {
             if (activeSelector === "bluetooth")
                 return Math.max(280, btBody.implicitWidth + pillPadding * 2)
             if (activeSelector === "power")
-                return Math.max(200, powerBody.implicitWidth + pillPadding * 2)
+                return 304 + pillPadding * 2
             return pillPadding * 2
         }
         height: {
-            if (activeSelector !== "none") {
-                var selectorContent = activeSelector === "wifi" ? wifiBody : activeSelector === "bluetooth" ? btBody : powerBody
-                return pillHeight + selectorContent.implicitHeight + 16
-            }
+            if (activeSelector === "wifi")
+                return pillHeight + wifiBody.implicitHeight + 16
+            if (activeSelector === "bluetooth")
+                return pillHeight + btBody.implicitHeight + 16
+            if (activeSelector === "power")
+                return pillHeight + powerBody.y + powerBody.implicitHeight + 8
+            if (activeSelector !== "none")
+                return pillHeight + powerBody.implicitHeight + 16
             var h = pillHeight
             if (islandState === "expanded")
                 h += expandedSection.height
@@ -472,14 +476,15 @@ PanelWindow {
     // ── Power menu mode ──
     Column {
         id: powerBody
-        x: pillPadding
+        x: 0
         y: 8
-        width: parent.width - pillPadding * 2
-        spacing: 8
+        width: parent.width
+        spacing: 12
         visible: activeSelector === "power"
 
         Row {
-            spacing: 8; width: parent.width
+            spacing: 8
+            anchors.horizontalCenter: parent.horizontalCenter
 
             Text {
                 text: "\u2190"
@@ -500,44 +505,50 @@ PanelWindow {
             }
         }
 
-        Rectangle {
-            height: 1; width: parent.width
-            color: Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.1)
-        }
-
-        Column {
-            width: parent.width; spacing: 4
+        Grid {
+            anchors.horizontalCenter: parent.horizontalCenter
+            columns: 3
+            columnSpacing: 12
+            rowSpacing: 12
 
             Repeater {
                 model: [
-                    { icon: "\uf023",  label: "Lock",     cmd: "loginctl lock-session" },
-                    { icon: "\uf2f5",  label: "Log Out",  cmd: "hyprctl dispatch exit" },
-                    { icon: "\uf186",  label: "Suspend",  cmd: "systemctl suspend" },
-                    { icon: "\uf2dc",  label: "Hibernate", cmd: "systemctl hibernate" },
-                    { icon: "\uf021",  label: "Reboot",   cmd: "systemctl reboot" },
-                    { icon: "\uf011",  label: "Shut Down", cmd: "systemctl poweroff" },
+                    { icon: "\uf023",  label: "Lock",     color: colors.cOnSurface, cmd: "loginctl lock-session" },
+                    { icon: "\uf2f5",  label: "Log Out",  color: colors.cOnSurface, cmd: "hyprctl dispatch exit" },
+                    { icon: "\uf186",  label: "Suspend",  color: colors.cOnSurface, cmd: "systemctl suspend" },
+                    { icon: "\uf2dc",  label: "Hibernate", color: colors.cOnSurface, cmd: "systemctl hibernate" },
+                    { icon: "\uf021",  label: "Reboot",   color: "#ff4444", cmd: "systemctl reboot" },
+                    { icon: "\uf011",  label: "Shut Down", color: "#ff4444", cmd: "systemctl poweroff" },
                 ]
 
                 Rectangle {
                     required property var modelData
-                    width: powerBody.width; height: 32; radius: 6
-                    color: mouseArea.containsMouse ? Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.08) : "transparent"
+                    width: 80; height: 80; radius: 16
+                    color: mouseArea.containsMouse
+                        ? Qt.hsla(Qt.color(colors.surface).hslHue, Qt.color(colors.surface).hslSaturation, Qt.color(colors.surface).hslLightness, 0.95)
+                        : Qt.hsla(Qt.color(colors.surface).hslHue, Qt.color(colors.surface).hslSaturation, Qt.color(colors.surface).hslLightness, 0.85)
 
-                    Row {
-                        x: 8; spacing: 8; anchors.verticalCenter: parent.verticalCenter
+                    Behavior on color { ColorAnimation { duration: 100 } }
+
+                    Column {
+                        anchors.centerIn: parent
+                        spacing: 6
+
                         Text {
                             text: modelData.icon
-                            color: modelData.label === "Shut Down" || modelData.label === "Reboot" ? "#ff4444" : colors.cOnSurface
+                            color: modelData.color
                             font.family: "JetBrainsMono Nerd Font"
-                            font.pixelSize: 14
-                            anchors.verticalCenter: parent.verticalCenter
+                            font.pixelSize: 24
+                            anchors.horizontalCenter: parent.horizontalCenter
                         }
+
                         Text {
                             text: modelData.label
-                            color: modelData.label === "Shut Down" || modelData.label === "Reboot" ? "#ff4444" : colors.cOnSurface
-                            font.pixelSize: 12; font.family: "JetBrainsMono Nerd Font"
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.weight: modelData.label === "Shut Down" ? Font.Bold : Font.Normal
+                            color: modelData.color
+                            font.pixelSize: 11
+                            font.family: "JetBrainsMono Nerd Font"
+                            font.weight: Font.Medium
+                            anchors.horizontalCenter: parent.horizontalCenter
                         }
                     }
 
