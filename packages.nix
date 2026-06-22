@@ -48,6 +48,7 @@
   devenv
   zip
   lazygit
+  rofi
 ];
 
 }
