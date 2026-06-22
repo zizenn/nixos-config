@@ -49,6 +49,7 @@
   zip
   lazygit
   rofi
+  uv
 ];
 
 }
