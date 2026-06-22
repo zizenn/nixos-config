@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Window
 import Quickshell
+import Quickshell.Io
 
 import "./services" as Services
 import "./modules" as Modules
@@ -79,11 +80,13 @@ PanelWindow {
                 return Math.max(280, wifiBody.implicitWidth + pillPadding * 2)
             if (activeSelector === "bluetooth")
                 return Math.max(280, btBody.implicitWidth + pillPadding * 2)
+            if (activeSelector === "power")
+                return Math.max(200, powerBody.implicitWidth + pillPadding * 2)
             return pillPadding * 2
         }
         height: {
             if (activeSelector !== "none") {
-                var selectorContent = activeSelector === "wifi" ? wifiBody : btBody
+                var selectorContent = activeSelector === "wifi" ? wifiBody : activeSelector === "bluetooth" ? btBody : powerBody
                 return pillHeight + selectorContent.implicitHeight + 16
             }
             var h = pillHeight
@@ -177,6 +180,7 @@ PanelWindow {
                         activeSelector = activeSelector === "bluetooth" ? "none" : "bluetooth"
                         if (activeSelector === "bluetooth") btSvc.refreshDevices()
                     }
+                    onPowerClicked: activeSelector = activeSelector === "power" ? "none" : "power"
                 }
             }
         }
@@ -460,6 +464,93 @@ PanelWindow {
                     color: Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.4)
                     font.pixelSize: 10; font.family: "JetBrainsMono Nerd Font"; font.italic: true
                     visible: btSvc && btSvc.discovering
+                }
+            }
+        }
+    }
+
+    // ── Power menu mode ──
+    Column {
+        id: powerBody
+        x: pillPadding
+        y: 8
+        width: parent.width - pillPadding * 2
+        spacing: 8
+        visible: activeSelector === "power"
+
+        Row {
+            spacing: 8; width: parent.width
+
+            Text {
+                text: "\u2190"
+                color: colors.cOnSurface
+                font.pixelSize: 14; font.family: "JetBrainsMono Nerd Font"
+                anchors.verticalCenter: parent.verticalCenter
+                MouseArea {
+                    anchors.fill: parent; cursorShape: Qt.PointingHandCursor
+                    onClicked: activeSelector = "none"
+                }
+            }
+
+            Text {
+                text: "Power"
+                color: colors.cOnSurface
+                font.pixelSize: 13; font.weight: Font.Medium; font.family: "JetBrainsMono Nerd Font"
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
+
+        Rectangle {
+            height: 1; width: parent.width
+            color: Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.1)
+        }
+
+        Column {
+            width: parent.width; spacing: 4
+
+            Repeater {
+                model: [
+                    { icon: "\uf023",  label: "Lock",     cmd: "loginctl lock-session" },
+                    { icon: "\uf2f5",  label: "Log Out",  cmd: "hyprctl dispatch exit" },
+                    { icon: "\uf186",  label: "Suspend",  cmd: "systemctl suspend" },
+                    { icon: "\uf2dc",  label: "Hibernate", cmd: "systemctl hibernate" },
+                    { icon: "\uf021",  label: "Reboot",   cmd: "systemctl reboot" },
+                    { icon: "\uf011",  label: "Shut Down", cmd: "systemctl poweroff" },
+                ]
+
+                Rectangle {
+                    required property var modelData
+                    width: powerBody.width; height: 32; radius: 6
+                    color: mouseArea.containsMouse ? Qt.hsla(Qt.color(colors.cOnSurface).hslHue, Qt.color(colors.cOnSurface).hslSaturation, Qt.color(colors.cOnSurface).hslLightness, 0.08) : "transparent"
+
+                    Row {
+                        x: 8; spacing: 8; anchors.verticalCenter: parent.verticalCenter
+                        Text {
+                            text: modelData.icon
+                            color: modelData.label === "Shut Down" || modelData.label === "Reboot" ? "#ff4444" : colors.cOnSurface
+                            font.family: "JetBrainsMono Nerd Font"
+                            font.pixelSize: 14
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                        Text {
+                            text: modelData.label
+                            color: modelData.label === "Shut Down" || modelData.label === "Reboot" ? "#ff4444" : colors.cOnSurface
+                            font.pixelSize: 12; font.family: "JetBrainsMono Nerd Font"
+                            anchors.verticalCenter: parent.verticalCenter
+                            font.weight: modelData.label === "Shut Down" ? Font.Bold : Font.Normal
+                        }
+                    }
+
+                    MouseArea {
+                        id: mouseArea
+                        anchors.fill: parent; hoverEnabled: true; cursorShape: Qt.PointingHandCursor
+                        onClicked: {
+                            activeSelector = "none"
+                            Qt.createQmlObject(
+                                'import Quickshell.Io; Process { command: ["bash", "-c", ' + JSON.stringify(modelData.cmd) + ']; running: true }',
+                                bar)
+                        }
+                    }
                 }
             }
         }

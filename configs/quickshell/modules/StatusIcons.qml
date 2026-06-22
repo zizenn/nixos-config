@@ -11,6 +11,7 @@ Row {
 
     signal wifiClicked()
     signal btClicked()
+    signal powerClicked()
 
     spacing: 14
     anchors.verticalCenter: parent.verticalCenter
@@ -95,6 +96,20 @@ Row {
                     0.7)
                 font.pixelSize: 11
             }
+        }
+    }
+
+    Text {
+        text: "\uf011"
+        color: "#ff4444"
+        font.pixelSize: 15
+        font.family: "JetBrainsMono Nerd Font"
+        anchors.verticalCenter: parent.verticalCenter
+
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            onClicked: root.powerClicked()
         }
     }
 }
