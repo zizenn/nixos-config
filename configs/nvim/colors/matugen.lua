@@ -23,7 +23,8 @@ function M.setup()
   vim.api.nvim_set_hl(0, "NormalNC",    { bg = "NONE", fg = c.fg })
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
   vim.api.nvim_set_hl(0, "FloatBorder", { fg = c.border, bg = "NONE" })
-  vim.api.nvim_set_hl(0, "CursorLine",  { bg = c.dark })
+  vim.api.nvim_set_hl(0, "CursorLine",  { bg = "NONE", sp = c.border, underline = false })
+  vim.api.nvim_set_hl(0, "CursorLineNr", { fg = c.blue, bold = true })
 
   -- Neo-tree
   vim.api.nvim_set_hl(0, "NeoTreeNormal",              { bg = "NONE", fg = c.fg })

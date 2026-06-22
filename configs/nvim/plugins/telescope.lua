@@ -5,11 +5,17 @@ return {
     "nvim-treesitter/nvim-treesitter",
   },
   cmd = "Telescope",
+  keys = {
+    { "<leader>f", "<cmd>Telescope find_files<CR>", desc = "Find files" },
+    { "<leader>sg", "<cmd>Telescope live_grep<CR>", desc = "Live grep" },
+    { "<leader>sb", "<cmd>Telescope buffers<CR>", desc = "Buffers" },
+    { "<leader>sh", "<cmd>Telescope help_tags<CR>", desc = "Help tags" },
+    { "<leader>sk", "<cmd>Telescope keymaps<CR>", desc = "Keymaps" },
+    { "<leader>so", "<cmd>Telescope oldfiles<CR>", desc = "Recent files" },
+    { "<leader>s.", "<cmd>Telescope resume<CR>", desc = "Resume last picker" },
+    { "gr", "<cmd>Telescope lsp_references<CR>", desc = "LSP references" },
+  },
   init = function()
-    -- Telescope still uses the old nvim-treesitter API
-    -- Provide polyfills since the modules were restructured in recent versions
-
-    -- Polyfill nvim-treesitter.parsers (now a metadata table, not a module)
     local ok_parsers, parsers = pcall(require, "nvim-treesitter.parsers")
     if ok_parsers and type(parsers) == "table" and not parsers.ft_to_lang then
       parsers.ft_to_lang = function(ft)
@@ -23,7 +29,6 @@ return {
       end
     end
 
-    -- Polyfill nvim-treesitter.configs (this module doesn't exist anymore)
     if not package.loaded["nvim-treesitter.configs"] then
       package.loaded["nvim-treesitter.configs"] = {
         is_enabled = function() return true end,
