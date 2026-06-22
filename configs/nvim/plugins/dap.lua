@@ -43,7 +43,25 @@ return {
       for _, lang in ipairs({ "c", "cpp" }) do
         dap.configurations[lang] = {
           {
-            name = "Launch",
+            name = "Launch with make",
+            type = "gdb",
+            request = "launch",
+            program = function()
+              local makefile = vim.fn.findfile("Makefile", vim.fn.getcwd() .. ";")
+              if makefile ~= "" then
+                vim.notify("Building with make...", vim.log.levels.INFO)
+                vim.fn.system("make -C " .. vim.fn.fnamemodify(makefile, ":h"))
+              end
+              return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            end,
+            cwd = "${workspaceFolder}",
+            stopOnEntry = false,
+            args = function()
+              return vim.split(vim.fn.input("Arguments: ") or "", " ")
+            end,
+          },
+          {
+            name = "Launch (no build)",
             type = "gdb",
             request = "launch",
             program = function()
@@ -52,8 +70,7 @@ return {
             cwd = "${workspaceFolder}",
             stopOnEntry = false,
             args = function()
-              local args_str = vim.fn.input("Arguments: ")
-              return vim.split(args_str, " ")
+              return vim.split(vim.fn.input("Arguments: ") or "", " ")
             end,
           },
         }
