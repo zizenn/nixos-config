@@ -4,6 +4,7 @@ return {
   event = "InsertEnter",
   dependencies = {
     "L3MON4D3/LuaSnip",
+    "rafamadriz/friendly-snippets",
     "saghen/blink.compat",
   },
   opts = {
@@ -24,6 +25,9 @@ return {
         min_width = 35,
         auto_show_delay_ms = 100,
       },
+    },
+    snippets = {
+      preset = "luasnip",
     },
     keymap = {
       ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
