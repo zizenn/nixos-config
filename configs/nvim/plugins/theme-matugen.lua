@@ -1,19 +1,16 @@
-local M = {}
-
-function M.setup(opts)
-  opts = opts or {}
-  require("kanagawa").setup(vim.tbl_deep_extend("force", {
-    compile = false,
-    undercurl = true,
-    commentStyle = { italic = true },
-    functionStyle = {},
-    keywordStyle = { italic = true },
-    statementStyle = { bold = true },
-    transparent = false,
-    theme = "dragon",
-    background = { dark = "dragon", light = "lotus" },
-  }, opts))
-  vim.cmd.colorscheme("kanagawa-dragon")
-end
-
-return M
+return {
+  -- Points Lazy to your local ~/.config/nvim/lua/matugen directory
+  dir = vim.fn.stdpath("config") .. "/lua/matugen",
+  name = "matugen",
+  lazy = false,
+  priority = 1000, 
+  config = function()
+    local status, matugen = pcall(require, "matugen")
+    if status then
+      matugen.setup()
+      vim.cmd("colorscheme matugen")
+    else
+      vim.notify("Could not load local matugen module", vim.log.levels.WARN)
+    end
+  end,
+}
