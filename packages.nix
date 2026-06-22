@@ -45,6 +45,7 @@
   bat
   lldb
   devenv
+  zip
 ];
 
 }
