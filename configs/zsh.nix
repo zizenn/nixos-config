@@ -25,8 +25,8 @@
       tree = "eza -T";
       pkgadd = "~/Documents/scripts/nixpkgsearch.sh";
       pkgdel = "~/Documents/scripts/nixpkgremove.sh";
-      code = "claude --model qwen3-coder";
       gf = "git fuzzy ";
+      cat = "bat";
     };
 
     # Fixed: Merged all shell configurations into the modern initContent system
