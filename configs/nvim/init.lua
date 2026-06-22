@@ -54,6 +54,17 @@ vim.api.nvim_create_autocmd("CursorMoved", {
   end,
 })
 
+-- Session management (mini.sessions)
+vim.keymap.set("n", "<leader>qj", function()
+  require("mini.sessions").write(".session")
+  vim.cmd("wqa")
+end, { desc = "Save session and quit" })
+
+vim.keymap.set("n", "<leader>qd", function()
+  require("mini.sessions").delete(".session")
+  vim.cmd("wqa")
+end, { desc = "Delete session and quit" })
+
 -- Lazy plugin setup
 require("lazy").setup({
   spec = {

@@ -39,8 +39,8 @@ return {
     require("lualine").setup({
       options = {
         theme = matugen_theme,
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         globalstatus = true,
         disabled_filetypes = { "neo-tree", "alpha", "TelescopePrompt" },
       },
@@ -54,7 +54,7 @@ return {
             symbols = { modified = " ●", readonly = " ", unnamed = " [No Name]" },
           },
         },
-        lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_x = { "filetype" },
         lualine_y = { "progress" },
         lualine_z = { "location" },
       },

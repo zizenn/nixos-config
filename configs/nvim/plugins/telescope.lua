@@ -3,17 +3,23 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
+    "nvim-telescope/telescope-file-browser.nvim",
+    "nvim-telescope/telescope-ui-select.nvim",
+    "nvim-telescope/telescope-fzf-native.nvim",
+    { "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" },
   },
   cmd = "Telescope",
   keys = {
-    { "<leader>f", "<cmd>Telescope find_files<CR>", desc = "Find files" },
-    { "<leader>sg", "<cmd>Telescope live_grep<CR>", desc = "Live grep" },
-    { "<leader>sb", "<cmd>Telescope buffers<CR>", desc = "Buffers" },
-    { "<leader>sh", "<cmd>Telescope help_tags<CR>", desc = "Help tags" },
-    { "<leader>sk", "<cmd>Telescope keymaps<CR>", desc = "Keymaps" },
-    { "<leader>so", "<cmd>Telescope oldfiles<CR>", desc = "Recent files" },
-    { "<leader>s.", "<cmd>Telescope resume<CR>", desc = "Resume last picker" },
-    { "gr", "<cmd>Telescope lsp_references<CR>", desc = "LSP references" },
+    { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Find files" },
+    { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Live grep" },
+    { "<leader>fn", "<cmd>Telescope file_browser<CR>", desc = "File browser" },
+    { "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Buffers" },
+    { "<leader>fs", "<cmd>Telescope symbols<CR>", desc = "Symbols" },
+    { "<leader>fh", "<cmd>Telescope help_tags<CR>", desc = "Help" },
+    { "<leader>fk", "<cmd>Telescope keymaps<CR>", desc = "Keymaps" },
+    { "<leader>fo", "<cmd>Telescope oldfiles<CR>", desc = "Recent" },
+    { "<leader>f.", "<cmd>Telescope resume<CR>", desc = "Resume" },
+    { "gr", "<cmd>Telescope lsp_references<CR>", desc = "References" },
   },
   init = function()
     local ok_parsers, parsers = pcall(require, "nvim-treesitter.parsers")
@@ -28,7 +34,6 @@ return {
         return vim.treesitter.get_parser(bufnr, lang)
       end
     end
-
     if not package.loaded["nvim-treesitter.configs"] then
       package.loaded["nvim-treesitter.configs"] = {
         is_enabled = function() return true end,
@@ -40,9 +45,9 @@ return {
   end,
   opts = function()
     local actions = require("telescope.actions")
-
     return {
       defaults = {
+        file_ignore_patterns = { ".git", "%.csv", ".venv", "node_modules", ".svelte-kit", ".vscode" },
         mappings = {
           i = {
             ["<C-j>"] = "move_selection_next",
@@ -55,9 +60,21 @@ return {
         },
       },
       pickers = {
+        buffers = { show_all_buffers = true },
         find_files = { hidden = true },
         live_grep = { additional_args = { "--hidden" } },
       },
+      extensions = {
+        file_browser = { theme = "ivy", hijack_netrw = true },
+        ["ui-select"] = { require("telescope.themes").get_dropdown({}) },
+      },
     }
+  end,
+  config = function(_, opts)
+    local telescope = require("telescope")
+    telescope.setup(opts)
+    telescope.load_extension("file_browser")
+    telescope.load_extension("ui-select")
+    telescope.load_extension("fzf")
   end,
 }

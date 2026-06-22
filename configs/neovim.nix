@@ -1,23 +1,18 @@
 { config, pkgs, ... }:
 
 let
-  # Toggle your active theme here: "matugen" or "kanagawa"
   theme = "matugen";
 in
 {
   xdg.configFile = {
-    # 1. The main entrypoint
     "nvim/init.lua".source = ./nvim/init.lua;
 
-    # 2. Core Theme Modules
     "nvim/lua/matugen/init.lua".source = ./nvim/lua/matugen/init.lua;
     "nvim/lua/kanagawa-dragon/init.lua".source = ./nvim/lua/kanagawa-dragon/init.lua;
 
-    # 3. Theme Spec and Native Colorscheme Bridges
     "nvim/lua/plugins/theme.lua".source = ./nvim/plugins/theme.lua;
     "nvim/colors/matugen.lua".source = ./nvim/colors/matugen.lua;
 
-    # 4. Core IDE Plugins
     "nvim/lua/plugins/lsp.lua".source = ./nvim/plugins/lsp.lua;
     "nvim/lua/plugins/dap.lua".source = ./nvim/plugins/dap.lua;
     "nvim/lua/plugins/noice.lua".source = ./nvim/plugins/noice.lua;
@@ -28,12 +23,20 @@ in
     "nvim/lua/plugins/whichkey.lua".source = ./nvim/plugins/whichkey.lua;
     "nvim/lua/plugins/lualine.lua".source = ./nvim/plugins/lualine.lua;
     "nvim/lua/plugins/bufferline.lua".source = ./nvim/plugins/bufferline.lua;
-    "nvim/lua/plugins/indent-blankline.lua".source = ./nvim/plugins/indent-blankline.lua;
-    "nvim/lua/plugins/autopairs.lua".source = ./nvim/plugins/autopairs.lua;
-    "nvim/lua/plugins/comment.lua".source = ./nvim/plugins/comment.lua;
     "nvim/lua/plugins/gitsigns.lua".source = ./nvim/plugins/gitsigns.lua;
-    "nvim/lua/plugins/surround.lua".source = ./nvim/plugins/surround.lua;
     "nvim/lua/plugins/todo-comments.lua".source = ./nvim/plugins/todo-comments.lua;
     "nvim/lua/plugins/toggleterm.lua".source = ./nvim/plugins/toggleterm.lua;
+    "nvim/lua/plugins/comment.lua".source = ./nvim/plugins/comment.lua;
+    "nvim/lua/plugins/fidget.lua".source = ./nvim/plugins/fidget.lua;
+
+    "nvim/lua/plugins/blink.lua".source = ./nvim/plugins/blink.lua;
+    "nvim/lua/plugins/conform.lua".source = ./nvim/plugins/conform.lua;
+    "nvim/lua/plugins/lint.lua".source = ./nvim/plugins/lint.lua;
+    "nvim/lua/plugins/mini.lua".source = ./nvim/plugins/mini.lua;
+    "nvim/lua/plugins/flash.lua".source = ./nvim/plugins/flash.lua;
+    "nvim/lua/plugins/vimade.lua".source = ./nvim/plugins/vimade.lua;
+    "nvim/lua/plugins/autosave.lua".source = ./nvim/plugins/autosave.lua;
+    "nvim/lua/plugins/remember.lua".source = ./nvim/plugins/remember.lua;
+    "nvim/lua/plugins/scrolleof.lua".source = ./nvim/plugins/scrolleof.lua;
   };
 }

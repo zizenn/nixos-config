@@ -1,5 +1,5 @@
 return {
-  "kylechui/nvim-surround",
+  "vladdoster/remember.nvim",
   event = { "BufReadPost", "BufNewFile" },
   opts = {},
 }
