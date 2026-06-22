@@ -45,6 +45,8 @@ return {
           vim.keymap.set("n", "<leader>li", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), { bufnr = ev.buf })
           end, opts)
+
+          vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
         end,
       })
     end,
@@ -66,6 +68,13 @@ return {
       cmp.setup({
         snippet = {
           expand = function(args) luasnip.lsp_expand(args.body) end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        performance = {
+          max_view_entries = 10,
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
