@@ -37,21 +37,42 @@ return {
       dap.adapters.gdb = {
         type = "executable",
         command = "gdb",
-        args = { "-i", "dap" },
+        args = { "-q", "--interpreter=dap" },
       }
+
+      dap.adapters.lldb = {
+        type = "executable",
+        command = "lldb-dap",
+        args = {},
+      }
+
+      local make_and_prompt = function()
+        local makefile = vim.fn.findfile("Makefile", vim.fn.getcwd() .. ";")
+        if makefile ~= "" then
+          vim.notify("Building with make...", vim.log.levels.INFO)
+          vim.fn.system("make -C " .. vim.fn.fnamemodify(makefile, ":h"))
+        end
+        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+      end
 
       for _, lang in ipairs({ "c", "cpp" }) do
         dap.configurations[lang] = {
           {
-            name = "Launch with make",
+            name = "Launch with gdb (make first)",
+            type = "gdb",
+            request = "launch",
+            program = make_and_prompt,
+            cwd = "${workspaceFolder}",
+            stopOnEntry = false,
+            args = function()
+              return vim.split(vim.fn.input("Arguments: ") or "", " ")
+            end,
+          },
+          {
+            name = "Launch with gdb (no build)",
             type = "gdb",
             request = "launch",
             program = function()
-              local makefile = vim.fn.findfile("Makefile", vim.fn.getcwd() .. ";")
-              if makefile ~= "" then
-                vim.notify("Building with make...", vim.log.levels.INFO)
-                vim.fn.system("make -C " .. vim.fn.fnamemodify(makefile, ":h"))
-              end
               return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
             end,
             cwd = "${workspaceFolder}",
@@ -61,12 +82,10 @@ return {
             end,
           },
           {
-            name = "Launch (no build)",
-            type = "gdb",
+            name = "Launch with lldb (make first)",
+            type = "lldb",
             request = "launch",
-            program = function()
-              return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-            end,
+            program = make_and_prompt,
             cwd = "${workspaceFolder}",
             stopOnEntry = false,
             args = function()
