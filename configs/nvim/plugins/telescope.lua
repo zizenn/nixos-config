@@ -5,8 +5,13 @@ return {
     "nvim-treesitter/nvim-treesitter",
     "nvim-telescope/telescope-file-browser.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
-    "nvim-telescope/telescope-fzf-native.nvim",
-    { "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" },
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+      cond = function()
+        return vim.fn.executable("make") == 1 and vim.fn.executable("gcc") == 1
+      end,
+    },
   },
   cmd = "Telescope",
   keys = {
@@ -75,6 +80,6 @@ return {
     telescope.setup(opts)
     telescope.load_extension("file_browser")
     telescope.load_extension("ui-select")
-    telescope.load_extension("fzf")
+    pcall(telescope.load_extension, "fzf")
   end,
 }
