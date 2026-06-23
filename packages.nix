@@ -58,7 +58,7 @@
     stylua
     selene
     prettierd
-    nixfmt-rfc-style
+    pkgs.nixfmt
     shellcheck
     shfmt
   ];
