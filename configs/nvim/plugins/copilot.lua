@@ -13,6 +13,11 @@ return {
           prev = "<M-[>",
           dismiss = "<C-]>",
         },
+        hint = {
+          enabled = true,
+          side = "right",
+          format = "  accept: %s  next: %s  prev: %s  dismiss: %s",
+        },
       },
       panel = { enabled = false },
     })
