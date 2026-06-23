@@ -13,9 +13,13 @@
       url = "github:samjoshuadud/waylandar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim-config = {
+      url = "path:./configs/nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, zen-browser, waylandar, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, zen-browser, waylandar, neovim-config, ... }@inputs: {
     nixosConfigurations = {
       nix-port = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -41,5 +45,8 @@
         ];
       };
     };
+
+    # Expose neovim-config packages directly in this flake
+    packages = neovim-config.packages;
   };
 }

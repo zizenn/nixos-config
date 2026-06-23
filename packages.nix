@@ -50,7 +50,13 @@
   lazygit
   rofi
   uv
-  terminus_font
-];
+  stylua
+  selene
+  prettierd
+  nixfmt-rfc-style
+  shellcheck
+  shfmt
+  ];
+
 
 }

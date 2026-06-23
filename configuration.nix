@@ -51,9 +51,33 @@
     upower.enable = true;
     blueman.enable = true;
     udisks2.enable = true;
-    displayManager.ly.enable = true;
     openssh.enable = true;
     timesyncd.enable = true;
+  };
+
+  systemd.services.tty-palette = {
+    description = "Set TTY palette for Kanagawa Dragon";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      # \e]P0181616 sets background to dragonBlack3
+      # \e]P7DCD7BA sets foreground to fujiWhite
+      # \ec resets the TTY to apply changes
+      ExecStart = "${pkgs.coreutils}/bin/printf '\\e]P0181616\\e]P7DCD7BA\\ec'";
+    };
+  };
+
+  services.displayManager.ly = {
+    enable = true;
+    settings = {
+      hide_greeting = true;
+      clock = "%H:%M:%S";
+      # Ly UI specific colors
+      bg = "#181616";
+      fg = "#DCD7BA";
+      save = true;
+      animate = false;
+    };
   };
 
   services.pipewire = {
@@ -74,7 +98,7 @@
       enable = true;
       clean.enable = true;
       clean.extraArgs = "--keep-since 4d --keep 3";
-      flake = "/etc/nixos";
+      flake = "~/nixos";
     };
   };
 
@@ -106,6 +130,8 @@
       pkgs.waybar
       pkgs.hyprpolkitagent
       pkgs.xdg-desktop-portal-hyprland
+      # more pkgs
+      pkgs.terminus_font
     ];
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";
@@ -117,6 +143,12 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
+  
+
+  # tty fonts
+  console.keyMap = "us"; 
+  # 'ter-v16n' (Terminus) is available in the 'terminus_font' package.
+  console.font = "${pkgs.terminus_font}/share/consolefonts/ter-v16n.psf.gz";
 
   systemd.packages = [ pkgs.cloudflare-warp ];
 
