@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   home.packages = with pkgs; [
@@ -31,32 +36,30 @@
     awww
     socat
     ollama
-  unzip
-  claude-code
-  direnv
-  bc
-  fd
-  vesktop
-  inputs.zen-browser.packages.x86_64-linux.default
-  inputs.waylandar.packages.x86_64-linux.default
-  steam
-  protonmail-desktop
-  zed-editor
-  btop
-  bat
-  lldb
-  devenv
-  zip
-  lazygit
-  rofi
-  uv
-  stylua
-  selene
-  prettierd
-  nixfmt-rfc-style
-  shellcheck
-  shfmt
+    unzip
+    claude-code
+    direnv
+    bc
+    fd
+    vesktop
+    inputs.zen-browser.packages.x86_64-linux.default
+    inputs.waylandar.packages.x86_64-linux.default
+    steam
+    protonmail-desktop
+    zed-editor
+    btop
+    bat
+    lldb
+    devenv
+    zip
+    lazygit
+    rofi
+    uv
+    stylua
+    selene
+    prettierd
+    nixfmt-rfc-style
+    shellcheck
+    shfmt
   ];
-
-
 }
