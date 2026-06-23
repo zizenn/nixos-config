@@ -66,3 +66,19 @@ require("lazy").setup({
   install = { colorscheme = { "habamax" } },
   checker = { enabled = false },
 })
+
+-- Always show dashboard when nvim opens with no files
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = vim.api.nvim_create_augroup("ForceDashboard", { clear = true }),
+  nested = true,
+  callback = function()
+    if vim.fn.argc() > 0 then return end
+    -- Find the alpha dashboard buffer and switch to it
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.bo[buf].filetype == "alpha" then
+        vim.api.nvim_set_current_buf(buf)
+        return
+      end
+    end
+  end,
+})
