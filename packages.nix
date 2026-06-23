@@ -61,5 +61,6 @@
     pkgs.nixfmt
     shellcheck
     shfmt
-  ];
+    gdb
+];
 }
