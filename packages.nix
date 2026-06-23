@@ -64,5 +64,6 @@
     shfmt
     gdb
     cmake
-  ];
+    discordo
+];
 }
