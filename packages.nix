@@ -50,7 +50,6 @@
   lazygit
   rofi
   uv
-  uv
 ];
 
 }

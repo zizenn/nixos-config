@@ -24,7 +24,4 @@ hl.on("hyprland.start", function ()
     -- bar
     hl.exec_cmd(bar)
 
-    -- calendar widget
-    hl.exec_cmd("waylandar-widget")
-
 end)
