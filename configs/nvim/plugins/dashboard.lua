@@ -89,6 +89,32 @@ return {
       })
 
       alpha.setup(dashboard.config)
+
+      -- Force dashboard on startup when no files opened
+      vim.api.nvim_create_autocmd("UIEnter", {
+        group = vim.api.nvim_create_augroup("ForceDashboard", { clear = true }),
+        once = true,
+        callback = function()
+          if vim.fn.argc() > 0 then return end
+          vim.schedule(function()
+            -- Close any unnamed buffers (auto-created by neovim/plugins)
+            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+              if vim.bo[buf].filetype ~= "alpha" and vim.api.nvim_buf_get_name(buf) == "" then
+                pcall(vim.api.nvim_buf_delete, buf, { force = true })
+              end
+            end
+            -- Switch to alpha dashboard
+            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+              if vim.bo[buf].filetype == "alpha" then
+                vim.api.nvim_set_current_buf(buf)
+                return
+              end
+            end
+            -- Recreate dashboard if buffer lost
+            pcall(vim.cmd, "Alpha")
+          end)
+        end,
+      })
     end,
   }
 }
