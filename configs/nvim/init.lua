@@ -40,6 +40,9 @@ vim.opt.timeoutlen = 500
 vim.opt.undofile = true
 vim.opt.signcolumn = "yes"
 
+-- Show diagnostic messages inline
+vim.diagnostic.config({ virtual_text = true })
+
 -- Scrolloff: keep minimum 5 lines visible above/below cursor
 vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 5

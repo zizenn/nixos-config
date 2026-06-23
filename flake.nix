@@ -32,7 +32,7 @@
 
     # This block enables "nh home switch" to work
     homeConfigurations = {
-      "zizenn@nix-port" = home-manager.lib.homeManagerConfiguration {
+      "zizenn" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; };
         modules = [

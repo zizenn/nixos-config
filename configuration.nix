@@ -1,4 +1,10 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [ ./hardware-configuration.nix ];
@@ -8,12 +14,19 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages;
   boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
-  boot.initrd.availableKernelModules = [ "hv_vmbus" "hv_storvsc" "hv_netvsc" ];
-  
+  boot.initrd.availableKernelModules = [
+    "hv_vmbus"
+    "hv_storvsc"
+    "hv_netvsc"
+  ];
+
   networking = {
     hostName = "nix-port";
     networkmanager.enable = true;
-    nameservers = [ "8.8.8.8" "1.1.1.1" ];
+    nameservers = [
+      "8.8.8.8"
+      "1.1.1.1"
+    ];
     enableIPv6 = false;
     interfaces.wlo1.mtu = 1400;
     networkmanager.dns = "none";
@@ -34,10 +47,14 @@
 
   # --- Desktop Environment & Portals ---
   programs.hyprland.enable = true;
-  
+
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-xapp ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-xapp
+    ];
     config.common.default = [ "xapp" ];
   };
 
@@ -98,7 +115,7 @@
       enable = true;
       clean.enable = true;
       clean.extraArgs = "--keep-since 4d --keep 3";
-      flake = "~/nixos";
+      flake = "/home/zizenn/nixos";
     };
   };
 
@@ -143,10 +160,9 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
-  
 
   # tty fonts
-  console.keyMap = "us"; 
+  console.keyMap = "us";
   # 'ter-v16n' (Terminus) is available in the 'terminus_font' package.
   console.font = "${pkgs.terminus_font}/share/consolefonts/ter-v16n.psf.gz";
 
@@ -161,11 +177,18 @@
 
   users.users.zizenn = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "video"
+    ];
     shell = pkgs.zsh;
   };
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   system.stateVersion = "26.05";
 }

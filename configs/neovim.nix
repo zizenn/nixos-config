@@ -6,6 +6,7 @@ in
 {
   xdg.configFile = {
     "nvim/.stylua.toml".source = ./nvim/.stylua.toml;
+    "nvim/.selene.toml".source = ./nvim/.selene.toml;
     "nvim/init.lua".source = ./nvim/init.lua;
 
     "nvim/lua/matugen/init.lua".source = ./nvim/lua/matugen/init.lua;
