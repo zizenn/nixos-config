@@ -62,5 +62,6 @@
     shellcheck
     shfmt
     gdb
-];
+    cmake
+  ];
 }
