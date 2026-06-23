@@ -59,9 +59,11 @@ return {
       preset = "luasnip",
     },
     keymap = {
-      ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
-      ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+      ["<Tab>"] = { "snippet_forward", "fallback" },
+      ["<S-Tab>"] = { "snippet_backward", "fallback" },
       ["<CR>"] = { "accept", "fallback" },
+      ["<C-n>"] = { "select_next", "fallback" },
+      ["<C-p>"] = { "select_prev", "fallback" },
       ["<C-Space>"] = { "show", "fallback" },
       ["<C-e>"] = { "hide" },
       ["<C-b>"] = { "scroll_documentation_up" },
