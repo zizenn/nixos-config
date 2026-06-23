@@ -6,6 +6,7 @@ return {
       "rcarriga/nvim-dap-ui",
       "nvim-neotest/nvim-nio",
       "mfussenegger/nvim-dap-python",
+      "jay-babu/mason-nvim-dap.nvim",
     },
     keys = {
       { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
@@ -25,7 +26,32 @@ return {
       local dap = require("dap")
       local dapui = require("dapui")
 
-      dapui.setup()
+      dapui.setup({
+        layouts = {
+          {
+            elements = {
+              { id = "scopes",  size = 0.50 },
+              { id = "stacks",  size = 0.20 },
+              { id = "watches", size = 0.30 },
+            },
+            position = "left",
+            size = 40,
+          },
+          {
+            elements = {
+              { id = "repl",    size = 0.50 },
+              { id = "console", size = 0.50 },
+            },
+            position = "bottom",
+            size = 12,
+          },
+        },
+        floating = {
+          max_height = 0.8,
+          max_width = 0.7,
+          border = "rounded",
+        },
+      })
       require("nvim-dap-virtual-text").setup()
 
       dap.listeners.before.attach.dapui_config = function() dapui.open() end
@@ -53,7 +79,6 @@ return {
             return entry.type, vim.fn.fnamemodify(found, ":h")
           end
         end
-        -- Fallback: check for compile_commands.json
         local cc = vim.fn.findfile("compile_commands.json", dir .. ";")
         if cc ~= "" then
           if vim.fn.filereadable(vim.fn.fnamemodify(cc, ":h") .. "/CMakeCache.txt") == 1 then
@@ -120,7 +145,6 @@ return {
       -- Util: build & launch config factory
       local function make_c_configs(adapter, label)
         local configs = {}
-        -- 1) Full build + launch
         table.insert(configs, {
           name = label .. " (build + launch)",
           type = adapter,
@@ -137,7 +161,6 @@ return {
           stopOnEntry = false,
           args = prompt_args,
         })
-        -- 2) Launch existing binary (no build)
         table.insert(configs, {
           name = label .. " (launch existing)",
           type = adapter,
@@ -149,7 +172,6 @@ return {
           stopOnEntry = false,
           args = prompt_args,
         })
-        -- 3) Attach to running process
         table.insert(configs, {
           name = label .. " (attach)",
           type = adapter,
@@ -160,14 +182,13 @@ return {
         return configs
       end
 
-      -- C / C++ (GDB — primary)
+      -- C / C++ (codelldb — primary, installed by mason)
+      -- mason-nvim-dap sets up dap.adapters.codelldb automatically
       dap.adapters.gdb = {
         type = "executable",
         command = "gdb",
         args = { "-q", "--interpreter=dap" },
       }
-
-      -- C / C++ (LLDB — alternative)
       dap.adapters.lldb = {
         type = "executable",
         command = "lldb-dap",
@@ -176,6 +197,9 @@ return {
 
       for _, lang in ipairs({ "c", "cpp" }) do
         dap.configurations[lang] = {}
+        for _, cfg in ipairs(make_c_configs("codelldb", "codelldb")) do
+          table.insert(dap.configurations[lang], cfg)
+        end
         for _, cfg in ipairs(make_c_configs("gdb", "gdb")) do
           table.insert(dap.configurations[lang], cfg)
         end
@@ -184,10 +208,10 @@ return {
         end
       end
 
-      -- Python (debugpy)
+      -- Python (debugpy — installed by mason)
       require("dap-python").setup("python3")
 
-      -- Lua (local)
+      -- Lua (local debugger)
       dap.adapters.nlua = function(callback, config)
         callback({ type = "server", host = "127.0.0.1", port = config.port or 8086 })
         local port = config.port or 8086
@@ -198,7 +222,6 @@ return {
           ))
         end
       end
-
       dap.configurations.lua = {
         {
           name = "Current File",
@@ -208,7 +231,7 @@ return {
         },
       }
 
-      -- JavaScript / TypeScript (Node.js)
+      -- JavaScript / TypeScript (js-debug-adapter — installed by mason)
       dap.adapters["pwa-node"] = {
         type = "server",
         host = "127.0.0.1",
@@ -218,7 +241,6 @@ return {
           args = { "${port}" },
         },
       }
-
       dap.adapters["pwa-chrome"] = {
         type = "server",
         host = "127.0.0.1",
@@ -228,7 +250,6 @@ return {
           args = { "${port}" },
         },
       }
-
       for _, lang in ipairs({ "javascript", "typescript" }) do
         dap.configurations[lang] = {
           {
@@ -249,13 +270,12 @@ return {
         }
       end
 
-      -- Shell / Bash (needs `bash-debug-adapter` in PATH)
+      -- Shell / Bash (bash-debug-adapter — installed by mason)
       dap.adapters.bash = {
         type = "executable",
         command = "bash-debug-adapter",
         args = { "0.0.0.0", "0" },
       }
-
       dap.configurations.sh = {
         {
           name = "Launch",
@@ -273,7 +293,7 @@ return {
       dap.configurations.zsh = dap.configurations.sh
       dap.configurations.bash = dap.configurations.sh
 
-      -- HTML / CSS — connect to local dev server
+      -- HTML / CSS — connect to local dev server via Chrome
       dap.configurations.html = {
         {
           name = "Launch Chrome",
@@ -296,7 +316,6 @@ return {
         DapLogPoint = { text = "󰛕", texthl = "DiagnosticSignInfo", linehl = "", numhl = "" },
         DapStopped = { text = "󰁕", texthl = "DiagnosticSignOk", linehl = "Visual", numhl = "DiagnosticSignOk" },
       }
-
       for name, sign in pairs(signs) do
         vim.fn.sign_define(name, sign)
       end

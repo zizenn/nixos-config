@@ -29,6 +29,7 @@ in
     "nvim/lua/plugins/gitsigns.lua".source = ./nvim/plugins/gitsigns.lua;
     "nvim/lua/plugins/todo-comments.lua".source = ./nvim/plugins/todo-comments.lua;
     "nvim/lua/plugins/toggleterm.lua".source = ./nvim/plugins/toggleterm.lua;
+    "nvim/lua/plugins/mason.lua".source = ./nvim/plugins/mason.lua;
     "nvim/lua/plugins/blink.lua".source = ./nvim/plugins/blink.lua;
     "nvim/lua/plugins/comment.lua".source = ./nvim/plugins/comment.lua;
     "nvim/lua/plugins/fidget.lua".source = ./nvim/plugins/fidget.lua;
