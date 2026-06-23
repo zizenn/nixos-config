@@ -41,12 +41,12 @@ return {
     },
     completion = {
       trigger = {
-        show_on_insert = true,
+        show_on_insert = false,
         show_on_trigger_character = true,
         show_on_backspace = true,
       },
       list = {
-        selection = { preselect = false, auto_insert = true },
+        selection = { preselect = false, auto_insert = false },
       },
       menu = {
         auto_show = true,
@@ -59,11 +59,9 @@ return {
       preset = "luasnip",
     },
     keymap = {
-      ["<Tab>"] = { "snippet_forward", "fallback" },
-      ["<S-Tab>"] = { "snippet_backward", "fallback" },
+      ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+      ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
       ["<CR>"] = { "accept", "fallback" },
-      ["<C-n>"] = { "select_next", "fallback" },
-      ["<C-p>"] = { "select_prev", "fallback" },
       ["<C-Space>"] = { "show", "fallback" },
       ["<C-e>"] = { "hide" },
       ["<C-b>"] = { "scroll_documentation_up" },
