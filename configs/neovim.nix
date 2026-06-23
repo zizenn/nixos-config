@@ -25,6 +25,7 @@ in
     "nvim/lua/plugins/whichkey.lua".source = ./nvim/plugins/whichkey.lua;
     "nvim/lua/plugins/lualine.lua".source = ./nvim/plugins/lualine.lua;
     "nvim/lua/plugins/bufferline.lua".source = ./nvim/plugins/bufferline.lua;
+    "nvim/lua/plugins/copilot.lua".source = ./nvim/plugins/copilot.lua;
     "nvim/lua/plugins/gitsigns.lua".source = ./nvim/plugins/gitsigns.lua;
     "nvim/lua/plugins/todo-comments.lua".source = ./nvim/plugins/todo-comments.lua;
     "nvim/lua/plugins/toggleterm.lua".source = ./nvim/plugins/toggleterm.lua;

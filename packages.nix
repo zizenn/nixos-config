@@ -9,6 +9,7 @@
   home.packages = with pkgs; [
     git
     neovim
+    nodejs
     zsh
     yazi
     fzf
