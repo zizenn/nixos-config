@@ -96,23 +96,32 @@ return {
         once = true,
         callback = function()
           if vim.fn.argc() > 0 then return end
-          vim.schedule(function()
-            -- Close any unnamed buffers (auto-created by neovim/plugins)
+          vim.defer_fn(function()
+            -- Delete all buffers except the alpha dashboard
+            local to_keep = {}
             for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-              if vim.bo[buf].filetype ~= "alpha" and vim.api.nvim_buf_get_name(buf) == "" then
+              if vim.bo[buf].filetype == "alpha" then
+                to_keep[#to_keep + 1] = buf
+              end
+            end
+            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+              local keep = false
+              for _, k in ipairs(to_keep) do
+                if buf == k then keep = true; break end
+              end
+              if not keep then
                 pcall(vim.api.nvim_buf_delete, buf, { force = true })
               end
             end
-            -- Switch to alpha dashboard
+            -- Switch to an alpha dashboard buffer (or recreate)
             for _, buf in ipairs(vim.api.nvim_list_bufs()) do
               if vim.bo[buf].filetype == "alpha" then
                 vim.api.nvim_set_current_buf(buf)
                 return
               end
             end
-            -- Recreate dashboard if buffer lost
             pcall(vim.cmd, "Alpha")
-          end)
+          end, 200)
         end,
       })
     end,
