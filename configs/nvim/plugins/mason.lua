@@ -18,7 +18,6 @@ return {
     dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
     opts = {
       ensure_installed = {
-        "clangd",
         "ts_ls",
         "html",
         "cssls",
@@ -31,7 +30,6 @@ return {
       handlers = {
         function(server_name)
           local servers = {
-            clangd = {},
             ts_ls = {},
             html = {},
             cssls = {},

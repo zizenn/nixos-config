@@ -18,6 +18,8 @@ return {
       json = { "prettier" },
       yaml = { "prettier" },
       markdown = { "prettier" },
+      c = { "clang-format" },
+      cpp = { "clang-format" },
     },
     format_on_save = {
       timeout_ms = 1000,

@@ -11,6 +11,8 @@ return {
       zsh = { "shellcheck" },
       javascript = { "eslint" },
       typescript = { "eslint" },
+      c = { "clangtidy" },
+      cpp = { "clangtidy" },
     }
 
     -- selene config: custom args for file-based config
