@@ -197,7 +197,7 @@ return {
 
       for _, lang in ipairs({ "c", "cpp" }) do
         dap.configurations[lang] = {}
-        for _, cfg in ipairs(make_c_configs("codelldb", "codelldb")) do
+        for _, cfg in ipairs(make_c_configs("lldb", "lldb")) do
           table.insert(dap.configurations[lang], cfg)
         end
         for _, cfg in ipairs(make_c_configs("gdb", "gdb")) do
