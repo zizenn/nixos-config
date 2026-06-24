@@ -1,4 +1,9 @@
-{ config, pkgs, libs, ... }:
+{
+  config,
+  pkgs,
+  libs,
+  ...
+}:
 
 {
   programs.zsh = {
@@ -12,7 +17,7 @@
     oh-my-zsh = {
       enable = true;
       theme = "";
-      plugins = [ "git" ]; 
+      plugins = [ "git" ];
     };
 
     # Your custom aliases
@@ -41,9 +46,10 @@
         fi
         typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-        unset ANTHROPIC_API_KEY
-        export ANTHROPIC_BASE_URL="http://localhost:11434"
-        export ANTHROPIC_AUTH_TOKEN="ollama"
+        # Claude Code environment variables (loads early to ensure they are set for all sessions)
+        export ANTHROPIC_API_KEY="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"
+        export ANTHROPIC_BASE_URL="https://openrouter.ai"
+
         export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
         export CLAUDE_CODE_ATTRIBUTION_HEADER="0"
       '')
