@@ -33,7 +33,10 @@ return {
       vim.lsp.enable("nixd")
       vim.lsp.enable("marksman")
 
-      -- Keymaps
+      -- Global keymap for diagnostics (works without LSP)
+      vim.keymap.set("n", "<leader>x", vim.diagnostic.open_float, { desc = "Show diagnostics" })
+
+      -- Keymaps on LspAttach
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
@@ -52,9 +55,8 @@ return {
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
           end
           
-          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-          vim.keymap.set("n", "<leader>x", vim.diagnostic.open_float, opts)
-          vim.keymap.set("n", "<leader>li", function()
+           vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+           vim.keymap.set("n", "<leader>li", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), { bufnr = ev.buf })
           end, opts)
           vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
