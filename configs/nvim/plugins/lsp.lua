@@ -53,7 +53,7 @@ return {
           end
           
           vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-          vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)  -- Changed from <leader>d
+          vim.keymap.set("n", "<leader>x", vim.diagnostic.open_float, opts)
           vim.keymap.set("n", "<leader>li", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), { bufnr = ev.buf })
           end, opts)
