@@ -5,15 +5,17 @@ return {
     config = function()
       -- clangd with compile_commands.json
       vim.lsp.config("clangd", {
-        cmd = { "clangd", "--compile-commands-dir=.", "--background-index", "--clang-tidy", "--header-insertion=iwyu" },
+        cmd = { "clangd", "--compile-commands-dir=.", "--background-index", "--clang-tidy", "--header-insertion=iwyu", "--query-driver=/nix/store/*/bin/g++" },
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
-        root_dir = function(fname)
-          return require("lspconfig.util").root_pattern(
-            "compile_commands.json",
-            "compile_flags.txt",
-            ".clangd",
-            ".git"
-          )(fname) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1]) or vim.fn.getcwd()
+        root_dir = function(bufnr, on_dir)
+          local fname = vim.api.nvim_buf_get_name(bufnr)
+          -- Find project root by looking for markers
+          local root = vim.fs.root(fname, { "compile_commands.json", "compile_flags.txt", ".clangd", ".git" })
+          if root then
+            on_dir(root)
+            return
+          end
+          on_dir(vim.fn.getcwd())
         end,
       })
 
