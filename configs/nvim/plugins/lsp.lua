@@ -3,14 +3,12 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = { "williamboman/mason-lspconfig.nvim" },
     config = function()
-      local lspconfig = require("lspconfig")
-
       -- clangd with compile_commands.json
-      lspconfig.clangd.setup({
+      vim.lsp.config("clangd", {
         cmd = { "clangd", "--compile-commands-dir=.", "--background-index", "--clang-tidy", "--header-insertion=iwyu" },
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
         root_dir = function(fname)
-          return lspconfig.util.root_pattern(
+          return require("lspconfig.util").root_pattern(
             "compile_commands.json",
             "compile_flags.txt",
             ".clangd",
@@ -20,7 +18,7 @@ return {
       })
 
       -- lua_ls
-      lspconfig.lua_ls.setup({
+      vim.lsp.config("lua_ls", {
         settings = {
           Lua = {
             runtime = { version = "LuaJIT" },
@@ -32,10 +30,16 @@ return {
       })
 
       -- nixd
-      lspconfig.nixd.setup({})
+      vim.lsp.config("nixd", {})
 
       -- marksman
-      lspconfig.marksman.setup({})
+      vim.lsp.config("marksman", {})
+
+      -- Enable all servers
+      vim.lsp.enable("clangd")
+      vim.lsp.enable("lua_ls")
+      vim.lsp.enable("nixd")
+      vim.lsp.enable("marksman")
 
       -- Global keymap for diagnostics
       vim.keymap.set("n", "<leader>x", vim.diagnostic.open_float, { desc = "Show diagnostics" })
