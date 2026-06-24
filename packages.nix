@@ -65,5 +65,6 @@
     gdb
     cmake
     discordo
+  nodejs_26
 ];
 }
