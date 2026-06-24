@@ -39,7 +39,6 @@ in
     "nvim/lua/plugins/mini.lua".source = ./nvim/plugins/mini.lua;
     "nvim/lua/plugins/flash.lua".source = ./nvim/plugins/flash.lua;
     "nvim/lua/plugins/vimade.lua".source = ./nvim/plugins/vimade.lua;
-    "nvim/lua/plugins/autosave.lua".source = ./nvim/plugins/autosave.lua;
     "nvim/lua/plugins/remember.lua".source = ./nvim/plugins/remember.lua;
     "nvim/lua/plugins/scrolleof.lua".source = ./nvim/plugins/scrolleof.lua;
   };

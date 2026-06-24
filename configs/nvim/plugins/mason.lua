@@ -27,34 +27,7 @@ return {
         "jsonls",
         "yamlls",
       },
-      handlers = {
-        function(server_name)
-          local servers = {
-            ts_ls = {},
-            html = {},
-            cssls = {},
-            jsonls = {},
-            yamlls = {},
-            bashls = {},
-            pyright = {},
-            marksman = {},
-            nixd = {},
-            lua_ls = {
-              settings = {
-                Lua = {
-                  runtime = { version = "LuaJIT" },
-                  diagnostics = { globals = { "vim" } },
-                  workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
-                  telemetry = { enable = false },
-                },
-              },
-            },
-          }
-          local config = servers[server_name] or {}
-          local ok, _ = pcall(vim.lsp.config, server_name, config)
-          if ok then pcall(vim.lsp.enable, server_name) end
-        end,
-      },
+      automatic_installation = true,
     },
   },
   {
