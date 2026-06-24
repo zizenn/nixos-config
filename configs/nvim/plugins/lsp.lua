@@ -3,22 +3,24 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = { "williamboman/mason-lspconfig.nvim" },
     config = function()
-      -- Configure clangd with compile_commands.json support
-      vim.lsp.config("clangd", {
+      local lspconfig = require("lspconfig")
+
+      -- clangd with compile_commands.json
+      lspconfig.clangd.setup({
         cmd = { "clangd", "--compile-commands-dir=.", "--background-index", "--clang-tidy", "--header-insertion=iwyu" },
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
         root_dir = function(fname)
-          return require("lspconfig.util").root_pattern(
-            "compile_commands.json", 
-            "compile_flags.txt", 
+          return lspconfig.util.root_pattern(
+            "compile_commands.json",
+            "compile_flags.txt",
             ".clangd",
             ".git"
           )(fname) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1]) or vim.fn.getcwd()
         end,
       })
 
-      -- Other servers configured via mason-lspconfig
-      vim.lsp.config("lua_ls", {
+      -- lua_ls
+      lspconfig.lua_ls.setup({
         settings = {
           Lua = {
             runtime = { version = "LuaJIT" },
@@ -29,16 +31,13 @@ return {
         },
       })
 
-      vim.lsp.config("nixd", {})
-      vim.lsp.config("marksman", {})
+      -- nixd
+      lspconfig.nixd.setup({})
 
-      -- Enable all servers
-      vim.lsp.enable("clangd")
-      vim.lsp.enable("lua_ls")
-      vim.lsp.enable("nixd")
-      vim.lsp.enable("marksman")
+      -- marksman
+      lspconfig.marksman.setup({})
 
-      -- Global keymap for diagnostics (works without LSP)
+      -- Global keymap for diagnostics
       vim.keymap.set("n", "<leader>x", vim.diagnostic.open_float, { desc = "Show diagnostics" })
 
       -- Keymaps on LspAttach
@@ -48,7 +47,6 @@ return {
           local opts = { buffer = ev.buf }
           local client = vim.lsp.get_client_by_id(ev.data.client_id)
           
-          -- Check if client supports code actions
           local has_code_action = client and client.server_capabilities and client.server_capabilities.codeActionProvider
           
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -60,8 +58,8 @@ return {
             vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
           end
           
-           vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-           vim.keymap.set("n", "<leader>li", function()
+          vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+          vim.keymap.set("n", "<leader>li", function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), { bufnr = ev.buf })
           end, opts)
           vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
