@@ -19,6 +19,7 @@
     mako
     ripgrep
     python3
+    python3Packages.pylint
     ntfs3g
     gcc
     clang-tools
@@ -66,5 +67,6 @@
     cmake
     discordo
     claude-code-router
-];
+    eslint_d
+  ];
 }

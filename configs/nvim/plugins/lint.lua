@@ -9,8 +9,8 @@ return {
       python = { "pylint" },
       sh = { "shellcheck" },
       zsh = { "shellcheck" },
-      javascript = { "eslint" },
-      typescript = { "eslint" },
+      javascript = { "eslint_d" },
+      typescript = { "eslint_d" },
       c = { "clangtidy" },
       cpp = { "clangtidy" },
     }
