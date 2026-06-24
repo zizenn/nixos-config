@@ -8,7 +8,12 @@ return {
         cmd = { "clangd", "--compile-commands-dir=.", "--background-index", "--clang-tidy", "--header-insertion=iwyu" },
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
         root_dir = function(fname)
-          return require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt", ".git")(fname) or vim.fn.getcwd()
+          return require("lspconfig.util").root_pattern(
+            "compile_commands.json", 
+            "compile_flags.txt", 
+            ".clangd",
+            ".git"
+          )(fname) or vim.fs.dirname(vim.fs.find(".git", { path = fname, upward = true })[1]) or vim.fn.getcwd()
         end,
       })
 
