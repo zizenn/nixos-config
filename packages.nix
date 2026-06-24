@@ -9,7 +9,7 @@
   home.packages = with pkgs; [
     git
     neovim
-    nodejs
+    nodejs_26
     zsh
     yazi
     fzf
@@ -65,6 +65,6 @@
     gdb
     cmake
     discordo
-  nodejs_26
+    claude-code-router
 ];
 }
