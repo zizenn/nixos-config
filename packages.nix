@@ -69,5 +69,6 @@
     claude-code-router
     eslint_d
     impala
+  iwd
 ];
 }
