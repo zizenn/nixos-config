@@ -32,6 +32,7 @@
       lg = "lazygit";
       cat = "bat";
       v = "nvim";
+      oc = "opencode";
     };
 
     # Fixed: Merged all shell configurations into the modern initContent system
