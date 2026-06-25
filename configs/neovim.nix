@@ -33,6 +33,7 @@ in
     "nvim/lua/plugins/blink.lua".source = ./nvim/plugins/blink.lua;
     "nvim/lua/plugins/comment.lua".source = ./nvim/plugins/comment.lua;
     "nvim/lua/plugins/fidget.lua".source = ./nvim/plugins/fidget.lua;
+    "nvim/lua/plugins/telekasten.lua".source = ./nvim/plugins/telekasten.lua;
 
     "nvim/lua/plugins/conform.lua".source = ./nvim/plugins/conform.lua;
     "nvim/lua/plugins/lint.lua".source = ./nvim/plugins/lint.lua;

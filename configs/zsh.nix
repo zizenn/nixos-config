@@ -46,12 +46,6 @@
         fi
         typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-        # Claude Code environment variables (loads early to ensure they are set for all sessions)
-        export ANTHROPIC_API_KEY="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"
-        export ANTHROPIC_BASE_URL="https://openrouter.ai"
-
-        export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
-        export CLAUDE_CODE_ATTRIBUTION_HEADER="0"
       '')
 
       # Standard priority (loads last) for functions, binds, and paths
@@ -66,26 +60,26 @@
         }
 
         # my custom rm function to work with fzf currently disabled cuz it messes with stuff
-        # rm() {
-        #   # Check if -r or --recursive was passed as the first argument
-        #   if [[ "$1" == "-r" || "$1" == "--recursive" ]]; then
-        #     # Find directories only, exclude hidden ones, and pass to fzf
-        #     # Press TAB to select multiple folders, then Enter to delete
-        #     local targets=$(find . -maxdepth 1 -type d ! -path '.' ! -path '*/.*' | fzf -m --prompt="Select directories to delete: ")
-        #     
-        #     if [ -n "$targets" ]; then
-        #       # Echo the choices first so you see what is happening
-        #       echo "$targets" | xargs -I {} rm -r "{}"
-        #     fi
-        #   else
-        #     # Find files only (no directories, no hidden files)
-        #     local targets=$(find . -maxdepth 1 -type f ! -path '*/.*' | fzf -m --prompt="Select files to delete: ")
-        #     
-        #     if [ -n "$targets" ]; then
-        #       echo "$targets" | xargs -I {} rm "{}"
-        #     fi
-        #   fi
-        # }
+        remove() {
+          # Check if -r or --recursive was passed as the first argument
+          if [[ "$1" == "-r" || "$1" == "--recursive" ]]; then
+            # Find directories only, exclude hidden ones, and pass to fzf
+            # Press TAB to select multiple folders, then Enter to delete
+            local targets=$(find . -maxdepth 1 -type d ! -path '.' ! -path '*/.*' | fzf -m --prompt="Select directories to delete: ")
+            
+            if [ -n "$targets" ]; then
+              # Echo the choices first so you see what is happening
+              echo "$targets" | xargs -I {} rm -r "{}"
+            fi
+          else
+            # Find files only (no directories, no hidden files)
+            local targets=$(find . -maxdepth 1 -type f ! -path '*/.*' | fzf -m --prompt="Select files to delete: ")
+            
+            if [ -n "$targets" ]; then
+              echo "$targets" | xargs -I {} rm "{}"
+            fi
+          fi
+        }
 
         # OMZ settings (Vi Mode & KeyTimeout)
         bindkey -v
@@ -97,7 +91,7 @@
         # Environment Paths
         export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
         export PATH="$HOME/.local/bin/git-fuzzy/bin:$PATH"
-        export NVM_DIR="$HOME/.nvm"
+        export MANPAGER="sh -c 'col -bx | bat -l man -p'";
         export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
         [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
