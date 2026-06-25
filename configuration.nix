@@ -36,6 +36,10 @@
   hardware.bluetooth.powerOnBoot = true;
 
   # networking.firewall.enable = false; # disable firewall
+  networking.firewall.allowedTCPPorts = [
+    9000
+    9001
+  ];
 
   # --- Graphics (AMD Optimized) ---
   hardware.graphics = {
