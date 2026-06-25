@@ -70,5 +70,6 @@
     eslint_d
     impala
   iwd
+  catimg
 ];
 }
