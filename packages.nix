@@ -71,5 +71,6 @@
     impala
   iwd
   catimg
+  zsh-fzf-tab
 ];
 }
