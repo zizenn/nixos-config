@@ -8,17 +8,33 @@
 {
   programs.zsh = {
     enable = true;
+    enableCompletion = true; # Tells Home Manager to manage completion hooks cleanly
 
-    # Fixed: Updated to the new option name
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    # Oh My Zsh settings
     oh-my-zsh = {
       enable = true;
       theme = "";
       plugins = [ "git" ];
     };
+
+    # 1. Nicer native autocomplete options (Arrow keys + Case-insensitive fuzzy matching)
+    completionInit = ''
+      zstyle ':completion:*' menu select
+      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+      zstyle ':completion:*' group-name ''
+      zstyle ':completion:*:descriptions' format '%F{green}-- %d --%f'
+    '';
+
+    # 2. Declaratively add the fzf-tab plugin
+    plugins = [
+      {
+        name = "fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.plugin.zsh";
+      }
+    ];
 
     # Your custom aliases
     shellAliases = {
@@ -105,3 +121,4 @@
     ];
   };
 }
+
