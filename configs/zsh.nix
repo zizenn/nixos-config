@@ -23,8 +23,8 @@
     completionInit = ''
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-      zstyle ':completion:*' group-name ''
-      zstyle ':completion:*:descriptions' format '%F{green}-- %d --%f'
+      zstyle ':completion:*' group-name ""
+      zstyle ':completion:*:descriptions' format "%F{green}-- %d --%f"
     '';
 
     # 2. Declaratively add the fzf-tab plugin
@@ -121,4 +121,3 @@
     ];
   };
 }
-
