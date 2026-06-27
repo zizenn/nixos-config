@@ -51,6 +51,12 @@
       oc = "opencode";
     };
 
+    profileExtra = ''
+      if uwsm check may-start; then
+        exec uwsm start hyprland-uwsm.desktop
+      fi
+    '';
+
     # Fixed: Merged all shell configurations into the modern initContent system
     initContent = pkgs.lib.mkMerge [
       # High priority (loads first) for Instant Prompt

@@ -50,7 +50,10 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # --- Desktop Environment & Portals ---
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+  };
 
   xdg.portal = {
     enable = true;

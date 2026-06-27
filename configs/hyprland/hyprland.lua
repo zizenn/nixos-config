@@ -31,13 +31,6 @@ local menu = "rofi -show drun"
 local bar = "waybar"
 
 --------------------------------------------------------------------------------
--- ENVIRONMENT VARIABLES
---------------------------------------------------------------------------------
-
-hl.env("XCURSOR_SIZE", "16")
-hl.env("HYPRCURSOR_SIZE", "16")
-
---------------------------------------------------------------------------------
 -- LOOK AND FEEL (Core Configuration Object)
 --------------------------------------------------------------------------------
 hl.config({
@@ -149,10 +142,7 @@ hl.gesture({
 })
 
 -- exit logic
-hl.bind(
-	mainMod .. " + M",
-	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
-)
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("uwsm stop"))
 
 -- Mouse Bindings
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
