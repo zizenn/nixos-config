@@ -1,85 +1,81 @@
 {
-  description = "Neovim configuration with lazy.nvim";
+  description = "Neovim configuration — packages for LSP, DAP, and tooling";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, neovim-nightly-overlay, ... }: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config = { allowUnfree = true; };
-      overlays = [ neovim-nightly-overlay.overlays.default ];
-    };
+  outputs =
+    { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        packages = {
+          # LSP servers
+          typescript-language-server = pkgs.typescript-language-server;
+          vscode-langservers-extracted = pkgs.vscode-langservers-extracted; # html, css, json
 
-    neovimPackages = with pkgs; [
-      # Core dependencies
-      nodejs_22
-      python3
-      python3Packages.pynvim
-      ripgrep
-      fd
-      fzf
-      unzip
-      curl
-      git
-      gnumake
-      cmake
-      gcc
-      clang-tools
-      lua-language-server
-      nil
-      python3Packages.ruff
-      python3Packages.black
-      stylua
-      prettier
-      prettierd
-      eslint_d
-      shfmt
-      gofumpt
-      rustfmt
-      nixfmt
-      hadolint
-      yamllint
-      shellcheck
-      golangci-lint
-      delve
-      bash-language-server
-      vscode-langservers-extracted
-      typescript-language-server
-      yaml-language-server
-      dockerfile-language-server-nodejs
-      marksman
-      vim-language-server
-      gopls
-      rust-analyzer
-      taplo
-    ];
+          # DAP adapters
+          js-debug-adapter = pkgs.vscode-js-debug;
+          debugpy = pkgs.python3Packages.debugpy;
 
-  in {
-    packages.${system} = {
-      default = pkgs.neovim.override {
-        vimAlias = true;
-        viAlias = true;
-        withNodeJs = false;
-        withPython3 = false;
-        withRuby = false;
-        extraPackages = neovimPackages;
-      };
-    };
+          # Formatters / linters
+          stylua = pkgs.stylua;
+          selene = pkgs.selene;
+          prettierd = pkgs.prettierd;
 
-    devShells.${system}.default = pkgs.mkShell {
-      buildInputs = neovimPackages;
-    };
+          # Wrapped neovim with everything baked in
+          neovim = pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped {
+            extraMakeWrapperArgs = ''--suffix PATH : ${pkgs.lib.makeBinPath [
+              self.packages.${system}.typescript-language-server
+              self.packages.${system}.vscode-langservers-extracted
+              self.packages.${system}.js-debug-adapter
+              self.packages.${system}.debugpy
+              self.packages.${system}.stylua
+              self.packages.${system}.selene
+              self.packages.${system}.prettierd
+              pkgs.clang-tools
+              pkgs.nixd
+              pkgs.lua-language-server
+              pkgs.pyright
+              pkgs.bash-language-server
+              pkgs.yaml-language-server
+              pkgs.marksman
+              pkgs.gdb
+              pkgs.lldb
+              pkgs.nodejs
+              pkgs.python3
+              pkgs.nixfmt-rfc-style
+              pkgs.shellcheck
+              pkgs.shfmt
+              pkgs.lazygit
+              pkgs.fzf
+              pkgs.ripgrep
+              pkgs.fd
+            ]}'';
 
-    apps.${system}.neovim = {
-      type = "app";
-      program = "${pkgs.neovim}/bin/nvim";
-    };
-  };
+            wrapperArgsStr = ''
+              --suffix NVIM_APPNAME : nvim
+            '';
+          };
+
+          default = self.packages.${system}.neovim;
+        };
+
+        devShells.default = pkgs.mkShell {
+          name = "neovim-config";
+          packages = builtins.attrValues self.packages.${system};
+          shellHook = ''
+            echo "󰢱  Neovim config dev shell"
+            echo "  stylua   — format Lua files"
+            echo "  selene   — lint Lua files"
+            echo "  prettierd — format JS/TS/CSS/HTML"
+          '';
+        };
+      }
+    );
 }
