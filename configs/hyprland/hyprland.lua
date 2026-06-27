@@ -27,7 +27,7 @@ hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
 -- AUTOSTART VARIABLES & EXECUTIONS
 --------------------------------------------------------------------------------
 local terminal = "kitty"
-local menu = "walker"
+local menu = "rofi -show drun"
 
 --------------------------------------------------------------------------------
 -- LOOK AND FEEL (Core Configuration Object)

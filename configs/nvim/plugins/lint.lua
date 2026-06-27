@@ -17,6 +17,7 @@ return {
 
     -- selene config: custom args for file-based config
     lint.linters.selene = {
+      cmd = "selene",
       args = { "--config", vim.fn.stdpath("config") .. "/.selene.toml" },
     }
 
