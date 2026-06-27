@@ -73,6 +73,5 @@
   catimg
   zsh-fzf-tab
   gh
-  proton-pass-cli
 ];
 }
