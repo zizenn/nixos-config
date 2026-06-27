@@ -38,7 +38,7 @@
 
     # Your custom aliases
     shellAliases = {
-      config = "cd ~/nixos";
+      conf = "cd ~/nixos";
       home = "nh home switch";
       os = "nh os switch";
       ls = "eza -1";
@@ -49,7 +49,6 @@
       cat = "bat";
       v = "nvim";
       oc = "opencode";
-      pass = "pass-cli"
     };
 
     # Fixed: Merged all shell configurations into the modern initContent system
