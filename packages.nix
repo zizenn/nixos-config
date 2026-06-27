@@ -72,5 +72,6 @@
   iwd
   catimg
   zsh-fzf-tab
+  gh
 ];
 }
