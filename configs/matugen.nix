@@ -32,6 +32,10 @@
       input_path = "~/.config/matugen/templates/zed-theme.json"
       output_path = ["~/.config/zed/themes/matugen.json"]
 
+      [templates.walker]
+      input_path = "~/.config/matugen/templates/walker.css"
+      output_path = ["~/.config/walker/themes/matugen/style.css"]
+
       [hooks]
       post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done"
     '';
@@ -355,6 +359,56 @@
 
           property color outline: Qt.alpha("{{colors.outline.default.hex}}", 0.20)
           property color outlineVariant: Qt.alpha("{{colors.outline_variant.default.hex}}", 0.10)
+      }
+    '';
+
+    "matugen/templates/walker.css".text = ''
+      * {
+        all: unset;
+        font-family: "JetBrainsMono Nerd Font", monospace;
+        font-size: 14px;
+      }
+
+      #window {
+        background-color: {{colors.surface.default.hex}};
+        color: {{colors.on_surface.default.hex}};
+        border-radius: 18px;
+        padding: 12px;
+        min-width: 480px;
+      }
+
+      #search {
+        background-color: {{colors.surface_variant.default.hex}};
+        color: {{colors.on_surface.default.hex}};
+        border-radius: 12px;
+        padding: 10px 14px;
+        margin-bottom: 8px;
+      }
+
+      #search:focus {
+        outline: 2px solid {{colors.primary.default.hex}};
+      }
+
+      .item {
+        background-color: transparent;
+        color: {{colors.on_surface.default.hex}};
+        border-radius: 10px;
+        padding: 8px 12px;
+      }
+
+      .item:hover,
+      .item:selected {
+        background-color: {{colors.surface_variant.default.hex}};
+        color: {{colors.on_surface.default.hex}};
+      }
+
+      .item .label {
+        color: {{colors.on_surface.default.hex}};
+      }
+
+      .item .sub {
+        color: {{colors.on_surface_variant.default.hex}};
+        font-size: 12px;
       }
     '';
   };
