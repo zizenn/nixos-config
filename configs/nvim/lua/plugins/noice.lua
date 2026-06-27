@@ -14,7 +14,7 @@ return {
           ["cmp.entry.get_documentation"] = true,
         },
         hover = { enabled = true },
-        signature = { enabled = { enabled = true },
+        signature = { enabled = true },
       },
       routes = {
         {
