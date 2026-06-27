@@ -1,7 +1,14 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
+    inputs.walker.homeManagerModules.default
+    ./configs/walker.nix
     ./configs/zsh.nix
     ./configs/kitty.nix
     ./configs/hyprland.nix

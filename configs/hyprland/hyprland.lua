@@ -27,8 +27,7 @@ hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
 -- AUTOSTART VARIABLES & EXECUTIONS
 --------------------------------------------------------------------------------
 local terminal = "kitty"
-local menu = "rofi -show drun"
-local bar = "waybar"
+local menu = "walker"
 
 --------------------------------------------------------------------------------
 -- LOOK AND FEEL (Core Configuration Object)
@@ -98,8 +97,7 @@ local mainMod = "SUPER"
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + G", hl.dsp.window.float({ action = "toggle" }))
-hl.bind("SUPER + Space", hl.dsp.exec_cmd(menu))
-hl.bind("ALT + Space", hl.dsp.exec_cmd("rofi -show drun"))
+hl.bind("ALT + Space", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = 0 }))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("~/.local/bin/wallselect"))
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("~/.local/bin/cliphist-rofi-img"))

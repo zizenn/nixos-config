@@ -17,36 +17,53 @@
       url = "path:./configs/nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    elephant.url = "github:abenz1267/elephant";
+    walker = {
+      url = "github:abenz1267/walker";
+      inputs.elephant.follows = "elephant";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, zen-browser, waylandar, neovim-config, ... }@inputs: {
-    nixosConfigurations = {
-      nix-port = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./configuration.nix
-        ];
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      zen-browser,
+      waylandar,
+      neovim-config,
+      elephant,
+      walker,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations = {
+        nix-port = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./configuration.nix
+          ];
+        };
       };
-    };
 
-    # This block enables "nh home switch" to work
-    homeConfigurations = {
-      "zizenn" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = { inherit inputs; };
-        modules = [
-          ./home.nix
-          {
-            home.username = "zizenn";
-            home.homeDirectory = "/home/zizenn";
-            home.stateVersion = "26.05"; 
-          }
-        ];
+      # This block enables "nh home switch" to work
+      homeConfigurations = {
+        "zizenn" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./home.nix
+            {
+              home.username = "zizenn";
+              home.homeDirectory = "/home/zizenn";
+              home.stateVersion = "26.05";
+            }
+          ];
+        };
       };
-    };
 
-    # Expose neovim-config packages directly in this flake
-    packages = neovim-config.packages;
-  };
+      # Expose neovim-config packages directly in this flake
+      packages = neovim-config.packages;
+    };
 }
