@@ -4,10 +4,9 @@ return {
     event = "VeryLazy",
     dependencies = { "nvim-web-devicons" },
     opts = function()
-      local theme = require("config.theme")
       local colors = {}
-      local json = vim.fn.readfile(vim.fn.expand("~/.cache/matugen/colors.json"))
-      if json then
+      local json = vim.fn.readfile(vim.fn.expand("~/.cache/matugen/colors.json"), "b")
+      if json and #json > 0 then
         local content = table.concat(json, "")
         local function extract(key)
           return content:match('"' .. key .. '":%s*"(#%x+)"')

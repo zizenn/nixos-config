@@ -31,7 +31,6 @@ return {
     version = "*",
     event = "VeryLazy",
     opts = {
-      keymaps = { insert = "<C-g>s", insert_line = "<C-g>S", normal = "ys", normal_cur = "yss", normal_line = "yS", normal_cur_line = "ySS", visual = "S", visual_line = "gS", delete = "ds", change = "cs", change_line = "cS" },
       aliases = { ["a"] = ">", ["b"] = ")", ["B"] = "}", ["r"] = "]", ["q"] = { '"', "'", "`" }, ["s"] = { "}", "]", ")", ">", '"', "'", "`" } },
       highlight = { duration = 300 },
       move_cursor = "begin",
@@ -87,6 +86,7 @@ return {
         hint = { "DiagnosticHint", "#89dceb" },
         default = { "Identifier", "#cdd6f4" },
         test = { "Identifier", "#cba6f7" },
+        perf = { "DiagnosticInfo", "#89b4fa" },
       },
       search = { command = "rg", args = { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column" }, pattern = [[\b(KEYWORDS):]], },
     },
