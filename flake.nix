@@ -13,10 +13,6 @@
       url = "github:samjoshuadud/waylandar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim-config = {
-      url = "path:./configs/nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     elephant.url = "github:abenz1267/elephant";
     walker = {
       url = "github:abenz1267/walker";
@@ -31,7 +27,6 @@
       home-manager,
       zen-browser,
       waylandar,
-      neovim-config,
       elephant,
       walker,
       ...
@@ -49,7 +44,7 @@
 
       # This block enables "nh home switch" to work
       homeConfigurations = {
-        "zizenn" = home-manager.lib.homeManagerConfiguration {
+        "zizenn@nix-port" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs; };
           modules = [
@@ -62,8 +57,5 @@
           ];
         };
       };
-
-      # Expose neovim-config packages directly in this flake
-      packages = neovim-config.packages;
     };
 }
