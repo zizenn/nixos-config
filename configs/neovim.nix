@@ -1,47 +1,75 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  theme = "matugen";
+  # Path to your lua config directory (relative to this file)
+  luaConfigDir = ./nvim;
+
+  # Auto-discover all .lua files in a given directory (recursive)
+  luaFilesIn =
+    dir:
+    let
+      entries = builtins.readDir dir;
+      luaFiles = lib.filterAttrs (name: type: type == "regular" && lib.hasSuffix ".lua" name) entries;
+      subdirs = lib.filterAttrs (name: type: type == "directory") entries;
+      recurse = lib.mapAttrs' (name: _: luaFilesIn (dir + "/${name}")) subdirs;
+    in
+    lib.mergeEqualOption luaFiles (lib.concatMap (x: x) (builtins.attrValues recurse));
+
+  # Build xdg.configFile entries for every .lua file in a directory
+  # targetDir is the destination path inside ~/.config/nvim/
+  luaConfigEntries =
+    sourceDir: targetDir:
+    let
+      files = luaFilesIn sourceDir;
+    in
+    lib.mapAttrs' (
+      name: _: lib.nameValuePair "nvim/${targetDir}/${name}" { source = sourceDir + "/${name}"; }
+    ) files;
+
 in
 {
-  xdg.configFile = {
-    "nvim/.stylua.toml".source = ./nvim/.stylua.toml;
-    "nvim/.selene.toml".source = ./nvim/.selene.toml;
-    "nvim/init.lua".source = ./nvim/init.lua;
+  imports = [ ./packages.nix ];
 
-    "nvim/lua/matugen/init.lua".source = ./nvim/lua/matugen/init.lua;
-    "nvim/lua/kanagawa-dragon/init.lua".source = ./nvim/lua/kanagawa-dragon/init.lua;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
 
-    "nvim/lua/plugins/theme.lua".source = ./nvim/plugins/theme.lua;
-    "nvim/colors/matugen.lua".source = ./nvim/colors/matugen.lua;
+    withNodeJs = false;
+    withPython3 = false;
+    withRuby = false;
 
-    "nvim/lua/plugins/lsp.lua".source = ./nvim/plugins/lsp.lua;
-    "nvim/lua/plugins/dap.lua".source = ./nvim/plugins/dap.lua;
-    "nvim/lua/plugins/noice.lua".source = ./nvim/plugins/noice.lua;
-    "nvim/lua/plugins/dashboard.lua".source = ./nvim/plugins/dashboard.lua;
-    "nvim/lua/plugins/telescope.lua".source = ./nvim/plugins/telescope.lua;
-    "nvim/lua/plugins/neotree.lua".source = ./nvim/plugins/neotree.lua;
-    "nvim/lua/plugins/treesitter.lua".source = ./nvim/plugins/treesitter.lua;
-    "nvim/lua/plugins/whichkey.lua".source = ./nvim/plugins/whichkey.lua;
-    "nvim/lua/plugins/lualine.lua".source = ./nvim/plugins/lualine.lua;
-    "nvim/lua/plugins/bufferline.lua".source = ./nvim/plugins/bufferline.lua;
-    "nvim/lua/plugins/copilot.lua".source = ./nvim/plugins/copilot.lua;
-    "nvim/lua/plugins/gitsigns.lua".source = ./nvim/plugins/gitsigns.lua;
-    "nvim/lua/plugins/todo-comments.lua".source = ./nvim/plugins/todo-comments.lua;
-    "nvim/lua/plugins/toggleterm.lua".source = ./nvim/plugins/toggleterm.lua;
-    "nvim/lua/plugins/mason.lua".source = ./nvim/plugins/mason.lua;
-    "nvim/lua/plugins/blink.lua".source = ./nvim/plugins/blink.lua;
-    "nvim/lua/plugins/comment.lua".source = ./nvim/plugins/comment.lua;
-    "nvim/lua/plugins/fidget.lua".source = ./nvim/plugins/fidget.lua;
-    "nvim/lua/plugins/telekasten.lua".source = ./nvim/plugins/telekasten.lua;
-    "nvim/lua/plugins/markdown-preview.lua".source = ./nvim/plugins/markdown-preview.lua;
+    # LSP servers and tools installed via nix (not mason)
+    extraPackages = with pkgs; [
+      # LSPs
+      clang-tools
+      lua-language-server
+      nil
 
-    "nvim/lua/plugins/conform.lua".source = ./nvim/plugins/conform.lua;
-    "nvim/lua/plugins/lint.lua".source = ./nvim/plugins/lint.lua;
-    "nvim/lua/plugins/mini.lua".source = ./nvim/plugins/mini.lua;
-    "nvim/lua/plugins/flash.lua".source = ./nvim/plugins/flash.lua;
-    "nvim/lua/plugins/vimade.lua".source = ./nvim/plugins/vimade.lua;
-    "nvim/lua/plugins/remember.lua".source = ./nvim/plugins/remember.lua;
-    "nvim/lua/plugins/scrolleof.lua".source = ./nvim/plugins/scrolleof.lua;
+      # Formatters
+      stylua
+
+      # Debug
+      lldb
+
+      # Telescope dependencies
+      ripgrep
+      fd
+      fzf
+    ];
   };
+
+  xdg.configFile = lib.mkMerge [
+    # Main init.lua
+    {
+      "nvim/init.lua".source = luaConfigDir + "/init.lua";
+    }
+
+    # Config files
+    (luaConfigEntries (luaConfigDir + "/lua/config") "lua/config")
+
+    # Auto-discover plugin configs
+    (luaConfigEntries (luaConfigDir + "/lua/plugins") "lua/plugins")
+  ];
 }

@@ -1,4 +1,4 @@
--- Bootstrap lazy.nvim
+-- Lazy.nvim bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -12,27 +12,26 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Leader keys
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
--- Core options
-require("config.options")
-require("config.keymaps")
-require("config.autocmds")
-
--- Load theme (matugen colors)
-require("config.theme")
-
--- Setup plugins
-require("lazy").setup("plugins", {
+-- Lazy.nvim setup
+require("lazy").setup({
+  spec = {
+    { import = "plugins" },
+  },
   defaults = {
     lazy = true,
     version = "*",
   },
-  install = { colorscheme = { "matugen" } },
-  checker = { enabled = true, notify = false },
-  change_detection = { notify = false },
+  install = {
+    colorscheme = { "matugen", "tokyonight" },
+  },
+  checker = {
+    enabled = true,
+    notify = false,
+  },
+  change_detection = {
+    enabled = true,
+    notify = false,
+  },
   performance = {
     rtp = {
       disabled_plugins = {
@@ -49,6 +48,9 @@ require("lazy").setup("plugins", {
   },
   ui = {
     border = "rounded",
-    backdrop = 80,
+    backdrop = 60,
+    title = " Lazy ",
+    title_pos = "center",
+    pills = true,
   },
 })
