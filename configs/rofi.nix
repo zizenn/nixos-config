@@ -9,7 +9,7 @@
 {
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    package = pkgs.rofi;
 
     extraConfig = {
       drun-launch = "uwsm app -- {cmd}";
