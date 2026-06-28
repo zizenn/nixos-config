@@ -112,12 +112,13 @@
         source <(fzf --zsh)
 
         # Environment Paths
-        export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
-        export PATH="$HOME/.local/bin/git-fuzzy/bin:$PATH"
+        export PATH="$HOME/.local/bin:$PATH"
+        export EDITOR="nvim"
+        export SUDO_EDITOR="nvim"
+        export VISUAL="nvim"
+
         export MANPAGER="sh -c 'col -bx | bat -l man -p'";
         export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
-        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
         # Runtime styling theme setup
         eval "$(devenv hook zsh)"
