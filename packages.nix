@@ -74,5 +74,6 @@
     zsh-fzf-tab
     gh
     inputs.herdr.packages.${pkgs.system}.default
-  ];
+    obsidian
+];
 }
