@@ -67,7 +67,6 @@
     discordo
     claude-code-router
     eslint_d
-    impala
     iwd
     catimg
     zsh-fzf-tab
