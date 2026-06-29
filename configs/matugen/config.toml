@@ -1,0 +1,35 @@
+[config]
+mode = "dark"
+type = "scheme-tonal-spot"
+contrast = 0.0
+
+[templates.kitty]
+input_path = "~/.config/matugen/templates/kitty.conf"
+output_path = ["~/.config/kitty/current-colors.conf"]
+
+[templates.neovim]
+input_path = "~/.config/matugen/templates/nvim-colors.lua"
+output_path = ["~/.config/nvim/lua/matugen/colors.lua"]
+
+[templates.quickshell]
+input_path = "~/.config/matugen/templates/quickshell-colors.json"
+output_path = ["~/.config/quickshell/colors.json"]
+
+[templates.rofi]
+input_path = "~/.config/matugen/templates/rofi-colors.rasi"
+output_path = ["~/.config/rofi/colors.rasi"]
+
+[templates.waylandar]
+input_path = "~/.config/matugen/templates/waylandar-theme.qml"
+output_path = ["~/.config/waylandar/frontend/Theme.qml"]
+
+[templates.zed]
+input_path = "~/.config/matugen/templates/zed-theme.json"
+output_path = ["~/.config/zed/themes/matugen.json"]
+
+[templates.obsidian]
+input_path = "~/.config/matugen/templates/obsidian.css"
+output_path = ["~/Documents/vault/.obsidian/snippets/matugen.css"]
+
+[hooks]
+post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done"
