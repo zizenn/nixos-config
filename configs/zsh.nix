@@ -62,20 +62,19 @@
     '';
 
     initContent = pkgs.lib.mkMerge [
-      # High priority (loads first) for Powerlevel10k Instant Prompt
-      (pkgs.lib.mkOrder 550 ''
-        # Powerlevel10k instant prompt must be evaluated BEFORE any other script sources
+      # FIXED: Uses mkBefore to place the Instant Prompt at the absolute top of .zshrc safely
+      (pkgs.lib.mkBefore ''
         if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
         typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-
-        # Load P10K Theme script
-        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       '')
 
-      # Standard priority (loads last) for functions, binds, and paths
+      # Standard priority (loads last) for themes, functions, binds, and paths
       (pkgs.lib.mkOrder 1000 ''
+        # Load P10K Theme script
+        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+
         # Yazi cwd shell wrapper
         function y() {
         	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -107,7 +106,7 @@
         # Sources & extra integrations
         source <(fzf --zsh)
 
-        # Environment Paths (Kept here because it appends to existing state)
+        # Environment Paths
         export PATH="$HOME/.local/bin:$PATH"
 
         # Runtime styling theme setup
