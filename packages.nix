@@ -78,5 +78,6 @@
   wttrbar
   wlogout
   bluetui
+  wiremix
 ];
 }
