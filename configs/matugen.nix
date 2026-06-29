@@ -10,6 +10,5 @@
     "matugen/templates/zed-theme.json".source = ./matugen/templates/zed.json;
     "matugen/templates/kitty.conf".source = ./matugen/templates/kitty.conf;
     "matugen/templates/waylandar-theme.qml".source = ./matugen/templates/waylandar.qml;
-    "matugen/templates/obsidian.css".source = ./matugen/templates/obsidian.css;
   };
 }
