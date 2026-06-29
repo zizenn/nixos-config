@@ -76,5 +76,6 @@
     obsidian
   cava
   wttrbar
+  wlogout
 ];
 }
