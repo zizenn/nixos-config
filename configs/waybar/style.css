@@ -10,10 +10,11 @@
 
 window#waybar {
   background-color: transparent;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
-
-#waybar>box {
+#waybar > box {
   margin: 2px 5px 2px 5px;
   padding: 0px 0px;
   min-height: 32px;
@@ -90,10 +91,7 @@ button:hover {
   border-radius: 99px;
 }
 
-
 #tray,
-#idle_inhibitor,
-#cpu,
 #clock,
 #battery,
 #backlight,
@@ -102,10 +100,7 @@ button:hover {
 #pulseaudio,
 #custom-expand-icon,
 #custom-weather,
-#custom-updatespacman,
-#custom-screenrecording-indicator,
-#custom-update,
-#custom-omarchy {
+#custom-power {
   min-width: 12px;
   color: @fg;
   opacity: 1;
@@ -113,19 +108,11 @@ button:hover {
   margin: 0px 2px 0px 2px;
 }
 
-#custom-omarchy {
+#custom-power {
   color: @red;
   font-size: 14px;
   padding: 0px 4px 0px 0px;
   margin: 0 4px;
-}
-
-#idle_inhibitor.deactivated {
-  color: alpha(@fg, 0.4);
-}
-
-#idle_inhibitor.activated {
-  color: @red;
 }
 
 #custom-expand-icon {
@@ -157,32 +144,6 @@ button:hover {
   color: #25e712;
 }
 
-#custom-voxtype,
-#custom-update,
-#custom-screenrecording-indicator,
-#custom-idle-indicator,
-#custom-notification-silencing-indicator {
-  font-size: 12px;
-  padding: 0 3px 0 3px;
-  margin: 0 0 0 2.5px;
-}
-
-/* No gap from inactive indicators: collapse them when empty */
-#custom-idle-indicator.empty,
-#custom-notification-silencing-indicator.empty,
-#custom-screenrecording-indicator.empty {
-  margin: 0;
-  padding: 0;
-  min-width: 0;
-}
-
-#custom-voxtype.recording,
-#custom-idle-indicator.active,
-#custom-notification-silencing-indicator.active {
-  color: #a55555;
-  opacity: 1;
-}
-
 .hidden {
   opacity: 0;
 }
@@ -193,14 +154,12 @@ tooltip {
   font-size: 10px;
   border: 1px solid alpha(@fg, 0.2);
   border-radius: 6px;
-
 }
 
 tooltip label {
   color: alpha(@fg, 1);
   font-weight: normal;
 }
-
 
 #custom-separator {
   opacity: 0.2;
@@ -220,27 +179,6 @@ tooltip label {
   padding: 0 4px;
 }
 
-/* Specific animation Module */
-
-#custom-screenrecording-indicator {
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  color: transparent;
-}
-
-#custom-screenrecording-indicator.active {
-  color: #eb7087;
-  animation-name: blink-recording;
-  animation-duration: 0.5s;
-}
-
-@keyframes blink-recording {
-  to {
-    color: @bg;
-  }
-}
-
 #custom-mpris {
   margin: 5px 4px;
   padding: 0 12px;
@@ -249,8 +187,6 @@ tooltip label {
   opacity: 1;
   color: @fg;
 }
-
-
 
 @keyframes text-glow {
   from {
@@ -263,7 +199,6 @@ tooltip label {
     /* Your custom accent color */
   }
 }
-
 
 #network.disconnected,
 #battery.warning {

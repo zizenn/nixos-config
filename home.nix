@@ -13,6 +13,7 @@
     ./configs/hyprland.nix
     ./configs/matugen.nix
     ./configs/wallpaper.nix
+    ./configs/waybar.nix
     ./configs/neovim.nix
     ./configs/quickshell.nix
     ./configs/zed.nix

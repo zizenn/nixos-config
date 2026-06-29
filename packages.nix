@@ -58,25 +58,21 @@
     uv
     stylua
     selene
-    prettierd
     pkgs.nixfmt
     shellcheck
     shfmt
     gdb
     cmake
-    discordo
-    claude-code-router
-    eslint_d
-    iwd
     catimg
     zsh-fzf-tab
     gh
     inputs.herdr.packages.${pkgs.system}.default
     obsidian
-  cava
-  wttrbar
-  wlogout
-  bluetui
-  wiremix
-];
+    cava
+    wttrbar
+    wlogout
+    bluetui
+    wiremix
+    inputs.wlctl.packages.${pkgs.system}.default
+  ];
 }

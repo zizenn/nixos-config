@@ -14,6 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     herdr.url = "github:ogulcancelik/herdr";
+    wlctl.url = "github:aashish-thapa/wlctl";
   };
 
   outputs =

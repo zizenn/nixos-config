@@ -111,19 +111,12 @@
       pkgs.vim
       pkgs.neovim
       pkgs.git
-      pkgs.htop
+      pkgs.btop
       pkgs.kitty
-      pkgs.tmux
       pkgs.eza
-      pkgs.bubblewrap
       pkgs.firefox
-      pkgs.shared-mime-info
       pkgs.glib
       pkgs.xdg-utils
-      pkgs.mailcap
-      pkgs.cacert
-      pkgs.nss
-      pkgs.cloudflare-warp
       # hyprland ecosystem
       pkgs.brightnessctl
       pkgs.playerctl
@@ -134,12 +127,9 @@
       pkgs.waybar
       pkgs.hyprpolkitagent
       pkgs.xdg-desktop-portal-hyprland
-      # more pkgs
-      pkgs.terminus_font
     ];
     sessionVariables = {
       LIBVA_DRIVER_NAME = "radeonsi";
-      SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
       NSS_SSL_CBC_RANDOM_IV = "0";
     };
   };
