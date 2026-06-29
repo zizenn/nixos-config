@@ -1,6 +1,6 @@
 [config]
 mode = "dark"
-type = "scheme-tonal-spot"
+type = "scheme-neutral"
 contrast = 0.0
 
 [templates.kitty]
@@ -26,10 +26,6 @@ output_path = ["~/.config/waylandar/frontend/Theme.qml"]
 [templates.zed]
 input_path = "~/.config/matugen/templates/zed-theme.json"
 output_path = ["~/.config/zed/themes/matugen.json"]
-
-[templates.obsidian]
-input_path = "~/.config/matugen/templates/obsidian.css"
-output_path = ["~/Documents/vault/.obsidian/snippets/matugen.css"]
 
 [hooks]
 post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done"
