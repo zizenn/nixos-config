@@ -8,15 +8,18 @@
 {
   programs.zsh = {
     enable = true;
-    enableCompletion = true; # Tells Home Manager to manage completion hooks cleanly
+    enableCompletion = true;
 
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    oh-my-zsh = {
-      enable = true;
-      theme = "";
-      plugins = [ "git" ];
+    # Dedicated attribute for environment variables
+    sessionVariables = {
+      EDITOR = "nvim";
+      SUDO_EDITOR = "nvim";
+      VISUAL = "nvim";
+      MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+      FZF_DEFAULT_COMMAND = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
     };
 
     # 1. Nicer native autocomplete options (Arrow keys + Case-insensitive fuzzy matching)
@@ -27,7 +30,7 @@
       zstyle ':completion:*:descriptions' format "%F{green}-- %d --%f"
     '';
 
-    # 2. Declaratively add the fzf-tab plugin
+    # 2. Declaratively add your Zsh plugins via Nix packages
     plugins = [
       {
         name = "fzf-tab";
@@ -49,6 +52,7 @@
       cat = "bat";
       v = "nvim";
       oc = "opencode";
+      sudo = "doas";
     };
 
     profileExtra = ''
@@ -57,18 +61,17 @@
       fi
     '';
 
-    # Fixed: Merged all shell configurations into the modern initContent system
     initContent = pkgs.lib.mkMerge [
-      # High priority (loads first) for Instant Prompt
+      # High priority (loads first) for Powerlevel10k Instant Prompt
       (pkgs.lib.mkOrder 550 ''
-        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-
-        # Powerlevel10k instant prompt (Must load first)
+        # Powerlevel10k instant prompt must be evaluated BEFORE any other script sources
         if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
           source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
         fi
         typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
+        # Load P10K Theme script
+        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       '')
 
       # Standard priority (loads last) for functions, binds, and paths
@@ -82,43 +85,30 @@
         	rm -f -- "$tmp"
         }
 
-        # my custom rm function to work with fzf currently disabled cuz it messes with stuff
+        # Custom rm function with fzf
         remove() {
-          # Check if -r or --recursive was passed as the first argument
           if [[ "$1" == "-r" || "$1" == "--recursive" ]]; then
-            # Find directories only, exclude hidden ones, and pass to fzf
-            # Press TAB to select multiple folders, then Enter to delete
             local targets=$(find . -maxdepth 1 -type d ! -path '.' ! -path '*/.*' | fzf -m --prompt="Select directories to delete: ")
-            
             if [ -n "$targets" ]; then
-              # Echo the choices first so you see what is happening
               echo "$targets" | xargs -I {} rm -r "{}"
             fi
           else
-            # Find files only (no directories, no hidden files)
             local targets=$(find . -maxdepth 1 -type f ! -path '*/.*' | fzf -m --prompt="Select files to delete: ")
-            
             if [ -n "$targets" ]; then
               echo "$targets" | xargs -I {} rm "{}"
             fi
           fi
         }
 
-        # OMZ settings (Vi Mode & KeyTimeout)
+        # Native Zsh Vi Mode & KeyTimeout
         bindkey -v
         export KEYTIMEOUT=1
 
         # Sources & extra integrations
         source <(fzf --zsh)
 
-        # Environment Paths
+        # Environment Paths (Kept here because it appends to existing state)
         export PATH="$HOME/.local/bin:$PATH"
-        export EDITOR="nvim"
-        export SUDO_EDITOR="nvim"
-        export VISUAL="nvim"
-
-        export MANPAGER="sh -c 'col -bx | bat -l man -p'";
-        export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
         # Runtime styling theme setup
         eval "$(devenv hook zsh)"

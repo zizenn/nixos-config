@@ -13,11 +13,7 @@
       url = "github:samjoshuadud/waylandar";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    elephant.url = "github:abenz1267/elephant";
-    walker = {
-      url = "github:abenz1267/walker";
-      inputs.elephant.follows = "elephant";
-    };
+    herdr.url = "github:ogulcancelik/herdr";
   };
 
   outputs =
@@ -27,8 +23,7 @@
       home-manager,
       zen-browser,
       waylandar,
-      elephant,
-      walker,
+      herdr,
       ...
     }@inputs:
     {

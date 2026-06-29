@@ -69,9 +69,10 @@
     claude-code-router
     eslint_d
     impala
-  iwd
-  catimg
-  zsh-fzf-tab
-  gh
-];
+    iwd
+    catimg
+    zsh-fzf-tab
+    gh
+    inputs.herdr.packages.${pkgs.system}.default
+  ];
 }

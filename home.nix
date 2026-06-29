@@ -7,7 +7,6 @@
 
 {
   imports = [
-    inputs.walker.homeManagerModules.default
     ./configs/rofi.nix
     ./configs/zsh.nix
     ./configs/kitty.nix

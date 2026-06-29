@@ -1,14 +1,10 @@
-# rofi.nix
 {
   config,
   pkgs,
-  inputs,
   ...
 }:
 
 {
-  home.packages = [ pkgs.rofi ];
-
   xdg.configFile."rofi/config.rasi" = {
     force = true;
     source = pkgs.writeText "rofi-config.rasi" ''
