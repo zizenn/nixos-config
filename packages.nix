@@ -76,5 +76,6 @@
     inputs.herdr.packages.${pkgs.system}.default
     obsidian
   cava
+  wttrbar
 ];
 }
