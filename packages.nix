@@ -13,7 +13,6 @@
     zsh
     yazi
     fzf
-    waybar
     matugen
     opencode
     mako
