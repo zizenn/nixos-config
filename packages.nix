@@ -77,5 +77,6 @@
   cava
   wttrbar
   wlogout
+  bluetui
 ];
 }
