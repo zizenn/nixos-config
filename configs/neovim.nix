@@ -7,12 +7,6 @@
     vimAlias = true;
 
     extraPackages = with pkgs; [
-      lua-language-server
-      nil               # nix lsp
-      clang-tools       # clangd, clang-format
-      pyright           # python lsp
-      vscode-langservers-extracted  # html, css, json lsp
-      typescript-language-server    # js/ts lsp
       ripgrep
       fd
       gcc
