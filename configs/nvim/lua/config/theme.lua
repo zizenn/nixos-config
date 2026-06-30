@@ -3,7 +3,7 @@
 local M = {}
 
 function M.apply()
-  local colors_path = vim.fn.expand("~/.cache/matugen/colors.lua")
+  local colors_path = vim.fn.expand("~/.cache/matugen/lua/colors.lua")
   if vim.fn.filereadable(colors_path) == 0 then
     vim.notify("matugen: colors.lua not found", vim.log.levels.WARN)
     return
