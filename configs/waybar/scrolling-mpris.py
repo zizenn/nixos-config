@@ -13,9 +13,7 @@ TEXT_WHEN_STOPPED = (
 )
 SCROLL_TEXT_LENGTH = 25  # Length of the song title part (excludes glyph and space)
 REFRESH_INTERVAL = 0.4  # How often the script updates (in seconds)
-PLAYERCTL_PATH = (
-    "/usr/bin/playerctl"  # Path to playerctl, use which playerctl to find yours.
-)
+PLAYERCTL_PATH = "/run/current-system/sw/bin/playerctl"  # Path to playerctl, use which playerctl to find yours.
 
 
 # Function to get player status using playerctl

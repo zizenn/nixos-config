@@ -1,27 +1,25 @@
 local terminal = "kitty"
-local menu = "wofi -n"
+local menu = "rofi -show drun"
 local bar = "quickshell -p /home/zizenn/.config/quickshell/shell.qml"
 
-hl.on("hyprland.start", function ()
+hl.on("hyprland.start", function()
+	-- wallpaper
+	hl.exec_cmd("awww-daemon")
 
-    -- wallpaper
-    hl.exec_cmd("awww-daemon")
+	-- hyprpolkitagent and pywal
+	hl.exec_cmd("matugen image ~/.wallpaper --source-color-index 0")
+	hl.exec_cmd("systemctl --user start hyprpolkitagent")
+	hl.exec_cmd("xhost +si:localuser:root")
 
-    -- hyprpolkitagent and pywal
-    hl.exec_cmd("matugen image ~/.wallpaper --source-color-index 0")
-    hl.exec_cmd("systemctl --user start hyprpolkitagent")
-    hl.exec_cmd("xhost +si:localuser:root")
+	-- xdg desktop portal
+	hl.exec_cmd("killall -9 xdg-desktop-portal-hyprland xdg-desktop-portal")
+	hl.exec_cmd("/usr/lib/xdg-desktop-portal-hyprland &")
+	hl.exec_cmd("/usr/lib/xdg-desktop-portal &")
 
-    -- xdg desktop portal
-    hl.exec_cmd("killall -9 xdg-desktop-portal-hyprland xdg-desktop-portal")
-    hl.exec_cmd("/usr/lib/xdg-desktop-portal-hyprland &")
-    hl.exec_cmd("/usr/lib/xdg-desktop-portal &")
+	-- clipboard
+	hl.exec_cmd("wl-paste --type text --watch cliphist store")
+	hl.exec_cmd("wl-paste --type image --watch cliphist store")
 
-    -- clipboard
-    hl.exec_cmd("wl-paste --type text --watch cliphist store")
-    hl.exec_cmd("wl-paste --type image --watch cliphist store")
-
-    -- bar
-    hl.exec_cmd(bar)
-
+	-- bar
+	hl.exec_cmd(bar)
 end)
