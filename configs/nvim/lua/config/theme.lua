@@ -130,3 +130,5 @@ function M.apply()
   -- Trouble
   hi("TroubleNormal", { fg = c.fg, bg = c.bg2 })
 end
+
+return M

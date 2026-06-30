@@ -7,13 +7,16 @@
     vimAlias = true;
 
     extraPackages = with pkgs; [
-      # LSP servers, formatters, linters you need
       lua-language-server
-      nil # nix lsp
+      nil               # nix lsp
+      clang-tools       # clangd, clang-format
+      pyright           # python lsp
+      vscode-langservers-extracted  # html, css, json lsp
+      typescript-language-server    # js/ts lsp
       ripgrep
       fd
-      gcc # for treesitter compilation
-      nodejs # many LSPs need this
+      gcc
+      nodejs
     ];
   };
 
