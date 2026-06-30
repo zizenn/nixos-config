@@ -70,7 +70,6 @@
     obsidian
     cava
     wttrbar
-    wlogout
     bluetui
     wiremix
     inputs.wlctl.packages.${pkgs.system}.default
