@@ -34,8 +34,8 @@ local menu = "rofi -show drun"
 --------------------------------------------------------------------------------
 hl.config({
 	general = {
-		gaps_in = 5,
-		gaps_out = 10,
+		gaps_in = 4.5,
+		gaps_out = 9,
 		border_size = 0,
 		resize_on_border = false,
 		allow_tearing = false,
@@ -43,8 +43,8 @@ hl.config({
 	},
 
 	decoration = {
-		rounding = 18,
-		rounding_power = 2.5,
+		rounding = 0,
+		rounding_power = 0,
 		active_opacity = 0.94,
 		inactive_opacity = 0.88,
 		dim_inactive = 0,
@@ -64,14 +64,16 @@ hl.config({
 	},
 
 	scrolling = {
-		column_width = 0.8,
+		column_width = 0.7,
 		fullscreen_on_one_column = true,
 		focus_fit_method = 1,
+		follow_focus = true,
+		direction = "right",
 	},
 
 	misc = {
 		force_default_wallpaper = -1,
-		disable_hyprland_logo = false,
+		disable_hyprland_logo = true,
 		disable_splash_rendering = 1,
 		focus_on_activate = 1,
 		vrr = 3,

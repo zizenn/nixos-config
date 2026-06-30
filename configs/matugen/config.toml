@@ -31,5 +31,9 @@ output_path = ["~/.config/zed/themes/matugen.json"]
 input_path = "~/.config/matugen/templates/waybar.css"
 output_path = ["~/.config/waybar/colors.css"]
 
+[templates.waybar]
+input_path = "~/.config/matugen/templates/obsidian.css"
+output_path = ["~/Documents/vault/.obsidian/snippets/matugen.css"]
+
 [hooks]
 post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done"

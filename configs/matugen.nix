@@ -11,5 +11,6 @@
     "matugen/templates/kitty.conf".source = ./matugen/templates/kitty.conf;
     "matugen/templates/waylandar-theme.qml".source = ./matugen/templates/waylandar.qml;
     "matugen/templates/waybar.css".source = ./matugen/templates/waybar.css;
+    "matugen/templates/obsidian.css".source = ./matugen/templates/obsidian.css;
   };
 }

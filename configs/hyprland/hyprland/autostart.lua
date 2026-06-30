@@ -1,6 +1,4 @@
-local terminal = "kitty"
-local menu = "rofi -show drun"
-local bar = "quickshell -p /home/zizenn/.config/quickshell/shell.qml"
+local bar = "waybar"
 
 hl.on("hyprland.start", function()
 	-- wallpaper
