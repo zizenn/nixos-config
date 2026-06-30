@@ -13,7 +13,8 @@
     "custom/mpris",
     "custom/music-stopped",
     "custom/separator2",
-    "hyprland/workspaces"
+    "hyprland/workspaces",
+    "custom/separator2"
   ],
   "modules-right": [
     "battery",

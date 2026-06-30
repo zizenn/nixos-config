@@ -8,7 +8,6 @@
 {
   home.packages = with pkgs; [
     git
-    neovim
     nodejs_26
     zsh
     yazi
@@ -74,6 +73,6 @@
     wiremix
     inputs.wlctl.packages.${pkgs.system}.default
     wleave
-  libnotify
-];
+    libnotify
+  ];
 }
