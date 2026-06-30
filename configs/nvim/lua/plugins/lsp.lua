@@ -31,12 +31,23 @@ return {
         },
       }
 
-      require("mason-lspconfig").setup_handlers({
-        function(server_name)
-          local opts = servers[server_name] or {}
-          opts.on_attach = on_attach
-          lspconfig[server_name].setup(opts)
-        end,
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "lua_ls",
+          "nil_ls",
+          "clangd",
+          "pyright",
+          "html",
+          "cssls",
+          "ts_ls",
+        },
+        handlers = {
+          function(server_name)
+            local opts = servers[server_name] or {}
+            opts.on_attach = on_attach
+            lspconfig[server_name].setup(opts)
+          end,
+        },
       })
     end,
   },

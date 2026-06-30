@@ -8,16 +8,5 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "williamboman/mason.nvim" },
-    opts = {
-      ensure_installed = {
-        "lua_ls",
-        "nil_ls",
-        "clangd",
-        "pyright",
-        "html",
-        "cssls",
-        "ts_ls",
-      },
-    },
   },
 }

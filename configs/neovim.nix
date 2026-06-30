@@ -7,6 +7,8 @@
     vimAlias = true;
 
     extraPackages = with pkgs; [
+      cargo
+      fzf
       ripgrep
       fd
       gcc
