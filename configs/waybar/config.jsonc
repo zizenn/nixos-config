@@ -1,6 +1,5 @@
 {
   "exclusive": true,
-  "reload_style_on_change": true,
   "position": "top",
   "passthrough": false,
   "margin-top": 5,
