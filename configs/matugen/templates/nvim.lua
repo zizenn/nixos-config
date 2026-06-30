@@ -22,4 +22,11 @@ return {
 	outline = "{{colors.outline.default.hex}}",
 	background = "{{colors.background.default.hex}}",
 	on_background = "{{colors.on_background.default.hex}}",
+	fg = "{{colors.on_surface.default.hex}}",
+	bg = "{{colors.surface.default.hex}}",
+	fg_muted = "{{colors.on_surface_variant.default.hex}}",
+	fg_sel = "{{colors.on_primary.default.hex}}",
+	bg2 = "{{colors.surface_variant.default.hex}}",
+	bg_sel = "{{colors.primary_container.default.hex}}",
+	bg_hl = "{{colors.surface_variant.default.hex}}",
 }
