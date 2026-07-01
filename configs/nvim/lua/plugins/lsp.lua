@@ -15,16 +15,20 @@ return {
 				})
 			end
 
+			local nix_clangd = vim.fn.expand("~/.nix-profile/bin/clangd")
+			local clangd_cmd = vim.fn.executable(nix_clangd) == 1
+				and { nix_clangd }
+				or { "clangd" }
+
 			lspconfig.clangd.setup({
 				capabilities = capabilities,
-				cmd = {
-					"clangd",
+				cmd = vim.list_extend(clangd_cmd, {
 					"--background-index",
 					"--clang-tidy",
 					"--header-insertion=iwyu",
 					"--completion-style=detailed",
 					"--function-arg-placeholders",
-				},
+				}),
 				init_options = {
 					usePlaceholders = true,
 					completeUnimported = true,
