@@ -4,6 +4,10 @@ local map = vim.keymap.set
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- move by visual line (wrapped text)
+map("n", "j", "gj", { desc = "Move down (visual line)" })
+map("n", "k", "gk", { desc = "Move up (visual line)" })
+
 -- neotree
 map("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle Neo-tree" })
 
