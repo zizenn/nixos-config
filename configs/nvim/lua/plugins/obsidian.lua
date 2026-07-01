@@ -31,7 +31,7 @@ return {
       templates = {
         subdir = "_templates",
       },
-      preferred_link_style = "wiki",
+      link = { style = "wiki" },
       ui = { enable = false },
     },
   },
