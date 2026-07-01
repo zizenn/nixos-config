@@ -5,7 +5,7 @@ return {
     opts = {
       focus = false,
       win = {
-        border = "rounded",
+        border = "single",
       },
     },
     cmd = "Trouble",

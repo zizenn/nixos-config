@@ -31,7 +31,7 @@ return {
 				auto_show = true,
 				auto_show_delay_ms = 250,
 				treesitter_highlighting = true,
-				window = { border = "rounded" },
+				window = { border = "single" },
 			},
 
 			list = {
@@ -42,7 +42,7 @@ return {
 			},
 
 			menu = {
-				border = "rounded",
+				border = "single",
 
 				cmdline_position = function()
 					if vim.g.ui_cmdline_pos ~= nil then
@@ -115,7 +115,7 @@ return {
 		-- Experimental signature help support
 		signature = {
 			enabled = true,
-			window = { border = "rounded" },
+			window = { border = "single" },
 		},
 
 		cmdline = {

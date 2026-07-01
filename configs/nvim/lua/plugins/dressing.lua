@@ -4,7 +4,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       input = {
-        border = "rounded",
+        border = "single",
       },
       select = {
         backend = { "telescope", "builtin" },

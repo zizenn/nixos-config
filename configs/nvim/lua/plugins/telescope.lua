@@ -15,9 +15,9 @@ return {
         selection_caret = "▎",
         layout_strategy = "horizontal",
         layout_config = {
-          width = 0.60,
-          height = 0.70,
-          preview_width = 0.50,
+          width = 0.85,
+          height = 0.80,
+          preview_width = 0.55,
           horizontal = {
             prompt_position = "top",
           },

@@ -31,7 +31,7 @@ return {
           max_height = 10,
         },
         border = {
-          style = "rounded", -- Gives it a sleek, modern rounded look
+          style = "single",
           padding = { 0, 1 },
         },
         win_options = {
