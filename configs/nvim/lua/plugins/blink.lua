@@ -23,7 +23,6 @@ return {
 
 			trigger = {
 				show_on_insert_on_trigger_character = true,
-				show_on_blocked_trigger_character = true,
 			},
 
 			documentation = {
