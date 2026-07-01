@@ -1,37 +1,57 @@
 return {
 	{
 		"saghen/blink.cmp",
-		lazy = false, -- Force-load on boot to instantly pipe capabilities into Mason LSPs
+		lazy = false,
 		dependencies = {
-			-- Provides a massive library of ready-to-use boilerplate code snippets
 			"rafamadriz/friendly-snippets",
 		},
-		-- Use specific release tags for absolute stability
 		version = "*",
 
 		opts = {
-			-- Set up the default VS-Code style keyboard control triggers
 			keymap = {
-				preset = "default",
-				-- Optional tweak: Make Enter accept the suggestion explicitly
+				preset = "none",
+
 				["<CR>"] = { "accept", "fallback" },
+
+				["<Tab>"] = {
+					"snippet_forward",
+					"select_next",
+					"fallback",
+				},
+
+				["<S-Tab>"] = {
+					"snippet_backward",
+					"select_prev",
+					"fallback",
+				},
+
+				["<C-space>"] = { "show", "hide" },
+				["<C-e>"] = { "hide" },
 			},
 
-			-- Visual UI formatting layout elements
+			completion = {
+				min_keyword_length = 2,
+
+				keyword = {
+					delay = 250, -- Keeps your custom 250ms delay intact
+				},
+
+				accept = { auto_brackets = { enabled = true } },
+
+				-- 📐 Lock the visual popups positioning behavior
+				menu = {
+					direction_priority = { "s", "se", "sw" }, -- Forces South (below), South-East, South-West directions
+					draw = { treesitter = { "lsp" } },
+				},
+			},
+
 			appearance = {
-				use_nvim_cmp_as_default = true, -- Inherits your colorscheme's traditional CMP design groups
-				nerd_font_variant = "mono", -- Aligns icons nicely if you use Nerd Fonts
+				use_nvim_cmp_as_default = true,
+				nerd_font_variant = "mono",
 			},
 
-			-- Define data pools for autocomplete suggestions
 			sources = {
 				default = { "lsp", "path", "snippets", "buffer" },
-			},
-
-			-- Experimental feature: automatically adds closing brackets when completing functions
-			completion = {
-				accept = { auto_brackets = { enabled = true } },
-				menu = { draw = { treesitter = { "lsp" } } },
 			},
 		},
 		opts_extend = { "sources.default" },
