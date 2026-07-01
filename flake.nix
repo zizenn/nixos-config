@@ -25,7 +25,7 @@
     {
       nixosConfigurations = {
         nix-port = nixpkgs.lib.nixosSystem {
-          nixpkgs.hostPlatform = "x86_64-linux";
+          system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
             ./configuration.nix
