@@ -19,9 +19,13 @@ return {
 		},
 
 		completion = {
+			keyword_length = 1,
 			accept = { auto_brackets = { enabled = true } },
 
 			trigger = {
+				show_on_keyword = function(_, char)
+					return char ~= " " and char ~= "\t" and char ~= "\n"
+				end,
 				show_on_insert_on_trigger_character = true,
 			},
 
