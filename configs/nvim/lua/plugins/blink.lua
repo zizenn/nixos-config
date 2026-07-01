@@ -131,8 +131,8 @@ return {
 			default = { "lsp", "path", "snippets", "buffer" },
 			providers = {
 				lsp = {
-					min_keyword_length = 2, -- Number of characters to trigger porvider
-					score_offset = 0, -- Boost/penalize the score of the items
+					min_keyword_length = 0,
+					score_offset = 0,
 				},
 				path = {
 					min_keyword_length = 0,
