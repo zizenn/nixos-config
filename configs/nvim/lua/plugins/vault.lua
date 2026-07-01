@@ -1,9 +1,7 @@
 return {
   "oleksiiluchnikov/vault.nvim",
   version = "*",
-  dependencies = {
-    "oleksiiluchnikov/vimtable.nvim",
-  },
+  dependencies = {},
   keys = {
     { "<leader>oo", "<cmd>Vault note obsidian<CR>", desc = "Open in Obsidian" },
     { "<leader>oq", "<cmd>Vault note<CR>", desc = "Notes picker" },
