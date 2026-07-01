@@ -29,7 +29,6 @@ return {
 					"html",
 					"cssls",
 					"pyright",
-					"clangd",
 				},
 				automatic_installation = true,
 			})
