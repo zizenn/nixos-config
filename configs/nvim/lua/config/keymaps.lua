@@ -4,9 +4,9 @@ local map = vim.keymap.set
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- move by visual line (wrapped text)
-map("n", "j", "gj", { desc = "Move down (visual line)" })
-map("n", "k", "gk", { desc = "Move up (visual line)" })
+-- move by visual line (wrapped text) + center
+map("n", "j", "gjzz", { desc = "Move down (visual line)" })
+map("n", "k", "gkzz", { desc = "Move up (visual line)" })
 
 -- neotree
 map("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle Neo-tree" })
@@ -74,36 +74,14 @@ map("n", "<leader>cs", "<cmd>Trouble symbols toggle<cr>", { desc = "Symbols (Tro
 map("n", "<leader>cl", "<cmd>Trouble lsp toggle<cr>", { desc = "LSP References (Trouble)" })
 map("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
 
--- neoscroll
-map("n", "<C-u>", function()
-	require("neoscroll").ctrl_u({ duration = 150 })
-end, { desc = "Scroll Up" })
-map("n", "<C-d>", function()
-	require("neoscroll").ctrl_d({ duration = 150 })
-end, { desc = "Scroll Down" })
-map("n", "<C-b>", function()
-	require("neoscroll").ctrl_b({ duration = 250 })
-end, { desc = "Page Up" })
-map("n", "<C-f>", function()
-	require("neoscroll").ctrl_f({ duration = 250 })
-end, { desc = "Page Down" })
-
 -- scroll
--- Next search match: Jump, center the screen, and trigger smooth animation
+-- search: jump + center
 map("n", "n", function()
-	-- Use pcall to prevent error sounds/popups if no more matches exist
-	pcall(function()
-		vim.cmd("normal! nzz")
-		require("neoscroll").zz({ duration_ms = 100 })
-	end)
+	pcall(function() vim.cmd("normal! nzz") end)
 end, { silent = true, desc = "Search: Next match (Centered)" })
 
--- Previous search match: Jump backward, center the screen, and trigger smooth animation
 map("n", "N", function()
-	pcall(function()
-		vim.cmd("normal! Nzz")
-		require("neoscroll").zz({ duration_ms = 100 })
-	end)
+	pcall(function() vim.cmd("normal! Nzz") end)
 end, { silent = true, desc = "Search: Previous match (Centered)" })
 
 -- window management
