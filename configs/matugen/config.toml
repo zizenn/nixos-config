@@ -8,7 +8,7 @@ input_path = "~/.config/matugen/templates/kitty.conf"
 output_path = ["~/.config/kitty/current-colors.conf"]
 
 [templates.neovim]
-input_path = "~/.config/matugen/templates/nvim.jsonc"
+input_path = "~/.config/matugen/templates/nvim-colors.jsonc"
 output_path = ["~/.cache/matugen/themes/nvim-colors.jsonc"]
 
 [templates.rofi]
