@@ -9,8 +9,8 @@ return {
     cmd = { "TSUpdateSync", "TSInstall", "TSUninstall" },
     opts = {
       ensure_installed = {
-        "bash", "c", "lua", "vim", "vimdoc", "query",
-        "javascript", "typescript", "tsx", "html", "css", 
+		"bash", "c", "cpp", "lua", "vim", "vimdoc", "query",
+		"javascript", "typescript", "tsx", "html", "css", 
         "json", "yaml", "markdown", "markdown_inline",
       },
       sync_install = false,
