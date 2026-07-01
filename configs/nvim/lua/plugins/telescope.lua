@@ -11,13 +11,21 @@ return {
 
     telescope.setup({
       defaults = {
-        prompt_prefix = "🔭 ",
-        selection_caret = "❯ ",
+        prompt_prefix = "  ",
+        selection_caret = "▎",
         layout_strategy = "horizontal",
-        layout_config = { 
-          width = 0.85, 
-          height = 0.80,
-          preview_width = 0.55,
+        layout_config = {
+          width = 0.60,
+          height = 0.70,
+          preview_width = 0.50,
+          horizontal = {
+            prompt_position = "top",
+          },
+        },
+        borderchars = {
+          prompt = { "─", "│", "─", "│", "┌", "┐", "└", "┘" },
+          results = { "─", "│", "─", "│", "┌", "┐", "└", "┘" },
+          preview = { "─", "│", "─", "│", "┌", "┐", "└", "┘" },
         },
         mappings = {
           i = {
@@ -25,10 +33,12 @@ return {
             ["<C-k>"] = actions.move_selection_previous,
             ["<C-c>"] = actions.close,
             ["<CR>"] = actions.select_default,
-            ["<C-v>"] = actions.select_vertical,
-            ["<C-s>"] = actions.select_horizontal,
           },
         },
+      },
+      pickers = {
+        find_files = { hidden = true },
+        live_grep = { additional_args = { "--hidden" } },
       },
       extensions = {
         fzf = {
