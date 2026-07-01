@@ -43,7 +43,6 @@
     fd
     vesktop
     inputs.zen-browser.packages.x86_64-linux.default
-    inputs.waylandar.packages.x86_64-linux.default
     steam
     protonmail-desktop
     zed-editor

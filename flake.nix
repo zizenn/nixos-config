@@ -9,10 +9,6 @@
     };
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    waylandar = {
-      url = "github:samjoshuadud/waylandar";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     herdr.url = "github:ogulcancelik/herdr";
     wlctl.url = "github:aashish-thapa/wlctl";
   };
@@ -23,7 +19,6 @@
       nixpkgs,
       home-manager,
       zen-browser,
-      waylandar,
       herdr,
       ...
     }@inputs:

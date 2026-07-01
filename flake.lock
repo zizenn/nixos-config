@@ -92,29 +92,8 @@
         "herdr": "herdr",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
-        "waylandar": "waylandar",
         "wlctl": "wlctl",
         "zen-browser": "zen-browser"
-      }
-    },
-    "waylandar": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1782139419,
-        "narHash": "sha256-RxdBpdcyzmUF6DB3kWjfKFHCMiMqY+GIbr/sRYCW4CM=",
-        "owner": "samjoshuadud",
-        "repo": "waylandar",
-        "rev": "db4d7c24680dabecfc2b6e3ec99235b472dd6371",
-        "type": "github"
-      },
-      "original": {
-        "owner": "samjoshuadud",
-        "repo": "waylandar",
-        "type": "github"
       }
     },
     "wlctl": {

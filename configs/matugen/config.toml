@@ -8,20 +8,12 @@ input_path = "~/.config/matugen/templates/kitty.conf"
 output_path = ["~/.config/kitty/current-colors.conf"]
 
 [templates.neovim]
-input_path = "~/.config/matugen/templates/nvim.lua"
-output_path = ["~/.cache/matugen/lua/colors.lua"]
-
-[templates.quickshell]
-input_path = "~/.config/matugen/templates/quickshell-colors.json"
-output_path = ["~/.config/quickshell/colors.json"]
+input_path = "~/.config/matugen/templates/nvim.jsonc"
+output_path = ["~/.cache/matugen/themes/nvim-colors.jsonc"]
 
 [templates.rofi]
 input_path = "~/.config/matugen/templates/rofi-colors.rasi"
 output_path = ["~/.config/rofi/colors.rasi"]
-
-[templates.waylandar]
-input_path = "~/.config/matugen/templates/waylandar-theme.qml"
-output_path = ["~/.config/waylandar/frontend/Theme.qml"]
 
 [templates.zed]
 input_path = "~/.config/matugen/templates/zed-theme.json"
