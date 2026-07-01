@@ -29,8 +29,8 @@
     nil
     typescript-language-server
     vscode-langservers-extracted
-    nodePackages.prettier
-    nodePackages.eslint_d
+    prettier
+    eslint_d
     zsh-autosuggestions
     zsh-syntax-highlighting
     eza
