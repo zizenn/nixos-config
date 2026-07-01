@@ -17,11 +17,20 @@
     mako
     ripgrep
     python3
-    python3Packages.pylint
+    python3Packages.debugpy
+    ruff
+    black
     ntfs3g
     gcc
     clang-tools
     tree-sitter
+    lua-language-server
+    pyright
+    nil
+    typescript-language-server
+    vscode-langservers-extracted
+    nodePackages.prettier
+    nodePackages.eslint_d
     zsh-autosuggestions
     zsh-syntax-highlighting
     eza

@@ -7,7 +7,7 @@ return {
 
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-			local servers = { "lua_ls", "tsserver", "html", "cssls", "pyright" }
+			local servers = { "lua_ls", "ts_ls", "html", "cssls", "pyright", "nil_ls" }
 
 			for _, server in ipairs(servers) do
 				lspconfig[server].setup({

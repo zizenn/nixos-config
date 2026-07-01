@@ -97,7 +97,6 @@
   programs = {
     zsh.enable = true;
     dconf.enable = true; # Required for browser settings persistence
-    nix-ld.enable = true;
     nh = {
       enable = true;
       clean.enable = true;
