@@ -50,6 +50,40 @@ map("n", "<leader>du", function()
 	require("dapui").toggle()
 end, { silent = true, desc = "Debug: Toggle UI Panel" })
 
+-- yazi
+map("n", "<leader>y", "<cmd>Yazi<cr>", { desc = "Open Yazi" })
+
+-- dashboard
+map("n", "<leader>th", function()
+	Snacks.dashboard.open()
+end, { desc = "Dashboard: Open Home Screen" })
+
+-- which-key
+map("n", "<leader>?", function()
+	require("which-key").show({ global = false })
+end, { desc = "Buffer Local Keymaps" })
+
+-- trouble
+map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
+map("n", "<leader>xw", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
+map("n", "<leader>cs", "<cmd>Trouble symbols toggle<cr>", { desc = "Symbols (Trouble)" })
+map("n", "<leader>cl", "<cmd>Trouble lsp toggle<cr>", { desc = "LSP References (Trouble)" })
+map("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
+
+-- neoscroll
+map("n", "<C-u>", function()
+	require("neoscroll").ctrl_u({ duration = 150 })
+end, { desc = "Scroll Up" })
+map("n", "<C-d>", function()
+	require("neoscroll").ctrl_d({ duration = 150 })
+end, { desc = "Scroll Down" })
+map("n", "<C-b>", function()
+	require("neoscroll").ctrl_b({ duration = 250 })
+end, { desc = "Page Up" })
+map("n", "<C-f>", function()
+	require("neoscroll").ctrl_f({ duration = 250 })
+end, { desc = "Page Down" })
+
 -- scroll
 -- Next search match: Jump, center the screen, and trigger smooth animation
 map("n", "n", function()

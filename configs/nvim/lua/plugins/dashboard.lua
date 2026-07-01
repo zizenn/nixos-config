@@ -15,14 +15,6 @@ return {
 				},
 			},
 		},
-		keys = {
-			{
-				"<leader>th",
-				function()
-					Snacks.dashboard.open()
-				end,
-				desc = "Dashboard: Open Home Screen",
-			},
-		},
+
 	},
 }
