@@ -23,6 +23,15 @@ return {
           path = vim.fn.expand("~/Documents/vault"),
         },
       },
+      daily_notes = {
+        folder = "daily",
+        date_format = "%Y-%m-%d",
+        default_tags = { "daily" },
+      },
+      templates = {
+        subdir = "_templates",
+      },
+      preferred_link_style = "wiki",
       ui = { enable = false },
     },
   },
