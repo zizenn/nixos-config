@@ -1,35 +1,38 @@
 return {
 	{
 		"karb94/neoscroll.nvim",
-		event = { "BufReadPre", "BufNewFile" }, -- Load when opening a file to preserve fast startup
-		config = function()
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+			-- ⏱️ Setup standard motion configurations directly via opts
+			mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
+			duration_ms = 150,
+			easing = "quadratic",
+			hide_cursor = true,
+			stop_eof = true,
+			respect_scrolloff = true,
+		},
+		config = function(_, opts)
 			local neoscroll = require("neoscroll")
 
-			neoscroll.setup({
-				-- Time (in ms) for the scrolling animation to complete
-				duration_ms = 150,
-				-- Smooth deceleration effect as the scroll comes to a stop
-				easing = "quadratic",
-				-- Hide the mouse cursor dynamically during animations to avoid visual flickering
-				hide_cursor = true,
-				-- Automatically halt scrolling if you press an unrelated key mid-movement
-				stop_eof = true,
-				-- Respect search match positions smoothly
-				respect_scrolloff = true,
-			})
+			-- Load settings block
+			neoscroll.setup(opts)
 
-			-- Set up keymap shortcuts using standard navigation triggers
-			local mappings = {}
+			-- 🚀 CUSTOM SPEED OVERRIDES (Without using deprecated set_mappings)
+			-- Map keys natively using your local config structure or direct wrappers
+			local map = vim.keymap.set
 
-			-- Use your preferred styling structure to map standard motions
-			-- Syntax: mappings[key] = { function_name, { arguments } }
-			mappings["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "150" } } -- Scroll half-page up
-			mappings["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "150" } } -- Scroll half-page down
-			mappings["<C-b>"] = { "scroll", { "-vim.api.nvim_win_get_height(0)", "true", "250" } } -- Full page up
-			mappings["<C-f>"] = { "scroll", { "vim.api.nvim_win_get_height(0)", "true", "250" } } -- Full page down
-
-			-- Connect the physics engine configuration to your native keystrokes
-			require("neoscroll.config").set_mappings(mappings)
+			map("n", "<C-u>", function()
+				neoscroll.ctrl_u({ duration = 150 })
+			end, { desc = "Scroll Up" })
+			map("n", "<C-d>", function()
+				neoscroll.ctrl_d({ duration = 150 })
+			end, { desc = "Scroll Down" })
+			map("n", "<C-b>", function()
+				neoscroll.ctrl_b({ duration = 250 })
+			end, { desc = "Page Up" })
+			map("n", "<C-f>", function()
+				neoscroll.ctrl_f({ duration = 250 })
+			end, { desc = "Page Down" })
 		end,
 	},
 }

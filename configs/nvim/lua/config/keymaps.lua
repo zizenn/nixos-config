@@ -49,3 +49,21 @@ end, { silent = true, desc = "Debug: Terminate Session" })
 map("n", "<leader>du", function()
 	require("dapui").toggle()
 end, { silent = true, desc = "Debug: Toggle UI Panel" })
+
+-- scroll
+-- Next search match: Jump, center the screen, and trigger smooth animation
+map("n", "n", function()
+	-- Use pcall to prevent error sounds/popups if no more matches exist
+	pcall(function()
+		vim.cmd("normal! nzz")
+		require("neoscroll").zz({ duration_ms = 100 })
+	end)
+end, { silent = true, desc = "Search: Next match (Centered)" })
+
+-- Previous search match: Jump backward, center the screen, and trigger smooth animation
+map("n", "N", function()
+	pcall(function()
+		vim.cmd("normal! Nzz")
+		require("neoscroll").zz({ duration_ms = 100 })
+	end)
+end, { silent = true, desc = "Search: Previous match (Centered)" })

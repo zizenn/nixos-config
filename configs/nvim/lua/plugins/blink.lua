@@ -40,7 +40,7 @@ return {
 
 				-- 📐 Lock the visual popups positioning behavior
 				menu = {
-					direction_priority = { "s", "se", "sw" }, -- Forces South (below), South-East, South-West directions
+					direction_priority = { "s", "n" }, -- Forces South (below), South-East, South-West directions
 					draw = { treesitter = { "lsp" } },
 				},
 			},
