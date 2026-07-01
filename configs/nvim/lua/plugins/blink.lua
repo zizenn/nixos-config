@@ -21,6 +21,11 @@ return {
 		completion = {
 			accept = { auto_brackets = { enabled = true } },
 
+			trigger = {
+				show_on_insert_on_trigger_character = true,
+				show_on_blocked_trigger_character = true,
+			},
+
 			documentation = {
 				auto_show = true,
 				auto_show_delay_ms = 250,
@@ -30,10 +35,8 @@ return {
 
 			list = {
 				selection = {
-					preselect = true,
-					auto_insert = function(ctx)
-						return ctx.mode == "cmdline"
-					end,
+					preselect = false,
+					auto_insert = true,
 				},
 			},
 

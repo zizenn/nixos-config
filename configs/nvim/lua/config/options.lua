@@ -31,3 +31,12 @@ vim.opt.updatetime = 250 -- Faster completion and diagnostic updates
 
 -- --- Autocompletion Setup ---
 vim.opt.completeopt = "menu,menuone,noselect" -- Standard options for LSP completion
+
+-- --- Diagnostics (Inline Lint/Error Display) ---
+vim.diagnostic.config({
+	virtual_text = { prefix = "▎", spacing = 2 },
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	float = { border = "rounded" },
+})
