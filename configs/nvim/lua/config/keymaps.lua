@@ -101,3 +101,14 @@ map("n", "N", function()
 		require("neoscroll").zz({ duration_ms = 100 })
 	end)
 end, { silent = true, desc = "Search: Previous match (Centered)" })
+
+-- window management
+map("n", "<leader>sv", "<C-w>v", { desc = "Split vertically" })
+map("n", "<leader>sh", "<C-w>s", { desc = "Split horizontally" })
+map("n", "<leader>se", "<C-w>=", { desc = "Equalize splits" })
+map("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close split" })
+map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Close buffer" })
+
+-- move lines in visual mode
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
