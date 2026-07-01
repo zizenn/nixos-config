@@ -82,5 +82,6 @@
     inputs.wlctl.packages.${pkgs.system}.default
     wleave
     libnotify
+    glow
   ];
 }
