@@ -22,7 +22,7 @@ require("lazy").setup({
     lazy = true,
     version = false,
   },
-  install = { colorscheme = { "tokyonight", "habamax", "matugen" } },
+  install = { colorscheme = { "tokyonight" } },
   checker = {
     enabled = true,
     notify = true,
@@ -42,5 +42,3 @@ require("lazy").setup({
     },
   },
 })
-
-require("config.theme").apply()
