@@ -84,5 +84,6 @@
     libnotify
     glow
     obs-studio
+  rose-pine-hyprcursor
 ];
 }
