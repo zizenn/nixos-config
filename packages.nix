@@ -86,5 +86,9 @@
     rose-pine-cursor
     feh
     vlc
+    kdenlive      # The video editor
+    glaxnimate    # Optional: For text/vector animations
+    mediainfo     # Optional: For reading video file metadata
+  kdePackages
 ];
 }
