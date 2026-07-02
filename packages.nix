@@ -80,6 +80,7 @@
     wiremix
     inputs.wlctl.packages.${pkgs.system}.default
     wleave
+    wl-clipboard
     libnotify
     glow
     rose-pine-hyprcursor
