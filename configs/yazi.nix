@@ -9,7 +9,6 @@
   xdg.configFile."yazi" = {
     source = ./yazi;
     recursive = true;
-    force = true;
   };
 
   xdg.desktopEntries.yazi = {
