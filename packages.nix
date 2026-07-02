@@ -83,5 +83,6 @@
     wleave
     libnotify
     glow
-  ];
+    obs-studio
+];
 }
