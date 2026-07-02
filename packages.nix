@@ -47,7 +47,6 @@
     ollama
     unzip
     claude-code
-    direnv
     bc
     fd
     vesktop
@@ -84,6 +83,7 @@
     libnotify
     glow
     obs-studio
-  rose-pine-hyprcursor
+    rose-pine-hyprcursor
+    rose-pine-cursor
 ];
 }
