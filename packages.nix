@@ -82,7 +82,6 @@
     wleave
     libnotify
     glow
-    obs-studio
     rose-pine-hyprcursor
     rose-pine-cursor
     feh

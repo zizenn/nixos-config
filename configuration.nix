@@ -45,7 +45,7 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs; [ mesa ];
+    extraPackages = with pkgs; [ mesa libva amdvlk ];
   };
   services.xserver.videoDrivers = [ "amdgpu" ];
 
