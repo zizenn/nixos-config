@@ -10,8 +10,8 @@
   };
 
   xdg.configFile."uwsm/env-hyprland".text = ''
-    export XCURSOR_SIZE=16
-    export HYPRCURSOR_SIZE=16
+    export XCURSOR_SIZE=24
+    export HYPRCURSOR_SIZE=24
   '';
 
   wayland.windowManager.hyprland.systemd.enable = false;
