@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+
+case "${1:-}" in
+    delete)
+        selected=$(cliphist list | rofi -dmenu -theme clipboard -p "Delete:")
+        if [ -n "$selected" ]; then
+            echo "$selected" | cliphist delete
+        fi
+        ;;
+    *)
+        selected=$(cliphist list | rofi -dmenu -theme clipboard -p "Clipboard:")
+        if [ -n "$selected" ]; then
+            echo "$selected" | cliphist decode | wl-copy
+        fi
+        ;;
+esac
