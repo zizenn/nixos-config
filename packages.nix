@@ -85,5 +85,7 @@
     obs-studio
     rose-pine-hyprcursor
     rose-pine-cursor
+    feh
+    vlc
 ];
 }
