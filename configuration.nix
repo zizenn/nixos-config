@@ -37,8 +37,8 @@
 
   # networking.firewall.enable = false; # disable firewall
   networking.firewall.allowedTCPPorts = [
-    9000
-    9001
+    8080
+    8081
   ];
 
   # --- Graphics (AMD Optimized) ---
