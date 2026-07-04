@@ -15,6 +15,8 @@
     matugen
     opencode
     mako
+    hyprlock
+    hypridle
     ripgrep
     python3
     python3Packages.debugpy

@@ -7,6 +7,7 @@
     "hypr/hyprland/autostart.lua".source = ./hyprland/hyprland/autostart.lua;
     "hypr/hyprland/window_rules.lua".source = ./hyprland/hyprland/window_rules.lua;
     "hypr/hyprsplit/init.lua".source = ./hyprland/hyprsplit/init.lua;
+    "hypr/hypridle.conf".source = ./hyprland/hyprland/hypridle.conf;
   };
 
   xdg.configFile."uwsm/env-hyprland".text = ''

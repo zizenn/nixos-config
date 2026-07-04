@@ -39,5 +39,9 @@ output_path = ["~/.config/mako/config"]
 input_path = "~/.config/matugen/templates/wleave.css"
 output_path = ["~/.config/wleave/style.css"]
 
+[templates.hyprlock]
+input_path = "~/.config/matugen/templates/hyprlock.conf"
+output_path = ["~/.config/hypr/hyprlock.conf"]
+
 [hooks]
 post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done; makoctl reload 2>/dev/null; true"

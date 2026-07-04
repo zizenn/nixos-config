@@ -15,7 +15,7 @@
                     "shell": "loginctl lock-session"
                 },
                 {
-                    "executable": "swaylock"
+                    "executable": "hyprlock"
                 }
             ],
             "text": "Lock",
