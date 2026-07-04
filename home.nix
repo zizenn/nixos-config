@@ -17,6 +17,8 @@
     ./configs/neovim.nix
     ./configs/zed.nix
     ./configs/yazi.nix
+    ./configs/mako.nix
+    ./configs/wleave.nix
     ./packages.nix
   ];
 

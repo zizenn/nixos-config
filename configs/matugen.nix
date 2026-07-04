@@ -11,5 +11,7 @@
     "matugen/templates/waybar.css".source = ./matugen/templates/waybar.css;
     "matugen/templates/obsidian.css".source = ./matugen/templates/obsidian.css;
     "matugen/templates/vesktop.css".source = ./matugen/templates/vesktop.css;
+    "matugen/templates/mako.conf".source = ./matugen/templates/mako.conf;
+    "matugen/templates/wleave.css".source = ./matugen/templates/wleave.css;
   };
 }
