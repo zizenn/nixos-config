@@ -1,7 +1,7 @@
 {
     "margin": "20%",
-    "buttons-per-row": 3,
-    "button-aspect-ratio": 1.25,
+    "buttons-per-row": "3",
+    "button-aspect-ratio": "5/4",
     "show-keybinds": true,
     "close-on-lost-focus": true,
     "delay-command-ms": 100,
