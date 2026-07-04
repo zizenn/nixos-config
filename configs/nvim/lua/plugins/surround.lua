@@ -4,11 +4,7 @@ return {
 		version = "*",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
-			require("nvim-surround").setup({
-				keymaps = {
-					visual = "S", -- Forces Shift+S in visual mode
-				},
-			})
+			require("nvim-surround").setup()
 		end,
 	},
 }
