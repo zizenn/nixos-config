@@ -2,6 +2,7 @@
   font-family: "JetBrainsMono Nerd Font";
   border: none;
   border-radius: 0;
+  transition: none;
 }
 
 window {
@@ -17,7 +18,6 @@ button {
   margin: 4px;
   min-width: 120px;
   min-height: 80px;
-  transition: 0.15s ease-in-out;
 }
 
 button label.action-name {
