@@ -2,7 +2,7 @@
 
 {
   programs.aerc.enable = true;
-  home.packages = [ pkgs.age ];
+  home.packages = with pkgs; [ age jq ];
 
   xdg.configFile = {
     "aerc/aerc.conf".source = ./aerc/aerc.conf;
@@ -14,38 +14,99 @@
     if [ ! -f "$conf" ]; then
       cat > "$conf" << 'AERC_EOF'
 # aerc accounts configuration
-# passwords are fetched via source-cred-cmd/outgoing-cred-cmd
-# using ~/.local/bin/aerc-cred (age-encrypted secrets).
+# passwords are handled via OAuth2 using ~/.local/bin/aerc-oauth2.
 # see https://aerc-mail.org/ for documentation.
 
 [personal]
-source = imaps://user@example.com:993
-source-cred-cmd = ~/.local/bin/aerc-cred personal
-outgoing = smtps://user@example.com:465
-outgoing-cred-cmd = ~/.local/bin/aerc-cred personal
+source = imaps://zizenn.69@gmail.com@imap.gmail.com:993
+source-cred-cmd = ~/.local/bin/aerc-oauth2 personal
+source-cred-type = oauthbearer
+outgoing = smtps://zizenn.69@gmail.com@smtp.gmail.com:465
+outgoing-cred-cmd = ~/.local/bin/aerc-oauth2 personal
+outgoing-cred-type = oauthbearer
 default = INBOX
-from = Your Name <user@example.com>
+from = Zizenn <zizenn.69@gmail.com>
 copy-to = Sent
 AERC_EOF
       chmod 0600 "$conf"
     fi
   '';
 
-  home.file.".local/bin/aerc-cred" = {
+  home.file.".local/bin/aerc-oauth2" = {
     text = ''
       #!/usr/bin/env bash
       set -euo pipefail
 
       name="''${1:-personal}"
       key="''${AGE_KEY:-$HOME/.config/age/key.txt}"
-      secret="$HOME/.config/aerc/secrets/$name.age"
+      state="$HOME/.config/aerc/secrets/$name.oauth"
 
-      if [ ! -f "$secret" ]; then
-        echo "aerc-cred: no secret for '$name' at $secret" >&2
-        exit 1
-      fi
+      die() { echo "aerc-oauth2: $*" >&2; exit 1; }
 
-      age -d -i "$key" "$secret"
+      load_state() {
+        [ ! -f "$state.age" ] && return
+        eval "$(age -d -i "$key" "$state.age" 2>/dev/null)" || die "failed to decrypt $state.age"
+      }
+
+      save_state() {
+        local tmp; tmp=$(mktemp)
+        printf 'client_id=%s\nclient_secret=%s\nrefresh_token=%s\n' \
+          "$client_id" "$client_secret" "$refresh_token" > "$tmp"
+        age -e -i "$key" -o "$state.age" "$tmp" 2>/dev/null || die "failed to encrypt state"
+        rm -f "$tmp"
+      }
+
+      device_auth() {
+        echo "requesting device code..." >&2
+        local resp; resp=$(curl -s -X POST https://oauth2.googleapis.com/device/code \
+          -d "client_id=$client_id&scope=https://mail.google.com/") || die "device code request failed"
+
+        local device_code user_code verification_url interval
+        device_code=$(echo "$resp" | jq -r '.device_code // empty')
+        user_code=$(echo "$resp" | jq -r '.user_code // empty')
+        verification_url=$(echo "$resp" | jq -r '.verification_url // empty')
+        interval=$(echo "$resp" | jq -r '.interval // 5')
+
+        [ -n "$user_code" ] || die "no user_code: $(echo "$resp" | jq -r '.error_description // .error // empty')"
+
+        echo >&2
+        echo "  ┌─────────────────────────────────────────────────────────────" >&2
+        echo "  │ authorize aerc to access your gmail:" >&2
+        echo "  │" >&2
+        echo "  │   1. open  $verification_url" >&2
+        echo "  │   2. enter code:  $user_code" >&2
+        echo "  │" >&2
+        echo "  │ press enter here after authorizing in the browser." >&2
+        echo "  └─────────────────────────────────────────────────────────────" >&2
+        read -r _
+
+        local grant="urn:ietf:params:oauth:grant-type:device_code"
+        while true; do
+          sleep "$interval"
+          resp=$(curl -s -X POST https://oauth2.googleapis.com/token \
+            -d "client_id=$client_id&client_secret=$client_secret&device_code=$device_code&grant_type=$grant") || continue
+          refresh_token=$(echo "$resp" | jq -r '.refresh_token // empty')
+          [ -n "$refresh_token" ] && break
+          local err; err=$(echo "$resp" | jq -r '.error // "pending"')
+          [ "$err" != "authorization_pending" ] && [ "$err" != "slow_down" ] && \
+            die "auth error: $err"
+        done
+
+        save_state
+        echo "oauth2 setup complete!" >&2
+      }
+
+      get_token() {
+        local resp; resp=$(curl -s -X POST https://oauth2.googleapis.com/token \
+          -d "client_id=$client_id&client_secret=$client_secret&refresh_token=$refresh_token&grant_type=refresh_token")
+        local token; token=$(echo "$resp" | jq -r '.access_token // empty')
+        [ -n "$token" ] || die "token refresh failed: $(echo "$resp" | jq -r '.error_description // .error // "unknown"')"
+        echo "$token"
+      }
+
+      load_state
+      [ -n "''${client_id:-}" ] || die "no client_id. create a google cloud oauth2 desktop credential first."
+      [ -n "''${refresh_token:-}" ] && get_token || device_auth && get_token
     '';
     executable = true;
   };
