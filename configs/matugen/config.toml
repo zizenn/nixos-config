@@ -22,6 +22,7 @@ output_path = ["~/.config/zed/themes/matugen.json"]
 [templates.waybar]
 input_path = "~/.config/matugen/templates/waybar.css"
 output_path = ["~/.config/waybar/colors.css"]
+post_run = "pkill waybar && waybar & disown"
 
 [templates.obsidian]
 input_path = "~/.config/matugen/templates/obsidian.css"
