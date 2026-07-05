@@ -105,8 +105,11 @@ AERC_EOF
       }
 
       load_state
-      [ -n "''${client_id:-}" ] || die "no client_id. create a google cloud oauth2 desktop credential first."
-      [ -n "''${refresh_token:-}" ] && get_token || device_auth && get_token
+      [ -n "''${client_id:-}" ] || die "no client_id. create a google cloud oauth2 web application credential first."
+      if [ -z "''${refresh_token:-}" ]; then
+        device_auth
+      fi
+      get_token
     '';
     executable = true;
   };

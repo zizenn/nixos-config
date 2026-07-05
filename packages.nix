@@ -92,8 +92,8 @@
     kdePackages.kdenlive # the vid editor
     glaxnimate    # Optional: For text/vector animations
     mediainfo     # Optional: For reading video file metadata
-  gemini-cli
-  proton-pass
-  jujutsu
+    gemini-cli
+    proton-pass
+    zathura
 ];
 }
