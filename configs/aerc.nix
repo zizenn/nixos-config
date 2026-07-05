@@ -2,7 +2,7 @@
 
 {
   programs.aerc.enable = true;
-  home.packages = with pkgs; [ age jq ];
+  home.packages = with pkgs; [ age gnupg jq ];
 
   xdg.configFile = {
     "aerc/aerc.conf".source = ./aerc/aerc.conf;

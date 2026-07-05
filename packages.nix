@@ -95,5 +95,6 @@
     gemini-cli
     proton-pass
     zathura
-];
+    lynx
+  ];
 }
