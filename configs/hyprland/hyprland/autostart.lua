@@ -23,4 +23,5 @@ hl.on("hyprland.start", function()
 
 	-- bar
 	hl.exec_cmd(bar)
+	hl.exec_cmd("ollama serve")
 end)
