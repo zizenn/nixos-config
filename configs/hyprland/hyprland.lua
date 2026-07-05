@@ -131,6 +131,13 @@ end
 hl.bind(mainMod .. " + h", hl.dsp.layout("focus l"))
 hl.bind(mainMod .. " + l", hl.dsp.layout("focus r"))
 
+-- toggle focus between floating and tiled windows
+hl.bind(mainMod .. " + Tab", hl.dsp.layout("focuswindow floating"))
+hl.bind(mainMod .. " + SHIFT + Tab", hl.dsp.layout("focuswindow tiled"))
+
+-- launch aerc (floating via aerc-todo class rule)
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("kitty --class aerc-todo -e aerc"))
+
 -- swapping places
 hl.bind(mainMod .. " + SHIFT + h", hl.dsp.layout("swapcol l"))
 hl.bind(mainMod .. " + SHIFT + l", hl.dsp.layout("swapcol r"))

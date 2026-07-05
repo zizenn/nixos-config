@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   programs.aerc.enable = true;
@@ -6,8 +6,24 @@
   xdg.configFile = {
     "aerc/aerc.conf".source = ./aerc/aerc.conf;
     "aerc/binds.conf".source = ./aerc/binds.conf;
-    "aerc/accounts.conf".source = ./aerc/accounts.conf;
   };
+
+  home.activation.writeAercAccounts = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    conf="${config.home.homeDirectory}/.config/aerc/accounts.conf"
+    cat > "$conf" << 'EOF'
+      # aerc accounts configuration
+      # replace with your own account settings.
+      # see https://aerc-mail.org/ for documentation.
+
+      [personal]
+      source = imaps://user@example.com:993
+      outgoing = smtps://user@example.com:465
+      default = INBOX
+      from = Your Name <user@example.com>
+      copy-to = Sent
+    EOF
+    chmod 0600 "$conf"
+  '';
 
   home.file.".local/bin/mail2obsidian.sh" = {
     source = ./mail2obsidian.sh;
