@@ -94,5 +94,6 @@
     mediainfo     # Optional: For reading video file metadata
   gemini-cli
   proton-pass
+  jujutsu
 ];
 }
