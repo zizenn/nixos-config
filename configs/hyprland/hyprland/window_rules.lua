@@ -23,23 +23,16 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	match = { class = "yazi-float" },
+	match = { class = "zsh-fzf-tab" },
 	float = true,
 	size = "1280 720",
 	center = true,
 })
 
 hl.window_rule({
-	match = { class = "wlctl-float" },
+	match = { class = "aerc-todo" },
 	float = true,
-	size = "1280 720",
-	center = true,
-})
-
-hl.window_rule({
-	match = { class = "wiremix-float" },
-	float = true,
-	size = "1280 720",
+	size = "1000 800",
 	center = true,
 })
 

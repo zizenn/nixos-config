@@ -19,6 +19,7 @@
     ./configs/yazi.nix
     ./configs/mako.nix
     ./configs/wleave.nix
+    ./configs/aerc.nix
     ./packages.nix
   ];
 
