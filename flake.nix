@@ -11,6 +11,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     herdr.url = "github:ogulcancelik/herdr";
     wlctl.url = "github:aashish-thapa/wlctl";
+    areofyl-fetch.url = "github:areofyl/fetch";
   };
 
   outputs =
@@ -20,6 +21,7 @@
       home-manager,
       zen-browser,
       herdr,
+      areofyl-fetch,
       ...
     }@inputs:
     {
