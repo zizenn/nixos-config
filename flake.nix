@@ -42,6 +42,7 @@
           extraSpecialArgs = { inherit inputs; };
           modules = [
             ./home.nix
+            inputs.areofyl-fetch.homeManagerModules.default
             {
               home.username = "zizenn";
               home.homeDirectory = "/home/zizenn";
