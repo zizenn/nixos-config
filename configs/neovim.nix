@@ -6,14 +6,6 @@
     viAlias = true;
     vimAlias = true;
 
-    extraPackages = with pkgs; [
-      cargo
-      fzf
-      ripgrep
-      fd
-      gcc
-      nodejs
-    ];
   };
 
   # symlink your config dir into ~/.config/nvim
