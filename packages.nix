@@ -96,5 +96,6 @@
     proton-pass
     zathura
     lynx
+    fetch
   ];
 }
