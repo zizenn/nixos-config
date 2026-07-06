@@ -4,6 +4,7 @@
     labelColor = "red";
     info = [
       "os"
+      "host"
       "kernel"
       "uptime"
     ];
