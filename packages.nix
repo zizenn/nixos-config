@@ -20,19 +20,10 @@
     ripgrep
     python3
     python3Packages.debugpy
-    ruff
-    black
     ntfs3g
     gcc
     clang-tools
     tree-sitter
-    lua-language-server
-    pyright
-    nil
-    typescript-language-server
-    vscode-langservers-extracted
-    prettier
-    eslint_d
     zsh-autosuggestions
     zsh-syntax-highlighting
     eza
@@ -64,11 +55,6 @@
     lazygit
     rofi
     uv
-    stylua
-    selene
-    pkgs.nixfmt
-    shellcheck
-    shfmt
     gdb
     cmake
     catimg
