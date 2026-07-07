@@ -8,9 +8,6 @@ vim.g.maplocalleader = " "
 map("n", "j", "gjzz", { desc = "Move down (visual line)" })
 map("n", "k", "gkzz", { desc = "Move up (visual line)" })
 
--- neotree
-map("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle Neo-tree" })
-
 -- telescope
 map("n", "<leader>ff", function()
 	require("telescope.builtin").find_files()
@@ -27,6 +24,12 @@ end, { desc = "Telescope Help Tags" })
 map("n", "<leader>fo", function()
 	require("telescope.builtin").oldfiles()
 end, { desc = "Telescope Recent Files" })
+map("n", "<leader>fs", function()
+	require("telescope.builtin").lsp_document_symbols()
+end, { desc = "Telescope Document Symbols" })
+map("n", "<leader>fS", function()
+	require("telescope.builtin").lsp_workspace_symbols()
+end, { desc = "Telescope Workspace Symbols" })
 
 -- DAP
 -- Toggle visual break marker positions in the code gutter
