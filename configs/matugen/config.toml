@@ -40,6 +40,10 @@ output_path = ["~/.config/mako/config"]
 input_path = "~/.config/matugen/templates/wleave.css"
 output_path = ["~/.config/wleave/style.css"]
 
+[templates.sysc-greet]
+input_path = "~/.config/matugen/templates/sysc-greet.toml"
+output_path = ["~/.config/sysc-greet/themes/matugen.toml"]
+
 [templates.hyprlock]
 input_path = "~/.config/matugen/templates/hyprlock.conf"
 output_path = ["~/.config/hypr/hyprlock.conf"]

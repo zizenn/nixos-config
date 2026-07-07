@@ -14,5 +14,6 @@
     "matugen/templates/mako.conf".source = ./matugen/templates/mako.conf;
     "matugen/templates/wleave.css".source = ./matugen/templates/wleave.css;
     "matugen/templates/hyprlock.conf".source = ./matugen/templates/hyprlock.conf;
+    "matugen/templates/sysc-greet.toml".source = ./matugen/templates/sysc-greet.toml;
   };
 }

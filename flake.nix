@@ -14,6 +14,10 @@
     areofyl-fetch.url = "github:areofyl/fetch";
     herdr.url = "github:ogulcancelik/herdr";
     wlctl.url = "github:aashish-thapa/wlctl";
+    sysc-greet = {
+      url = "github:Nomadcxx/sysc-greet";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {

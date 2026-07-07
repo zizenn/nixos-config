@@ -14,7 +14,16 @@
     config.common.default = [ "xapp" ];
   };
 
-  services.displayManager.ly.enable = true;
+  services.sysc-greet = {
+    enable = true;
+    compositor = "hyprland";
+    settings = {
+      initial_session = {
+        command = "Hyprland";
+        user = "zizenn";
+      };
+    };
+  };
 
   environment.sessionVariables = {
     GTK_USE_PORTAL = "1";
