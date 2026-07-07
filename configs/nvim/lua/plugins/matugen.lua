@@ -6,8 +6,7 @@ return {
     local matugen = require("matugen")
     matugen.setup({
       load_theme = true,
-      jsonc_path = vim.fn.expand("~/.cache/matugen/themes/nvim-colors.jsonc"),
-      palette_path = vim.fn.expand("~/.cache/matugen/colors.json"),
+      palette_path = vim.fn.expand("~/.cache/matugen/themes/nvim-colors.jsonc"),
     })
     matugen.load()
     vim.g.colors_name = "matugen"
