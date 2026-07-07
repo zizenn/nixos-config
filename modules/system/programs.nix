@@ -22,6 +22,7 @@
 
   environment.systemPackages = with pkgs; [
     vim
+    wget
     glib
     xdg-utils
     brightnessctl

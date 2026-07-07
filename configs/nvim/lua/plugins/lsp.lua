@@ -16,7 +16,6 @@ return {
           "html",
           "cssls",
           "pyright",
-          "clangd",
         },
         handlers = {
 
