@@ -22,7 +22,6 @@ output_path = ["~/.config/zed/themes/matugen.json"]
 [templates.waybar]
 input_path = "~/.config/matugen/templates/waybar.css"
 output_path = ["~/.config/waybar/colors.css"]
-post_run = "pkill waybar && waybar & disown"
 
 [templates.obsidian]
 input_path = "~/.config/matugen/templates/obsidian.css"
@@ -40,13 +39,13 @@ output_path = ["~/.config/mako/config"]
 input_path = "~/.config/matugen/templates/wleave.css"
 output_path = ["~/.config/wleave/style.css"]
 
-[templates.sysc-greet]
-input_path = "~/.config/matugen/templates/sysc-greet.toml"
-output_path = ["~/.config/sysc-greet/themes/matugen.toml"]
+[templates.sddm]
+input_path = "~/.config/matugen/templates/sddm.conf"
+output_path = ["/var/lib/sddm-themes/where_is_my_sddm_theme/theme.conf"]
 
 [templates.hyprlock]
 input_path = "~/.config/matugen/templates/hyprlock.conf"
 output_path = ["~/.config/hypr/hyprlock.conf"]
 
 [hooks]
-post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done; makoctl reload 2>/dev/null; true"
+post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done; makoctl reload 2>/dev/null; pkill waybar 2>/dev/null; waybar & disown; true"
