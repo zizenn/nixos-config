@@ -57,6 +57,9 @@ conf                   # alias: cd ~/nixos
 - Theme generation: matugen templates live in `configs/matugen/templates/`, applied by post‑switch scripts
 - Desktop: Hyprland + UWSM (`programs.hyprland.withUWSM = true`); login via `services.displayManager.ly`
 - `xdg.configFile` is the standard mechanism for symlinking dotfile directories (avoid manual symlinks)
+- LSPs / linters / formatters are managed by Mason inside Neovim, not declared in Nix (`configs/nvim/lua/plugins/mason.lua`). The system provides `nix-ld` so Mason's dynamically linked binaries work on NixOS.
+- Indentation: 6 spaces globally (`shiftwidth=6`, `tabstop=6`, `softtabstop=6`), enforced by formatters (stylua, prettier, autopep8, clang-format with `--indent-width 6` / `--tab-width 6` / etc.)
+- clangd is provided by the Nix `clang-tools` package, not Mason.
 
 ## Key files & locations
 
@@ -70,6 +73,7 @@ conf                   # alias: cd ~/nixos
 | Hyprlock template | `configs/matugen/templates/hyprlock.conf` → `~/.config/hypr/hyprlock.conf` |
 | Neovim | `configs/nvim/` (symlinked to `~/.config/nvim`) |
 | udev rules | `modules/system/services.nix` → `services.udev.extraRules` |
+| USB input resume fix | `modules/system/services.nix` → `systemd.services.fix-usb-input-after-resume` |
 | Systemd services | `modules/system/services.nix` |
 
 ## Testing / verification
