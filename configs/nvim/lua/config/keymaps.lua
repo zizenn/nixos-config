@@ -75,7 +75,9 @@ map("n", "<leader>cl", "<cmd>Trouble lsp toggle<cr>", { desc = "LSP References (
 map("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
 
 -- lsp
-map("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
+map("n", "<leader>li", function()
+	vim.lsp.info()
+end, { desc = "LSP Info" })
 
 -- scroll
 -- search: jump + center
