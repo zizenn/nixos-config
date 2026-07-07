@@ -14,12 +14,15 @@
     config.common.default = [ "xapp" ];
   };
 
+  users.users.greeter.extraGroups = [ "video" ];
+
   services.sysc-greet = {
     enable = true;
     compositor = "hyprland";
+    hyprlandPackage = pkgs.hyprland;
     settings = {
       initial_session = {
-        command = "Hyprland";
+        command = "${pkgs.hyprland}/bin/Hyprland";
         user = "zizenn";
       };
     };
