@@ -55,6 +55,7 @@
     lazygit
     rofi
     uv
+    python3Packages.autopep8
     gdb
     cmake
     catimg

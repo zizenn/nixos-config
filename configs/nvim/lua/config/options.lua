@@ -6,11 +6,11 @@ vim.opt.signcolumn = "yes" -- Keep sign column open to prevent text shifting
 vim.opt.cursorline = true -- Highlight the current cursor line
 vim.opt.scrolloff = 999 -- Keep 8 lines visible above/below cursor
 
--- --- 2-Space Indentation ---
+-- --- 6-Space Indentation ---
 vim.opt.expandtab = true -- Convert tabs into spaces
-vim.opt.shiftwidth = 2 -- Number of spaces for auto-indenting
-vim.opt.tabstop = 2 -- Number of spaces a tab counts for
-vim.opt.softtabstop = 2 -- Number of spaces a tab counts for while editing
+vim.opt.shiftwidth = 6 -- Number of spaces for auto-indenting
+vim.opt.tabstop = 6 -- Number of spaces a tab counts for
+vim.opt.softtabstop = 6 -- Number of spaces a tab counts for while editing
 vim.opt.wrap = true -- Enable text wrapping
 vim.opt.breakindent = true -- Wrapped lines keep the original indentation
 

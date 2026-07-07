@@ -6,32 +6,35 @@ return {
       local conform = require("conform")
 
       conform.setup({
-        -- Map filetypes to formatters
         formatters_by_ft = {
           lua = { "stylua" },
-          python = { "black" },
+          python = { "autopep8" },
           javascript = { "prettier" },
           typescript = { "prettier" },
           html = { "prettier" },
           css = { "prettier" },
-          -- C/C++ setup using clang-format
           c = { "clang-format" },
           cpp = { "clang-format" },
         },
 
-        -- Configure the format-on-save behavior
         format_on_save = {
-          lsp_fallback = true,   -- Use LSP formatting if formatter isn't ready
-          async = false,         -- Set to true if formatting slows down typing
-          timeout_ms = 500,      -- Give up if formatting takes too long
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = 500,
         },
 
-        -- Custom configurations for individual formatters
         formatters = {
+          stylua = {
+            prepend_args = { "--indent-width", "6" },
+          },
+          prettier = {
+            prepend_args = { "--tab-width", "6" },
+          },
+          autopep8 = {
+            prepend_args = { "--indent-size", "6" },
+          },
           ["clang-format"] = {
-            -- Pass custom styling options if you don't use a .clang-format file
-            -- Example forces the Google or LLVM styles natively
-            prepend_args = { "-style=file" }, -- Looks for a .clang-format file in your project
+            prepend_args = { "-style={IndentWidth: 6, BasedOnStyle: LLVM}" },
           },
         },
       })
