@@ -19,12 +19,14 @@
   systemd.packages = [ pkgs.cloudflare-warp ];
 
   services.logind = {
-    extraConfig = ''
-      HandlePowerKey=ignore
-      HandleLidSwitch=suspend
-      HandleLidSwitchExternalPower=lock
-      LidSwitchIgnoreInhibited=no
-    '';
+    settings = {
+      Login = {
+        HandlePowerKey = "ignore";
+        HandleLidSwitch = "suspend";
+        HandleLidSwitchExternalPower = "lock";
+        LidSwitchIgnoreInhibited = "no";
+      };
+    };
   };
 
   # Fix USB input devices not working after suspend/resume
