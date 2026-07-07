@@ -76,7 +76,16 @@ map("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List
 
 -- lsp
 map("n", "<leader>li", function()
-	vim.lsp.info()
+	local clients = vim.lsp.get_clients()
+	if #clients == 0 then
+		vim.notify("No active LSP clients")
+		return
+	end
+	local names = {}
+	for _, cl in ipairs(clients) do
+		table.insert(names, cl.name)
+	end
+	vim.notify("LSP: " .. table.concat(names, ", "))
 end, { desc = "LSP Info" })
 
 -- scroll
