@@ -18,31 +18,27 @@ return {
           "pyright",
         },
         handlers = {
-
-          -- Default handler for all servers except clangd
           function(server_name)
             vim.lsp.config(server_name, { capabilities = capabilities })
             vim.lsp.enable(server_name)
           end,
-
-          -- clangd needs extra flags
-          ["clangd"] = function()
-            vim.lsp.config("clangd", {
-              capabilities = capabilities,
-              cmd = {
-                "clangd",
-                "--background-index",
-                "--clang-tidy",
-                "--header-insertion=iwyu",
-                "--completion-style=detailed",
-                "--function-arg-placeholders=true",
-              },
-            })
-            vim.lsp.enable("clangd")
-          end,
-
         },
       })
+
+      -- clangd is provided by nixpkgs clang-tools, not mason.
+      -- Configure it independently so it always activates.
+      vim.lsp.config("clangd", {
+        capabilities = capabilities,
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--header-insertion=iwyu",
+          "--completion-style=detailed",
+          "--function-arg-placeholders=true",
+        },
+      })
+      vim.lsp.enable("clangd")
     end,
   },
 }
