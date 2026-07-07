@@ -74,6 +74,9 @@ map("n", "<leader>cs", "<cmd>Trouble symbols toggle<cr>", { desc = "Symbols (Tro
 map("n", "<leader>cl", "<cmd>Trouble lsp toggle<cr>", { desc = "LSP References (Trouble)" })
 map("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
 
+-- lsp
+map("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP Info" })
+
 -- scroll
 -- search: jump + center
 map("n", "n", function()
