@@ -83,5 +83,6 @@
     proton-pass
     zathura
     lynx
-  ];
+    cmatrix
+];
 }
