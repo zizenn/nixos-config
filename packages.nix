@@ -84,5 +84,6 @@
     zathura
     lynx
     cmatrix
+  modrinth-app
 ];
 }
