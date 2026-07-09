@@ -21,6 +21,9 @@
 
       # Forces new window splits to prefer vertical layout (side-by-side)
       enabled_layouts = "tall,splits,stack";
+
+      active_border_color = "#11111b";
+      inactive_border_color = "#11111b";
     };
 
     keybindings = {
