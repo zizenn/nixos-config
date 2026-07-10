@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   ...
@@ -77,15 +76,15 @@
     feh
     vlc
     kdePackages.kdenlive # the vid editor
-    glaxnimate    # Optional: For text/vector animations
-    mediainfo     # Optional: For reading video file metadata
+    glaxnimate # Optional: For text/vector animations
+    mediainfo # Optional: For reading video file metadata
     gemini-cli
     proton-pass
     zathura
     lynx
     cmatrix
-  modrinth-app
-  browsh
-  cargo
-];
+    modrinth-app
+    browsh
+    cargo
+  ];
 }

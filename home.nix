@@ -1,6 +1,6 @@
 { config, pkgs, inputs, ... }: {
   imports = [
-    ./configs/zsh.nix
+    ./configs/shell.nix
     ./configs/git.nix
     ./configs/jujutsu.nix
     ./configs/fetch.nix
