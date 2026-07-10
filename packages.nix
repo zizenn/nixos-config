@@ -85,5 +85,6 @@
     lynx
     cmatrix
   modrinth-app
+  browsh
 ];
 }
