@@ -2,7 +2,7 @@
 
 {
       
-      programs.tmux {
+      programs.tmux = {
             enable = true;
             prefix = "C-space";
 
