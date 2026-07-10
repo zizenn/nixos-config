@@ -85,6 +85,5 @@
     lynx
     cmatrix
   modrinth-app
-  tmux
 ];
 }

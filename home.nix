@@ -17,6 +17,7 @@
     ./configs/wleave.nix
     ./configs/aerc.nix
     ./configs/zed.nix
+    ./configs/tmux.nix
     ./packages.nix
   ];
 
