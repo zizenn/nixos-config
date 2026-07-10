@@ -86,5 +86,6 @@
     cmatrix
   modrinth-app
   browsh
+  cargo
 ];
 }

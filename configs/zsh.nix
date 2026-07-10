@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs, # Added to pull from flake inputs
   ...
 }:
 
@@ -9,11 +10,9 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    # Dedicated attribute for environment variables
     sessionVariables = {
       EDITOR = "nvim";
       SUDO_EDITOR = "nvim";
@@ -22,7 +21,6 @@
       FZF_DEFAULT_COMMAND = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
     };
 
-    # 1. Nicer native autocomplete options (Arrow keys + Case-insensitive fuzzy matching)
     completionInit = ''
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
@@ -30,16 +28,18 @@
       zstyle ':completion:*:descriptions' format "%F{green}-- %d --%f"
     '';
 
-    # 2. Declaratively add your Zsh plugins via Nix packages
     plugins = [
       {
         name = "fzf-tab";
         src = pkgs.zsh-fzf-tab;
         file = "share/fzf-tab/fzf-tab.plugin.zsh";
       }
+      {
+        name = "zsh-transient-prompt";
+        src = inputs.zsh-transient-prompt;
+      }
     ];
 
-    # Your custom aliases
     shellAliases = {
       conf = "cd ~/nixos";
       home = "nh home switch";
@@ -61,59 +61,90 @@
       fi
     '';
 
-    initContent = pkgs.lib.mkMerge [
-      # FIXED: Uses mkBefore to place the Instant Prompt at the absolute top of .zshrc safely
-      (pkgs.lib.mkBefore ''
-        if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-          source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-        fi
-        typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-      '')
+    # Fixed option name and dropped mkMerge bloat
+    initExtra = ''
+      # Yazi cwd shell wrapper
+      function y() {
+          local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+          command yazi "$@" --cwd-file="$tmp"
+          IFS= read -r -d \'\' cwd < "$tmp"
+          [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+          rm -f -- "$tmp"
+      }
 
-      # Standard priority (loads last) for themes, functions, binds, and paths
-      (pkgs.lib.mkOrder 1000 ''
-        # Load P10K Theme script
-        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-
-        # Yazi cwd shell wrapper
-        function y() {
-        	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-        	command yazi "$@" --cwd-file="$tmp"
-        	IFS= read -r -d \'\' cwd < "$tmp"
-        	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
-        	rm -f -- "$tmp"
-        }
-
-        # Custom rm function with fzf
-        remove() {
-          if [[ "$1" == "-r" || "$1" == "--recursive" ]]; then
-            local targets=$(find . -maxdepth 1 -type d ! -path '.' ! -path '*/.*' | fzf -m --prompt="Select directories to delete: ")
-            if [ -n "$targets" ]; then
-              echo "$targets" | xargs -I {} rm -r "{}"
-            fi
-          else
-            local targets=$(find . -maxdepth 1 -type f ! -path '*/.*' | fzf -m --prompt="Select files to delete: ")
-            if [ -n "$targets" ]; then
-              echo "$targets" | xargs -I {} rm "{}"
-            fi
+      # Custom rm function with fzf
+      remove() {
+        if [[ "$1" == "-r" || "$1" == "--recursive" ]]; then
+          local targets=$(find . -maxdepth 1 -type d ! -path '.' ! -path '*/.*' | fzf -m --prompt="Select directories to delete: ")
+          if [ -n "$targets" ]; then
+            echo "$targets" | xargs -I {} rm -r "{}"
           fi
-        }
+        else
+          local targets=$(find . -maxdepth 1 -type f ! -path '*/.*' | fzf -m --prompt="Select files to delete: ")
+          if [ -n "$targets" ]; then
+            echo "$targets" | xargs -I {} rm "{}"
+          fi
+        fi
+      }
 
-        # Native Zsh Vi Mode & KeyTimeout
-        bindkey -v
-        export KEYTIMEOUT=1
+      # Native Zsh Vi Mode & KeyTimeout
+      bindkey -v
+      export KEYTIMEOUT=1
 
-        # Sources & extra integrations
-        source <(fzf --zsh)
+      # Sources & extra integrations
+      source <(fzf --zsh)
 
-        # Environment Paths
-        export PATH="$HOME/.local/bin:$PATH"
+      # Environment Paths
+      export PATH="$HOME/.local/bin:$PATH"
 
-        # Runtime styling theme setup
-        eval "$(devenv hook zsh)"
-        eval "$(zoxide init --cmd cd zsh)"
-        [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-      '')
-    ];
+      # Runtime styling theme setup
+      eval "$(devenv hook zsh)"
+      eval "$(zoxide init --cmd cd zsh)"
+    '';
+  };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      format = "$directory$line_break$character";
+      right_format = "$nix_shell$git_branch$git_status$c$cplusplus$cmd_duration";
+
+      directory = {
+        style = "cyan bold";
+        truncate_to_repo = true;
+      };
+
+      character = {
+        success_symbol = "[❯](purple bold)";
+        error_symbol = "[❯](red bold)";
+        vimcmd_symbol = "[❮](green bold)";
+      };
+
+      nix_shell = {
+        format = "[ $state( \($name\))]($style) ";
+        style = "bold blue";
+      };
+
+      git_branch = {
+        format = "on [ $branch]($style) ";
+        style = "bright-black";
+      };
+
+      c = {
+        format = "via [ $version]($style) ";
+        style = "bold text";
+      };
+      
+      cplusplus = {
+        format = "via [ $version]($style) ";
+        style = "bold text";
+      };
+
+      cmd_duration = {
+        format = "took [ $duration]($style)";
+        style = "yellow";
+      };
+    };
   };
 }

@@ -22,6 +22,7 @@
 
   environment.systemPackages = with pkgs; [
     vim
+    tmux
     wget
     glib
     xdg-utils

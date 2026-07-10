@@ -128,7 +128,8 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_3",
         "wlctl": "wlctl",
-        "zen-browser": "zen-browser"
+        "zen-browser": "zen-browser",
+        "zsh-transient-prompt": "zsh-transient-prompt"
       }
     },
     "wlctl": {
@@ -166,6 +167,22 @@
       "original": {
         "owner": "youwen5",
         "repo": "zen-browser-flake",
+        "type": "github"
+      }
+    },
+    "zsh-transient-prompt": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1775975216,
+        "narHash": "sha256-P6iqJfT8quY5P+1QYQrt/C2vFyAisl37/ljFTf+A1n4=",
+        "owner": "olets",
+        "repo": "zsh-transient-prompt",
+        "rev": "bdd5917f38db4b4995134e8fb0251ce01cd9a068",
+        "type": "github"
+      },
+      "original": {
+        "owner": "olets",
+        "repo": "zsh-transient-prompt",
         "type": "github"
       }
     }

@@ -14,9 +14,13 @@
     areofyl-fetch.url = "github:areofyl/fetch";
     herdr.url = "github:ogulcancelik/herdr";
     wlctl.url = "github:aashish-thapa/wlctl";
+    zsh-transient-prompt = {
+      url = "github:olets/zsh-transient-prompt";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, zsh-transient-prompt, ... }@inputs: {
     nixosConfigurations.nix-port = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
