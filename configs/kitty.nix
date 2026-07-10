@@ -7,9 +7,9 @@
       name = "JetBrainsMono Nerd Font";
       size = 11.0;
     };
-    
+
     settings = {
-      shell = "zsh";
+      shell = "fish";
       enable_audio_bell = false;
       window_padding_width = 25;
       cursor_trail = 1;
@@ -65,4 +65,3 @@
     color15 #a6adc8
   '';
 }
-

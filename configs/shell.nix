@@ -32,6 +32,9 @@
       set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
       set -gx DEVENV_NO_PROMPT 1
 
+      # --- Fish ---
+      set -U fish_greeting ""
+
       # --- Vi Mode ---
       fish_vi_key_bindings
 
@@ -85,24 +88,22 @@
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
-    enableTransience = true; # Keeps your prompt transient
+    enableTransience = true;
 
     settings = {
-      # Line 1: Directory & Git (Left) -> Space Fill -> Nix, C/C++, Time (Right)
-      # Line 2: Typing prompt
-      format = "$directory$git_branch$git_status$fill$nix_shell$c$cmd_duration$line_break$character";
+      # Added $env_var right after $fill to catch devenv environments
+      format = "$directory$git_branch$git_status$fill$env_var$nix_shell$c$cmd_duration$line_break$character";
 
       fill = {
         symbol = " ";
       };
 
-      # Jetpack's signature multi-line continuation symbol
       continuation_prompt = "[▸▹ ](dimmed white)";
 
       directory = {
         style = "bold blue";
         format = "[$path]($style)[$read_only]($read_only_style) ";
-        truncate_to_repo = false; # Keeps your p10k full-path preference
+        truncate_to_repo = false;
       };
 
       character = {
@@ -111,7 +112,6 @@
         vimcmd_symbol = "[❮](green bold)";
       };
 
-      # Jetpack geometric git style
       git_branch = {
         format = "[△ $branch]($style) ";
         style = "italic bright-blue";
@@ -122,7 +122,14 @@
         style = "bold bright-black";
       };
 
-      # Minimal dev environments (stripped of words)
+      # Catches devenv environments specifically, styled for Jetpack
+      env_var.DEVENV_NAME = {
+        variable = "DEVENV_NAME";
+        format = "[ $value]($style) ";
+        style = "italic bright-blue";
+      };
+
+      # Catches standard nix-shell / nix develop environments
       nix_shell = {
         format = "[ \\($state\\)]($style) ";
         style = "italic bright-blue";

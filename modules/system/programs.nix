@@ -1,6 +1,12 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   programs = {
-    zsh.enable = true;
+    fish.enable = true;
     dconf.enable = true;
     firefox.enable = true;
     nix-ld.enable = true;
@@ -33,7 +39,11 @@
 
   users.users.zizenn = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" ];
-    shell = pkgs.zsh;
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "video"
+    ];
+    shell = pkgs.fish;
   };
 }
