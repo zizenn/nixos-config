@@ -22,6 +22,7 @@
     # Runs for interactive sessions
     interactiveShellInit = ''
       # --- Environment Variables ---
+      set -gx SHELL (command -v fish)
       set -gx EDITOR "nvim"
       set -gx SUDO_EDITOR "nvim"
       set -gx VISUAL "nvim"
