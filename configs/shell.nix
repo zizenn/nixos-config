@@ -1,6 +1,17 @@
 { config, pkgs, ... }:
 
 {
+
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
   programs.fish = {
     enable = true;
 
@@ -21,29 +32,18 @@
 
     # Runs for interactive sessions
     interactiveShellInit = ''
-      # --- Environment Variables ---
-      set -gx SHELL (command -v fish)
+      # Remove the subshells here
       set -gx EDITOR "nvim"
       set -gx SUDO_EDITOR "nvim"
       set -gx VISUAL "nvim"
       set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
       set -gx FZF_DEFAULT_COMMAND "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 
-      # --- Devenv & VirtualEnv Overrides ---
-      set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
-      set -gx DEVENV_NO_PROMPT 1
-
-      # --- Fish ---
       set -U fish_greeting ""
-
-      # --- Vi Mode ---
       fish_vi_key_bindings
-
-      # --- Paths ---
       fish_add_path ~/.local/bin
 
       # --- Functions ---
-      # Yazi wrapper
       function y
           set tmp (mktemp -t "yazi-cwd.XXXXXX")
           yazi $argv --cwd-file="$tmp"
@@ -53,36 +53,9 @@
           rm -f -- "$tmp"
       end
 
-      # Custom rm with fzf
-      function remove
-          if test "$argv[1]" = "-r"; or test "$argv[1]" = "--recursive"
-              set targets (find . -maxdepth 1 -type d ! -path '.' ! -path '*/.*' | fzf -m --prompt="Select directories to delete: ")
-              if test -n "$targets"
-                  for target in $targets
-                      rm -r $target
-                  end
-              end
-          else
-              set targets (find . -maxdepth 1 -type f ! -path '*/.*' | fzf -m --prompt="Select files to delete: ")
-              if test -n "$targets"
-                  for target in $targets
-                      rm $target
-                  end
-              end
-          end
-      end
-
       # --- Hooks ---
-      fzf --fish | source
-      zoxide init fish | source
+      # devenv needs to be sourced, it's the only one that can't be "module-ified"
       devenv hook fish | source
-    '';
-
-    # Runs on login (Hyprland auto-start)
-    loginShellInit = ''
-      if uwsm check may-start
-        exec uwsm start hyprland-uwsm.desktop
-      end
     '';
   };
 
