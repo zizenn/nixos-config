@@ -4,7 +4,7 @@ vim.opt.relativenumber = true -- Show relative line numbers for easy jumping
 vim.opt.termguicolors = true -- Enable 24-bit RGB colors in terminal
 vim.opt.signcolumn = "yes" -- Keep sign column open to prevent text shifting
 vim.opt.cursorline = true -- Highlight the current cursor line
-vim.opt.scrolloff = 999 -- Keep 8 lines visible above/below cursor
+vim.opt.scrolloff = 8
 
 -- --- 6-Space Indentation ---
 vim.opt.expandtab = true -- Convert tabs into spaces

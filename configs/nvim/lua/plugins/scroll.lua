@@ -4,7 +4,7 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			-- ⏱️ Setup standard motion configurations directly via opts
-			mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
+			mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zb" },
 			duration_ms = 150,
 			easing = "quadratic",
 			hide_cursor = true,
