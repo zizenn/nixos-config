@@ -40,6 +40,9 @@
       ${pkgs.matugen}/bin/matugen image "$(realpath "$WALLPAPER_LINK")" -q --source-color-index 0 || \
         ${pkgs.libnotify}/bin/notify-send "wallselect" "matugen failed"
 
+      # generate zen-wabi colors for Zen Browser theming
+      generate-matugen-vars "$(realpath "$WALLPAPER_LINK")" || true
+
       # apply colors to running kitty instances
       for SOCK in /tmp/kitty-zizenn-*; do
         [ -S "$SOCK" ] && ${pkgs.kitty}/bin/kitty @ --to="unix:$SOCK" set-colors --all --configured "$KITTY_COLORS" 2>/dev/null || true
