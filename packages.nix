@@ -83,8 +83,6 @@
     zathura
     lynx
     cmatrix
-    modrinth-app
-    browsh
     cargo
   ];
 }
