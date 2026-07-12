@@ -59,18 +59,13 @@
 
   services.kmscon = {
     enable = true;
-    
-    fonts = [
-      {
-        name = "JetBrainsMono Nerd Font";
-        package = pkgs.nerd-fonts.jetbrains-mono;
-      }
-    ];
-
-    extraConfig = ''
-      font-size=14
-      drm
-      hwaccel
-    '';
+    config = {
+      font-name = "JetBrainsMono Nerd Font";
+      font-size = 14;
+      drm = true;
+      hwaccel = true;
+    };
   };
+
+  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
 }

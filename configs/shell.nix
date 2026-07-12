@@ -65,6 +65,8 @@
     enableTransience = true;
 
     settings = {
+      scan_timeout = 50;
+      command_timeout = 2000;
       # Added $env_var right after $fill to catch devenv environments
       format = "$directory$git_branch$git_status$fill$env_var$nix_shell$c$cmd_duration$line_break$character";
 
