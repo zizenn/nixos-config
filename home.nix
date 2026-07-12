@@ -1,9 +1,14 @@
-{ config, pkgs, inputs, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   imports = [
     ./configs/shell.nix
     ./configs/git.nix
     ./configs/jujutsu.nix
-    ./configs/fetch.nix
     ./configs/obs.nix
     ./configs/opencode.nix
     ./configs/kitty.nix

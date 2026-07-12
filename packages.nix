@@ -60,7 +60,7 @@
     catimg
     zsh-fzf-tab
     gh
-    inputs.herdr.packages.${pkgs.system}.default
+    herdr
     obsidian
     cava
     wttrbar
