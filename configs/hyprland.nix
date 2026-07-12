@@ -9,6 +9,7 @@
     "hypr/hyprland/monitors.lua".source = ./hyprland/hyprland/monitors.lua;
     "hypr/hyprland/config.lua".source = ./hyprland/hyprland/config.lua;
     "hypr/hyprland/bindings.lua".source = ./hyprland/hyprland/bindings.lua;
+    "hypr/hyprland/zen.lua".source = ./hyprland/hyprland/zen.lua;
     "hypr/hyprsplit/init.lua".source = ./hyprland/hyprsplit/init.lua;
     "hypr/hypridle.conf".source = ./hyprland/hyprland/hypridle.conf;
   };
