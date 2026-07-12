@@ -24,6 +24,8 @@ in {
     serviceConfig.RemainAfterExit = true;
   };
 
+  programs.skwd-wall.enable = true;
+
   programs.hyprland = {
     enable = true;
     withUWSM = true;

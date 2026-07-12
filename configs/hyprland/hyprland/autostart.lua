@@ -1,11 +1,8 @@
 local bar = "waybar"
 
 hl.on("hyprland.start", function()
-	-- wallpaper
-	hl.exec_cmd("awww-daemon")
-
-	-- hyprpolkitagent and pywal
-	hl.exec_cmd("matugen image ~/.wallpaper --source-color-index 0")
+	-- wallpaper daemon
+	hl.exec_cmd("skwd-daemon")
 	hl.exec_cmd("systemctl --user start hyprpolkitagent")
 	hl.exec_cmd("xhost +si:localuser:root")
 

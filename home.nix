@@ -21,6 +21,7 @@
     ./configs/matugen.nix
     ./configs/mako.nix
     ./configs/wleave.nix
+    ./configs/fastfetch.nix
     ./configs/aerc.nix
     ./configs/zed.nix
     ./configs/tmux.nix

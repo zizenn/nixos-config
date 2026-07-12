@@ -10,5 +10,6 @@
     ./modules/system/nix.nix
     ./modules/system/programs.nix
     ./modules/system/locale.nix
+    inputs.skwd-wall.nixosModules.default
   ];
 }
