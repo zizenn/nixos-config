@@ -1,8 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  inherit (config.lib.file) mkOutOfStoreSymlink;
-  zenDir = ./zen-wabi;
+  base = ./zen-wabi;
   profile = "632wsxku.Default Profile";
 in
 {
@@ -21,39 +20,34 @@ in
   };
 
   xdg.configFile = {
-    # JS bridge files
     "zen/${profile}/chrome/JS/matugen-bridge.uc.js".source =
-      "${zenDir}/chrome/JS/matugen-bridge.uc.js";
+      base + "/chrome/JS/matugen-bridge.uc.js";
     "zen/${profile}/chrome/JS/Matugen/MatugenParent.sys.mjs".source =
-      "${zenDir}/chrome/JS/Matugen/MatugenParent.sys.mjs";
+      base + "/chrome/JS/Matugen/MatugenParent.sys.mjs";
     "zen/${profile}/chrome/JS/Matugen/MatugenChild.sys.mjs".source =
-      "${zenDir}/chrome/JS/Matugen/MatugenChild.sys.mjs";
-
-    # fx-autoconfig utils
+      base + "/chrome/JS/Matugen/MatugenChild.sys.mjs";
     "zen/${profile}/chrome/utils/boot.sys.mjs".source =
-      "${zenDir}/chrome/utils/boot.sys.mjs";
+      base + "/chrome/utils/boot.sys.mjs";
     "zen/${profile}/chrome/utils/fs.sys.mjs".source =
-      "${zenDir}/chrome/utils/fs.sys.mjs";
+      base + "/chrome/utils/fs.sys.mjs";
     "zen/${profile}/chrome/utils/module_loader.mjs".source =
-      "${zenDir}/chrome/utils/module_loader.mjs";
+      base + "/chrome/utils/module_loader.mjs";
     "zen/${profile}/chrome/utils/uc_api.sys.mjs".source =
-      "${zenDir}/chrome/utils/uc_api.sys.mjs";
+      base + "/chrome/utils/uc_api.sys.mjs";
     "zen/${profile}/chrome/utils/utils.sys.mjs".source =
-      "${zenDir}/chrome/utils/utils.sys.mjs";
+      base + "/chrome/utils/utils.sys.mjs";
     "zen/${profile}/chrome/utils/chrome.manifest".source =
-      "${zenDir}/chrome/utils/chrome.manifest";
-
-    # Template files (rendered by generate-matugen-vars.sh)
+      base + "/chrome/utils/chrome.manifest";
     "zen/templates/userChrome.css.template".source =
-      "${zenDir}/templates/userChrome.css.template";
+      base + "/templates/userChrome.css.template";
     "zen/templates/userContent.css.template".source =
-      "${zenDir}/templates/userContent.css.template";
+      base + "/templates/userContent.css.template";
     "zen/templates/userContent.github.template".source =
-      "${zenDir}/templates/userContent.github.template";
+      base + "/templates/userContent.github.template";
   };
 
   home.file.".local/bin/generate-matugen-vars" = {
     executable = true;
-    source = "${zenDir}/scripts/generate-matugen-vars.sh";
+    source = base + "/scripts/generate-matugen-vars.sh";
   };
 }
