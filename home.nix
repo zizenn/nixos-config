@@ -5,6 +5,7 @@
     ./configs/jujutsu.nix
     ./configs/fetch.nix
     ./configs/obs.nix
+    ./configs/opencode.nix
     ./configs/kitty.nix
     ./configs/hyprland.nix
     ./configs/neovim.nix
