@@ -18,4 +18,5 @@ hs.config({
 	persistent_workspaces = false,
 })
 
+require("hyprland.zen")
 require("hyprland.bindings")
