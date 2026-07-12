@@ -59,11 +59,14 @@
 
   services.kmscon = {
     enable = true;
+    useXkbConfig = true;
     config = {
       font-name = "JetBrainsMono Nerd Font";
       font-size = 14;
+      font-engine = "pango";
       drm = true;
-      hwaccel = true;
+      hwaccel = false;
+      term = "xterm-256color";
     };
   };
 
