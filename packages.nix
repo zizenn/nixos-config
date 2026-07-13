@@ -84,5 +84,6 @@
     lynx
     cmatrix
     cargo
-  ];
+    broot
+];
 }
