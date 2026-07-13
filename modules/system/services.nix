@@ -7,6 +7,7 @@
     openssh.enable = true;
     timesyncd.enable = true;
     elephant.enable = true;
+    fstrim.enable = true;
 
     pipewire = {
       enable = true;
@@ -30,10 +31,13 @@
   };
 
   # Fix USB input devices not working after suspend/resume
+  # Force BFQ I/O scheduler for external USB block devices
   services.udev.extraRules = ''
     # Disable USB autosuspend for input devices (keyboards, mice, HID)
     ACTION=="add", SUBSYSTEM=="usb", ATTR{product}=="*[Kk]eyboard*|*[Kk]eypad*|*[Mm]ouse*|*[Hh]id*|*[Tt]ouchpad*", ATTR{power/control}="on"
     ACTION=="add", SUBSYSTEM=="input", ATTR{power/control}="on"
+    # BFQ scheduler for USB mass storage (e.g. external SSD)
+    ACTION=="add|change", SUBSYSTEM=="block", KERNEL=="sd*[!0-9]", SUBSYSTEMS=="usb", ATTR{queue/scheduler}="bfq"
   '';
 
   systemd.services.fix-usb-input-after-resume = {

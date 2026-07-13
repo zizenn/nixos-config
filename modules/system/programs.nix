@@ -10,6 +10,7 @@
     dconf.enable = true;
     firefox.enable = true;
     nix-ld.enable = true;
+    ccache.enable = true;
 
     nh = {
       enable = true;
