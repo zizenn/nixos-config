@@ -24,7 +24,6 @@
     ./configs/fastfetch.nix
     ./configs/aerc.nix
     ./configs/zed.nix
-    ./configs/zen.nix
     ./configs/tmux.nix
     ./packages.nix
   ];
