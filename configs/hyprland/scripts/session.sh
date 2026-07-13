@@ -65,25 +65,44 @@ save() {
   notify-send "Session saved" "$n windows on $(jq '[.[].workspace] | unique | length' "$STATE_FILE") workspaces" -t 3000
 }
 
+# Parallel launch + workspace arrangement. Called from autostart.lua.
 restore() {
-  if [[ ! -f "$STATE_FILE" ]]; then
-    notify-send "Session restore" "No saved session found" -t 3000
-    return
-  fi
+  [[ ! -f "$STATE_FILE" ]] && return
 
   local n
   n=$(jq length "$STATE_FILE")
+  [[ "$n" -eq 0 ]] && return
   notify-send "Session restore" "Restoring $n windows…" -t 3000
 
-  jq -c '.[]' "$STATE_FILE" | while read -r entry; do
-    local ws cmd
-    ws=$(jq -r '.workspace' <<<"$entry")
+  # Phase 1: launch all apps in parallel
+  while read -r entry; do
+    local cmd
     cmd=$(jq -r '.cmd' <<<"$entry")
+    [[ -z "$cmd" ]] && continue
+    hyprctl dispatch exec -- "$cmd" &
+  done < <(jq -c '.[]' "$STATE_FILE")
 
-    hyprctl dispatch workspace "$ws"
-    sleep 0.15
-    hyprctl dispatch exec -- "$cmd"
-    sleep 0.15
+  # Phase 2: wait for windows to appear, then arrange to saved workspaces
+  sleep 2
+
+  local clients
+  clients=$(hyprctl -j clients)
+
+  jq -c '.[]' "$STATE_FILE" | while read -r entry; do
+    local ws class addr
+    ws=$(jq -r '.workspace' <<<"$entry")
+    class=$(jq -r '.class' <<<"$entry")
+
+    addr=$(echo "$clients" | jq -r --arg cls "$class" \
+      '[.[] | select(.class == $cls and .workspace.id > 0)][0].address // empty')
+
+    if [[ -n "$addr" ]]; then
+      hyprctl dispatch movetoworkspace "$ws,address:$addr"
+      clients=$(echo "$clients" | jq --arg addr "$addr" \
+        'map(select(.address != $addr))')
+    fi
+
+    sleep 0.1
   done
 
   notify-send "Session restored" "$n windows restored" -t 3000

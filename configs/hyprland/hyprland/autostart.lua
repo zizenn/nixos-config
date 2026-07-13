@@ -23,7 +23,7 @@ hl.on("hyprland.start", function()
 	-- bar
 	hl.exec_cmd(bar)
 
-	-- session restore (launches previous windows on their workspaces)
+	-- session restore: launch saved apps (parallel) + arrange to workspaces
 	hl.exec_cmd("~/.config/hypr/scripts/session.sh restore")
 
 	hl.exec_cmd("ollama serve")
