@@ -13,6 +13,7 @@
     };
     wlctl.url = "github:aashish-thapa/wlctl";
     skwd-wall.url = "github:liixini/skwd-wall";
+    hyprsession.url = "github:joshurtree/hyprsession";
   };
 
   outputs =
@@ -38,6 +39,7 @@
             home.username = "zizenn";
             home.homeDirectory = "/home/zizenn";
             home.stateVersion = "26.05";
+            home.packages = [ inputs.hyprsession.packages.x86_64-linux.default ];
           }
         ];
       };
