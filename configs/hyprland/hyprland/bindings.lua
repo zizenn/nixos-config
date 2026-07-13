@@ -24,17 +24,17 @@ hl.bind(mainMod .. " + semicolon", hl.dsp.focus({ monitor = "+1" }))
 hl.bind(mainMod .. " + SHIFT + semicolon", hl.dsp.window.move({ monitor = "+1" }))
 
 -- workspace management
-hl.bind(mainMod .. " + k", hs.dsp.focus({ workspace = "-1" }))
-hl.bind(mainMod .. " + j", hs.dsp.focus({ workspace = "+1" }))
-hl.bind(mainMod .. " + SHIFT + k", hs.dsp.window.move({ workspace = "prev" }))
-hl.bind(mainMod .. " + SHIFT + j", hs.dsp.window.move({ workspace = "next" }))
+hl.bind(mainMod .. " + k", hl.dsp.focus({ workspace = "-1" }))
+hl.bind(mainMod .. " + j", hl.dsp.focus({ workspace = "+1" }))
+hl.bind(mainMod .. " + SHIFT + k", hl.dsp.window.move({ workspace = "prev" }))
+hl.bind(mainMod .. " + SHIFT + j", hl.dsp.window.move({ workspace = "next" }))
 
 for i = 1, 10 do
       local key = i % 10
       if i <= 9 then
-            hl.bind(mainMod .. " + " .. key, hs.dsp.focus({ workspace = i }))
+            hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
       end
-      hl.bind(mainMod .. " + SHIFT + " .. key, hs.dsp.window.move({ workspace = i, follow = false }))
+      hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i, follow = false }))
 end
 
 -- changing focus
