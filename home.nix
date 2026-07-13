@@ -38,6 +38,8 @@
     SUDO_EDITOR = "nvim";
     EDITOR = "nvim";
     VISUAL = "nvim";
+    QT_QUICK_BACKEND = "software";
+    QSG_RHI_BACKEND = "opengl";
   };
 
   xdg.mimeApps = {
