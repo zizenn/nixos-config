@@ -6,7 +6,7 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [ mesa libva ];
+      extraPackages = with pkgs; [ mesa libva vulkan-loader ];
     };
   };
 
