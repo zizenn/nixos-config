@@ -36,9 +36,20 @@ return {
           "--header-insertion=iwyu",
           "--completion-style=detailed",
           "--function-arg-placeholders=true",
+          "--inlay-hints=true",
         },
       })
       vim.lsp.enable("clangd")
+
+      -- Enable inlay hints (e.g. deduced types, parameter names) for all LSP servers
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client and client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+          end
+        end,
+      })
     end,
   },
 }
