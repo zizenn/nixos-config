@@ -12,6 +12,11 @@
     "hypr/hyprland/zen.lua".source = ./hyprland/hyprland/zen.lua;
     "hypr/hyprsplit/init.lua".source = ./hyprland/hyprsplit/init.lua;
     "hypr/hypridle.conf".source = ./hyprland/hyprland/hypridle.conf;
+
+    "hypr/scripts/session.sh" = {
+      source = ./hyprland/scripts/session.sh;
+      executable = true;
+    };
   };
 
   xdg.configFile."uwsm/env-hyprland".text = ''

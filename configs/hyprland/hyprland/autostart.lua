@@ -2,7 +2,7 @@ local bar = "waybar"
 
 hl.on("hyprland.start", function()
 	-- wallpaper daemon
-	hl.exec_cmd("skwd-daemon")
+	hl.exec_cmd("QSG_RHI_BACKEND=software QT_QUICK_BACKEND=software skwd-daemon")
 	hl.exec_cmd("generate-matugen-vars")
 
 	hl.exec_cmd("systemctl --user start hyprpolkitagent")
@@ -22,5 +22,9 @@ hl.on("hyprland.start", function()
 
 	-- bar
 	hl.exec_cmd(bar)
+
+	-- session restore (launches previous windows on their workspaces)
+	hl.exec_cmd("~/.config/hypr/scripts/session.sh restore")
+
 	hl.exec_cmd("ollama serve")
 end)

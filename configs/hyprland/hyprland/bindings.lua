@@ -13,6 +13,9 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("~/.local/bin/cliphist-rofi-img"))
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("obsidian"))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("wleave"))
 
+-- save / restore
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("~/.config/hypr/scripts/session.sh save"))
+
 -- Special Script Invoking Executions
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("kitty --class yazi-float -e ~/.config/hypr/scripts/yazi.sh"))
 
@@ -57,7 +60,7 @@ hl.gesture({
 })
 
 -- exit logic
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("uwsm stop"))
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("~/.config/hypr/scripts/session.sh save; uwsm stop"))
 
 -- Mouse Bindings
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
