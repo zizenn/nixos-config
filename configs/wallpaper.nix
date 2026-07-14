@@ -51,36 +51,28 @@
 
       WALLPAPER_DIR="''${XDG_PICTURES_DIR:-$HOME/Pictures}/Wallpapers"
       WALLPAPER_LINK="$HOME/.wallpaper"
-      CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/rofi-wallpapers"
 
-      mkdir -p "$CACHE_DIR"
+      mkdir -p "$WALLPAPER_DIR"
+      cd "$WALLPAPER_DIR"
 
-      # build rofi entries with thumbnail icons
-      ENTRIES=""
-      for img in "$WALLPAPER_DIR"/*.{jpg,jpeg,png,bmp,webp}; do
-        [ -f "$img" ] || continue
-        name=$(basename "$img")
-        thumb="$CACHE_DIR/$(basename "$img" | sed 's/\.[^.]*$//').png"
-        [ -f "$thumb" ] || ${pkgs.imagemagick}/bin/magick "$img" -resize 170x170^ -gravity center -extent 170x170 "$thumb" 2>/dev/null
-        ENTRIES+="$name\0icon\x1f$thumb\n"
-      done
+      export WALLPAPER_DIR
 
-      SELECTED=$(echo -e "$ENTRIES" | ${pkgs.rofi}/bin/rofi -dmenu -theme wallpaper-grid -p "Wallpaper")
+      SELECTED=$(find . -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) -printf '%f\n' | sort \
+        | ${pkgs.fzf}/bin/fzf --reverse \
+            --preview='${pkgs.catimg}/bin/catimg -w $FZF_PREVIEW_COLUMNS "$WALLPAPER_DIR"/{}' \
+            --preview-window='right:60%' \
+            --header='Select wallpaper (ESC to cancel)' \
+            --height=100%)
+
       [ -z "$SELECTED" ] && exit 0
 
       SELECTED_PATH="$WALLPAPER_DIR/$SELECTED"
 
-      # update symlink
       ln -sf "$(realpath "$SELECTED_PATH")" "$WALLPAPER_LINK"
-
-      # set wallpaper
       ${pkgs.awww}/bin/awww img "$WALLPAPER_LINK" || \
         ${pkgs.libnotify}/bin/notify-send "wallpaper" "awww failed"
-
-      # run matugen (post hook hot-reloads kitty, mako, waybar)
       ${pkgs.matugen}/bin/matugen image "$(realpath "$WALLPAPER_LINK")" -q --source-color-index 0 || \
         ${pkgs.libnotify}/bin/notify-send "wallpaper" "matugen failed"
-
       ${pkgs.libnotify}/bin/notify-send -i "$SELECTED_PATH" "wallpaper" "Set to $SELECTED"
     '';
   };

@@ -8,24 +8,25 @@ window {
     transparency: "real";
     location: center;
     anchor: center;
-    width: 58%;
+    width: 28%;
     border: 1px;
-    border-color: rgba(255, 255, 255, 0.22);
+    border-color: @background;
     border-radius: 0px;
-    background-color: rgba(20, 20, 28, 0.36);
-    padding: 10px;
+    background-color: @background-dim;
+    background-blur: true;
+    padding: 8px;
 }
 
 mainbox {
     background-color: transparent;
-    spacing: 8px;
+    spacing: 6px;
     children: [ inputbar, listview ];
 }
 
 inputbar {
-    background-color: rgba(255, 255, 255, 0.14);
+    background-color: @background;
     border: 1px;
-    border-color: rgba(255, 255, 255, 0.24);
+    border-color: @foreground;
     border-radius: 0px;
     padding: 8px 14px;
     spacing: 10px;
@@ -39,8 +40,7 @@ prompt {
 entry {
     background-color: transparent;
     text-color: @foreground;
-    placeholder: "Search wallpapers...";
-    placeholder-color: rgba(255, 255, 255, 0.55);
+    placeholder: "Search apps";
     expand: true;
 }
 
@@ -49,78 +49,88 @@ listview {
     border: 0;
     padding: 2px;
     margin: 0;
-    spacing: 10px;
-    layout: vertical;
-    columns: 3;
-    fixed-columns: true;
-    lines: 3;
-    fixed-height: true;
-    dynamic: false;
+    spacing: 4px;
+    columns: 1;
+    lines: 8;
     cycle: true;
+    dynamic: true;
+    fixed-height: false;
+    layout: vertical;
     scrollbar: false;
 }
 
 element {
-    orientation: vertical;
+    orientation: horizontal;
     children: [ element-icon, element-text ];
-    background-color: rgba(255, 255, 255, 0.14);
-    border: 1px;
-    border-color: rgba(255, 255, 255, 0.22);
+    background-color: transparent;
+    border: 0;
     border-radius: 0px;
-    padding: 8px;
+    padding: 6px 10px;
     margin: 0;
-    spacing: 6px;
+    spacing: 10px;
     text-color: @foreground;
 }
 
 element-icon {
     background-color: transparent;
-    size: 170px;
-    horizontal-align: 0.5;
-    vertical-align: 0.5;
-    border-radius: 0px;
+    size: 1em;
 }
 
 element-text {
     background-color: transparent;
     text-color: inherit;
     highlight: none;
-    horizontal-align: 0.5;
+    expand: true;
     vertical-align: 0.5;
     format: "{text}";
 }
 
 element normal.normal {
-    background-color: rgba(255, 255, 255, 0.14);
+    background-color: transparent;
     text-color: @foreground;
-}
-
-element alternate.normal {
-    background-color: rgba(255, 255, 255, 0.14);
-    text-color: @foreground;
-}
-
-element normal.active {
-    background-color: @active-background;
-    border: 2px;
-    border-color: rgba(255, 255, 255, 0.30);
-    text-color: @active-foreground;
 }
 
 element selected.normal {
     background-color: @selected-normal-background;
-    border: 2px;
-    border-color: rgba(255, 255, 255, 0.30);
+    border: 0;
     text-color: @selected-normal-foreground;
+}
+
+element normal.active {
+    background-color: transparent;
+    border: 0;
+    text-color: @foreground;
 }
 
 element selected.active {
     background-color: @selected-active-background;
-    border: 2px;
-    border-color: rgba(255, 255, 255, 0.34);
+    border: 0;
     text-color: @selected-active-foreground;
+}
+
+element normal.urgent,
+element selected.urgent {
+    background-color: @selected-urgent-background;
+    border: 0;
+    text-color: @selected-urgent-foreground;
+}
+
+element alternate.normal,
+element alternate.active,
+element alternate.urgent {
+    background-color: transparent;
+    text-color: @foreground;
 }
 
 scrollbar {
     enabled: false;
+}
+
+message {
+    background-color: transparent;
+}
+
+textbox {
+    background-color: transparent;
+    text-color: @foreground;
 }

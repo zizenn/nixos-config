@@ -44,6 +44,13 @@ hl.window_rule({
 })
 
 hl.window_rule({
+	match = { class = "fzf-float" },
+	float = true,
+	size = "1400 900",
+	center = true,
+})
+
+hl.window_rule({
 	match = { title = "quickshell-launcher" },
 	float = true,
 	pin = true,
