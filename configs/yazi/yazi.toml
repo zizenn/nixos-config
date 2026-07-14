@@ -1,0 +1,13 @@
+[mgr]
+# Layout ratios (Parent : Current : Preview)
+ratio          = [ 1, 3, 4 ]
+sort_by        = "natural"
+sort_sensitive = false
+sort_reverse   = false
+sort_dir_first = true
+# linemode       = "size"
+show_hidden    = false
+
+[input]
+# Use Vim-style keybindings for the input field
+cursor_blink = true

@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   ...
@@ -8,18 +7,18 @@
 {
   home.packages = with pkgs; [
     git
-    neovim
     nodejs_26
     zsh
     yazi
     fzf
-    waybar
     matugen
     opencode
     mako
+    hyprlock
+    hypridle
     ripgrep
     python3
-    python3Packages.pylint
+    python3Packages.debugpy
     ntfs3g
     gcc
     clang-tools
@@ -33,19 +32,16 @@
     jq
     zoxide
     pavucontrol
-    quickshell
     pv
     awww
     socat
     ollama
     unzip
     claude-code
-    direnv
     bc
     fd
     vesktop
     inputs.zen-browser.packages.x86_64-linux.default
-    inputs.waylandar.packages.x86_64-linux.default
     steam
     protonmail-desktop
     zed-editor
@@ -57,25 +53,36 @@
     lazygit
     rofi
     uv
-    stylua
-    selene
-    prettierd
-    pkgs.nixfmt
-    shellcheck
-    shfmt
+    python3Packages.autopep8
     gdb
     cmake
-    discordo
-    claude-code-router
-    eslint_d
-    impala
-    iwd
     catimg
     zsh-fzf-tab
     gh
-    inputs.herdr.packages.${pkgs.system}.default
+    herdr
     obsidian
-  cava
-  wttrbar
-];
+    cava
+    wttrbar
+    bluetui
+    wiremix
+    inputs.wlctl.packages.${pkgs.stdenv.hostPlatform.system}.default
+    wleave
+    wl-clipboard
+    libnotify
+    glow
+    rose-pine-hyprcursor
+    rose-pine-cursor
+    feh
+    vlc
+    kdePackages.kdenlive # the vid editor
+    glaxnimate # Optional: For text/vector animations
+    mediainfo # Optional: For reading video file metadata
+    gemini-cli
+    proton-pass
+    zathura
+    lynx
+    cmatrix
+    cargo
+    broot
+  ];
 }

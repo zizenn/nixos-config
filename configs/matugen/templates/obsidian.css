@@ -1,0 +1,132 @@
+/* matugen template for Obsidian
+   Generated theme: place output at ~/.config/obsidian/themes/matugen/theme.css
+   (or wherever your Obsidian vault/config expects custom themes)
+   Rebuild trigger: `matugen image <wallpaper>` will regenerate this from
+   ~/.config/matugen/templates/obsidian.css
+*/
+
+.theme-dark, .theme-light {
+    /* Core surfaces */
+    --background-primary: {{colors.surface.default.hex}};
+    --background-primary-alt: {{colors.surface_variant.default.hex}};
+    --background-secondary: {{colors.surface_container.default.hex}};
+    --background-secondary-alt: {{colors.surface_container_high.default.hex}};
+    --background-modifier-border: {{colors.outline_variant.default.hex}};
+    --background-modifier-border-hover: {{colors.outline.default.hex}};
+    --background-modifier-border-focus: {{colors.primary.default.hex}};
+    --background-modifier-form-field: {{colors.surface_container_low.default.hex}};
+    --background-modifier-hover: {{colors.surface_container_high.default.hex}};
+    --background-modifier-active-hover: {{colors.surface_container_highest.default.hex}};
+    --background-modifier-error: {{colors.error.default.hex}};
+    --background-modifier-error-hover: {{colors.error.default.hex}};
+    --background-modifier-success: {{colors.tertiary.default.hex}};
+    --background-modifier-message: {{colors.surface_container.default.hex}};
+    --background-modifier-cover: {{colors.scrim.default.hex}};
+
+    /* Explicit opaque backgrounds — fixes compositor transparency bleed */
+    background-color: {{colors.surface.default.hex}};
+
+    /* Text */
+    --text-normal: {{colors.on_surface.default.hex}};
+    --text-muted: {{colors.on_surface_variant.default.hex}};
+    --text-faint: {{colors.outline.default.hex}};
+    --text-on-accent: {{colors.on_primary.default.hex}};
+    --text-on-accent-inverted: {{colors.primary.default.hex}};
+    --text-error: {{colors.error.default.hex}};
+    --text-accent: {{colors.primary.default.hex}};
+    --text-accent-hover: {{colors.primary_container.default.hex}};
+    --text-selection: {{colors.primary_container.default.hex}};
+    --text-highlight-bg: {{colors.tertiary_container.default.hex}};
+
+    /* Interactive / accent */
+    --interactive-normal: {{colors.surface_container_high.default.hex}};
+    --interactive-hover: {{colors.surface_container_highest.default.hex}};
+    --interactive-accent: {{colors.primary.default.hex}};
+    --interactive-accent-hover: {{colors.primary_container.default.hex}};
+    --interactive-accent-rgb: {{colors.primary.default.rgb}};
+    --interactive-success: {{colors.tertiary.default.hex}};
+    --interactive-error: {{colors.error.default.hex}};
+    --interactive-error-hover: {{colors.error_container.default.hex}};
+
+    /* Headers / titlebar */
+    --titlebar-background: {{colors.surface_container.default.hex}};
+    --titlebar-background-focused: {{colors.surface_container_high.default.hex}};
+    --titlebar-text-color: {{colors.on_surface.default.hex}};
+
+    /* Sidebars */
+    --nav-item-color: {{colors.on_surface_variant.default.hex}};
+    --nav-item-color-hover: {{colors.on_surface.default.hex}};
+    --nav-item-color-active: {{colors.on_primary_container.default.hex}};
+    --nav-item-background-hover: {{colors.surface_container_high.default.hex}};
+    --nav-item-background-active: {{colors.primary_container.default.hex}};
+    --nav-collapse-icon-color: {{colors.outline.default.hex}};
+    --nav-indentation-guide-color: {{colors.outline_variant.default.hex}};
+
+    /* Tabs */
+    --tab-text-color: {{colors.on_surface_variant.default.hex}};
+    --tab-text-color-focused: {{colors.on_surface.default.hex}};
+    --tab-text-color-focused-active: {{colors.on_surface.default.hex}};
+    --tab-background-active: {{colors.surface_container_high.default.hex}};
+    --tab-outline-color: {{colors.outline_variant.default.hex}};
+
+    /* Scrollbar */
+    --scrollbar-thumb-bg: {{colors.outline.default.hex}};
+    --scrollbar-active-thumb-bg: {{colors.primary.default.hex}};
+    --scrollbar-bg: {{colors.surface.default.hex}};
+
+    /* Code blocks */
+    --code-normal: {{colors.on_surface.default.hex}};
+    --code-background: {{colors.surface_container_low.default.hex}};
+    --code-comment: {{colors.outline.default.hex}};
+    --code-function: {{colors.secondary.default.hex}};
+    --code-important: {{colors.error.default.hex}};
+    --code-keyword: {{colors.primary.default.hex}};
+    --code-operator: {{colors.tertiary.default.hex}};
+    --code-property: {{colors.primary.default.hex}};
+    --code-string: {{colors.tertiary.default.hex}};
+    --code-tag: {{colors.secondary.default.hex}};
+    --code-value: {{colors.tertiary.default.hex}};
+
+    /* Checkboxes / radio / misc UI */
+    --checkbox-color: {{colors.primary.default.hex}};
+    --checkbox-color-hover: {{colors.primary_container.default.hex}};
+    --checkbox-border-color: {{colors.outline.default.hex}};
+    --checkbox-border-color-hover: {{colors.outline_variant.default.hex}};
+
+    /* Modals / popovers */
+    --modal-background: {{colors.surface_container.default.hex}};
+    --modal-border-color: {{colors.outline_variant.default.hex}};
+    --popover-shadow: {{colors.shadow.default.hex}};
+
+    /* Links */
+    --link-color: {{colors.primary.default.hex}};
+    --link-color-hover: {{colors.primary_container.default.hex}};
+    --link-unresolved-color: {{colors.error.default.hex}};
+
+    /* Tags */
+    --tag-background: {{colors.secondary_container.default.hex}};
+    --tag-color: {{colors.on_secondary_container.default.hex}};
+
+    /* Bold/italic markers */
+    --bold-color: {{colors.on_surface.default.hex}};
+    --italic-color: {{colors.on_surface_variant.default.hex}};
+}
+
+/* Belt-and-suspenders: explicit opaque backgrounds on the actual window
+   chrome, since Obsidian's Electron shell can otherwise pick up transparency
+   from compositor settings if any background-color rule is missing. */
+.app-container,
+.workspace,
+.workspace-split,
+.workspace-leaf,
+.workspace-leaf-content,
+.titlebar,
+.mod-left-split,
+.mod-right-split,
+.workspace-tab-header-container {
+    background-color: {{colors.surface.default.hex}};
+}
+
+.workspace-leaf.mod-active .view-content {
+    background-color: {{colors.surface.default.hex}};
+}

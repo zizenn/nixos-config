@@ -7,8 +7,9 @@
       name = "JetBrainsMono Nerd Font";
       size = 11.0;
     };
-      settings = {
-      shell = "zsh";
+
+    settings = {
+      shell = "fish";
       enable_audio_bell = false;
       window_padding_width = 25;
       cursor_trail = 1;
@@ -17,6 +18,23 @@
       allow_remote_control = "socket-only";
       listen_on = "unix:/tmp/kitty-zizenn";
       include = "current-colors.conf";
+
+      # Forces new window splits to prefer vertical layout (side-by-side)
+      enabled_layouts = "tall,splits,stack";
+
+      active_border_color = "#11111b";
+      inactive_border_color = "#11111b";
+    };
+
+    keybindings = {
+      # Forces the primary new pane shortcut to execute a vertical split
+      "ctrl+shift+enter" = "launch --location=vsplit";
+
+      # Use arrow keys to seamlessly switch focus between your vertical panes
+      "ctrl+left" = "neighboring_window left";
+      "ctrl+right" = "neighboring_window right";
+      "ctrl+up" = "neighboring_window up";
+      "ctrl+down" = "neighboring_window down";
     };
   };
 

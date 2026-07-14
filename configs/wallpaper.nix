@@ -40,10 +40,40 @@
       ${pkgs.matugen}/bin/matugen image "$(realpath "$WALLPAPER_LINK")" -q --source-color-index 0 || \
         ${pkgs.libnotify}/bin/notify-send "wallselect" "matugen failed"
 
-      # apply colors to running kitty instances
-      for SOCK in /tmp/kitty-zizenn-*; do
-        [ -S "$SOCK" ] && ${pkgs.kitty}/bin/kitty @ --to="unix:$SOCK" set-colors --all --configured "$KITTY_COLORS" 2>/dev/null || true
-      done 2>/dev/null
+    '';
+  };
+
+  home.file.".local/bin/wallpaper-pick" = {
+    executable = true;
+    text = ''
+      #!${pkgs.bash}/bin/bash
+      set -euo pipefail
+
+      WALLPAPER_DIR="''${XDG_PICTURES_DIR:-$HOME/Pictures}/Wallpapers"
+      WALLPAPER_LINK="$HOME/.wallpaper"
+
+      mkdir -p "$WALLPAPER_DIR"
+      cd "$WALLPAPER_DIR"
+
+      export WALLPAPER_DIR
+
+      SELECTED=$(find . -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) -printf '%f\n' | sort \
+        | ${pkgs.fzf}/bin/fzf --reverse \
+            --preview='${pkgs.catimg}/bin/catimg -w $FZF_PREVIEW_COLUMNS "$WALLPAPER_DIR"/{}' \
+            --preview-window='right:60%' \
+            --header='Select wallpaper (ESC to cancel)' \
+            --height=100%)
+
+      [ -z "$SELECTED" ] && exit 0
+
+      SELECTED_PATH="$WALLPAPER_DIR/$SELECTED"
+
+      ln -sf "$(realpath "$SELECTED_PATH")" "$WALLPAPER_LINK"
+      ${pkgs.awww}/bin/awww img "$WALLPAPER_LINK" || \
+        ${pkgs.libnotify}/bin/notify-send "wallpaper" "awww failed"
+      ${pkgs.matugen}/bin/matugen image "$(realpath "$WALLPAPER_LINK")" -q --source-color-index 0 || \
+        ${pkgs.libnotify}/bin/notify-send "wallpaper" "matugen failed"
+      ${pkgs.libnotify}/bin/notify-send -i "$SELECTED_PATH" "wallpaper" "Set to $SELECTED"
     '';
   };
 }

@@ -1,23 +1,5 @@
 {
   "nodes": {
-    "herdr": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1782678854,
-        "narHash": "sha256-HfdOfF+Qx7NNXkDAqfs0Aclp4pNpeX4c1fXW3ZB6E+Q=",
-        "owner": "ogulcancelik",
-        "repo": "herdr",
-        "rev": "a937f7e85bbf8780c6030c57f48dab2168bca932",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ogulcancelik",
-        "repo": "herdr",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -25,31 +7,48 @@
         ]
       },
       "locked": {
-        "lastModified": 1781981105,
-        "narHash": "sha256-/1nNBbA7PrSQpTc9Qazkhl4kIPg+TNl0CjxS3UQJKlw=",
+        "lastModified": 1783823409,
+        "narHash": "sha256-OI4IkRjRXa1e7hYmCGJDPDq5H/kPwhsyoS80cNUF9fI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7bfff44b465909f69a442701293bc0badcf476dc",
+        "rev": "7566825d4652a1b885bd4ce65bd9e8def432fec9",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-26.05",
+        "ref": "master",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "hyprflow": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773255004,
+        "narHash": "sha256-5QWzimuNSl91TLWhBBiq4HCQyYtoSP8c9VknxSA0O8s=",
+        "owner": "isorensen",
+        "repo": "hyprflow",
+        "rev": "efc96e9aa7bf96ad00706e77511a3daf99ca4c63",
+        "type": "github"
+      },
+      "original": {
+        "owner": "isorensen",
+        "ref": "v0.2.1",
+        "repo": "hyprflow",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1779357205,
-        "narHash": "sha256-cCO8aTqss5x9Ky8GWkpY0Hy5fyTZEbtifSUV8QjSzic=",
-        "owner": "NixOS",
+        "lastModified": 1783776592,
+        "narHash": "sha256-UgCQzxeWI75XM8G+hPrPh+MKzEPjG3SpAj7dtqSbksA=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "f83fc3c307e74bc5fd5adb7eb6b8b13ffd2a36e1",
+        "rev": "e7a3ca8092b61ff85b6a45bf863ea2b2d6a661b3",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "nixos",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
@@ -57,46 +56,44 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1781808408,
-        "narHash": "sha256-0sOb6OIaD/K1zHxBhpmlKvkADfe0n8+l4Jj2e1Q0r3w=",
+        "lastModified": 1776434932,
+        "narHash": "sha256-gyqXNMgk3sh+ogY5svd2eNLJ6oEwzbAeaoBrrxD0lKk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e8210c649915deed7080033cdbabcc19e40bb899",
+        "rev": "c7f47036d3df2add644c46d712d14262b7d86c0c",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-26.05",
+        "ref": "nixos-25.11",
         "repo": "nixpkgs",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
-        "herdr": "herdr",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_2",
-        "waylandar": "waylandar",
+        "hyprflow": "hyprflow",
+        "nixpkgs": "nixpkgs",
+        "wlctl": "wlctl",
         "zen-browser": "zen-browser"
       }
     },
-    "waylandar": {
+    "wlctl": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1782139419,
-        "narHash": "sha256-RxdBpdcyzmUF6DB3kWjfKFHCMiMqY+GIbr/sRYCW4CM=",
-        "owner": "samjoshuadud",
-        "repo": "waylandar",
-        "rev": "db4d7c24680dabecfc2b6e3ec99235b472dd6371",
+        "lastModified": 1782629001,
+        "narHash": "sha256-XzQu8cxWN6v6KhgZkqYAckqFIabJQQhXQU5XLEYerNI=",
+        "owner": "aashish-thapa",
+        "repo": "wlctl",
+        "rev": "d4da0f122615c5f8e9f6e3b24ad0124c08c7a93a",
         "type": "github"
       },
       "original": {
-        "owner": "samjoshuadud",
-        "repo": "waylandar",
+        "owner": "aashish-thapa",
+        "repo": "wlctl",
         "type": "github"
       }
     },
@@ -107,11 +104,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781847955,
-        "narHash": "sha256-1OSYOGuJp/NoODmSHjsz+6TB/kSilJ+BsFihjY7TTnc=",
+        "lastModified": 1783668749,
+        "narHash": "sha256-EDJjJYGT5pQKTBqmz+OA2sqE20kjj6mP699JFGDzse4=",
         "owner": "youwen5",
         "repo": "zen-browser-flake",
-        "rev": "4bca251cd556677f7b765ff324d1638ae215be13",
+        "rev": "e8041a3571e8cadb57dc18a3d6362d753510b94a",
         "type": "github"
       },
       "original": {

@@ -1,0 +1,136 @@
+@import "~/.config/rofi/colors.rasi"
+
+* {
+    font: "JetBrainsMono Nerd Font 14px";
+}
+
+window {
+    transparency: "real";
+    location: center;
+    anchor: center;
+    width: 36%;
+    border: 1px;
+    border-color: @background;
+    border-radius: 0;
+    background-color: @background-dim;
+    background-blur: true;
+    padding: 8px;
+}
+
+mainbox {
+    background-color: transparent;
+    spacing: 6px;
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    background-color: @background;
+    border: 1px;
+    border-color: @foreground;
+    border-radius: 0;
+    padding: 8px 14px;
+    spacing: 10px;
+    children: [ entry ];
+}
+
+prompt {
+    enabled: false;
+}
+
+entry {
+    background-color: transparent;
+    text-color: @foreground;
+    placeholder: "Search clipboard history";
+    expand: true;
+}
+
+listview {
+    background-color: transparent;
+    border: 0;
+    padding: 2px;
+    margin: 0;
+    spacing: 4px;
+    columns: 1;
+    lines: 12;
+    cycle: true;
+    dynamic: true;
+    fixed-height: false;
+    layout: vertical;
+    scrollbar: false;
+}
+
+element {
+    orientation: horizontal;
+    children: [ element-icon, element-text ];
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 10px;
+    margin: 0;
+    spacing: 10px;
+    text-color: @foreground;
+}
+
+element-icon {
+    background-color: transparent;
+    size: 1em;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    highlight: none;
+    expand: true;
+    vertical-align: 0.5;
+    format: "{text}";
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+element selected.normal {
+    background-color: @selected-normal-background;
+    border: 0;
+    text-color: @selected-normal-foreground;
+}
+
+element normal.active {
+    background-color: transparent;
+    border: 0;
+    text-color: @foreground;
+}
+
+element selected.active {
+    background-color: @selected-active-background;
+    border: 0;
+    text-color: @selected-active-foreground;
+}
+
+element normal.urgent,
+element selected.urgent {
+    background-color: @selected-urgent-background;
+    border: 0;
+    text-color: @selected-urgent-foreground;
+}
+
+element alternate.normal,
+element alternate.active,
+element alternate.urgent {
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+scrollbar {
+    enabled: false;
+}
+
+message {
+    background-color: transparent;
+}
+
+textbox {
+    background-color: transparent;
+    text-color: @foreground;
+}

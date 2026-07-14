@@ -3,12 +3,18 @@
 {
   programs.yazi = {
     enable = true;
-    enableZshIntegration = true; # Change to enableZshIntegration if using zsh
+    enableZshIntegration = true;
+  };
+
+  xdg.configFile."yazi" = {
+    source = ./yazi;
+    recursive = true;
+    force = true;
   };
 
   xdg.desktopEntries.yazi = {
     name = "yazi";
-    exec = "kitty --class yazi-float -e yazi %u"; # Replace 'kitty' with your preferred terminal
+    exec = "kitty --class yazi-float -e yazi %u";
     terminal = false;
     mimeType = [ "inode/directory" ];
   };

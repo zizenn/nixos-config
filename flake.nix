@@ -1,19 +1,21 @@
 {
-  description = "my nixos flake";
+  description = "zizenn's NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager.url = "github:nix-community/home-manager/release-26.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    waylandar = {
-      url = "github:samjoshuadud/waylandar";
-      inputs.nixpkgs.follows = "nixpkgs";
+    wlctl.url = "github:aashish-thapa/wlctl";
+    hyprflow = {
+      url = "github:isorensen/hyprflow/v0.2.1";
+      flake = false;
     };
-    herdr.url = "github:ogulcancelik/herdr";
   };
 
   outputs =
@@ -21,36 +23,34 @@
       self,
       nixpkgs,
       home-manager,
-      zen-browser,
-      waylandar,
-      herdr,
       ...
     }@inputs:
     {
-      nixosConfigurations = {
-        nix-port = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./configuration.nix
-          ];
-        };
+      nixosConfigurations.nix-port = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [ ./configuration.nix ];
       };
 
-      # This block enables "nh home switch" to work
-      homeConfigurations = {
-        "zizenn@nix-port" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [
-            ./home.nix
-            {
-              home.username = "zizenn";
-              home.homeDirectory = "/home/zizenn";
-              home.stateVersion = "26.05";
-            }
-          ];
-        };
+      homeConfigurations."zizenn@nix-port" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+          ./home.nix
+          {
+            home.username = "zizenn";
+            home.homeDirectory = "/home/zizenn";
+            home.stateVersion = "26.05";
+            home.packages = [
+              (nixpkgs.legacyPackages.x86_64-linux.rustPlatform.buildRustPackage {
+                pname = "hyprflow";
+                version = "0.2.1";
+                src = inputs.hyprflow;
+                cargoHash = "sha256-6TGMiyvmLDYMsPKqQwnPf98frtRIel0QsqgjW0B290E=";
+              })
+            ];
+          }
+        ];
       };
     };
 }

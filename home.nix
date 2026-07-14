@@ -4,19 +4,28 @@
   inputs,
   ...
 }:
-
 {
   imports = [
-    ./configs/rofi.nix
-    ./configs/zsh.nix
+    ./configs/shell.nix
+    ./configs/git.nix
+    ./configs/jujutsu.nix
+    ./configs/obs.nix
+    ./configs/opencode.nix
     ./configs/kitty.nix
     ./configs/hyprland.nix
-    ./configs/matugen.nix
-    ./configs/wallpaper.nix
     ./configs/neovim.nix
-    ./configs/quickshell.nix
-    ./configs/zed.nix
+    ./configs/rofi.nix
+    ./configs/waybar.nix
     ./configs/yazi.nix
+    ./configs/wallpaper.nix
+    ./configs/matugen.nix
+    ./configs/mako.nix
+    ./configs/wleave.nix
+    ./configs/hyprflow.nix
+    ./configs/fastfetch.nix
+    ./configs/aerc.nix
+    ./configs/zed.nix
+    ./configs/tmux.nix
     ./packages.nix
   ];
 
@@ -25,32 +34,29 @@
     allowUnfreePredicate = (_: true);
   };
 
-  home.username = "zizenn";
-  home.homeDirectory = "/home/zizenn";
-
-  # ENVIRONMENT VARIABLES
   home.sessionVariables = {
     SUDO_EDITOR = "nvim";
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
 
-  programs.zsh.enable = true;
-
-  # CONFIGURATION
-  programs.git = {
+  xdg.mimeApps = {
     enable = true;
-    settings = {
-      user = {
-        name = "sakif";
-        email = "zizenn@proton.me";
-      };
-      core = {
-        editor = "nvim";
-      };
+    defaultApplications = {
+      "image/jpeg" = [ "feh.desktop" ];
+      "image/png" = [ "feh.desktop" ];
+      "image/gif" = [ "feh.desktop" ];
+      "image/webp" = [ "feh.desktop" ];
+      "image/bmp" = [ "feh.desktop" ];
+      "image/tiff" = [ "feh.desktop" ];
+      "video/x-matroska" = "vlc.desktop";
+      "video/mp4" = "vlc.desktop";
+      "video/webm" = "vlc.desktop";
+      "video/ogg" = "vlc.desktop";
+      "video/quicktime" = "vlc.desktop";
+      "audio/mp3" = "vlc.desktop";
+      "audio/x-flac" = "vlc.desktop";
+      "audio/mpeg" = "vlc.desktop";
     };
   };
-
-  # SYSTEM
-  home.stateVersion = "26.05";
 }

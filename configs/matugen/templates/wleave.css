@@ -1,0 +1,87 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  border: none;
+  border-radius: 0;
+  transition: none;
+}
+
+window {
+  background-color: {{colors.background.default.hex}}CC;
+}
+
+button {
+  color: {{colors.on_surface.default.hex}};
+  background-color: {{colors.surface_container.default.hex}};
+  border: 1px solid {{colors.outline.default.hex}}38;
+  border-radius: 0;
+  padding: 12px;
+  margin: 4px;
+  min-width: 120px;
+  min-height: 80px;
+}
+
+button label.action-name {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+button label.keybind {
+  font-size: 18px;
+  font-family: "JetBrainsMono Nerd Font";
+  opacity: 0.5;
+}
+
+button:hover, button:focus {
+  background-color: {{colors.primary_container.default.hex}};
+  color: {{colors.on_primary_container.default.hex}};
+}
+
+button:active {
+  color: {{colors.on_primary.default.hex}};
+  background-color: {{colors.primary.default.hex}};
+}
+
+button#shutdown {
+  color: {{colors.error.default.hex}};
+}
+
+button#shutdown:hover {
+  background-color: {{colors.error_container.default.hex}};
+  color: {{colors.on_error_container.default.hex}};
+}
+
+button#reboot {
+  color: {{colors.tertiary.default.hex}};
+}
+
+button#reboot:hover {
+  background-color: {{colors.tertiary_container.default.hex}};
+  color: {{colors.on_tertiary_container.default.hex}};
+}
+
+button#lock {
+  color: {{colors.primary.default.hex}};
+}
+
+button#lock:hover {
+  background-color: {{colors.primary_container.default.hex}};
+  color: {{colors.on_primary_container.default.hex}};
+}
+
+button#logout {
+  color: {{colors.secondary.default.hex}};
+}
+
+button#logout:hover {
+  background-color: {{colors.secondary_container.default.hex}};
+  color: {{colors.on_secondary_container.default.hex}};
+}
+
+button#suspend, button#hibernate {
+  color: {{colors.secondary.default.hex}};
+}
+
+button#suspend:hover, button#hibernate:hover {
+  background-color: {{colors.secondary_container.default.hex}};
+  color: {{colors.on_secondary_container.default.hex}};
+}

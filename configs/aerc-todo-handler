@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+msgid="${1#aerc-todo://}"
+msgid="${1#aerc-todo:}"
+
+exec kitty --class aerc-todo -e sh -c "aerc & pid=\$!; sleep 2; aerc ':cf msgid:\"$msgid\"' 2>/dev/null || true; wait \$pid"
