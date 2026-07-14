@@ -22,8 +22,9 @@ hl.on("hyprland.start", function()
 	-- bar
 	hl.exec_cmd(bar)
 
-	-- session daemon: auto-restores + periodically saves window layout
-	hl.exec_cmd("hyprsession")
+	-- session restore on login + install autosave timer
+	hl.exec_cmd("hyprflow restore --max-age 24h")
+	hl.exec_cmd("hyprflow autosave --install")
 
 	hl.exec_cmd("ollama serve")
 end)

@@ -14,7 +14,7 @@ hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("obsidian"))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("wleave"))
 
 -- save session
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("hyprsession save"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("hyprflow save"))
 
 -- Special Script Invoking Executions
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("kitty --class yazi-float -e ~/.config/hypr/scripts/yazi.sh"))
@@ -60,7 +60,7 @@ hl.gesture({
 })
 
 -- exit logic
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("hyprsession save; uwsm stop"))
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("hyprflow save; uwsm stop"))
 
 -- Mouse Bindings
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
