@@ -59,7 +59,7 @@
 
       set SELECTED (find . -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) -printf '%f\n' | sort \
         | ${pkgs.fzf}/bin/fzf --reverse \
-            --preview='${pkgs.kitty}/bin/kitty +kitten icat --clear --transfer-mode=memory --place=$((FZF_PREVIEW_COLUMNS-2))x$((FZF_PREVIEW_LINES-2))@0x0 "$WALLPAPER_DIR"/{} 2>/dev/null' \
+            --preview='${pkgs.kitty}/bin/kitty +kitten icat --clear --transfer-mode=memory --place=''${FZF_PREVIEW_COLUMNS}x''${FZF_PREVIEW_LINES}@0x0 "$WALLPAPER_DIR"/{} 2>/dev/null' \
             --preview-window='right:60%' \
             --header='Select wallpaper (ESC to cancel)' \
             --height=100%)
