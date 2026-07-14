@@ -9,7 +9,6 @@
 
       WALLPAPER_DIR="''${XDG_PICTURES_DIR:-$HOME/Pictures}/Wallpapers"
       WALLPAPER_LINK="$HOME/.wallpaper"
-      KITTY_COLORS="$HOME/.config/kitty/current-colors.conf"
 
       mkdir -p "$WALLPAPER_DIR"
 
@@ -28,18 +27,13 @@
         *) ${pkgs.libnotify}/bin/notify-send "wallselect" "not an image"; exit 1 ;;
       esac
 
-      # symlink wallpaper for persistence
       ln -sf "$(realpath "$SELECTED")" "$WALLPAPER_LINK"
 
-      # set wallpaper
       ${pkgs.awww}/bin/awww img "$WALLPAPER_LINK" || \
         ${pkgs.libnotify}/bin/notify-send "wallselect" "awww failed"
 
-      # run matugen -> renders kitty + nvim templates automatically
-      # resolve symlink since matugen 4.x can't determine image format from symlinks
       ${pkgs.matugen}/bin/matugen image "$(realpath "$WALLPAPER_LINK")" -q --source-color-index 0 || \
         ${pkgs.libnotify}/bin/notify-send "wallselect" "matugen failed"
-
     '';
   };
 
@@ -47,35 +41,7 @@
     executable = true;
     text = ''
       #!${pkgs.fish}/bin/fish
-
-      set -q XDG_PICTURES_DIR; or set XDG_PICTURES_DIR "$HOME/Pictures"
-      set WALLPAPER_DIR "$XDG_PICTURES_DIR/Wallpapers"
-      set WALLPAPER_LINK "$HOME/.wallpaper"
-
-      mkdir -p $WALLPAPER_DIR
-      cd $WALLPAPER_DIR
-
-      set -gx WALLPAPER_DIR $WALLPAPER_DIR
-
-      set SELECTED (find . -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) -printf '%f\n' | sort \
-        | ${pkgs.fzf}/bin/fzf --reverse \
-            --preview='${pkgs.kitty}/bin/kitty +kitten icat --clear --transfer-mode=memory --place=''${FZF_PREVIEW_COLUMNS}x''${FZF_PREVIEW_LINES}@0x0 "$WALLPAPER_DIR"/{} 2>/dev/null' \
-            --preview-window='right:60%' \
-            --header='Select wallpaper (ESC to cancel)' \
-            --height=100%)
-
-      if test -z "$SELECTED"
-          exit 0
-      end
-
-      set SELECTED_PATH "$WALLPAPER_DIR/$SELECTED"
-
-      ln -sf (realpath $SELECTED_PATH) $WALLPAPER_LINK
-      ${pkgs.awww}/bin/awww img $WALLPAPER_LINK
-      or ${pkgs.libnotify}/bin/notify-send "wallpaper" "awww failed"
-      ${pkgs.matugen}/bin/matugen image (realpath $WALLPAPER_LINK) -q --source-color-index 0
-      or ${pkgs.libnotify}/bin/notify-send "wallpaper" "matugen failed"
-      ${pkgs.libnotify}/bin/notify-send -i $SELECTED_PATH "wallpaper" "Set to $SELECTED"
+${builtins.readFile ./scripts/wallpaper-pick}
     '';
   };
 }
