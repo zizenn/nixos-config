@@ -32,7 +32,6 @@
     jq
     zoxide
     pavucontrol
-    quickshell
     pv
     awww
     socat

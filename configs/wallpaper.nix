@@ -40,10 +40,48 @@
       ${pkgs.matugen}/bin/matugen image "$(realpath "$WALLPAPER_LINK")" -q --source-color-index 0 || \
         ${pkgs.libnotify}/bin/notify-send "wallselect" "matugen failed"
 
-      # apply colors to running kitty instances
-      for SOCK in /tmp/kitty-zizenn-*; do
-        [ -S "$SOCK" ] && ${pkgs.kitty}/bin/kitty @ --to="unix:$SOCK" set-colors --all --configured "$KITTY_COLORS" 2>/dev/null || true
-      done 2>/dev/null
+    '';
+  };
+
+  home.file.".local/bin/wallpaper-pick" = {
+    executable = true;
+    text = ''
+      #!${pkgs.bash}/bin/bash
+      set -euo pipefail
+
+      WALLPAPER_DIR="''${XDG_PICTURES_DIR:-$HOME/Pictures}/Wallpapers"
+      WALLPAPER_LINK="$HOME/.wallpaper"
+      CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/rofi-wallpapers"
+
+      mkdir -p "$CACHE_DIR"
+
+      # build rofi entries with thumbnail icons
+      ENTRIES=""
+      for img in "$WALLPAPER_DIR"/*.{jpg,jpeg,png,bmp,webp}; do
+        [ -f "$img" ] || continue
+        name=$(basename "$img")
+        thumb="$CACHE_DIR/$(basename "$img" | sed 's/\.[^.]*$//').png"
+        [ -f "$thumb" ] || ${pkgs.imagemagick}/bin/magick "$img" -resize 170x170^ -gravity center -extent 170x170 "$thumb" 2>/dev/null
+        ENTRIES+="$name\0icon\x1f$thumb\n"
+      done
+
+      SELECTED=$(echo -e "$ENTRIES" | ${pkgs.rofi}/bin/rofi -dmenu -theme wallpaper-grid -p "Wallpaper")
+      [ -z "$SELECTED" ] && exit 0
+
+      SELECTED_PATH="$WALLPAPER_DIR/$SELECTED"
+
+      # update symlink
+      ln -sf "$(realpath "$SELECTED_PATH")" "$WALLPAPER_LINK"
+
+      # set wallpaper
+      ${pkgs.awww}/bin/awww img "$WALLPAPER_LINK" || \
+        ${pkgs.libnotify}/bin/notify-send "wallpaper" "awww failed"
+
+      # run matugen (post hook hot-reloads kitty, mako, waybar)
+      ${pkgs.matugen}/bin/matugen image "$(realpath "$WALLPAPER_LINK")" -q --source-color-index 0 || \
+        ${pkgs.libnotify}/bin/notify-send "wallpaper" "matugen failed"
+
+      ${pkgs.libnotify}/bin/notify-send -i "$SELECTED_PATH" "wallpaper" "Set to $SELECTED"
     '';
   };
 }

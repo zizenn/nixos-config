@@ -24,12 +24,6 @@ in {
     serviceConfig.RemainAfterExit = true;
   };
 
-  programs.skwd-wall.enable = true;
-
-  systemd.user.services.skwd-daemon = {
-    environment.QSG_RHI_BACKEND = "opengl";
-  };
-
   programs.hyprland = {
     enable = true;
     withUWSM = true;

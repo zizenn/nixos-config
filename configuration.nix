@@ -10,7 +10,6 @@
     ./modules/system/nix.nix
     ./modules/system/programs.nix
     ./modules/system/locale.nix
-    inputs.skwd-wall.nixosModules.default
   ];
 
   # Optimize ext4 on external SSD (USB 3.0) for C++ compilation
