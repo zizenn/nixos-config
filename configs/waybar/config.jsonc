@@ -6,12 +6,7 @@
   "width": 500,
   "margin-bottom": 0,
   "modules-left": [
-    "custom/weather",
-    "custom/separator2",
     "clock",
-    "custom/separator2",
-    "custom/mpris",
-    "custom/music-stopped",
     "custom/separator2",
     "hyprland/workspaces",
     "custom/separator2"
@@ -54,13 +49,6 @@
   "custom/separator2": {
     "format": "•",
     "tooltip": false
-  },
-  "custom/weather": {
-    "format": "{}°",
-    "tooltip": true,
-    "interval": 60,
-    "exec": "wttrbar --nerd",
-    "return-type": "json"
   },
   "custom/power": {
     "format": "",
@@ -190,13 +178,6 @@
         ""
       ]
     }
-  },
-  "custom/mpris": {
-    "exec": "python3 -u ~/.config/waybar/scrolling-mpris.py",
-    "format": "{text}",
-    "return-type": "json",
-    "on-click": "playerctl play-pause",
-    "tooltip": false
   },
   "group/tray-expander": {
     "orientation": "inherit",

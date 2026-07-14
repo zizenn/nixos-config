@@ -51,6 +51,20 @@ hl.window_rule({
 })
 
 hl.window_rule({
+	match = { class = "wiremix-float" },
+	float = true,
+	size = "1280 720",
+	center = true,
+})
+
+hl.window_rule({
+	match = { class = "wlctl-float" },
+	float = true,
+	size = "1280 720",
+	center = true,
+})
+
+hl.window_rule({
 	match = { title = "quickshell-launcher" },
 	float = true,
 	pin = true,
