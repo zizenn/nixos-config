@@ -46,34 +46,36 @@
   home.file.".local/bin/wallpaper-pick" = {
     executable = true;
     text = ''
-      #!${pkgs.bash}/bin/bash
-      set -euo pipefail
+      #!${pkgs.fish}/bin/fish
 
-      WALLPAPER_DIR="''${XDG_PICTURES_DIR:-$HOME/Pictures}/Wallpapers"
-      WALLPAPER_LINK="$HOME/.wallpaper"
+      set -q XDG_PICTURES_DIR; or set XDG_PICTURES_DIR "$HOME/Pictures"
+      set WALLPAPER_DIR "$XDG_PICTURES_DIR/Wallpapers"
+      set WALLPAPER_LINK "$HOME/.wallpaper"
 
-      mkdir -p "$WALLPAPER_DIR"
-      cd "$WALLPAPER_DIR"
+      mkdir -p $WALLPAPER_DIR
+      cd $WALLPAPER_DIR
 
-      export WALLPAPER_DIR
+      set -gx WALLPAPER_DIR $WALLPAPER_DIR
 
-      SELECTED=$(find . -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) -printf '%f\n' | sort \
+      set SELECTED (find . -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) -printf '%f\n' | sort \
         | ${pkgs.fzf}/bin/fzf --reverse \
             --preview='${pkgs.kitty}/bin/kitty +kitten icat --clear --transfer-mode=memory --place=$((FZF_PREVIEW_COLUMNS-2))x$((FZF_PREVIEW_LINES-2))@0x0 "$WALLPAPER_DIR"/{} 2>/dev/null' \
             --preview-window='right:60%' \
             --header='Select wallpaper (ESC to cancel)' \
             --height=100%)
 
-      [ -z "$SELECTED" ] && exit 0
+      if test -z "$SELECTED"
+          exit 0
+      end
 
-      SELECTED_PATH="$WALLPAPER_DIR/$SELECTED"
+      set SELECTED_PATH "$WALLPAPER_DIR/$SELECTED"
 
-      ln -sf "$(realpath "$SELECTED_PATH")" "$WALLPAPER_LINK"
-      ${pkgs.awww}/bin/awww img "$WALLPAPER_LINK" || \
-        ${pkgs.libnotify}/bin/notify-send "wallpaper" "awww failed"
-      ${pkgs.matugen}/bin/matugen image "$(realpath "$WALLPAPER_LINK")" -q --source-color-index 0 || \
-        ${pkgs.libnotify}/bin/notify-send "wallpaper" "matugen failed"
-      ${pkgs.libnotify}/bin/notify-send -i "$SELECTED_PATH" "wallpaper" "Set to $SELECTED"
+      ln -sf (realpath $SELECTED_PATH) $WALLPAPER_LINK
+      ${pkgs.awww}/bin/awww img $WALLPAPER_LINK
+      or ${pkgs.libnotify}/bin/notify-send "wallpaper" "awww failed"
+      ${pkgs.matugen}/bin/matugen image (realpath $WALLPAPER_LINK) -q --source-color-index 0
+      or ${pkgs.libnotify}/bin/notify-send "wallpaper" "matugen failed"
+      ${pkgs.libnotify}/bin/notify-send -i $SELECTED_PATH "wallpaper" "Set to $SELECTED"
     '';
   };
 }
