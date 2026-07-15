@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   services = {
     dbus.enable = true;
     upower.enable = true;
@@ -8,6 +14,7 @@
     timesyncd.enable = true;
     elephant.enable = true;
     fstrim.enable = true;
+    tailscale.enable = true;
 
     pipewire = {
       enable = true;
@@ -43,8 +50,16 @@
   systemd.services.fix-usb-input-after-resume = {
     enable = true;
     description = "Fix USB input devices after suspend/resume";
-    after = [ "suspend.target" "hibernate.target" "hybrid-sleep.target" ];
-    wants = [ "suspend.target" "hibernate.target" "hybrid-sleep.target" ];
+    after = [
+      "suspend.target"
+      "hibernate.target"
+      "hybrid-sleep.target"
+    ];
+    wants = [
+      "suspend.target"
+      "hibernate.target"
+      "hybrid-sleep.target"
+    ];
     before = [ "post-resume.target" ];
     script = ''
       sleep 3
