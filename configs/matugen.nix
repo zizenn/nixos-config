@@ -4,7 +4,7 @@
   xdg.configFile = {
     "matugen/config.toml".source = ./matugen/config.toml;
 
-    "matugen/templates/nvim-colors.jsonc".source = ./matugen/templates/nvim-colors.jsonc;
+    "matugen/templates/nvim-colors.json".source = ./matugen/templates/nvim-colors.json;
     "matugen/templates/rofi-colors.rasi".source = ./matugen/templates/rofi.rasi;
     "matugen/templates/zed-theme.json".source = ./matugen/templates/zed.json;
     "matugen/templates/kitty.conf".source = ./matugen/templates/kitty.conf;
