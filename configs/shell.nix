@@ -27,6 +27,7 @@
       cat = "bat";
       v = "nvim";
       oc = "opencode";
+      leet = "nvim leetcode.nvim";
       sudo = "doas";
     };
 
