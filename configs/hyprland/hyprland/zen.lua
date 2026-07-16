@@ -10,17 +10,14 @@ local function toggle_zen()
 		if saved_gaps_out ~= nil then
 			hl.config({ general = { gaps_out = saved_gaps_out } })
 		end
-		hl.exec_cmd("pkill -f 'waybar.*waybar-zen'")
-		hl.exec_cmd("waybar")
-		hl.exec_cmd("mako")
+		hl.exec_cmd("pkill -f 'waybar.*waybar-zen'; waybar")
 		in_zen = false
 	else
 		saved_gaps_in = hl.get_config("general.gaps_in")
 		saved_gaps_out = hl.get_config("general.gaps_out")
 		hl.config({ general = { gaps_in = 2, gaps_out = 0 } })
-		hl.exec_cmd("pkill waybar")
-		hl.exec_cmd("waybar -c /home/zizenn/.config/waybar-zen/config.jsonc -s /home/zizenn/.config/waybar-zen/style.css")
-		hl.exec_cmd("pkill mako")
+		hl.exec_cmd(
+			"pkill waybar; waybar -c /home/zizenn/.config/waybar-zen/config.jsonc -s /home/zizenn/.config/waybar-zen/style.css")
 		in_zen = true
 	end
 end
