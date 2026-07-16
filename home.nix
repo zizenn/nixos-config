@@ -26,6 +26,8 @@
     ./configs/aerc.nix
     ./configs/zed.nix
     ./configs/tmux.nix
+    ./configs/gtk.nix
+    ./configs/qt.nix
     ./packages.nix
   ];
 

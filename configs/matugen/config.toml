@@ -47,5 +47,17 @@ output_path = ["/var/lib/sddm-themes/where_is_my_sddm_theme/theme.conf"]
 input_path = "~/.config/matugen/templates/hyprlock.conf"
 output_path = ["~/.config/hypr/hyprlock.conf"]
 
+[templates.gtk3]
+input_path = "~/.config/matugen/templates/gtk.css"
+output_path = ["~/.config/gtk-3.0/gtk.css"]
+
+[templates.gtk4]
+input_path = "~/.config/matugen/templates/gtk4.css"
+output_path = ["~/.config/gtk-4.0/gtk.css"]
+
+[templates.kvantum]
+input_path = "~/.config/matugen/templates/kvantum/Matugen.kvconfig"
+output_path = ["~/.config/Kvantum/Matugen.kvconfig"]
+
 [hooks]
-post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done; makoctl reload 2>/dev/null; pkill waybar 2>/dev/null; waybar & disown; true"
+post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done; makoctl reload 2>/dev/null; pkill waybar 2>/dev/null; waybar & disown; kvantummanager --set Matugen 2>/dev/null; true"
