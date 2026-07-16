@@ -10,7 +10,8 @@ local function toggle_zen()
 		if saved_gaps_out ~= nil then
 			hl.config({ general = { gaps_out = saved_gaps_out } })
 		end
-		hl.exec_cmd("pkill -f 'waybar.*waybar-zen'; waybar")
+		hl.exec_cmd("pkill -f 'waybar.*waybar-zen'")
+		hl.exec_cmd("waybar")
 		in_zen = false
 	else
 		saved_gaps_in = hl.get_config("general.gaps_in")

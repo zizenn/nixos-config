@@ -37,7 +37,7 @@
       set -gx EDITOR "nvim"
       set -gx SUDO_EDITOR "nvim"
       set -gx VISUAL "nvim"
-      set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+      set -gx MANPAGER "bat -plman"
       set -gx FZF_DEFAULT_COMMAND "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 
       set -U fish_greeting ""
