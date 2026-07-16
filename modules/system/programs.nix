@@ -25,6 +25,13 @@
     };
   };
 
+  # for man pages
+  documentation = {
+    enable = true;
+    dev.enable = true;
+    man.generateCaches = true;
+  };
+
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
   environment.systemPackages = with pkgs; [
@@ -36,6 +43,7 @@
     brightnessctl
     playerctl
     cliphist
+    man-pages
   ];
 
   users.users.zizenn = {
