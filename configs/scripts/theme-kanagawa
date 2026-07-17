@@ -29,6 +29,10 @@ cp "$KD/wleave.css" ~/.config/wleave/style.css
 mkdir -p ~/.config/hypr
 cp "$KD/hyprlock.conf" ~/.config/hypr/hyprlock.conf
 
+for f in ~/.config/gtk-3.0/gtk.css ~/.config/gtk-4.0/gtk.css ~/.config/Kvantum/Matugen.kvconfig
+    test -L "$f"; and rm "$f"
+end
+
 mkdir -p ~/.config/gtk-3.0
 cp "$KD/gtk.css" ~/.config/gtk-3.0/gtk.css
 
@@ -44,9 +48,10 @@ cp "$KD/vesktop.css" ~/.config/vesktop/themes/matugen.theme.css
 mkdir -p ~/.config/Kvantum
 cp "$KD/kvantum/Matugen.kvconfig" ~/.config/Kvantum/Matugen.kvconfig
 
-for SOCK in /tmp/kitty-zizenn-* 2>/dev/null
+for SOCK in /tmp/kitty-zizenn-*
+    set -q SOCK; or continue
     [ -S "$SOCK" ] && kitty @ --to="unix:$SOCK" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null
-end
+end 2>/dev/null
 makoctl reload 2>/dev/null
 pkill waybar 2>/dev/null
 waybar & disown
