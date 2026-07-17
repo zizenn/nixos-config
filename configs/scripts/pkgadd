@@ -20,7 +20,7 @@ end
 
 set CLEAN_PKG (echo $SELECTED_PKG | cut -d. -f2)
 
-if grep -qs "^\s\+$CLEAN_PKG\s" $CONFIG_FILE
+if rg -q "^\s+$CLEAN_PKG\s" $CONFIG_FILE
     echo "$CLEAN_PKG already in packages.nix"
     exit 0
 end
