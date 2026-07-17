@@ -29,7 +29,7 @@ if test -z "$LINE_NUM"
     exit 1
 end
 
-sed -i "${LINE_NUM}d" $CONFIG_FILE
+sed -i "$LINE_NUM d" $CONFIG_FILE
 
 cd $CONFIG_PATH
 git add packages.nix
