@@ -4,37 +4,37 @@
   --color-scheme: dark;
 
   /* Core surfaces */
-  --z-bg: {{ colors.surface.default | red }} {{ colors.surface.default | green }} {{ colors.surface.default | blue }};
-  --z-bg-softer: {{ colors.surface_variant.default | red }} {{ colors.surface_variant.default | green }} {{ colors.surface_variant.default | blue }};
-  --z-bg-1: {{ colors.surface_container_low.default | red }} {{ colors.surface_container_low.default | green }} {{ colors.surface_container_low.default | blue }};
-  --z-bg-2: {{ colors.surface_container.default | red }} {{ colors.surface_container.default | green }} {{ colors.surface_container.default | blue }};
-  --z-bg-3: {{ colors.surface_container_high.default | red }} {{ colors.surface_container_high.default | green }} {{ colors.surface_container_high.default | blue }};
-  --z-bg-4: {{ colors.surface_container_highest.default | red }} {{ colors.surface_container_highest.default | green }} {{ colors.surface_container_highest.default | blue }};
+  --z-bg: {{ colors.surface.default.red }} {{ colors.surface.default.green }} {{ colors.surface.default.blue }};
+  --z-bg-softer: {{ colors.surface_variant.default.red }} {{ colors.surface_variant.default.green }} {{ colors.surface_variant.default.blue }};
+  --z-bg-1: {{ colors.surface_container_low.default.red }} {{ colors.surface_container_low.default.green }} {{ colors.surface_container_low.default.blue }};
+  --z-bg-2: {{ colors.surface_container.default.red }} {{ colors.surface_container.default.green }} {{ colors.surface_container.default.blue }};
+  --z-bg-3: {{ colors.surface_container_high.default.red }} {{ colors.surface_container_high.default.green }} {{ colors.surface_container_high.default.blue }};
+  --z-bg-4: {{ colors.surface_container_highest.default.red }} {{ colors.surface_container_highest.default.green }} {{ colors.surface_container_highest.default.blue }};
 
   /* Text */
-  --z-fg: {{ colors.on_surface.default | red }} {{ colors.on_surface.default | green }} {{ colors.on_surface.default | blue }};
-  --z-fg-1: {{ colors.on_surface_variant.default | red }} {{ colors.on_surface_variant.default | green }} {{ colors.on_surface_variant.default | blue }};
-  --z-fg-2: {{ colors.on_surface_variant.default | red }} {{ colors.on_surface_variant.default | green }} {{ colors.on_surface_variant.default | blue }};
-  --z-grey-2: {{ colors.on_surface_variant.default | red }} {{ colors.on_surface_variant.default | green }} {{ colors.on_surface_variant.default | blue }};
-  --z-grey-1: {{ colors.outline.default | red }} {{ colors.outline.default | green }} {{ colors.outline.default | blue }};
-  --z-grey-0: {{ colors.outline_variant.default | red }} {{ colors.outline_variant.default | green }} {{ colors.outline_variant.default | blue }};
-  --z-grey-dim: {{ colors.surface_container_high.default | red }} {{ colors.surface_container_high.default | green }} {{ colors.surface_container_high.default | blue }};
+  --z-fg: {{ colors.on_surface.default.red }} {{ colors.on_surface.default.green }} {{ colors.on_surface.default.blue }};
+  --z-fg-1: {{ colors.on_surface_variant.default.red }} {{ colors.on_surface_variant.default.green }} {{ colors.on_surface_variant.default.blue }};
+  --z-fg-2: {{ colors.on_surface_variant.default.red }} {{ colors.on_surface_variant.default.green }} {{ colors.on_surface_variant.default.blue }};
+  --z-grey-2: {{ colors.on_surface_variant.default.red }} {{ colors.on_surface_variant.default.green }} {{ colors.on_surface_variant.default.blue }};
+  --z-grey-1: {{ colors.outline.default.red }} {{ colors.outline.default.green }} {{ colors.outline.default.blue }};
+  --z-grey-0: {{ colors.outline_variant.default.red }} {{ colors.outline_variant.default.green }} {{ colors.outline_variant.default.blue }};
+  --z-grey-dim: {{ colors.surface_container_high.default.red }} {{ colors.surface_container_high.default.green }} {{ colors.surface_container_high.default.blue }};
 
   /* Accent */
-  --z-accent: {{ colors.primary.default | red }} {{ colors.primary.default | green }} {{ colors.primary.default | blue }};
-  --z-accent-soft: {{ colors.tertiary.default | red }} {{ colors.tertiary.default | green }} {{ colors.tertiary.default | blue }};
-  --z-accent-muted: {{ colors.secondary.default | red }} {{ colors.secondary.default | green }} {{ colors.secondary.default | blue }};
+  --z-accent: {{ colors.primary.default.red }} {{ colors.primary.default.green }} {{ colors.primary.default.blue }};
+  --z-accent-soft: {{ colors.tertiary.default.red }} {{ colors.tertiary.default.green }} {{ colors.tertiary.default.blue }};
+  --z-accent-muted: {{ colors.secondary.default.red }} {{ colors.secondary.default.green }} {{ colors.secondary.default.blue }};
 
   /* Semantic */
-  --z-red: {{ colors.error.default | red }} {{ colors.error.default | green }} {{ colors.error.default | blue }};
-  --z-green: {{ colors.tertiary.default | red }} {{ colors.tertiary.default | green }} {{ colors.tertiary.default | blue }};
-  --z-yellow: {{ colors.secondary.default | red }} {{ colors.secondary.default | green }} {{ colors.secondary.default | blue }};
-  --z-blue: {{ colors.primary.default | red }} {{ colors.primary.default | green }} {{ colors.primary.default | blue }};
-  --z-purple: {{ colors.primary_container.default | red }} {{ colors.primary_container.default | green }} {{ colors.primary_container.default | blue }};
-  --z-aqua: {{ colors.tertiary_container.default | red }} {{ colors.tertiary_container.default | green }} {{ colors.tertiary_container.default | blue }};
+  --z-red: {{ colors.error.default.red }} {{ colors.error.default.green }} {{ colors.error.default.blue }};
+  --z-green: {{ colors.tertiary.default.red }} {{ colors.tertiary.default.green }} {{ colors.tertiary.default.blue }};
+  --z-yellow: {{ colors.secondary.default.red }} {{ colors.secondary.default.green }} {{ colors.secondary.default.blue }};
+  --z-blue: {{ colors.primary.default.red }} {{ colors.primary.default.green }} {{ colors.primary.default.blue }};
+  --z-purple: {{ colors.primary_container.default.red }} {{ colors.primary_container.default.green }} {{ colors.primary_container.default.blue }};
+  --z-aqua: {{ colors.tertiary_container.default.red }} {{ colors.tertiary_container.default.green }} {{ colors.tertiary_container.default.blue }};
 
   /* Shadow */
-  --z-shadow: {{ colors.shadow.default | red }} {{ colors.shadow.default | green }} {{ colors.shadow.default | blue }};
+  --z-shadow: {{ colors.shadow.default.red }} {{ colors.shadow.default.green }} {{ colors.shadow.default.blue }};
 
   /* Glass alphas */
   --z-glass-a1: 0.58;
