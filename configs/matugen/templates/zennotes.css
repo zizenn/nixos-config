@@ -4,37 +4,37 @@
   --color-scheme: dark;
 
   /* Core surfaces */
-  --z-bg: {{colors.surface.default.rgb | replace: ",", " "}};
-  --z-bg-softer: {{colors.surface_variant.default.rgb | replace: ",", " "}};
-  --z-bg-1: {{colors.surface_container_low.default.rgb | replace: ",", " "}};
-  --z-bg-2: {{colors.surface_container.default.rgb | replace: ",", " "}};
-  --z-bg-3: {{colors.surface_container_high.default.rgb | replace: ",", " "}};
-  --z-bg-4: {{colors.surface_container_highest.default.rgb | replace: ",", " "}};
+  --z-bg: {{colors.surface.default.r}} {{colors.surface.default.g}} {{colors.surface.default.b}};
+  --z-bg-softer: {{colors.surface_variant.default.r}} {{colors.surface_variant.default.g}} {{colors.surface_variant.default.b}};
+  --z-bg-1: {{colors.surface_container_low.default.r}} {{colors.surface_container_low.default.g}} {{colors.surface_container_low.default.b}};
+  --z-bg-2: {{colors.surface_container.default.r}} {{colors.surface_container.default.g}} {{colors.surface_container.default.b}};
+  --z-bg-3: {{colors.surface_container_high.default.r}} {{colors.surface_container_high.default.g}} {{colors.surface_container_high.default.b}};
+  --z-bg-4: {{colors.surface_container_highest.default.r}} {{colors.surface_container_highest.default.g}} {{colors.surface_container_highest.default.b}};
 
   /* Text */
-  --z-fg: {{colors.on_surface.default.rgb | replace: ",", " "}};
-  --z-fg-1: {{colors.on_surface.default.rgb | replace: ",", " "}};
-  --z-fg-2: {{colors.on_surface_variant.default.rgb | replace: ",", " "}};
-  --z-grey-2: {{colors.on_surface_variant.default.rgb | replace: ",", " "}};
-  --z-grey-1: {{colors.outline.default.rgb | replace: ",", " "}};
-  --z-grey-0: {{colors.outline_variant.default.rgb | replace: ",", " "}};
-  --z-grey-dim: {{colors.surface_container_high.default.rgb | replace: ",", " "}};
+  --z-fg: {{colors.on_surface.default.r}} {{colors.on_surface.default.g}} {{colors.on_surface.default.b}};
+  --z-fg-1: {{colors.on_surface_variant.default.r}} {{colors.on_surface_variant.default.g}} {{colors.on_surface_variant.default.b}};
+  --z-fg-2: {{colors.on_surface_variant.default.r}} {{colors.on_surface_variant.default.g}} {{colors.on_surface_variant.default.b}};
+  --z-grey-2: {{colors.on_surface_variant.default.r}} {{colors.on_surface_variant.default.g}} {{colors.on_surface_variant.default.b}};
+  --z-grey-1: {{colors.outline.default.r}} {{colors.outline.default.g}} {{colors.outline.default.b}};
+  --z-grey-0: {{colors.outline_variant.default.r}} {{colors.outline_variant.default.g}} {{colors.outline_variant.default.b}};
+  --z-grey-dim: {{colors.surface_container_high.default.r}} {{colors.surface_container_high.default.g}} {{colors.surface_container_high.default.b}};
 
   /* Accent */
-  --z-accent: {{colors.primary.default.rgb | replace: ",", " "}};
-  --z-accent-soft: {{colors.tertiary.default.rgb | replace: ",", " "}};
-  --z-accent-muted: {{colors.secondary.default.rgb | replace: ",", " "}};
+  --z-accent: {{colors.primary.default.r}} {{colors.primary.default.g}} {{colors.primary.default.b}};
+  --z-accent-soft: {{colors.tertiary.default.r}} {{colors.tertiary.default.g}} {{colors.tertiary.default.b}};
+  --z-accent-muted: {{colors.secondary.default.r}} {{colors.secondary.default.g}} {{colors.secondary.default.b}};
 
   /* Semantic */
-  --z-red: {{colors.error.default.rgb | replace: ",", " "}};
-  --z-green: {{colors.tertiary.default.rgb | replace: ",", " "}};
-  --z-yellow: {{colors.secondary.default.rgb | replace: ",", " "}};
-  --z-blue: {{colors.primary.default.rgb | replace: ",", " "}};
-  --z-purple: {{colors.primary_container.default.rgb | replace: ",", " "}};
-  --z-aqua: {{colors.tertiary_container.default.rgb | replace: ",", " "}};
+  --z-red: {{colors.error.default.r}} {{colors.error.default.g}} {{colors.error.default.b}};
+  --z-green: {{colors.tertiary.default.r}} {{colors.tertiary.default.g}} {{colors.tertiary.default.b}};
+  --z-yellow: {{colors.secondary.default.r}} {{colors.secondary.default.g}} {{colors.secondary.default.b}};
+  --z-blue: {{colors.primary.default.r}} {{colors.primary.default.g}} {{colors.primary.default.b}};
+  --z-purple: {{colors.primary_container.default.r}} {{colors.primary_container.default.g}} {{colors.primary_container.default.b}};
+  --z-aqua: {{colors.tertiary_container.default.r}} {{colors.tertiary_container.default.g}} {{colors.tertiary_container.default.b}};
 
   /* Shadow */
-  --z-shadow: {{colors.shadow.default.rgb | replace: ",", " "}};
+  --z-shadow: {{colors.shadow.default.r}} {{colors.shadow.default.g}} {{colors.shadow.default.b}};
 
   /* Glass alphas */
   --z-glass-a1: 0.58;
