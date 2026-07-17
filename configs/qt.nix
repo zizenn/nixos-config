@@ -14,7 +14,10 @@
 
   xdg.configFile = {
     "Kvantum/kvantum.kvconfig".source = ./qt/kvantum.kvconfig;
-    "Kvantum/Matugen.kvconfig".source = ./qt/Matugen.kvconfig;
+    "Kvantum/Matugen.kvconfig" = {
+      source = ./qt/Matugen.kvconfig;
+      force = true;
+    };
     "Kvantum/Matugen.svg".source = ./qt/Matugen.svg;
   };
 
