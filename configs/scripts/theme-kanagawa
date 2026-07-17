@@ -1,61 +1,58 @@
 set -l KD "$HOME/.config/matugen/kanagawa-dragon"
 
 if test ! -d "$KD"
-    notify-send "theme" "kanagawa-dragon files not found at $KD"
+    echo "kanagawa-dragon files not found at $KD"
     exit 1
 end
 
 mkdir -p ~/.config/kitty
-cp "$KD/kitty.conf" ~/.config/kitty/current-colors.conf
+cp -f "$KD/kitty.conf" ~/.config/kitty/current-colors.conf
 
 mkdir -p ~/.cache/matugen/themes
-cp "$KD/nvim-colors.json" ~/.cache/matugen/themes/nvim-colors.json
+cp -f "$KD/nvim-colors.json" ~/.cache/matugen/themes/nvim-colors.json
 
 mkdir -p ~/.config/rofi
-cp "$KD/rofi-colors.rasi" ~/.config/rofi/colors.rasi
+cp -f "$KD/rofi-colors.rasi" ~/.config/rofi/colors.rasi
 
 mkdir -p ~/.config/zed/themes
-cp "$KD/zed-theme.json" ~/.config/zed/themes/matugen.json
+cp -f "$KD/zed-theme.json" ~/.config/zed/themes/matugen.json
 
 mkdir -p ~/.config/waybar
-cp "$KD/waybar.css" ~/.config/waybar/colors.css
+cp -f "$KD/waybar.css" ~/.config/waybar/colors.css
 
 mkdir -p ~/.config/mako
-cp "$KD/mako.conf" ~/.config/mako/config
+cp -f "$KD/mako.conf" ~/.config/mako/config
 
 mkdir -p ~/.config/wleave
-cp "$KD/wleave.css" ~/.config/wleave/style.css
+cp -f "$KD/wleave.css" ~/.config/wleave/style.css
 
 mkdir -p ~/.config/hypr
-cp "$KD/hyprlock.conf" ~/.config/hypr/hyprlock.conf
-
-for f in ~/.config/gtk-3.0/gtk.css ~/.config/gtk-4.0/gtk.css ~/.config/Kvantum/Matugen.kvconfig
-    test -L "$f"; and rm "$f"
-end
+cp -f "$KD/hyprlock.conf" ~/.config/hypr/hyprlock.conf
 
 mkdir -p ~/.config/gtk-3.0
-cp "$KD/gtk.css" ~/.config/gtk-3.0/gtk.css
+cp -f "$KD/gtk.css" ~/.config/gtk-3.0/gtk.css
 
 mkdir -p ~/.config/gtk-4.0
-cp "$KD/gtk4.css" ~/.config/gtk-4.0/gtk.css
+cp -f "$KD/gtk4.css" ~/.config/gtk-4.0/gtk.css
 
 mkdir -p ~/Documents/vault/.obsidian/snippets
-cp "$KD/obsidian.css" ~/Documents/vault/.obsidian/snippets/matugen.css
+cp -f "$KD/obsidian.css" ~/Documents/vault/.obsidian/snippets/matugen.css
 
 mkdir -p ~/.config/vesktop/themes
-cp "$KD/vesktop.css" ~/.config/vesktop/themes/matugen.theme.css
+cp -f "$KD/vesktop.css" ~/.config/vesktop/themes/matugen.theme.css
 
 mkdir -p ~/.config/Kvantum
-cp "$KD/kvantum/Matugen.kvconfig" ~/.config/Kvantum/Matugen.kvconfig
+cp -f "$KD/kvantum/Matugen.kvconfig" ~/.config/Kvantum/Matugen.kvconfig
 
 for SOCK in /tmp/kitty-zizenn-*
     set -q SOCK; or continue
     [ -S "$SOCK" ] && kitty @ --to="unix:$SOCK" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null
 end 2>/dev/null
-makoctl reload 2>/dev/null
-pkill waybar 2>/dev/null
-waybar & disown
-kvantummanager --set Matugen 2>/dev/null
-true
 
-notify-send "theme" "Applied kanagawa dragon"
+if set -q DISPLAY
+    makoctl reload 2>/dev/null
+    pkill waybar 2>/dev/null
+    waybar & disown
+    kvantummanager --set Matugen 2>/dev/null
+    notify-send "theme" "Applied kanagawa dragon"
+end
