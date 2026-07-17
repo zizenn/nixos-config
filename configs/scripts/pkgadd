@@ -20,12 +20,12 @@ end
 
 set CLEAN_PKG (echo $SELECTED_PKG | cut -d. -f2)
 
-if rg -q "^\s+$CLEAN_PKG\s" $CONFIG_FILE
+if rg -q "^\s+$CLEAN_PKG\b" $CONFIG_FILE
     echo "$CLEAN_PKG already in packages.nix"
     exit 0
 end
 
-sed -i "/^\];/i\    $CLEAN_PKG" $CONFIG_FILE
+sed -i "/^\s*\];/i\    $CLEAN_PKG" $CONFIG_FILE
 
 cd $CONFIG_PATH
 git add packages.nix
