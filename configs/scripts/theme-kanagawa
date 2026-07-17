@@ -41,6 +41,9 @@ cp -f "$KD/obsidian.css" ~/Documents/vault/.obsidian/snippets/matugen.css
 mkdir -p ~/.config/vesktop/themes
 cp -f "$KD/vesktop.css" ~/.config/vesktop/themes/matugen.theme.css
 
+mkdir -p ~/.config/zennotes/themes/matugen
+cp -f "$KD/zennotes.css" ~/.config/zennotes/themes/matugen/theme.css
+
 mkdir -p ~/.config/Kvantum
 cp -f "$KD/kvantum/Matugen.kvconfig" ~/.config/Kvantum/Matugen.kvconfig
 

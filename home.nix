@@ -26,6 +26,7 @@
     ./configs/fastfetch.nix
     ./configs/aerc.nix
     ./configs/zed.nix
+    ./configs/zennotes.nix
     ./configs/tmux.nix
     ./configs/gtk.nix
     ./configs/qt.nix

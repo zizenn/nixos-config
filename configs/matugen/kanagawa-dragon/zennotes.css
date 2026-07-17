@@ -1,0 +1,45 @@
+/* ZenNotes theme — Kanagawa Dragon palette */
+/* Source: ~/.config/matugen/kanagawa-dragon/zennotes.css */
+
+:root[data-theme-mode="dark"] {
+  --color-scheme: dark;
+
+  /* Core surfaces */
+  --z-bg: 24 22 22;
+  --z-bg-softer: 18 18 15;
+  --z-bg-1: 13 12 12;
+  --z-bg-2: 40 39 39;
+  --z-bg-3: 57 56 54;
+  --z-bg-4: 98 94 90;
+
+  /* Text */
+  --z-fg: 197 201 197;
+  --z-fg-1: 166 166 156;
+  --z-fg-2: 158 155 147;
+  --z-grey-2: 122 131 130;
+  --z-grey-1: 115 124 115;
+  --z-grey-0: 98 94 90;
+  --z-grey-dim: 57 56 54;
+
+  /* Accent */
+  --z-accent: 139 164 176;
+  --z-accent-soft: 196 178 138;
+  --z-accent-muted: 135 169 135;
+
+  /* Semantic */
+  --z-red: 196 116 110;
+  --z-green: 135 169 135;
+  --z-yellow: 196 178 138;
+  --z-blue: 139 164 176;
+  --z-purple: 162 146 163;
+  --z-aqua: 142 164 162;
+
+  /* Shadow */
+  --z-shadow: 0 0 0;
+
+  /* Glass alphas */
+  --z-glass-a1: 0.58;
+  --z-glass-a2: 0.46;
+  --z-glass-a3: 0.32;
+  --z-glass-a4: 0.22;
+}

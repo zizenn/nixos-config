@@ -4,6 +4,10 @@
   ...
 }:
 
+let
+  inherit (pkgs.stdenv.hostPlatform) system;
+in
+
 {
   home.packages = with pkgs; [
     git
@@ -41,7 +45,8 @@
     bc
     fd
     vesktop
-    inputs.zen-browser.packages.x86_64-linux.default
+    inputs.zen-browser.packages.${system}.default
+    inputs.zennotes.packages.${system}.zennotes-desktop
     steam
     protonmail-desktop
     zed-editor
@@ -65,7 +70,7 @@
     wttrbar
     bluetui
     wiremix
-    inputs.wlctl.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.wlctl.packages.${system}.default
     wleave
     wl-clipboard
     libnotify

@@ -19,5 +19,6 @@
     "matugen/templates/gtk4.css".source = ./matugen/templates/gtk4.css;
     "matugen/templates/kvantum/Matugen.kvconfig".source = ./matugen/templates/kvantum/Matugen.kvconfig;
     "matugen/templates/kvantum/Matugen.svg".source = ./matugen/templates/kvantum/Matugen.svg;
+    "matugen/templates/zennotes.css".source = ./matugen/templates/zennotes.css;
   };
 }
