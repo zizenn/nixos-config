@@ -1,7 +1,7 @@
 /**
- * @name system24 (matugen)
- * @description tui-style discord theme (system24) with kanagawa-dragon colors
- * @author refact0r (base theme), kanagawa-dragon color overrides
+ * @name system24 (kanagawa dragon)
+ * @description tui-style discord theme (system24) with kanagawa dragon colors
+ * @author refact0r (base theme), kanagawa dragon color overrides
  * @version 1.0.0
  * @source https://github.com/refact0r/system24
  */
@@ -43,45 +43,45 @@ body {
 
 :root {
     --colors: on;
-    --text-0: #282825;
-    --text-1: #c8c09c;
-    --text-2: #c8c09c;
-    --text-3: #8a8a83;
-    --text-4: #6c6c66;
-    --text-5: #5c5c55;
-    --bg-1: #464641;
-    --bg-2: #3c3c37;
-    --bg-3: #32322e;
-    --bg-4: #282825;
-    --hover: #3c3c37;
-    --active: #464641;
-    --active-2: #464641;
-    --message-hover: #32322e;
-    --accent-1: #7e9cd8;
-    --accent-2: #7e9cd8;
-    --accent-3: #3a4a6e;
-    --accent-4: #7e9cd8;
-    --accent-5: #7e9cd8;
-    --accent-new: #c4746e;
-    --online: #8ba4b0;
-    --dnd: #c4746e;
+    --text-0: #181616;
+    --text-1: #c5c9c5;
+    --text-2: #c5c9c5;
+    --text-3: #C8C093;
+    --text-4: #625e5a;
+    --text-5: #282727;
+    --bg-1: #393836;
+    --bg-2: #282727;
+    --bg-3: #1D1C19;
+    --bg-4: #181616;
+    --hover: #282727;
+    --active: #393836;
+    --active-2: #393836;
+    --message-hover: #1D1C19;
+    --accent-1: #8ba4b0;
+    --accent-2: #8ba4b0;
+    --accent-3: #2a3a3e;
+    --accent-4: #8ba4b0;
+    --accent-5: #8ba4b0;
+    --accent-new: #E82424;
+    --online: #8ea4a2;
+    --dnd: #E82424;
     --idle: #8992a7;
-    --streaming: #7e9cd8;
-    --offline: #6c6c66;
-    --border-light: #5c5c55;
-    --border: #5c5c55;
-    --border-hover: #7e9cd8;
-    --button-border: #5c5c55;
-    --red-1: #c4746e;
-    --red-2: #c4746e;
-    --red-3: #c4746e;
-    --red-4: #c4746e;
-    --red-5: #c4746e;
-    --green-1: #8ba4b0;
-    --green-2: #8ba4b0;
-    --green-3: #8ba4b0;
-    --green-4: #8ba4b0;
-    --green-5: #8ba4b0;
+    --streaming: #8ba4b0;
+    --offline: #625e5a;
+    --border-light: #282727;
+    --border: #282727;
+    --border-hover: #8ba4b0;
+    --button-border: #282727;
+    --red-1: #E82424;
+    --red-2: #E82424;
+    --red-3: #E82424;
+    --red-4: #E82424;
+    --red-5: #E82424;
+    --green-1: #8ea4a2;
+    --green-2: #8ea4a2;
+    --green-3: #8ea4a2;
+    --green-4: #8ea4a2;
+    --green-5: #8ea4a2;
     --blue-1: #8992a7;
     --blue-2: #8992a7;
     --blue-3: #8992a7;
@@ -92,9 +92,9 @@ body {
     --yellow-3: #8992a7;
     --yellow-4: #8992a7;
     --yellow-5: #8992a7;
-    --purple-1: #7e9cd8;
-    --purple-2: #7e9cd8;
-    --purple-3: #7e9cd8;
-    --purple-4: #7e9cd8;
-    --purple-5: #7e9cd8;
+    --purple-1: #8ba4b0;
+    --purple-2: #8ba4b0;
+    --purple-3: #8ba4b0;
+    --purple-4: #8ba4b0;
+    --purple-5: #8ba4b0;
 }

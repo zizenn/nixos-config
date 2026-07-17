@@ -62,94 +62,94 @@ CustomSelectionBackground=
 CustomSelectionForeground=
 
 [Colors(ColorScheme)]
-BackgroundNormal=#32322e
-BackgroundAlternate=#32322e
-BackgroundAlternate2=#282825
-ForegroundNormal=#c8c09c
-ForegroundAlternate=#c8c09c
-ForegroundAlternate2=#8a8a83
-ForegroundInactive=#8a8a83
-SelectionBackground=#7e9cd8
-SelectionForeground=#141413
-SelectionBackgroundAlternate=#3a4a6e
-SelectionForegroundAlternate=#b8cce8
+BackgroundNormal=#1D1C19
+BackgroundAlternate=#1D1C19
+BackgroundAlternate2=#12120f
+ForegroundNormal=#c5c9c5
+ForegroundAlternate=#c5c9c5
+ForegroundAlternate2=#C8C093
+ForegroundInactive=#C8C093
+SelectionBackground=#8ba4b0
+SelectionForeground=#0d0c0c
+SelectionBackgroundAlternate=#2a3a3e
+SelectionForegroundAlternate=#b8c8d0
 HighlightColor=#8992a7
-HighlightForeground=#141413
+HighlightForeground=#0d0c0c
 
-ButtonBackground=#32322e
-ButtonForeground=#c8c09c
-ButtonBackgroundAlternate=#282825
-ButtonForegroundAlternate=#c8c09c
-ButtonBackgroundHover=#3c3c37
-ButtonForegroundHover=#c8c09c
-ButtonBackgroundFocus=#464641
-ButtonForegroundFocus=#c8c09c
+ButtonBackground=#1D1C19
+ButtonForeground=#c5c9c5
+ButtonBackgroundAlternate=#12120f
+ButtonForegroundAlternate=#c5c9c5
+ButtonBackgroundHover=#282727
+ButtonForegroundHover=#c5c9c5
+ButtonBackgroundFocus=#393836
+ButtonForegroundFocus=#c5c9c5
 
-WindowBackground=#1a1a18
-WindowForeground=#c8c09c
-WindowBackgroundAlternate=#32322e
-WindowForegroundAlternate=#c8c09c
+WindowBackground=#181616
+WindowForeground=#c5c9c5
+WindowBackgroundAlternate=#1D1C19
+WindowForegroundAlternate=#c5c9c5
 
-ViewBackground=#32322e
-ViewForeground=#c8c09c
-ViewBackgroundAlternate=#282825
-ViewForegroundAlternate=#c8c09c
+ViewBackground=#1D1C19
+ViewForeground=#c5c9c5
+ViewBackgroundAlternate=#12120f
+ViewForegroundAlternate=#c5c9c5
 
-HeaderBackground=#32322e
-HeaderForeground=#c8c09c
-HeaderBackgroundAlternate=#32322e
-HeaderForegroundAlternate=#c8c09c
+HeaderBackground=#1D1C19
+HeaderForeground=#c5c9c5
+HeaderBackgroundAlternate=#1D1C19
+HeaderForegroundAlternate=#c5c9c5
 
-TooltipBackground=#32322e
-TooltipForeground=#c8c09c
+TooltipBackground=#1D1C19
+TooltipForeground=#c5c9c5
 
-LineEditBackground=#32322e
-LineEditForeground=#c8c09c
-LineEditBackgroundAlternate=#282825
-LineEditForegroundAlternate=#c8c09c
+LineEditBackground=#1D1C19
+LineEditForeground=#c5c9c5
+LineEditBackgroundAlternate=#12120f
+LineEditForegroundAlternate=#c5c9c5
 
-ScrollBarBackground=#32322e
-ScrollBarForeground=#7e9cd8
+ScrollBarBackground=#1D1C19
+ScrollBarForeground=#8ba4b0
 
-ProgressBarBackground=#3c3c37
-ProgressBarForeground=#7e9cd8
+ProgressBarBackground=#282727
+ProgressBarForeground=#8ba4b0
 
-TabBackground=#32322e
-TabForeground=#c8c09c
-TabBackgroundAlternate=#282825
-TabForegroundAlternate=#c8c09c
+TabBackground=#1D1C19
+TabForeground=#c5c9c5
+TabBackgroundAlternate=#12120f
+TabForegroundAlternate=#c5c9c5
 
-SliderBackground=#3c3c37
-SliderForeground=#7e9cd8
+SliderBackground=#282727
+SliderForeground=#8ba4b0
 
-CheckBoxBackground=#32322e
-CheckBoxForeground=#c8c09c
-CheckBoxBackgroundAlternate=#282825
-CheckBoxForegroundAlternate=#c8c09c
+CheckBoxBackground=#1D1C19
+CheckBoxForeground=#c5c9c5
+CheckBoxBackgroundAlternate=#12120f
+CheckBoxForegroundAlternate=#c5c9c5
 
-RadioButtonBackground=#32322e
-RadioButtonForeground=#c8c09c
-RadioButtonBackgroundAlternate=#282825
-RadioButtonForegroundAlternate=#c8c09c
+RadioButtonBackground=#1D1C19
+RadioButtonForeground=#c5c9c5
+RadioButtonBackgroundAlternate=#12120f
+RadioButtonForegroundAlternate=#c5c9c5
 
-GroupBoxBackground=#32322e
-GroupBoxForeground=#c8c09c
+GroupBoxBackground=#1D1C19
+GroupBoxForeground=#c5c9c5
 
-SpinBoxBackground=#32322e
-SpinBoxForeground=#c8c09c
+SpinBoxBackground=#1D1C19
+SpinBoxForeground=#c5c9c5
 
-ComboBoxBackground=#32322e
-ComboBoxForeground=#c8c09c
+ComboBoxBackground=#1D1C19
+ComboBoxForeground=#c5c9c5
 
-MenuBackground=#32322e
-MenuForeground=#c8c09c
-MenuBackgroundAlternate=#282825
-MenuForegroundAlternate=#c8c09c
+MenuBackground=#1D1C19
+MenuForeground=#c5c9c5
+MenuBackgroundAlternate=#12120f
+MenuForegroundAlternate=#c5c9c5
 
-ItemBackground=#32322e
-ItemForeground=#c8c09c
-ItemBackgroundAlternate=#282825
-ItemForegroundAlternate=#c8c09c
+ItemBackground=#1D1C19
+ItemForeground=#c5c9c5
+ItemBackgroundAlternate=#12120f
+ItemForegroundAlternate=#c5c9c5
 
 [Hacks]
 ComboBoxWheelEvent=0

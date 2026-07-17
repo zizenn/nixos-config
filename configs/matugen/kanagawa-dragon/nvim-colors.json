@@ -1,35 +1,35 @@
 {
-    "surface": "#282825",
-    "surface_low": "#282825",
-    "surface_container": "#32322e",
-    "surface_high": "#3c3c37",
-    "surface_highest": "#464641",
+    "surface": "#181616",
+    "surface_low": "#12120f",
+    "surface_container": "#1D1C19",
+    "surface_high": "#282727",
+    "surface_highest": "#393836",
 
-    "on_surface": "#c8c09c",
-    "on_surface_variant": "#8a8a83",
-    "outline": "#6c6c66",
-    "outline_variant": "#5c5c55",
+    "on_surface": "#c5c9c5",
+    "on_surface_variant": "#C8C093",
+    "outline": "#625e5a",
+    "outline_variant": "#282727",
 
-    "primary": "#7e9cd8",
-    "on_primary": "#141413",
-    "primary_container": "#3a4a6e",
-    "on_primary_container": "#b8cce8",
+    "primary": "#8ba4b0",
+    "on_primary": "#0d0c0c",
+    "primary_container": "#2a3a3e",
+    "on_primary_container": "#b8c8d0",
 
     "secondary": "#8992a7",
-    "secondary_container": "#4a4a5e",
+    "secondary_container": "#2a2a3e",
     "on_secondary_container": "#b8b8c8",
 
-    "tertiary": "#8ba4b0",
-    "tertiary_container": "#3a5a5e",
+    "tertiary": "#8ea4a2",
+    "tertiary_container": "#2a3a3a",
 
-    "error": "#c4746e",
-    "error_container": "#6e3a3a",
+    "error": "#E82424",
+    "error_container": "#3a1a1a",
 
-    "selection_bg": "#7e9cd833",
+    "selection_bg": "#8ba4b033",
     "word_highlight": "#8992a733",
-    "word_highlight_strong": "#8ba4b033",
+    "word_highlight_strong": "#8ea4a233",
 
-    "git_added": "#7e9cd8",
+    "git_added": "#8ba4b0",
     "git_modified": "#8992a7",
-    "git_deleted": "#c4746e"
+    "git_deleted": "#E82424"
 }
