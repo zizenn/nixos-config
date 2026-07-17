@@ -1,0 +1,60 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  border: none;
+  border-radius: 0;
+  transition: none;
+}
+
+window {
+  background-color: #1a1a18CC;
+}
+
+button {
+  color: #c8c09c;
+  background-color: #32322e;
+  border: 1px solid #6c6c6638;
+  border-radius: 0;
+  padding: 12px;
+  margin: 4px;
+  min-width: 120px;
+  min-height: 80px;
+}
+
+button label.action-name { font-size: 22px; font-weight: 700; }
+button label.keybind { font-size: 18px; opacity: 0.5; }
+
+button:hover, button:focus {
+  background-color: #3a4a6e;
+  color: #b8cce8;
+}
+
+button:active {
+  color: #141413;
+  background-color: #7e9cd8;
+}
+
+button#shutdown { color: #c4746e; }
+button#shutdown:hover {
+  background-color: #6e3a3a;
+  color: #e8b8b8;
+}
+button#reboot { color: #8ba4b0; }
+button#reboot:hover {
+  background-color: #3a5a5e;
+  color: #b8d0d8;
+}
+button#lock { color: #7e9cd8; }
+button#lock:hover {
+  background-color: #3a4a6e;
+  color: #b8cce8;
+}
+button#logout { color: #8992a7; }
+button#logout:hover {
+  background-color: #4a4a5e;
+  color: #b8b8c8;
+}
+button#suspend, button#hibernate { color: #8992a7; }
+button#suspend:hover, button#hibernate:hover {
+  background-color: #4a4a5e;
+  color: #b8b8c8;
+}

@@ -1,0 +1,15 @@
+* {
+  background:                     #282825;
+  background-dim:                 #282825D9;
+  foreground:                     #c8c09c;
+  selected-normal-background:     #3a4a6e;
+  selected-normal-foreground:     #b8cce8;
+  selected-active-background:     #4a4a5e;
+  selected-active-foreground:     #b8b8c8;
+  selected-urgent-background:     #6e3a3a;
+  selected-urgent-foreground:     #e8b8b8;
+  active-background:              #7e9cd8;
+  active-foreground:              #141413;
+  urgent-background:              #c4746e;
+  urgent-foreground:              #141413;
+}

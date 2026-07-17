@@ -19,6 +19,7 @@
     ./configs/yazi.nix
     ./configs/wallpaper.nix
     ./configs/matugen.nix
+    ./configs/matugen/kanagawa-dragon.nix
     ./configs/mako.nix
     ./configs/wleave.nix
     ./configs/hyprflow.nix

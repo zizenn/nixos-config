@@ -1,0 +1,35 @@
+{
+    "surface": "#282825",
+    "surface_low": "#282825",
+    "surface_container": "#32322e",
+    "surface_high": "#3c3c37",
+    "surface_highest": "#464641",
+
+    "on_surface": "#c8c09c",
+    "on_surface_variant": "#8a8a83",
+    "outline": "#6c6c66",
+    "outline_variant": "#5c5c55",
+
+    "primary": "#7e9cd8",
+    "on_primary": "#141413",
+    "primary_container": "#3a4a6e",
+    "on_primary_container": "#b8cce8",
+
+    "secondary": "#8992a7",
+    "secondary_container": "#4a4a5e",
+    "on_secondary_container": "#b8b8c8",
+
+    "tertiary": "#8ba4b0",
+    "tertiary_container": "#3a5a5e",
+
+    "error": "#c4746e",
+    "error_container": "#6e3a3a",
+
+    "selection_bg": "#7e9cd833",
+    "word_highlight": "#8992a733",
+    "word_highlight_strong": "#8ba4b033",
+
+    "git_added": "#7e9cd8",
+    "git_modified": "#8992a7",
+    "git_deleted": "#c4746e"
+}
