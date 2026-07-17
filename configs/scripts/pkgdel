@@ -22,7 +22,7 @@ if test -z "$SELECTED_PKG"
 end
 
 set PKG_PATTERN (echo $SELECTED_PKG | sed 's/\./\\\./g')
-set LINE_NUM (rg -n "^\s+$PKG_PATTERN(\s+#.*)?\s*$" $CONFIG_FILE | head -1 | cut -d: -f1)
+set LINE_NUM (rg -n "^\s+$PKG_PATTERN(\s+#.*)?\s*\$" $CONFIG_FILE | head -1 | cut -d: -f1)
 
 if test -z "$LINE_NUM"
     echo "Could not find $SELECTED_PKG in $CONFIG_FILE"
