@@ -29,7 +29,7 @@
   documentation = {
     enable = true;
     dev.enable = true;
-    man.generateCaches = true;
+    man.cache.enable = true;
   };
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];

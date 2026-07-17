@@ -70,13 +70,30 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1781074563,
+        "narHash": "sha256-md8WlXOlfnIeHeOScMTTHFyf2d6iaTwPl2apR5EQ3P4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "hyprflow": "hyprflow",
         "nixpkgs": "nixpkgs",
         "wlctl": "wlctl",
-        "zen-browser": "zen-browser"
+        "zen-browser": "zen-browser",
+        "zennotes": "zennotes"
       }
     },
     "wlctl": {
@@ -114,6 +131,24 @@
       "original": {
         "owner": "youwen5",
         "repo": "zen-browser-flake",
+        "type": "github"
+      }
+    },
+    "zennotes": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1784209408,
+        "narHash": "sha256-nkUKDJiBdEiw2ftFOODBOWlnlxnkN9lq8i4L6+gmsNU=",
+        "owner": "ZenNotes",
+        "repo": "zennotes",
+        "rev": "898286bfc9c38ffdcc755c070a5481415b8faf7e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ZenNotes",
+        "repo": "zennotes",
         "type": "github"
       }
     }
