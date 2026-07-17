@@ -46,7 +46,7 @@ in
     fd
     vesktop
     inputs.zen-browser.packages.${system}.default
-    inputs.zennotes.packages.${system}.zennotes-desktop
+    (pkgs.callPackage ./packages/zennotes/package-desktop.nix { })
     steam
     protonmail-desktop
     zed-editor
