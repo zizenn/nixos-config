@@ -1,0 +1,34 @@
+set CONFIG_PATH $HOME/nixos
+set CONFIG_FILE $CONFIG_PATH/packages.nix
+set PKG_LIST /tmp/nix_packages_list.txt
+
+if not test -f $PKG_LIST
+    echo "Building index (this will take a moment)..."
+    nix-env -f '<nixpkgs>' -qaP --json 2>/dev/null | jq -r 'keys[]' > $PKG_LIST
+end
+
+set SELECTED_PKG (cat $PKG_LIST | fzf \
+    --preview 'set CLEAN (echo {} | cut -d. -f2); nix eval --raw nixpkgs#$CLEAN.meta.description 2>/dev/null; or echo "No description"' \
+    --preview-window=right:60% \
+    --height=80% \
+    --header='Search nixpkgs (ESC to cancel)')
+
+if test -z "$SELECTED_PKG"
+    echo "Aborted."
+    exit 0
+end
+
+set CLEAN_PKG (echo $SELECTED_PKG | cut -d. -f2)
+
+if grep -qs "^\s\+$CLEAN_PKG\s" $CONFIG_FILE
+    echo "$CLEAN_PKG already in packages.nix"
+    exit 0
+end
+
+sed -i "/^\];/i\    $CLEAN_PKG" $CONFIG_FILE
+
+cd $CONFIG_PATH
+git add packages.nix
+git commit -m "feat: add $CLEAN_PKG" >/dev/null 2>&1
+
+nh home switch

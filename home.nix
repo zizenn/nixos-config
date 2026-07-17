@@ -29,6 +29,7 @@
     ./configs/tmux.nix
     ./configs/gtk.nix
     ./configs/qt.nix
+    ./configs/scripts.nix
     ./packages.nix
   ];
 

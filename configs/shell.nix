@@ -21,8 +21,8 @@
       os = "nh os switch";
       ls = "eza -1";
       tree = "eza -T";
-      pkgadd = "~/Documents/scripts/nixpkgsearch.sh";
-      pkgdel = "~/Documents/scripts/nixpkgremove.sh";
+      pkgadd = "pkgadd";
+      pkgdel = "pkgdel";
       lg = "lazygit";
       cat = "bat";
       v = "nvim";
