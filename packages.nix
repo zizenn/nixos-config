@@ -58,7 +58,6 @@
     cmake
     catimg
     chafa
-    zsh-fzf-tab
     gh
     herdr
     obsidian
