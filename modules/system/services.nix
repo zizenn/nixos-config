@@ -25,7 +25,7 @@
     openssh = {
       enable = true;
       settings = {
-            X11Forwarding = true";
+            X11Forwarding = true;
       };
     };
   };
@@ -47,10 +47,15 @@
   # Force BFQ I/O scheduler for external USB block devices
   services.udev.extraRules = ''
     # Disable USB autosuspend for input devices (keyboards, mice, HID)
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{product}=="*[Kk]eyboard*|*[Kk]eypad*|*[Mm]ouse*|*[Hh]id*|*[Tt]ouchpad*", ATTR{power/control}="on"
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{product}=="*[Kk]eyboard*", ATTR{power/control}="on"
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{product}=="*[Kk]eypad*", ATTR{power/control}="on"
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{product}=="*[Mm]ouse*", ATTR{power/control}="on"
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{product}=="*[Hh]id*", ATTR{power/control}="on"
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{product}=="*[Tt]ouchpad*", ATTR{power/control}="on"
     ACTION=="add", SUBSYSTEM=="input", ATTR{power/control}="on"
     # BFQ scheduler for USB mass storage (e.g. external SSD)
-    ACTION=="add|change", SUBSYSTEM=="block", KERNEL=="sd*[!0-9]", SUBSYSTEMS=="usb", ATTR{queue/scheduler}="bfq"
+    ACTION=="add", SUBSYSTEM=="block", KERNEL=="sd*", SUBSYSTEMS=="usb", ATTR{queue/scheduler}="bfq"
+    ACTION=="change", SUBSYSTEM=="block", KERNEL=="sd*", SUBSYSTEMS=="usb", ATTR{queue/scheduler}="bfq"
   '';
 
   systemd.services.fix-usb-input-after-resume = {

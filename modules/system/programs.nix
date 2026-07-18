@@ -11,6 +11,7 @@
     firefox.enable = true;
     nix-ld.enable = true;
     ccache.enable = true;
+    ssh.setXAuthLocation = true;
 
     nh = {
       enable = true;
