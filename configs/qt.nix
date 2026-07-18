@@ -21,8 +21,4 @@
     "Kvantum/Matugen.svg".source = ./qt/Matugen.svg;
   };
 
-  home.sessionVariables = {
-    QT_STYLE_OVERRIDE = "kvantum";
-    QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
-  };
 }

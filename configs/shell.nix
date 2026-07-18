@@ -33,10 +33,6 @@
 
     # Runs for interactive sessions
     interactiveShellInit = ''
-      # Remove the subshells here
-      set -gx EDITOR "nvim"
-      set -gx SUDO_EDITOR "nvim"
-      set -gx VISUAL "nvim"
       set -gx MANROFFOPT "-c"
       set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
       set -gx FZF_DEFAULT_COMMAND "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
@@ -44,6 +40,12 @@
       set -U fish_greeting ""
       fish_vi_key_bindings
       fish_add_path ~/.local/bin
+
+      # UWSM integration — source env and provide uwsm-app helper
+      type -q uwsm; and uwsm finalize &>/dev/null
+      function uwsa --description "Run app under UWSM scope"
+        uwsm app -- $argv
+      end
 
       # --- Functions ---
       function y

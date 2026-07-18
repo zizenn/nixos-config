@@ -14,10 +14,5 @@
     "hypr/scripts/layout-toggle.sh".source = ./hyprland/scripts/layout-toggle.sh;
   };
 
-  xdg.configFile."uwsm/env-hyprland".text = ''
-    export XCURSOR_SIZE=24
-    export HYPRCURSOR_SIZE=24
-  '';
-
   wayland.windowManager.hyprland.systemd.enable = false;
 }

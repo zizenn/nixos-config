@@ -39,8 +39,4 @@ in {
     config.common.default = [ "xapp" ];
   };
 
-  environment.sessionVariables = {
-    GTK_USE_PORTAL = "1";
-    NSS_SSL_CBC_RANDOM_IV = "0";
-  };
 }

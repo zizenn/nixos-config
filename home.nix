@@ -31,18 +31,13 @@
     ./configs/gtk.nix
     ./configs/qt.nix
     ./configs/scripts.nix
+    ./configs/env.nix
     ./packages.nix
   ];
 
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = (_: true);
-  };
-
-  home.sessionVariables = {
-    SUDO_EDITOR = "nvim";
-    EDITOR = "nvim";
-    VISUAL = "nvim";
   };
 
   xdg.mimeApps = {
