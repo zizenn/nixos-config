@@ -86,6 +86,7 @@ in
     proton-pass
     zathura
     lynx
+    pandoc
     cmatrix
     cargo
     broot
