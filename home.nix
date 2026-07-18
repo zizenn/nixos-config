@@ -41,7 +41,7 @@
     allowUnfreePredicate = (_: true);
   };
 
-  programs.man.enable = false;
+  programs.man.enable = true;
 
   xdg.mimeApps = {
     enable = true;
