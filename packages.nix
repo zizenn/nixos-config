@@ -97,5 +97,6 @@ in
     libsForQt5.qtstyleplugin-kvantum
     tldr
     cppman
+    ncdu
   ];
 }
