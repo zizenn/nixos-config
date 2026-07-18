@@ -10,7 +10,6 @@
     upower.enable = true;
     blueman.enable = true;
     udisks2.enable = true;
-    openssh.enable = true;
     timesyncd.enable = true;
     elephant.enable = true;
     fstrim.enable = true;
@@ -21,6 +20,13 @@
       audio.enable = true;
       pulse.enable = true;
       wireplumber.enable = true;
+    };
+
+    openssh = {
+      enable = true;
+      settings = {
+            X11Forwarding = true";
+      };
     };
   };
 
