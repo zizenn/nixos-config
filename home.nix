@@ -1,37 +1,38 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   ...
 }:
 {
   imports = [
-    ./modules/home/shell.nix
-    ./modules/home/git.nix
-    ./modules/home/jujutsu.nix
-    ./modules/home/obs.nix
-    ./modules/home/opencode.nix
-    ./modules/home/kitty.nix
-    ./modules/home/hyprland.nix
-    ./modules/home/neovim.nix
-    ./modules/home/rofi.nix
-    ./modules/home/waybar.nix
-    ./modules/home/yazi.nix
-    ./modules/home/wallpaper.nix
-    ./modules/home/matugen.nix
-    ./modules/home/matugen/kanagawa-dragon.nix
-    ./modules/home/mako.nix
-    ./modules/home/wleave.nix
-    ./modules/home/hyprflow.nix
-    ./modules/home/fastfetch.nix
-    ./modules/home/aerc.nix
-    ./modules/home/zed.nix
-    ./modules/home/zennotes.nix
-    ./modules/home/tmux.nix
-    ./modules/home/gtk.nix
-    ./modules/home/qt.nix
-    ./modules/home/scripts.nix
-    ./modules/home/env.nix
+    ./modules/home/shell/shell.nix
+    ./modules/home/dev/git.nix
+    ./modules/home/dev/jujutsu.nix
+    ./modules/home/apps/obs.nix
+    ./modules/home/editors/opencode.nix
+    ./modules/home/desktop/kitty.nix
+    ./modules/home/desktop/hyprland
+    ./modules/home/editors/neovim
+    ./modules/home/desktop/rofi
+    ./modules/home/desktop/waybar
+    ./modules/home/apps/yazi
+    ./modules/home/desktop/wallpaper.nix
+    ./modules/home/theme/matugen
+    ./modules/home/theme/matugen/kanagawa-dragon.nix
+    ./modules/home/desktop/mako.nix
+    ./modules/home/desktop/wleave
+    ./modules/home/desktop/hyprflow
+    ./modules/home/theme/fastfetch
+    ./modules/home/mail/aerc
+    ./modules/home/editors/zed
+    ./modules/home/apps/zennotes.nix
+    ./modules/home/shell/tmux.nix
+    ./modules/home/theme/gtk
+    ./modules/home/theme/qt
+    ./modules/home/core/scripts
+    ./modules/home/core/env.nix
     ./packages.nix
   ];
 
@@ -39,6 +40,13 @@
     allowUnfree = true;
     allowUnfreePredicate = (_: true);
   };
+
+  home.activation.makeManpathWritable = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    if [ -L "$HOME/.manpath" ]; then
+      cp --no-dereference "$HOME/.manpath" "$HOME/.manpath.tmp"
+      mv "$HOME/.manpath.tmp" "$HOME/.manpath"
+    fi
+  '';
 
   xdg.mimeApps = {
     enable = true;
