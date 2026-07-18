@@ -6,7 +6,7 @@
       executable = true;
       text = ''
         #!${pkgs.fish}/bin/fish
-        ${builtins.readFile ../scripts/theme-kanagawa}
+        ${builtins.readFile ../../core/scripts/theme-kanagawa}
       '';
     };
 

@@ -13,12 +13,12 @@
   };
 
   xdg.configFile = {
-    "Kvantum/kvantum.kvconfig".source = ./qt/kvantum.kvconfig;
+    "Kvantum/kvantum.kvconfig".source = ./kvantum.kvconfig;
     "Kvantum/Matugen.kvconfig" = {
-      source = ./qt/Matugen.kvconfig;
+      source = ./Matugen.kvconfig;
       force = true;
     };
-    "Kvantum/Matugen.svg".source = ./qt/Matugen.svg;
+    "Kvantum/Matugen.svg".source = ./Matugen.svg;
   };
 
 }

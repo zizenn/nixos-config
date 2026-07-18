@@ -7,5 +7,5 @@ in
   xdg.configFile."wleave/layout.json".text = builtins.replaceStrings
     [ "__ICONS__" ]
     [ iconsDir ]
-    (builtins.readFile ./wleave/layout.json);
+    (builtins.readFile ./layout.json);
 }

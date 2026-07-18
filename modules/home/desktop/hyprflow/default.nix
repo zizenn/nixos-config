@@ -5,5 +5,5 @@
 }:
 
 {
-  xdg.configFile."hyprflow/config.toml".source = ./hyprflow/config.toml;
+  xdg.configFile."hyprflow/config.toml".source = ./config.toml;
 }

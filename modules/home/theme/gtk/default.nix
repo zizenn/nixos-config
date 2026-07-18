@@ -33,11 +33,11 @@ in {
   # pre-seeded fallbacks — overwritten by matugen/theme-kanagawa
   home.file = {
     ".config/gtk-3.0/gtk.css" = {
-      source = ./gtk/gtk3-override.css;
+      source = ./gtk3-override.css;
       force = true;
     };
     ".config/gtk-4.0/gtk.css" = {
-      source = ./gtk/gtk4-override.css;
+      source = ./gtk4-override.css;
       force = true;
     };
   };

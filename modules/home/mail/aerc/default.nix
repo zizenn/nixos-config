@@ -5,8 +5,8 @@
   home.packages = with pkgs; [ age gnupg jq ];
 
   xdg.configFile = {
-    "aerc/aerc.conf".source = ./aerc/aerc.conf;
-    "aerc/binds.conf".source = ./aerc/binds.conf;
+    "aerc/aerc.conf".source = ./aerc.conf;
+    "aerc/binds.conf".source = ./binds.conf;
   };
 
   home.activation.writeAercAccounts = lib.hm.dag.entryAfter ["writeBoundary"] ''

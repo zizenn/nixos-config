@@ -7,7 +7,7 @@
   };
 
   xdg.configFile."yazi" = {
-    source = ./yazi;
+    source = ./config;
     recursive = true;
     force = true;
   };
