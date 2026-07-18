@@ -6,32 +6,32 @@
 }:
 {
   imports = [
-    ./configs/shell.nix
-    ./configs/git.nix
-    ./configs/jujutsu.nix
-    ./configs/obs.nix
-    ./configs/opencode.nix
-    ./configs/kitty.nix
-    ./configs/hyprland.nix
-    ./configs/neovim.nix
-    ./configs/rofi.nix
-    ./configs/waybar.nix
-    ./configs/yazi.nix
-    ./configs/wallpaper.nix
-    ./configs/matugen.nix
-    ./configs/matugen/kanagawa-dragon.nix
-    ./configs/mako.nix
-    ./configs/wleave.nix
-    ./configs/hyprflow.nix
-    ./configs/fastfetch.nix
-    ./configs/aerc.nix
-    ./configs/zed.nix
-    ./configs/zennotes.nix
-    ./configs/tmux.nix
-    ./configs/gtk.nix
-    ./configs/qt.nix
-    ./configs/scripts.nix
-    ./configs/env.nix
+    ./modules/home/shell.nix
+    ./modules/home/git.nix
+    ./modules/home/jujutsu.nix
+    ./modules/home/obs.nix
+    ./modules/home/opencode.nix
+    ./modules/home/kitty.nix
+    ./modules/home/hyprland.nix
+    ./modules/home/neovim.nix
+    ./modules/home/rofi.nix
+    ./modules/home/waybar.nix
+    ./modules/home/yazi.nix
+    ./modules/home/wallpaper.nix
+    ./modules/home/matugen.nix
+    ./modules/home/matugen/kanagawa-dragon.nix
+    ./modules/home/mako.nix
+    ./modules/home/wleave.nix
+    ./modules/home/hyprflow.nix
+    ./modules/home/fastfetch.nix
+    ./modules/home/aerc.nix
+    ./modules/home/zed.nix
+    ./modules/home/zennotes.nix
+    ./modules/home/tmux.nix
+    ./modules/home/gtk.nix
+    ./modules/home/qt.nix
+    ./modules/home/scripts.nix
+    ./modules/home/env.nix
     ./packages.nix
   ];
 

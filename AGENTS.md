@@ -33,7 +33,7 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 ├── home.nix                        # user-level config, imports ./configs/*
 ├── packages.nix                    # user package list (imported by home.nix)
 ├── AGENTS.md                       # this file
-├── configs/                        # user-scope modules (imported by home.nix)
+├── modules/home/                   # user-scope modules (imported by home.nix)
 │   ├── <name>.nix                  # individual module
 │   └── <name>/                     # optional companion dir for dotfiles
 │       └── …                       #   → xdg.configFile symlinks
