@@ -14,13 +14,12 @@
     if [ ! -f "$conf" ]; then
       cat > "$conf" << 'AERC_EOF'
 # aerc accounts configuration
-# OAuth2 via XOAUTH2 using age-encrypted refresh token.
-# see https://aerc-mail.org/ for documentation.
+# App password auth via age-encrypted credentials.
 
 [personal]
-source = imaps+xoauth2://zizenn.69%40gmail.com@imap.gmail.com:993?token_endpoint=https://oauth2.googleapis.com/token&client_id=166038912029-89mntpobldv7o2hnna5ecdqtctp511mm.apps.googleusercontent.com&client_secret=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&scope=https://mail.google.com/
+source = imaps://zizenn.69%40gmail.com@imap.gmail.com:993
 source-cred-cmd = ~/.local/bin/aerc-refresh personal
-outgoing = smtps+xoauth2://zizenn.69%40gmail.com@smtp.gmail.com:465?token_endpoint=https://oauth2.googleapis.com/token&client_id=166038912029-89mntpobldv7o2hnna5ecdqtctp511mm.apps.googleusercontent.com&client_secret=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&scope=https://mail.google.com/
+outgoing = smtps://zizenn.69%40gmail.com@smtp.gmail.com:465
 outgoing-cred-cmd = ~/.local/bin/aerc-refresh personal
 default = INBOX
 from = Zizenn <zizenn.69@gmail.com>
@@ -37,12 +36,11 @@ AERC_EOF
 
       name="''${1:-personal}"
       key="''${AGE_KEY:-$HOME/.config/age/key.txt}"
-      state="$HOME/.config/aerc/secrets/$name.oauth"
+      state="$HOME/.config/aerc/secrets/$name.app-password"
 
-      [ -f "$state.age" ] || { echo "aerc-refresh: no state for '$name'" >&2; exit 1; }
+      [ -f "$state.age" ] || { echo "aerc-refresh: no secret for '$name'" >&2; exit 1; }
 
-      eval "$(age -d -i "$key" "$state.age" 2>/dev/null)" || { echo "aerc-refresh: failed to decrypt" >&2; exit 1; }
-      echo "$refresh_token"
+      age -d -i "$key" "$state.age" 2>/dev/null || { echo "aerc-refresh: failed to decrypt" >&2; exit 1; }
     '';
     executable = true;
   };
