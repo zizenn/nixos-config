@@ -49,7 +49,6 @@ in
     (pkgs.callPackage ./packages/zennotes/package-desktop.nix { })
     steam
     protonmail-desktop
-    zed-editor
     btop
     bat
     lldb
