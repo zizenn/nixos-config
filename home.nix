@@ -41,12 +41,7 @@
     allowUnfreePredicate = (_: true);
   };
 
-  home.activation.makeManpathWritable = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    if [ -L "$HOME/.manpath" ]; then
-      cp --no-dereference "$HOME/.manpath" "$HOME/.manpath.tmp"
-      mv "$HOME/.manpath.tmp" "$HOME/.manpath"
-    fi
-  '';
+  programs.man.enable = false;
 
   xdg.mimeApps = {
     enable = true;
