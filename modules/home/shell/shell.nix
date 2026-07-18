@@ -19,7 +19,7 @@
       conf = "cd ~/nixos";
       home = "nh home switch";
       os = "nh os switch";
-      ls = "eza -1";
+      ls = "l";
       tree = "eza -T";
       pkgadd = "pkgadd";
       pkgdel = "pkgdel";
