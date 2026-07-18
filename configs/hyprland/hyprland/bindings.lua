@@ -41,9 +41,8 @@ end
 hl.bind(mainMod .. " + h", hl.dsp.layout("focus l"))
 hl.bind(mainMod .. " + l", hl.dsp.layout("focus r"))
 
--- toggle focus between floating and tiled windows
-hl.bind(mainMod .. " + Tab", hl.dsp.layout("focuswindow floating"))
-hl.bind(mainMod .. " + SHIFT + Tab", hl.dsp.layout("focuswindow tiled"))
+-- toggle layout on current workspace (dwindle <-> scrolling)
+hl.bind(mainMod .. " + bracketleft", hl.dsp.exec_cmd("~/.config/hypr/scripts/layout-toggle.sh"))
 
 -- launch aerc (floating via aerc-todo class rule)
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("kitty --class aerc-todo -e aerc"))

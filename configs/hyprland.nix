@@ -10,8 +10,8 @@
     "hypr/hyprland/config.lua".source = ./hyprland/hyprland/config.lua;
     "hypr/hyprland/bindings.lua".source = ./hyprland/hyprland/bindings.lua;
     "hypr/hyprland/zen.lua".source = ./hyprland/hyprland/zen.lua;
-    "hypr/hyprsplit/init.lua".source = ./hyprland/hyprsplit/init.lua;
     "hypr/hypridle.conf".source = ./hyprland/hyprland/hypridle.conf;
+    "hypr/scripts/layout-toggle.sh".source = ./hyprland/scripts/layout-toggle.sh;
   };
 
   xdg.configFile."uwsm/env-hyprland".text = ''
