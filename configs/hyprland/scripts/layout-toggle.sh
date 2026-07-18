@@ -12,4 +12,4 @@ else
   n="dwindle"
 fi
 echo "$n" > "$f"
-hyprctl eval "workspace=$ws, layout=$n"
+hyprctl eval "hl.workspace_rule({ workspace = '$ws', layout = '$n' })"
