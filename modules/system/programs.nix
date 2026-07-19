@@ -35,15 +35,15 @@
         libxkbcommon
 
         # X11 Windowing requirements
-        xorg.libX11
-        xorg.libXcomposite
-        xorg.libXdamage
-        xorg.libXext
-        xorg.libXfixes
-        xorg.libXrandr
-        xorg.libXrender
-        xorg.libXtst
-        xorg.libxcb
+        libx11
+        libxcomposite
+        libxdamage
+        libxext
+        libxfixes
+        libxrandr
+        libxrender
+        libxtst
+        libxcb
       ];
     };
 

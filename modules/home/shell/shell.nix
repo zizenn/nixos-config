@@ -19,7 +19,8 @@
       conf = "cd ~/nixos";
       home = "nh home switch";
       os = "nh os switch";
-      ls = "eza -1";
+      ls = "eza -l --icons=always --git --group-directories-first";
+      lt = "eza --tree --level=2 --icons=always";
       tree = "eza -T";
       pkgadd = "pkgadd";
       pkgdel = "pkgdel";
