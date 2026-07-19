@@ -15,7 +15,6 @@
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
-        # Core standard dependencies
         stdenv.cc.cc
         glib
         fuse
@@ -74,12 +73,12 @@
     vim
     tmux
     wget
-    glib
     xdg-utils
     brightnessctl
     playerctl
     cliphist
     man-pages
+    lsd
   ];
 
   users.users.zizenn = {
