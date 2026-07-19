@@ -9,9 +9,44 @@
     fish.enable = true;
     dconf.enable = true;
     firefox.enable = true;
-    nix-ld.enable = true;
     ccache.enable = true;
     ssh.setXAuthLocation = true;
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        # Core standard dependencies
+        stdenv.cc.cc
+        glib
+        fuse
+
+        # Graphical/Electron stack
+        gtk3
+        nss
+        nspr
+        alsa-lib
+        atk
+        cairo
+        pango
+        cups
+        dbus
+        expat
+        libdrm
+        mesa
+        libxkbcommon
+
+        # X11 Windowing requirements
+        xorg.libX11
+        xorg.libXcomposite
+        xorg.libXdamage
+        xorg.libXext
+        xorg.libXfixes
+        xorg.libXrandr
+        xorg.libXrender
+        xorg.libXtst
+        xorg.libxcb
+      ];
+    };
 
     nh = {
       enable = true;
