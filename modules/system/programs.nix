@@ -78,7 +78,7 @@
     playerctl
     cliphist
     man-pages
-    lsd
+    steam-run
   ];
 
   users.users.zizenn = {
