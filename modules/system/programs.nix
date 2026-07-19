@@ -71,7 +71,6 @@
 
   environment.systemPackages = with pkgs; [
     vim
-    tmux
     wget
     xdg-utils
     brightnessctl

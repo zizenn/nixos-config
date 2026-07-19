@@ -59,9 +59,5 @@ output_path = ["~/.config/gtk-4.0/gtk.css"]
 input_path = "~/.config/matugen/templates/kvantum/Matugen.kvconfig"
 output_path = ["~/.config/Kvantum/Matugen.kvconfig"]
 
-[templates.zennotes]
-input_path = "~/.config/matugen/templates/zennotes.css"
-output_path = ["~/.config/zennotes/themes/matugen/theme.css"]
-
 [hooks]
 post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done; makoctl reload 2>/dev/null; pkill waybar 2>/dev/null; waybar & disown; kvantummanager --set Matugen 2>/dev/null; true"

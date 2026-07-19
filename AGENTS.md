@@ -40,9 +40,9 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 │   │   ├── mail/                   # aerc
 │   │   ├── theme/                  # matugen, gtk, qt, fastfetch
 │   │   ├── dev/                    # git, jujutsu
-│   │   ├── shell/                  # shell, tmux
+│   │   ├── shell/                  # shell
 │   │   ├── core/                   # env, scripts
-│   │   └── apps/                   # obs, zennotes, yazi
+│   │   └── apps/                   # obs, yazi
 │   │
 │   └── system/                     # system-scope modules (imported by configuration.nix)
 │       ├── boot.nix

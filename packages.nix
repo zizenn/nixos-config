@@ -46,7 +46,6 @@ in
     fd
     vesktop
     inputs.zen-browser.packages.${system}.default
-    (pkgs.callPackage ./packages/zennotes/package-desktop.nix { })
     steam
     protonmail-desktop
     btop

@@ -22,7 +22,6 @@
     ".config/matugen/kanagawa-dragon/gtk4.css".source = ./kanagawa-dragon/gtk4.css;
     ".config/matugen/kanagawa-dragon/obsidian.css".source = ./kanagawa-dragon/obsidian.css;
     ".config/matugen/kanagawa-dragon/vesktop.css".source = ./kanagawa-dragon/vesktop.css;
-    ".config/matugen/kanagawa-dragon/zennotes.css".source = ./kanagawa-dragon/zennotes.css;
     ".config/matugen/kanagawa-dragon/kvantum/Matugen.kvconfig".source = ./kanagawa-dragon/kvantum/Matugen.kvconfig;
     ".config/matugen/kanagawa-dragon/kvantum/Matugen.svg".source = ./kanagawa-dragon/kvantum/Matugen.svg;
   };

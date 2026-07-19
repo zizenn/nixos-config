@@ -16,7 +16,6 @@
       url = "github:isorensen/hyprflow/v0.2.1";
       flake = false;
     };
-    zennotes.url = "github:ZenNotes/zennotes";
   };
 
   outputs =

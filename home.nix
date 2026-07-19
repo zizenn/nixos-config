@@ -27,8 +27,6 @@
     ./modules/home/theme/fastfetch
     ./modules/home/mail/aerc
     ./modules/home/editors/zed
-    ./modules/home/apps/zennotes.nix
-    ./modules/home/shell/tmux.nix
     ./modules/home/theme/gtk
     ./modules/home/theme/qt
     ./modules/home/core/scripts
