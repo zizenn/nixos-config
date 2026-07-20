@@ -26,5 +26,9 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprflow restore --max-age 24h")
 	hl.exec_cmd("hyprflow autosave --install")
 
+	-- ollama
 	hl.exec_cmd("ollama serve")
+
+	-- wleave service
+	hl.exec_cmd("wleave -s")
 end)
