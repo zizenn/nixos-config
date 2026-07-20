@@ -6,6 +6,41 @@
 
 let
   inherit (pkgs.stdenv.hostPlatform) system;
+  lib = pkgs.lib;
+
+  # The upstream modrinth-app uses symlinkJoin which excludes postBuild from
+  # derivation attrs, so overrideAttrs can't fix the wrapping. Instead we
+  # recreate the symlinkJoin with output=$out set before wrapGAppsHook runs.
+  modrinth-jdks = with pkgs; [ jdk8 jdk17 jdk21 jdk25 ];
+  modrinth-app-fixed = pkgs.symlinkJoin {
+    name = "modrinth-app-${pkgs.modrinth-app-unwrapped.version}";
+    paths = [ pkgs.modrinth-app-unwrapped ];
+    nativeBuildInputs = [ pkgs.glib pkgs.wrapGAppsHook3 ];
+    buildInputs = [ pkgs.glib-networking pkgs.gsettings-desktop-schemas ];
+    runtimeDependencies = lib.makeLibraryPath [
+      pkgs.addDriverRunpath.driverLink
+      pkgs.libGL pkgs.libx11 pkgs.libxcursor pkgs.libxext pkgs.libxrandr pkgs.libxxf86vm
+      (lib.getLib pkgs.stdenv.cc.cc)
+      pkgs.flite pkgs.alsa-lib pkgs.libjack2 pkgs.libpulseaudio pkgs.pipewire pkgs.udev
+    ];
+    postBuild = ''
+      output=$out
+
+      gappsWrapperArgs+=(
+        --prefix PATH : ${lib.makeSearchPath "bin/java" modrinth-jdks}
+        --prefix PATH : ${lib.makeBinPath [ pkgs.xrandr ]}
+        --set LD_LIBRARY_PATH $runtimeDependencies
+      )
+
+      glibPostInstallHook
+      gappsWrapperArgsHook
+      wrapGAppsHook
+    '';
+    meta = {
+      inherit (pkgs.modrinth-app-unwrapped.meta)
+        description longDescription homepage license maintainers mainProgram platforms broken;
+    };
+  };
 in
 
 {
@@ -81,6 +116,7 @@ in
     glaxnimate # Optional: For text/vector animations
     mediainfo # Optional: For reading video file metadata
     gemini-cli
+    modrinth-app-fixed
     proton-pass
     zathura
     lynx

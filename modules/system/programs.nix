@@ -44,8 +44,7 @@
     man-pages
     steam-run
 
-    # minecraft
-    modrinth-app
+    # minecraft (modrinth moved to home-manager packages.nix)
     temurin-bin-21 # Required for Minecraft 1.20.5 and newer
     temurin-bin-17 # Required for Minecraft 1.18 to 1.20.4
   ];
