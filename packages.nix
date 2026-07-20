@@ -89,6 +89,16 @@ in
     cargo
     broot
 
+    # LSP servers (mason replacement)
+    lua-language-server
+    typescript-language-server
+    vscode-langservers-extracted
+    pyright
+
+    # Formatters (mason replacement)
+    stylua
+    prettier
+
     # gtk / qt theming
     papirus-icon-theme
     kdePackages.qt6ct

@@ -67,7 +67,7 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 - Theme switching: `theme-wallpaper` (runs matugen from wallpaper → Material You) or `theme-kanagawa` (applies static kanagawa-dragon palette)
 - Desktop: Hyprland + UWSM (`programs.hyprland.withUWSM = true`); login via `services.sysc-greet` (greetd-based greeter)
 - `xdg.configFile` is the standard mechanism for symlinking dotfile directories (avoid manual symlinks)
-- LSPs / linters / formatters are managed by Mason inside Neovim, not declared in Nix (`modules/home/editors/neovim/nvim/lua/plugins/mason.lua`). The system provides `nix-ld` so Mason's dynamically linked binaries work on NixOS.
+- LSPs / linters / formatters are declared in `packages.nix` and configured directly in Neovim via `nvim-lspconfig` and `conform.nvim` (no Mason).
 - Indentation: 6 spaces globally (`shiftwidth=6`, `tabstop=6`, `softtabstop=6`), enforced by formatters (stylua, prettier, autopep8, clang-format with `--indent-width 6` / `--tab-width 6` / etc.)
 - clangd is provided by the Nix `clang-tools` package, not Mason.
 

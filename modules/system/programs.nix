@@ -12,41 +12,6 @@
     ccache.enable = true;
     ssh.setXAuthLocation = true;
 
-    nix-ld = {
-      enable = true;
-      libraries = with pkgs; [
-        stdenv.cc.cc
-        glib
-        fuse
-
-        # Graphical/Electron stack
-        gtk3
-        nss
-        nspr
-        alsa-lib
-        atk
-        cairo
-        pango
-        cups
-        dbus
-        expat
-        libdrm
-        mesa
-        libxkbcommon
-
-        # X11 Windowing requirements
-        libx11
-        libxcomposite
-        libxdamage
-        libxext
-        libxfixes
-        libxrandr
-        libxrender
-        libxtst
-        libxcb
-      ];
-    };
-
     nh = {
       enable = true;
       clean.enable = true;
@@ -78,6 +43,11 @@
     cliphist
     man-pages
     steam-run
+
+    # minecraft
+    modrinth-app
+    temurin-bin-21 # Required for Minecraft 1.20.5 and newer
+    temurin-bin-17 # Required for Minecraft 1.18 to 1.20.4
   ];
 
   users.users.zizenn = {
