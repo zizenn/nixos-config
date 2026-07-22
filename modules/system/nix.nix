@@ -1,11 +1,5 @@
 { config, lib, pkgs, ... }: {
   nix = {
-    gc = {
-      automatic = true;
-      dates = "03:00";
-      options = "--delete-older-than 7d";
-    };
-
     optimise = {
       automatic = true;
       dates = [ "04:00" ];
@@ -22,7 +16,7 @@
       keep-failed = false;
       log-lines = 25;
       max-free = 20000000000;
-      max-jobs = auto;
+      max-jobs = "auto";
       min-free = 5000000000;
       sandbox = false;
       tarball-ttl = 86400;
