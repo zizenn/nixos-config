@@ -33,10 +33,6 @@
     ./packages.nix
   ];
 
-  nixpkgs.config = {
-    allowUnfreePredicate = (_: true);
-  };
-
   programs.man.enable = true;
 
   xdg.mimeApps = {

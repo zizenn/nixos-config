@@ -15,8 +15,7 @@
 ## Essential commands
 
 ```sh
-nh os switch             # rebuild system config (alias: os)
-nh home switch           # rebuild home-manager (not home-manager switch)
+nh os switch             # rebuild everything (system + home-manager) (alias: os)
 doas <cmd>               # privilege escalation (sudo is disabled)
 conf                     # alias: cd ~/nixos
 theme-wallpaper          # matugen from wallpaper (interactive fzf picker)
@@ -114,8 +113,7 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 After any `.nix` change, run:
 
 ```sh
-nh os switch          # system changes (alias: os)
-nh home switch        # user/home-manager changes
+nh os switch          # rebuilds both NixOS + home-manager (alias: os)
 ```
 
 There are no CI tests, formatters, or linters configured in this repo. Nix evaluation catches most errors at build time.

@@ -1,6 +1,7 @@
 { config, lib, pkgs, inputs, ... }: {
   imports = [
     ./hardware-configuration.nix
+    ./home-manager.nix
     ./boot.nix
     ./networking.nix
     ./hardware.nix
