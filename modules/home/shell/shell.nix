@@ -57,8 +57,7 @@
     settings = {
       scan_timeout = 50;
       command_timeout = 2000;
-      # Added $env_var right after $fill to catch devenv environments
-      format = "$directory$git_branch$git_status$fill$env_var$nix_shell$c$cmd_duration$line_break$character";
+      format = "$directory$git_branch$git_status$fill$env_var$c$cmd_duration$line_break$character";
 
       fill = {
         symbol = " ";
@@ -88,16 +87,9 @@
         style = "bold bright-black";
       };
 
-      # Catches devenv environments specifically, styled for Jetpack
       env_var.DEVENV_NAME = {
         variable = "DEVENV_NAME";
         format = "[ $value]($style) ";
-        style = "italic bright-blue";
-      };
-
-      # Catches standard nix-shell / nix develop environments
-      nix_shell = {
-        format = "[ \\($state\\)]($style) ";
         style = "italic bright-blue";
       };
 
