@@ -9,16 +9,6 @@
     NSS_SSL_CBC_RANDOM_IV = "0";
     QT_STYLE_OVERRIDE = "kvantum";
     QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
+    XCURSOR_SIZE = "24";
   };
-
-  xdg.configFile."uwsm/env-hyprland".text = ''
-    export XCURSOR_SIZE=24
-    export HYPRCURSOR_SIZE=24
-    export EDITOR=nvim
-    export VISUAL=nvim
-    export GTK_USE_PORTAL=1
-    export NSS_SSL_CBC_RANDOM_IV=0
-    export QT_STYLE_OVERRIDE=kvantum
-    export QT_QPA_PLATFORMTHEME=qt6ct
-  '';
 }

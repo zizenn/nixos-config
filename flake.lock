@@ -21,23 +21,6 @@
         "type": "github"
       }
     },
-    "hyprflow": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1773255004,
-        "narHash": "sha256-5QWzimuNSl91TLWhBBiq4HCQyYtoSP8c9VknxSA0O8s=",
-        "owner": "isorensen",
-        "repo": "hyprflow",
-        "rev": "efc96e9aa7bf96ad00706e77511a3daf99ca4c63",
-        "type": "github"
-      },
-      "original": {
-        "owner": "isorensen",
-        "ref": "v0.2.1",
-        "repo": "hyprflow",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1784497964,
@@ -73,7 +56,6 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "hyprflow": "hyprflow",
         "nixpkgs": "nixpkgs",
         "wlctl": "wlctl",
         "zen-browser": "zen-browser"

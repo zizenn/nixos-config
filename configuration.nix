@@ -12,8 +12,7 @@
     ./modules/system/locale.nix
   ];
 
-  # Optimize ext4 on external SSD (USB 3.0) for C++ compilation
   fileSystems."/" = {
-    options = [ "noatime" "commit=60" "data=ordered" "barrier=1" ];
+    options = [ "noatime" "commit=60" "data=ordered" ];
   };
 }

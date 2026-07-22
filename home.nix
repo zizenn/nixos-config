@@ -13,7 +13,7 @@
     ./modules/home/apps/obs.nix
     ./modules/home/editors/opencode.nix
     ./modules/home/desktop/kitty.nix
-    ./modules/home/desktop/hyprland
+    ./modules/home/desktop/niri
     ./modules/home/editors/neovim
     ./modules/home/desktop/rofi
     ./modules/home/desktop/waybar
@@ -23,7 +23,6 @@
     ./modules/home/theme/matugen/kanagawa-dragon.nix
     ./modules/home/desktop/mako.nix
     ./modules/home/desktop/wleave
-    ./modules/home/desktop/hyprflow
     ./modules/home/theme/fastfetch
     ./modules/home/mail/aerc
     ./modules/home/editors/zed
@@ -35,7 +34,6 @@
   ];
 
   nixpkgs.config = {
-    allowUnfree = true;
     allowUnfreePredicate = (_: true);
   };
 

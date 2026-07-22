@@ -12,19 +12,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     wlctl.url = "github:aashish-thapa/wlctl";
-    hyprflow = {
-      url = "github:isorensen/hyprflow/v0.2.1";
-      flake = false;
-    };
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      ...
-    }@inputs:
+    { nixpkgs, home-manager, ... }@inputs:
+    let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    in
     {
       nixosConfigurations.nix-port = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -33,7 +27,7 @@
       };
 
       homeConfigurations."zizenn@nix-port" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        inherit pkgs;
         extraSpecialArgs = { inherit inputs; };
         modules = [
           ./home.nix
@@ -41,14 +35,6 @@
             home.username = "zizenn";
             home.homeDirectory = "/home/zizenn";
             home.stateVersion = "26.05";
-            home.packages = [
-              (nixpkgs.legacyPackages.x86_64-linux.rustPlatform.buildRustPackage {
-                pname = "hyprflow";
-                version = "0.2.1";
-                src = inputs.hyprflow;
-                cargoHash = "sha256-6TGMiyvmLDYMsPKqQwnPf98frtRIel0QsqgjW0B290E=";
-              })
-            ];
           }
         ];
       };

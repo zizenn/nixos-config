@@ -10,7 +10,7 @@
 | Git identity | `sakif` <zizenn@proton.me> |
 | Default editor | `nvim` (`vi`/`vim` aliased) |
 | State version | `26.05` |
-| Platform | `x86_64-linux` (AMD, Hyper‑V VM) |
+| Platform | `x86_64-linux` (AMD, bare metal) |
 
 ## Essential commands
 
@@ -36,7 +36,7 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 ├── modules/
 │   ├── home/                       # user-scope modules (imported by home.nix)
 │   │   ├── editors/                # neovim, zed, opencode
-│   │   ├── desktop/                # hyprland, waybar, rofi, wleave, kitty, mako, ...
+│   │   ├── desktop/                # niri, waybar, rofi, wleave, kitty, mako, ...
 │   │   ├── mail/                   # aerc
 │   │   ├── theme/                  # matugen, gtk, qt, fastfetch
 │   │   ├── dev/                    # git, jujutsu
@@ -46,14 +46,14 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 │   │
 │   └── system/                     # system-scope modules (imported by configuration.nix)
 │       ├── boot.nix
-│       ├── desktop.nix             # Hyprland, portals, display manager
+│       ├── desktop.nix             # Niri, Ly, portals
 │       ├── hardware.nix            # GPU, Bluetooth
 │       ├── locale.nix
 │       ├── networking.nix
 │       ├── nix.nix
 │       ├── programs.nix            # system packages, fonts, users, nh
 │       ├── security.nix            # doas (no sudo)
-│       └── services.nix            # dbus, pipewire, logind, udev, systemd services
+│       └── services.nix            # pipewire, logind, udev, systemd services
 ```
 
 ## Conventions
@@ -65,11 +65,30 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 - `system.stateVersion` and `home.stateVersion` remain at `26.05`
 - Theme generation: matugen templates live in `modules/home/theme/matugen/templates/`, static kanagawa-dragon outputs in `modules/home/theme/matugen/kanagawa-dragon/`
 - Theme switching: `theme-wallpaper` (runs matugen from wallpaper → Material You) or `theme-kanagawa` (applies static kanagawa-dragon palette)
-- Desktop: Hyprland + UWSM (`programs.hyprland.withUWSM = true`); login via `services.sysc-greet` (greetd-based greeter)
+- Desktop: Niri compositor; login via `services.ly` (TUI display manager)
 - `xdg.configFile` is the standard mechanism for symlinking dotfile directories (avoid manual symlinks)
-- LSPs / linters / formatters are declared in `packages.nix` and configured directly in Neovim via `nvim-lspconfig` and `conform.nvim` (no Mason).
+- **neovim is self-contained**: LSPs, formatters, and DAP are wrapped into neovim's runtime environment — they are NOT on the global PATH. Only accessible when `nvim` runs.
+- **C++ development uses `devenv`**: gcc, cmake, gdb, lldb, make are NOT in home packages. Use `devenv` shells for C++ projects. ccache is configured via nix.
 - Indentation: 6 spaces globally (`shiftwidth=6`, `tabstop=6`, `softtabstop=6`), enforced by formatters (stylua, prettier, autopep8, clang-format with `--indent-width 6` / `--tab-width 6` / etc.)
 - clangd is provided by the Nix `clang-tools` package, not Mason.
+- `documentation.doc.enable = false` and `documentation.nixos.enable = false` — man pages are kept; HTML/info docs are not built.
+
+## Performance tuning
+
+| Setting | Value | Benefit |
+|---|---|---|
+| Kernel | `linuxPackages_zen` | Desktop-optimized scheduling and latency |
+| Kernel params | `mitigations=off`, `nowatchdog`, `processor.max_cstate=1` | Disables CPU vuln mitigations, watchdog timers, deep C-states |
+| TCP congestion | `bbr` + `fq` qdisc | Faster throughput on high-latency links |
+| vm.swappiness | 1 | Only swap under extreme memory pressure |
+| vm.vfs_cache_pressure | 50 | Keep page cache longer |
+| vm.dirty_ratio | 10 | Larger writeback cache for async I/O |
+| nix.max-jobs | auto | Use all CPU cores for builds |
+| nix.cores | 0 | Each build uses all available cores |
+| nix.sandbox | false | Build speed — safe on personal machine |
+| nix.auto-optimise-store | true | Deduplicate store paths automatically |
+| nix.gc | weekly, >7d | Automatic garbage collection |
+| boot.configurationLimit | 10 | Keep only 10 boot entries |
 
 ## Key files & locations
 
@@ -78,15 +97,17 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 | System packages | `modules/system/programs.nix` → `environment.systemPackages` |
 | User packages | `packages.nix` (imported by `home.nix`) |
 | `allowUnfree` | set in both `modules/system/security.nix` and `home.nix` |
-| Hyprland config (Lua) | `modules/home/desktop/hyprland/hyprland.lua` + `modules/home/desktop/hyprland/hyprland/*.lua` |
-| Hypridle | `modules/home/desktop/hyprland/hypridle.conf` |
+| Niri config (KDL) | `modules/home/desktop/niri/default.nix` → `~/.config/niri/config.kdl` |
+| Hypridle | `modules/home/desktop/niri/hypridle.conf` |
 | Hyprlock template | `modules/home/theme/matugen/templates/hyprlock.conf` → `~/.config/hypr/hyprlock.conf` |
-| Login manager (sysc-greet) | `modules/system/desktop.nix` → `services.sysc-greet` |
-| sysc-greet theme | `modules/home/theme/matugen/templates/sysc-greet.toml` → `~/.config/sysc-greet/themes/matugen.toml` |
+| Login manager (Ly) | `modules/system/desktop.nix` → `services.ly` |
 | Neovim | `modules/home/editors/neovim/nvim/` (symlinked to `~/.config/nvim`) |
+| Neovim runtime deps | `modules/home/editors/neovim/default.nix` → `neovimRuntimePackages` (LSPs, formatters, DAP) |
 | udev rules | `modules/system/services.nix` → `services.udev.extraRules` |
 | USB input resume fix | `modules/system/services.nix` → `systemd.services.fix-usb-input-after-resume` |
 | Systemd services | `modules/system/services.nix` |
+| Nix tuning | `modules/system/nix.nix` — GC, optimise, parallel builds, caches |
+| Kernel tuning | `modules/system/boot.nix` — zen kernel, sysctl, mitigations off |
 
 ## Testing / verification
 

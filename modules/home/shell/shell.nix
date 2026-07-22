@@ -42,11 +42,6 @@
       fish_vi_key_bindings
       fish_add_path ~/.local/bin
 
-      # UWSM integration — source env and provide uwsm-app helper
-      type -q uwsm; and uwsm finalize &>/dev/null
-      function uwsa --description "Run app under UWSM scope"
-        uwsm app -- $argv
-      end
 
       # --- Hooks ---
       # devenv needs to be sourced, it's the only one that can't be "module-ified"

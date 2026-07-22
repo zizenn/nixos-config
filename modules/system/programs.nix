@@ -25,11 +25,12 @@
     };
   };
 
-  # for man pages
   documentation = {
     enable = true;
-    dev.enable = true;
+    doc.enable = false;
+    man.enable = true;
     man.cache.enable = true;
+    nixos.enable = false;
   };
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
@@ -43,10 +44,8 @@
     cliphist
     man-pages
     steam-run
-
-    # minecraft (modrinth moved to home-manager packages.nix)
-    temurin-bin-21 # Required for Minecraft 1.20.5 and newer
-    temurin-bin-17 # Required for Minecraft 1.18 to 1.20.4
+    temurin-bin-21
+    temurin-bin-17
   ];
 
   users.users.zizenn = {
