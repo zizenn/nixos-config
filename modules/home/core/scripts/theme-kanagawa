@@ -51,8 +51,8 @@ end 2>/dev/null
 
 if set -q DISPLAY
     makoctl reload 2>/dev/null
-    pkill waybar 2>/dev/null; true
-    # dynamic-glacier replaced waybar
+    pkill waybar 2>/dev/null
+    waybar >/dev/null 2>&1 & disown
     kvantummanager --set Matugen 2>/dev/null
     notify-send "theme" "Applied kanagawa dragon"
 end

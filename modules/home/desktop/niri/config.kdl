@@ -147,8 +147,7 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This starts the Dynamic Glacier island widget.
-spawn-at-startup "dynamic-glacier"
+spawn-at-startup "waybar"
 spawn-at-startup "awww-daemon"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"

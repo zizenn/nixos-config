@@ -5,81 +5,54 @@
   font-size: 12px;
   font-weight: 700;
   border: none;
-  border-radius: 0px;
+  border-radius: 0;
 }
 
 window#waybar {
-  background-color: transparent;
+  background: transparent;
 }
 
 #waybar > box {
-  margin: 5px 2px 5px 2px;
-  padding: 5px 0px;
-  min-width: 24px;
-  border-radius: 0;
-  background-color: @bg;
-  box-shadow:
-    0px 1px 2px rgba(0, 0, 0, 0.4),
-    0px 1px 2px rgba(0, 0, 0, 0.2);
-  border: 1px solid alpha(@fg, 0.1);
+  margin: 6px 4px;
+  padding: 6px 0;
+  min-width: 32px;
+  background: @bg;
+  border: 1px solid alpha(@fg, 0.08);
 }
 
 .modules-left,
 .modules-right {
-  padding: 5px 0;
-}
-
-button {
-  box-shadow: inset -3px 0 transparent;
-  border: none;
-  border-radius: 0;
-  transition: 0.3s ease-in-out;
-}
-
-button:hover {
-  background: inherit;
+  padding: 4px 0;
 }
 
 #workspaces {
-  background-color: alpha(@fg, 0.05);
-  border-radius: 0;
-  padding: 0;
-  margin: 5px 0;
+  background: alpha(@fg, 0.04);
+  margin: 4px 6px;
+  padding: 2px;
 }
 
 #workspaces button {
   padding: 2px 0;
-  margin: 2px 0;
-  min-height: 20px;
+  margin: 1px 0;
+  min-height: 18px;
+  min-width: 18px;
   color: @fg;
-  opacity: 0.6;
-  border: none;
-  border-radius: 0;
-  transition: 0.15s ease-in-out;
+  opacity: 0.5;
 }
 
 #workspaces button.active {
   opacity: 1;
   color: @bg;
-  background: alpha(@red, 1);
-  border-radius: 0;
+  background: @red;
 }
 
 #workspaces button.empty {
-  color: alpha(@fg, 0.25);
-  opacity: 1;
-}
-
-#workspaces button.active.empty {
-  color: @bg;
-  opacity: 1;
+  opacity: 0.25;
 }
 
 #workspaces button:hover {
   opacity: 1;
-  color: @red;
-  background: alpha(@red, 0.12);
-  border-radius: 0;
+  background: alpha(@red, 0.15);
 }
 
 #tray,
@@ -89,112 +62,33 @@ button:hover {
 #network,
 #bluetooth,
 #pulseaudio,
-#custom-expand-icon,
 #custom-power {
-  min-height: 12px;
   color: @fg;
-  opacity: 1;
-  padding: 4px 0;
-  margin: 2px 0;
+  padding: 3px 0;
+  margin: 1px 6px;
+  min-width: 16px;
+  min-height: 14px;
 }
 
 #custom-power {
   color: @red;
-  font-size: 14px;
-  padding: 4px 0;
-  margin: 4px 0;
-}
-
-#custom-expand-icon {
-  color: alpha(@fg, 0.4);
-  opacity: 1;
-  font-size: 12px;
-  padding: 2px 0px 0px 0px;
-  margin: 0 4px;
-}
-
-#tray {
-  margin-top: 1px;
-}
-
-#power-profiles-daemon {
-  margin: 2px 0;
-  padding: 4px 0;
-}
-
-#power-profiles-daemon.performance {
-  color: @red;
-}
-
-#power-profiles-daemon.balanced {
-  color: @fg;
-}
-
-#power-profiles-daemon.power-saver {
-  color: #25e712;
-}
-
-.hidden {
-  opacity: 0;
-}
-
-tooltip {
-  padding: 4px;
-  background: @bg;
-  font-size: 10px;
-  border: 1px solid alpha(@fg, 0.2);
-  border-radius: 0;
-}
-
-tooltip label {
-  color: alpha(@fg, 1);
-  font-weight: normal;
+  min-width: 14px;
+  min-height: 14px;
 }
 
 #custom-separator {
-  opacity: 0.2;
-  padding: 2px 0;
-  font-size: 12px;
+  opacity: 0.15;
+  padding: 1px 0;
+  font-size: 10px;
+}
+
+tooltip {
+  background: @bg;
+  padding: 4px 6px;
+  border: 1px solid alpha(@fg, 0.15);
+  font-size: 11px;
+}
+
+tooltip label {
   color: @fg;
-}
-
-#custom-separator2 {
-  color: alpha(@fg, 0.4);
-  opacity: 1;
-  font-size: 12px;
-  padding: 2px 0;
-}
-
-@keyframes text-glow {
-  from {
-    color: @fg;
-    /* Standard text color */
-  }
-
-  to {
-    color: #df6124;
-    /* Your custom accent color */
-  }
-}
-
-#network.disconnected,
-#battery.warning {
-  color: #c95d0f;
-}
-
-@keyframes blink2 {
-  to {
-    background-color: transparent;
-    color: #f53c3c;
-  }
-}
-
-#battery.critical:not(.charging) {
-  background-color: transparent;
-  color: #e6d8ba;
-  animation-name: blink2;
-  animation-duration: 0.5s;
-  animation-timing-function: steps(12);
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
 }

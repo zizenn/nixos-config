@@ -16,7 +16,7 @@
     ./desktop/niri
     ./editors/neovim
     ./desktop/rofi
-    ./desktop/dynamic-glacier
+    ./desktop/waybar
     ./apps/yazi
     ./desktop/wallpaper.nix
     ./theme/matugen

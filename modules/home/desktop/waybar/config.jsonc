@@ -2,14 +2,11 @@
   "exclusive": true,
   "position": "left",
   "passthrough": false,
-  "margin-left": 5,
-  "width": 36,
-  "margin-right": 0,
+  "margin-left": 6,
+  "width": 44,
   "modules-left": [
     "clock",
-    "custom/separator2",
-    "niri/workspaces",
-    "custom/separator2"
+    "niri/workspaces"
   ],
   "modules-right": [
     "battery",
@@ -18,23 +15,13 @@
     "network",
     "bluetooth",
     "custom/separator",
-    "group/tray-expander",
+    "tray",
     "custom/power"
   ],
   "niri/workspaces": {
     "all-outputs": true,
     "format": "{value}",
     "format-icons": {
-      "1": "1",
-      "2": "2",
-      "3": "3",
-      "4": "4",
-      "5": "5",
-      "6": "6",
-      "7": "7",
-      "8": "8",
-      "9": "9",
-      "10": "10",
       "active": "",
       "default": ""
     }
@@ -43,109 +30,53 @@
     "format": "─",
     "tooltip": false
   },
-  "custom/separator2": {
-    "format": "•",
-    "tooltip": false
-  },
   "custom/power": {
-    "format": "",
+    "format": "⏻",
     "on-click": "wleave",
     "tooltip": false
-  },
-  "power-profiles-daemon": {
-    "format": "{icon}",
-    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-    "tooltip": true,
-    "format-icons": {
-      "performance": "",
-      "balanced": " ",
-      "power-saver": ""
-    }
   },
   "backlight": {
     "device": "intel_backlight",
     "format": "{icon}",
-    "tooltip": true,
-    "tooltip-format": "Brightness:  {percent}%",
-    "format-alt": "{percent}% {icon}",
-    "format-alt-click": "click-right",
-    "format-icons": [
-      "󰃜",
-      "󰃝",
-      "󰃞",
-      "󰃟",
-      "󰃠"
-    ],
+    "format-icons": ["󰛨"],
     "on-scroll-down": "brightnessctl s 5%-",
     "on-scroll-up": "brightnessctl s +5%"
   },
   "clock": {
-    "format": "<span color='#df6124'>{0:%H:%M}</span>",
-    "format-alt": "{:L%d %B W%V %Y}",
-    "tooltip-format": "<span>{calendar}</span>",
+    "format": "{:%H:%M}",
+    "tooltip-format": "{:%a %b %d}",
     "calendar": {
       "mode": "month",
       "mode-mon-col": 3,
       "on-click-right": "mode",
       "format": {
-        "month": "<span color='#ffead3'><b>{}</b></span>",
-        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b>{}</b></span>"
+        "month": "<b>{}</b>",
+        "weekdays": "<b>{}</b>",
+        "today": "<b>{}</b>"
       }
     }
   },
   "network": {
-    "format": "󰤭",
-    "format-icons": [
-      "󰤯",
-      "󰤟",
-      "󰤢",
-      "󰤥",
-      "󰤨"
-    ],
+    "format": "{icon}",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
     "format-wifi": "{icon}",
     "format-ethernet": "󰈀",
     "format-disconnected": "󰤭",
     "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
-    "spacing": 1,
     "on-click": "kitty --class wlctl-float -e wlctl"
   },
   "battery": {
-    "format": "{capacity}% {icon}",
-    "format-charging": "{capacity}% {icon}",
-    "format-plugged": "{capacity}% ",
+    "format": "{icon}",
+    "format-charging": "{icon}",
+    "format-plugged": "",
     "format-icons": {
-      "charging": [
-        "󰢜",
-        "󰂆",
-        "󰂇",
-        "󰂈",
-        "󰢝",
-        "󰂉",
-        "󰢞",
-        "󰂊",
-        "󰂋",
-        "󰂅"
-      ],
-      "default": [
-        "󰁺",
-        "󰁻",
-        "󰁼",
-        "󰁽",
-        "󰁾",
-        "󰁿",
-        "󰂀",
-        "󰂁",
-        "󰂂",
-        "󰁹"
-      ]
+      "charging": [""],
+      "default": [""]
     },
-    "format-full": "󱊦 {capacity}%",
-    "tooltip-format-discharging": "{power:>1.0f}W↓ {timeTo}",
-    "tooltip-format-charging": "{power:>1.0f}W↑ {timeTo}",
+    "format-full": "",
+    "tooltip-format": "{capacity}% {power:>1.0f}W",
     "interval": 5,
     "states": {
       "warning": 30,
@@ -154,51 +85,24 @@
   },
   "bluetooth": {
     "format": "",
-    "format-disabled": "󰂲 {status}",
-    "format-connected": "󰂱 {num_connections}",
-    "tooltip-format": "Devices connected: {num_connections}",
+    "format-disabled": "",
+    "format-connected": "",
+    "tooltip-format": "{num_connections} connected",
     "on-click": "kitty --class bluetui-float -e bluetui"
   },
   "pulseaudio": {
     "format": "{icon}",
     "on-click": "kitty --class wiremix-float -e wiremix",
     "on-click-right": "pamixer -t",
-    "tooltip-format": "Playing at {volume}%",
+    "tooltip-format": "{volume}%",
     "scroll-step": 5,
     "format-muted": "",
     "format-icons": {
-      "headphone": "",
-      "headset": "",
-      "default": [
-        "",
-        "",
-        ""
-      ]
+      "default": ["", "", ""]
     }
   },
-  "group/tray-expander": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 600,
-      "children-class": "tray-group-item"
-    },
-    "modules": [
-      "custom/expand-icon",
-      "tray"
-    ]
-  },
-  "custom/expand-icon": {
-    "format": "",
-    "tooltip": false
-  },
   "tray": {
-    "icon-size": 13,
-    "spacing": 2
-  },
-  "custom/screenrecording-indicator": {
-    "on-click": "omarchy-capture-screenrecording",
-    "exec": "$OMARCHY_PATH/default/waybar/indicators/screen-recording.sh",
-    "signal": 8,
-    "return-type": "json"
+    "icon-size": 14,
+    "spacing": 4
   }
 }
