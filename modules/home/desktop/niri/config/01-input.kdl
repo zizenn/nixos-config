@@ -1,8 +1,4 @@
 input {
-    xcursor-theme {
-        name "rose-pine-cursor"
-        size 24
-    }
     keyboard {
         xkb {}
     }

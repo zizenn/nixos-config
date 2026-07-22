@@ -1,3 +1,8 @@
+cursor {
+    xcursor-theme "rose-pine-cursor"
+    xcursor-size 24
+}
+
 spawn-at-startup "waybar"
 spawn-at-startup "awww-daemon"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
