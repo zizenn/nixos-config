@@ -1,14 +1,14 @@
 {
   "exclusive": true,
-  "position": "top",
+  "position": "left",
   "passthrough": false,
-  "margin-top": 5,
-  "width": 500,
-  "margin-bottom": 0,
+  "margin-left": 5,
+  "width": 36,
+  "margin-right": 0,
   "modules-left": [
     "clock",
     "custom/separator2",
-    "hyprland/workspaces",
+    "niri/workspaces",
     "custom/separator2"
   ],
   "modules-right": [
@@ -21,11 +21,9 @@
     "group/tray-expander",
     "custom/power"
   ],
-  "hyprland/workspaces": {
-    "disable-scroll": true,
+  "niri/workspaces": {
     "all-outputs": true,
-    "cursor": true,
-    "format": "{icon}",
+    "format": "{value}",
     "format-icons": {
       "1": "1",
       "2": "2",
@@ -36,14 +34,13 @@
       "7": "7",
       "8": "8",
       "9": "9",
-      "10": "10"
-    },
-    "persistent-workspaces": {
-      "*": 4
+      "10": "10",
+      "active": "",
+      "default": ""
     }
   },
   "custom/separator": {
-    "format": "|",
+    "format": "─",
     "tooltip": false
   },
   "custom/separator2": {
@@ -83,7 +80,7 @@
     "on-scroll-up": "brightnessctl s +5%"
   },
   "clock": {
-    "format": "<span color='#df6124'>{0:%H:%M}</span> <span size='small' color='#616367'><i>{0:%a, %b %d}</i></span>",
+    "format": "<span color='#df6124'>{0:%H:%M}</span>",
     "format-alt": "{:L%d %B W%V %Y}",
     "tooltip-format": "<span>{calendar}</span>",
     "calendar": {
@@ -106,7 +103,7 @@
       "󰤥",
       "󰤨"
     ],
-    "format-wifi": "{icon} {essid}",
+    "format-wifi": "{icon}",
     "format-ethernet": "󰈀",
     "format-disconnected": "󰤭",
     "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
@@ -191,7 +188,7 @@
     ]
   },
   "custom/expand-icon": {
-    "format": "",
+    "format": "",
     "tooltip": false
   },
   "tray": {
