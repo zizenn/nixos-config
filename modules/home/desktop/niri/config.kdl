@@ -308,7 +308,7 @@ binds {
     Mod+V hotkey-overlay-title="clipboard" { spawn-sh "~/.local/bin/cliphist-rofi-img"; }
     Mod+O hotkey-overlay-title="obsidian" { spawn "obsidian"; }
     Mod+P hotkey-overlay-title="wleave" { spawn "wleave"; }
-    Mod+E hotkey-overlay-title="yazi" { spawn "kitty" "--class" "yazi-float" "-e" "~/.config/hypr/scripts/yazi.sh"; }
+    Mod+E hotkey-overlay-title="yazi" { spawn "kitty" "--class" "yazi-float" "-e" "yazi"; }
     Mod+A hotkey-overlay-title="aerc" { spawn "kitty" "--class" "aerc-todo" "-e" "aerc"; }
 
     // scratchpad
