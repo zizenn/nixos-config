@@ -114,12 +114,13 @@ layout {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
+        proportion 1.0
     }
 
     default-column-width { proportion 0.5; }
 
     focus-ring {
-        width 1
+        width 0.5
         active-color "#4fc3f7"
         inactive-color "#505050"
     }
@@ -167,7 +168,7 @@ spawn-at-startup "ollama" "serve"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
-    // skip-at-startup
+    skip-at-startup
 }
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
@@ -193,7 +194,7 @@ animations {
     // off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
+    slowdown 0.7
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -236,6 +237,13 @@ window-rule {
     open-floating true
 }
 
+// Scratchpad (floating terminal)
+window-rule {
+    match app-id="scratchpad"
+    open-floating true
+    default-column-width { fixed 800; }
+}
+
 // Floating helper windows (from hyprland config)
 window-rule {
     match app-id="fzf-float"
@@ -260,8 +268,40 @@ window-rule {
     background-effect {
         xray true
         blur true
-        noise 0.05
-        saturation 3
+        noise 0.03
+        saturation 1.0
+    }
+}
+
+// Blur for layer-shell surfaces (waybar, rofi, mako)
+window-rule {
+    match app-id="waybar"
+    geometry-corner-radius 0
+    background-effect {
+        xray true
+        blur true
+        noise 0.03
+        saturation 1.0
+    }
+}
+window-rule {
+    match app-id="rofi"
+    geometry-corner-radius 0
+    background-effect {
+        xray true
+        blur true
+        noise 0.03
+        saturation 1.0
+    }
+}
+window-rule {
+    match app-id="mako"
+    geometry-corner-radius 0
+    background-effect {
+        xray true
+        blur true
+        noise 0.03
+        saturation 1.0
     }
 }
 
@@ -271,7 +311,7 @@ binds {
     // --- App Launches ---
     Mod+T hotkey-overlay-title="kitty" { spawn "kitty"; }
     Mod+Return hotkey-overlay-title="kitty" { spawn "kitty"; }
-    Alt+Space hotkey-overlay-title="rofi" { spawn "rofi -show drun"; }
+    Alt+Space hotkey-overlay-title="rofi" { spawn-sh "rofi -show drun"; }
     Mod+Shift+Return hotkey-overlay-title="float kitty" { spawn "kitty" "--class" "floating"; }
 
     Mod+W hotkey-overlay-title="wallpaper" { spawn "kitty" "--class" "fzf-float" "-e" "wallpaper-pick"; }
@@ -280,6 +320,12 @@ binds {
     Mod+P hotkey-overlay-title="wleave" { spawn "wleave"; }
     Mod+E hotkey-overlay-title="yazi" { spawn "kitty" "--class" "yazi-float" "-e" "~/.config/hypr/scripts/yazi.sh"; }
     Mod+A hotkey-overlay-title="aerc" { spawn "kitty" "--class" "aerc-todo" "-e" "aerc"; }
+
+    // scratchpad
+    Mod+S hotkey-overlay-title="scratchpad" { spawn "kitty" "--class" "scratchpad"; }
+
+    // overview
+    Mod+Shift+Tab hotkey-overlay-title="overview" { toggle-overview; }
 
     // --- Window Ops ---
     Mod+Q repeat=false { close-window; }
@@ -398,6 +444,7 @@ binds {
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
+    Mod+Shift+S { screenshot; }
 
     // --- System ---
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
