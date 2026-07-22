@@ -253,6 +253,7 @@ window-rule {
 
 // Sharp corners and xray background blur for all windows
 window-rule {
+    match app-id=r#".*"#
     geometry-corner-radius 0
     clip-to-geometry true
     background-effect {
