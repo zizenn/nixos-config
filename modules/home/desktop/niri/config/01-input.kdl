@@ -1,5 +1,7 @@
 input {
-    keyboard { xkb {} }
+    keyboard {
+        xkb {}
+    }
     touchpad {
         tap
         natural-scroll
