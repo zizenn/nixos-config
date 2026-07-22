@@ -87,13 +87,18 @@
     };
                                                                                                   
     # 2. Fix the Nix attribute name and Starship internal token
-    env_var = {
-      DEVENV_NAME = {
-        variable = "DEVENV_NAME";
-        format = "[ $env_value]($style) ";
-        style = "italic bright-blue";
+      env_var = {
+        DEVENV_NAME = {
+          variable = "DEVENV_NAME";
+          format = "[ $env_value]($style) ";
+          style = "italic bright-blue";
+        };
+        DEVENV_LANG = {
+          variable = "DEVENV_LANG";
+          format = "[$env_value]($style) ";
+          style = "italic bright-blue";
+        };
       };
-    };
                                                                                                   
     c = {
       format = "[ $version]($style) ";
