@@ -3,8 +3,8 @@
     enable = true;
     settings = {
       user = {
-        name = "sakif";
-        email = "zizenn@proton.me";
+        name = "zizenn";
+        email = "zizenn.69@gmail.com";
       };
       core = {
         editor = "nvim";
