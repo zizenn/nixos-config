@@ -289,7 +289,6 @@ binds {
     Mod+T hotkey-overlay-title="kitty" { spawn "kitty"; }
     Mod+Return hotkey-overlay-title="kitty" { spawn "kitty"; }
     Alt+Space hotkey-overlay-title="rofi" { spawn-sh "rofi -show drun"; }
-    Mod+Shift+Return hotkey-overlay-title="float kitty" { spawn "kitty" "--class" "floating"; }
 
     Mod+W hotkey-overlay-title="wallpaper" { spawn "kitty" "--class" "fzf-float" "-e" "wallpaper-pick"; }
     Mod+V hotkey-overlay-title="clipboard" { spawn-sh "~/.local/bin/cliphist-rofi-img"; }
@@ -298,14 +297,8 @@ binds {
     Mod+E hotkey-overlay-title="yazi" { spawn "kitty" "--class" "yazi-float" "-e" "yazi"; }
     Mod+A hotkey-overlay-title="aerc" { spawn "kitty" "--class" "aerc-todo" "-e" "aerc"; }
 
-    // scratchpad
-    Mod+S hotkey-overlay-title="scratchpad" { spawn "kitty" "--class" "scratchpad"; }
-
     // overview
     Mod+U { toggle-overview; }
-
-    // floating/tiling toggle
-    Mod+Shift+Tab { switch-focus-between-floating-and-tiling; }
 
     // --- Window Ops ---
     Mod+Q repeat=false { close-window; }
@@ -354,10 +347,10 @@ binds {
     Mod+Shift+Right { focus-monitor-right; }
 
     // --- Column ops ---
-    Mod+Home { focus-column-first; }
-    Mod+End  { focus-column-last; }
-    Mod+Ctrl+Home { move-column-to-first; }
-    Mod+Ctrl+End  { move-column-to-last; }
+    Mod+0 { focus-column-first; }
+    Mod+$  { focus-column-last; }
+    Mod+Ctrl+0 { move-column-to-first; }
+    Mod+Ctrl+$  { move-column-to-last; }
 
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
@@ -398,8 +391,6 @@ binds {
     Mod+Shift+7 { move-column-to-workspace 7; }
     Mod+Shift+8 { move-column-to-workspace 8; }
     Mod+Shift+9 { move-column-to-workspace 9; }
-
-    Mod+Tab { focus-workspace-previous; }
 
     // --- Misc ---
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
