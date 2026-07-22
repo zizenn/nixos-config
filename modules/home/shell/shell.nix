@@ -48,58 +48,64 @@
   };
 
   programs.starship = {
-    enable = true;
-    enableFishIntegration = true;
-    enableTransience = true;
-
-    settings = {
-      scan_timeout = 50;
-      command_timeout = 2000;
-      format = "$directory$git_branch$git_status$fill$env_var$c$cmd_duration$line_break$character";
-
-      fill = {
-        symbol = " ";
-      };
-
-      continuation_prompt = "[▸▹ ](dimmed white)";
-
-      directory = {
-        style = "bold blue";
-        format = "[$path]($style)[$read_only]($read_only_style) ";
-        truncate_to_repo = true;
-      };
-
-      character = {
-        success_symbol = "[❯](purple bold)";
-        error_symbol = "[❯](red bold)";
-        vimcmd_symbol = "[❮](green bold)";
-      };
-
-      git_branch = {
-        format = "[△ $branch]($style) ";
-        style = "italic bright-blue";
-      };
-
-      git_status = {
-        format = "[$all_status$ahead_behind]($style) ";
-        style = "bold bright-black";
-      };
-
-      env_var.DEVENV_NAME = {
+  enable = true;
+  enableFishIntegration = true;
+  enableTransience = true;
+                                                                                                  
+  settings = {
+    scan_timeout = 50;
+    command_timeout = 2000;
+    # 1. Update the variable name inside the main format string
+    format = "$directory$git_branch$git_status$fill\${env_var.DEVENV_NAME}$c$cmd_duration$line_break$character";
+                                                                                                  
+    fill = {
+      symbol = " ";
+    };
+                                                                                                  
+    continuation_prompt = "[▸▹ ](dimmed white)";
+                                                                                                  
+    directory = {
+      style = "bold blue";
+      format = "[$path]($style)[$read_only]($read_only_style) ";
+      truncate_to_repo = true;
+    };
+                                                                                                  
+    character = {
+      success_symbol = "[❯](purple bold)";
+      error_symbol = "[❯](red bold)";
+      vimcmd_symbol = "[❮](green bold)";
+    };
+                                                                                                  
+    git_branch = {
+      format = "[△ $branch]($style) ";
+      style = "italic bright-blue";
+    };
+                                                                                                  
+    git_status = {
+      format = "[$all_status$ahead_behind]($style) ";
+      style = "bold bright-black";
+    };
+                                                                                                  
+    # 2. Fix the Nix attribute name and Starship internal token
+    env_var = {
+      DEVENV_NAME = {
         variable = "DEVENV_NAME";
-        format = "[ $env_var.value]($style) ";
+        format = "[ $env_value]($style) ";
         style = "italic bright-blue";
-      };
-
-      c = {
-        format = "[ $version]($style) ";
-        style = "italic dimmed white";
-      };
-
-      cmd_duration = {
-        format = "[$duration]($style)";
-        style = "italic dimmed yellow";
       };
     };
+                                                                                                  
+    c = {
+      format = "[ $version]($style) ";
+      style = "italic dimmed white";
+    };
+                                                                                                  
+    cmd_duration = {
+      format = "[$duration]($style)";
+      style = "italic dimmed yellow";
+    };
   };
+};
+
+
 }

@@ -12,6 +12,8 @@ let
     prettier
     python3Packages.autopep8
     python3Packages.debugpy
+    nixd
+    nixfmt
   ];
 
   neovimRuntimeEnv = pkgs.buildEnv {
