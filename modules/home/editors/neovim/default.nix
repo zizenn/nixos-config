@@ -19,23 +19,19 @@ let
     paths = neovimRuntimePackages;
   };
 
-  neovimWrapped = pkgs.symlinkJoin {
-    name = "neovim-wrapped";
-    paths = [ pkgs.neovim ];
-    nativeBuildInputs = [ pkgs.makeWrapper ];
-    postBuild = ''
-      wrapProgram $out/bin/nvim \
-        --prefix PATH : ${neovimRuntimeEnv}/bin
-    '';
-  };
+  nvim = pkgs.writeShellScriptBin "nvim" ''
+    export PATH="${neovimRuntimeEnv}/bin''${PATH:+:$PATH}"
+    exec ${pkgs.neovim}/bin/nvim "$@"
+  '';
 in {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    package = neovimWrapped;
   };
+
+  home.packages = [ nvim ];
 
   xdg.configFile."nvim" = {
     source = ./nvim;
