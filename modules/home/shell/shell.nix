@@ -41,9 +41,7 @@
       set -U fish_greeting ""
       fish_vi_key_bindings
       fish_add_path ~/.local/bin
-
-
-      # --- Hooks ---
+# --- Hooks ---
       # devenv needs to be sourced, it's the only one that can't be "module-ified"
       devenv hook fish | source
     '';
@@ -68,7 +66,7 @@
       directory = {
         style = "bold blue";
         format = "[$path]($style)[$read_only]($read_only_style) ";
-        truncate_to_repo = false;
+        truncate_to_repo = true;
       };
 
       character = {
@@ -89,7 +87,7 @@
 
       env_var.DEVENV_NAME = {
         variable = "DEVENV_NAME";
-        format = "[ $value]($style) ";
+        format = "[ $env_var.value]($style) ";
         style = "italic bright-blue";
       };
 
