@@ -251,9 +251,9 @@ window-rule {
     default-column-width { fixed 1000; }
 }
 
-// Sharp corners and xray background blur for all windows
+// Blur for kitty, obsidian, zen browser, waybar, rofi
 window-rule {
-    match app-id=r#".*"#
+    match app-id=r#"^(kitty|obsidian|zen(-browser)?|waybar|rofi)$"#
     geometry-corner-radius 0
     clip-to-geometry true
     background-effect {
@@ -264,27 +264,7 @@ window-rule {
     }
 }
 
-// Blur for layer-shell surfaces (waybar, rofi, mako)
-window-rule {
-    match app-id="waybar"
-    geometry-corner-radius 0
-    background-effect {
-        xray true
-        blur true
-        noise 0.03
-        saturation 1.0
-    }
-}
-window-rule {
-    match app-id="rofi"
-    geometry-corner-radius 0
-    background-effect {
-        xray true
-        blur true
-        noise 0.03
-        saturation 1.0
-    }
-}
+// Blur for mako notifications
 window-rule {
     match app-id="mako"
     geometry-corner-radius 0
