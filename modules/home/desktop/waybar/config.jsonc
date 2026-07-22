@@ -43,7 +43,7 @@
     "on-scroll-up": "brightnessctl s +5%"
   },
   "clock": {
-    "format": "{:%H:%M}",
+    "format": "<span color='#df6124'>{0:%H}\n{0:%M}</span>",
     "tooltip-format": "{:%a %b %d}",
     "calendar": {
       "mode": "month",
