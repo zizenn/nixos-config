@@ -11,7 +11,6 @@
       builders-use-substitutes = true;
       connect-timeout = 5;
       cores = 0;
-      download-buffer = 10000000;
       extra-sandbox-paths = [ "/var/cache/ccache" ];
       keep-failed = false;
       log-lines = 25;
