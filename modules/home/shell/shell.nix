@@ -25,6 +25,7 @@
       pkgadd = "pkgadd";
       pkgdel = "pkgdel";
       lg = "lazygit";
+      lj = "lazyjj";
       cat = "bat";
       v = "nvim";
       oc = "opencode";
