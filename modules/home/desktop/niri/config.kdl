@@ -107,9 +107,10 @@ layout {
         proportion 1.0
     }
 
-    default-column-width { proportion 0.5; }
+    default-column-width { proportion 0.66667; }
 
     focus-ring {
+        off
         width 0.5
         active-color "#4fc3f7"
         inactive-color "#505050"
@@ -146,8 +147,8 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar"
+// This starts the Dynamic Glacier island widget.
+spawn-at-startup "dynamic-glacier"
 spawn-at-startup "awww-daemon"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
