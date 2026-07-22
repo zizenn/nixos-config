@@ -347,11 +347,6 @@ binds {
     Mod+Shift+Right { focus-monitor-right; }
 
     // --- Column ops ---
-    Mod+0 { focus-column-first; }
-    Mod+$  { focus-column-last; }
-    Mod+Ctrl+0 { move-column-to-first; }
-    Mod+Ctrl+$  { move-column-to-last; }
-
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
     Mod+Comma  { consume-window-into-column; }
