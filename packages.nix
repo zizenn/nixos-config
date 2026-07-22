@@ -90,6 +90,7 @@ in
     ripgrep
     socat
     steam
+    swaylock
     tldr
     unzip
     uv
