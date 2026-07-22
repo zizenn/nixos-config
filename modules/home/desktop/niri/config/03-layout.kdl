@@ -1,0 +1,30 @@
+layout {
+    gaps 6
+    center-focused-column "never"
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        proportion 1.0
+    }
+    default-column-width { proportion 0.66667; }
+    focus-ring { off }
+    border { off }
+    shadow { off }
+    background-color "#0a1929"
+    struts {
+        left 3
+        right 3
+        top 3
+        bottom 3
+    }
+}
+
+animations {
+    slowdown 0.7
+}
+
+blur {
+    passes 3
+    offset 3.0
+}

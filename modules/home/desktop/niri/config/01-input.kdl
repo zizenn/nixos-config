@@ -1,0 +1,9 @@
+input {
+    keyboard { xkb {} }
+    touchpad {
+        tap
+        natural-scroll
+    }
+    mouse {}
+    trackpoint {}
+}

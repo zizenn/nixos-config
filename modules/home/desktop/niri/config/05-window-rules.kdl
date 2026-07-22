@@ -1,0 +1,70 @@
+window-rule {
+    opacity 0.85
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    block-out-from "screen-capture"
+}
+
+window-rule {
+    match app-id="floating"
+    open-floating true
+}
+
+window-rule {
+    match app-id="scratchpad"
+    open-floating true
+    default-column-width { fixed 800; }
+}
+
+window-rule {
+    match app-id="fzf-float"
+    open-floating true
+    default-column-width { fixed 1400; }
+}
+
+window-rule {
+    match app-id="yazi-float"
+    open-floating true
+    default-column-width { fixed 1280; }
+}
+
+window-rule {
+    match app-id="aerc-todo"
+    open-floating true
+    default-column-width { fixed 1000; }
+}
+
+window-rule {
+    match app-id=r#"^(kitty|obsidian|zen(-browser)?|waybar|rofi)$"#
+    geometry-corner-radius 0
+    clip-to-geometry true
+    background-effect {
+        xray true
+        blur true
+        noise 0.03
+        saturation 1.0
+    }
+}
+
+window-rule {
+    match app-id="mako"
+    geometry-corner-radius 0
+    background-effect {
+        xray true
+        blur true
+        noise 0.03
+        saturation 1.0
+    }
+}
