@@ -20,11 +20,8 @@
   ],
   "niri/workspaces": {
     "all-outputs": true,
-    "format": "{icon}",
+    "format": "{value}",
     "format-icons": {
-      "1": "",
-      "2": "",
-      "3": "",
       "active": "",
       "default": ""
     }
