@@ -1,5 +1,5 @@
 set CONFIG_PATH $HOME/nixos
-set CONFIG_FILE $CONFIG_PATH/packages.nix
+set CONFIG_FILE $CONFIG_PATH/modules/home/packages.nix
 
 set CURRENT_PKGS (sed -n '/^[[:space:]]*home\.packages = with pkgs; \[/,/^\s*\];/{
     /^[[:space:]]*home\.packages/d

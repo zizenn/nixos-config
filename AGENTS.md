@@ -28,32 +28,32 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 ```
 /
 ├── flake.nix                       # single-host flake entrypoint
-├── configuration.nix               # imports ./modules/system/*
-├── hardware-configuration.nix      # auto-generated, do not edit
-├── home.nix                        # user-level config, imports ./modules/home/*
-├── packages.nix                    # user package list (imported by home.nix)
 ├── AGENTS.md                       # this file
 ├── modules/
-│   ├── home/                       # user-scope modules (imported by home.nix)
-│   │   ├── editors/                # neovim, zed, opencode
-│   │   ├── desktop/                # niri, waybar, rofi, wleave, kitty, mako, ...
-│   │   ├── mail/                   # aerc
-│   │   ├── theme/                  # matugen, gtk, qt, fastfetch
-│   │   ├── dev/                    # git, jujutsu
-│   │   ├── shell/                  # shell
-│   │   ├── core/                   # env, scripts
-│   │   └── apps/                   # obs, yazi
+│   ├── system/                     # system-scope (NixOS), imported by flake.nix
+│   │   ├── configuration.nix       # top-level NixOS config, imports all modules below
+│   │   ├── hardware-configuration.nix  # auto-generated, do not edit
+│   │   ├── boot.nix
+│   │   ├── desktop.nix             # Niri, Ly, portals
+│   │   ├── hardware.nix            # GPU, Bluetooth
+│   │   ├── locale.nix
+│   │   ├── networking.nix
+│   │   ├── nix.nix
+│   │   ├── programs.nix            # system packages, fonts, users, nh
+│   │   ├── security.nix            # doas (no sudo)
+│   │   └── services.nix            # pipewire, logind, udev, systemd services
 │   │
-│   └── system/                     # system-scope modules (imported by configuration.nix)
-│       ├── boot.nix
-│       ├── desktop.nix             # Niri, Ly, portals
-│       ├── hardware.nix            # GPU, Bluetooth
-│       ├── locale.nix
-│       ├── networking.nix
-│       ├── nix.nix
-│       ├── programs.nix            # system packages, fonts, users, nh
-│       ├── security.nix            # doas (no sudo)
-│       └── services.nix            # pipewire, logind, udev, systemd services
+│   └── home/                       # user-scope (home-manager), imported by flake.nix
+│       ├── default.nix             # top-level HM config, imports all modules below
+│       ├── packages.nix            # user package list
+│       ├── editors/                # neovim, zed, opencode
+│       ├── desktop/                # niri, waybar, rofi, wleave, kitty, mako, ...
+│       ├── mail/                   # aerc
+│       ├── theme/                  # matugen, gtk, qt, fastfetch
+│       ├── dev/                    # git, jujutsu
+│       ├── shell/                  # shell
+│       ├── core/                   # env, scripts
+│       └── apps/                   # obs, yazi
 ```
 
 ## Conventions
@@ -95,7 +95,7 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 | What | Where |
 |---|---|
 | System packages | `modules/system/programs.nix` → `environment.systemPackages` |
-| User packages | `packages.nix` (imported by `home.nix`) |
+| User packages | `modules/home/packages.nix` (imported by `modules/home/default.nix`) |
 | `allowUnfree` | set in both `modules/system/security.nix` and `home.nix` |
 | Niri config (KDL) | `modules/home/desktop/niri/default.nix` → `~/.config/niri/config.kdl` |
 | Hypridle | `modules/home/desktop/niri/hypridle.conf` |

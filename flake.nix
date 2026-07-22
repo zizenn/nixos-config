@@ -23,14 +23,14 @@
       nixosConfigurations.nix-port = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
-        modules = [ ./configuration.nix ];
+        modules = [ ./modules/system/configuration.nix ];
       };
 
       homeConfigurations."zizenn@nix-port" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs; };
         modules = [
-          ./home.nix
+          ./modules/home/default.nix
           {
             home.username = "zizenn";
             home.homeDirectory = "/home/zizenn";

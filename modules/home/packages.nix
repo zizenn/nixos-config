@@ -47,6 +47,7 @@ in
     bc
     bluetui
     broot
+    awww
     btop
     cargo
     catimg
@@ -88,6 +89,7 @@ in
     pv
     python3
     ripgrep
+    rofi
     socat
     steam
     swaylock
@@ -97,7 +99,9 @@ in
     vesktop
     vlc
     wiremix
+    wleave
     wl-clipboard
+    wttrbar
     yazi
     zathura
     zip

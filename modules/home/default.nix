@@ -7,29 +7,29 @@
 }:
 {
   imports = [
-    ./modules/home/shell/shell.nix
-    ./modules/home/dev/git.nix
-    ./modules/home/dev/jujutsu.nix
-    ./modules/home/apps/obs.nix
-    ./modules/home/editors/opencode.nix
-    ./modules/home/desktop/kitty.nix
-    ./modules/home/desktop/niri
-    ./modules/home/editors/neovim
-    ./modules/home/desktop/rofi
-    ./modules/home/desktop/waybar
-    ./modules/home/apps/yazi
-    ./modules/home/desktop/wallpaper.nix
-    ./modules/home/theme/matugen
-    ./modules/home/theme/matugen/kanagawa-dragon.nix
-    ./modules/home/desktop/mako.nix
-    ./modules/home/desktop/wleave
-    ./modules/home/theme/fastfetch
-    ./modules/home/mail/aerc
-    ./modules/home/editors/zed
-    ./modules/home/theme/gtk
-    ./modules/home/theme/qt
-    ./modules/home/core/scripts
-    ./modules/home/core/env.nix
+    ./shell/shell.nix
+    ./dev/git.nix
+    ./dev/jujutsu.nix
+    ./apps/obs.nix
+    ./editors/opencode.nix
+    ./desktop/kitty.nix
+    ./desktop/niri
+    ./editors/neovim
+    ./desktop/rofi
+    ./desktop/waybar
+    ./apps/yazi
+    ./desktop/wallpaper.nix
+    ./theme/matugen
+    ./theme/matugen/kanagawa-dragon.nix
+    ./desktop/mako.nix
+    ./desktop/wleave
+    ./theme/fastfetch
+    ./mail/aerc
+    ./editors/zed
+    ./theme/gtk
+    ./theme/qt
+    ./core/scripts
+    ./core/env.nix
     ./packages.nix
   ];
 

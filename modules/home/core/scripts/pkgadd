@@ -1,5 +1,5 @@
 set CONFIG_PATH $HOME/nixos
-set CONFIG_FILE $CONFIG_PATH/packages.nix
+set CONFIG_FILE $CONFIG_PATH/modules/home/packages.nix
 set PKG_LIST /tmp/nix_packages_list.txt
 
 if not test -f $PKG_LIST

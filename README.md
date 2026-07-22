@@ -295,12 +295,9 @@ nh home switch      # or: home (alias)
 ```
 /
 ├── flake.nix                     # Flake entrypoint
-├── configuration.nix             # System config (imports modules/system/*)
-├── hardware-configuration.nix    # Auto-generated (do not edit directly)
-├── home.nix                      # User config (imports modules/home/*)
-├── packages.nix                  # User package list (no LSPs/formatters — those are neovim-only)
 ├── AGENTS.md                     # Agent instructions
-└── modules/
+├── modules/
+    ├── system/                   # System-scope (NixOS), imported by flake.nix
     ├── system/                   # System-scope
     │   ├── boot.nix              # systemd-boot, zen kernel, sysctl tuning
     │   ├── desktop.nix           # Niri, Ly, portals
@@ -312,7 +309,9 @@ nh home switch      # or: home (alias)
     │   ├── security.nix          # doas, unfree
     │   └── services.nix          # PipeWire, SSH, udev, systemd
     │
-    └── home/                     # User-scope
+    └── home/                     # User-scope (home-manager), imported by flake.nix
+        ├── default.nix           # Top-level HM config (imports all below)
+        ├── packages.nix          # User package list
         ├── core/                 # Env vars, scripts
         ├── shell/                # Fish, Starship
         ├── desktop/
