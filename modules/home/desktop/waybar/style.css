@@ -16,7 +16,7 @@ window#waybar {
   margin: 6px 4px;
   padding: 4px 0;
   min-width: 32px;
-  background: @bg;
+  background: alpha(@bg, 0.6);
   border: 1px solid alpha(@fg, 0.08);
 }
 
