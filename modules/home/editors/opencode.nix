@@ -5,7 +5,7 @@
     text = ''
       {
         "$schema": "https://opencode.ai/config.json",
-        "model": "ollama/qwen3-coder:latest",
+        "model": "opencode/deepseek-v4-flash-free",
         "provider": {
           "ollama": {
             "npm": "@ai-sdk/openai-compatible",
