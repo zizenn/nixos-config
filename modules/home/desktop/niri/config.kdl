@@ -314,8 +314,8 @@ binds {
     // scratchpad
     Mod+S hotkey-overlay-title="scratchpad" { spawn "kitty" "--class" "scratchpad"; }
 
-    // overview
-    Mod+Shift+Tab hotkey-overlay-title="overview" { toggle-overview; }
+    // floating/tiling toggle
+    Mod+Shift+Tab { switch-focus-between-floating-and-tiling; }
 
     // --- Window Ops ---
     Mod+Q repeat=false { close-window; }
