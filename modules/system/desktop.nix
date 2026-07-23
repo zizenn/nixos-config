@@ -16,6 +16,6 @@
       pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-xapp
     ];
-    config.common.default = [ "xapp" ];
+    config.common.default = [ "gtk" ];
   };
 }

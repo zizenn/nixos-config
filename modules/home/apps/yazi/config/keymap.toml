@@ -1,4 +1,0 @@
-[manager]
-prepend_keymap = [
-  { on = [ "g", "d" ], run = "shell '$HOME/.config/yazi/drag.sh %s'", desc = "Drag selected files out" },
-]

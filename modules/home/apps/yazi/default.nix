@@ -1,19 +1,29 @@
 { pkgs, lib, ... }:
 
-let
-  inherit (lib) importTOML;
-in
 {
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
 
-    settings = importTOML ./config/yazi.toml;
-    keymap = importTOML ./config/keymap.toml;
-    theme = importTOML ./config/theme.toml;
+    settings = lib.importTOML ./config/yazi.toml;
+    theme = lib.importTOML ./config/theme.toml;
 
-    extraPackages = [ ripdrag ];
+    keymap = {
+      manager = {
+        prepend_keymap = [
+          {
+            on = [ "<C-d>" ];
+            run = "shell '$HOME/.config/yazi/drag.sh %s'";
+            desc = "Drag selected files out with ripdrag";
+          }
+        ];
+      };
+    };
+
+    extraPackages = with pkgs; [ ripdrag ];
   };
+
+  home.packages = with pkgs; [ ripdrag ];
 
   xdg.configFile."yazi/drag.sh" = {
     source = ./config/drag.sh;
