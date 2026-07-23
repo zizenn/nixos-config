@@ -290,6 +290,35 @@ nh home switch      # or: home (alias)
 
 ---
 
+## 🏃 Run on Any Distro
+
+All my dotfiles packages are exposed as a Nix flake — you can run them on any
+Linux distro with Nix installed (no NixOS required):
+
+```bash
+# Run a terminal
+nix run github:zizenn/nixos-config#kitty
+
+# Run the compositor
+nix run github:zizenn/nixos-config#niri
+
+# Try a shell
+nix run github:zizenn/nixos-config#fish
+
+# Or any other tool
+nix run github:zizenn/nixos-config#bat
+nix run github:zizenn/nixos-config#starship
+nix run github:zizenn/nixos-config#neovim
+```
+
+Available packages: `bat`, `brightnessctl`, `cliphist`, `eza`, `fastfetch`,
+`fd`, `feh`, `firefox`, `fish`, `fzf`, `gh`, `git`, `imv`, `jq`, `jujutsu`,
+`kitty`, `lazygit`, `mako`, `neovim`, `niri`, `obs-studio`, `pavucontrol`,
+`playerctl`, `ripgrep`, `rofi`, `starship`, `tmux`, `vesktop`, `vlc`,
+`waybar`, `wl-clipboard`, `wleave`, `yazi`, `zoxide`.
+
+---
+
 ## 📁 Directory Structure
 
 ```
