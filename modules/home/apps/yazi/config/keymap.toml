@@ -1,4 +1,4 @@
-[manager]
-prepend_keymap = [
-  { on = [ "<C-d>" ], run = "shell 'ripdrag -- %s'", desc = "Drag selected files out" },
-]
+[[manager.prepend_keymap]]
+desc = "Drag selected files out"
+on = ["<C-d>"]
+run = "shell ripdrag -- %s"

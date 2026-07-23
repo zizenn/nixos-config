@@ -35,7 +35,12 @@ in
           echo "Downloading latest Shard AppImage..."
           curl -L \
             -o "$SHARD_APPIMAGE" \
-            "https://github.com/Th0rgal/shard/releases/latest/download/shard-x86_64.AppImage"
+            "https://github.com/Th0rgal/shard/releases/latest/download/shard-launcher-linux-x64.AppImage" \
+            || begin
+              rm -f "$SHARD_APPIMAGE"
+              echo "Download failed"
+              exit 1
+            end
           chmod +x "$SHARD_APPIMAGE"
       end
 
