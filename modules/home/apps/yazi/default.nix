@@ -1,38 +1,10 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
-  programs.yazi = {
-    enable = true;
-    enableFishIntegration = true;
+  home.packages = with pkgs; [ yazi ripdrag ];
 
-    settings = lib.importTOML ./config/yazi.toml;
-    theme = lib.importTOML ./config/theme.toml;
-
-    keymap = {
-      manager = {
-        prepend_keymap = [
-          {
-            on = [ "<C-d>" ];
-            run = "shell '$HOME/.config/yazi/drag.sh %s'";
-            desc = "Drag selected files out with ripdrag";
-          }
-        ];
-      };
-    };
-
-    extraPackages = with pkgs; [ ripdrag ];
-  };
-
-  home.packages = with pkgs; [ ripdrag ];
-
-  xdg.configFile."yazi/drag.sh" = {
-    source = ./config/drag.sh;
-    executable = true;
-    force = true;
-  };
-
-  xdg.configFile."yazi/plugins/ouch.yazi" = {
-    source = ./config/plugins/ouch.yazi;
+  xdg.configFile."yazi" = {
+    source = ./config;
     recursive = true;
     force = true;
   };
