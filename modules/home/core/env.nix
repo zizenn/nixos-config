@@ -10,5 +10,7 @@
     QT_STYLE_OVERRIDE = "kvantum";
     QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
     XCURSOR_SIZE = "24";
+    AMD_VULKAN_ICD = "RADV";
+    mesa_glthread = "true";
   };
 }

@@ -12,6 +12,11 @@
     ccache.enable = true;
     ssh.setXAuthLocation = true;
 
+    java = {
+      enable = true;
+      package = pkgs.temurin-bin-21;
+    };
+
     nh = {
       enable = true;
       clean.enable = true;
@@ -44,6 +49,9 @@
     cliphist
     man-pages
     steam-run
+    appimage-run
+    curl
+    jq
     temurin-bin-21
     temurin-bin-17
   ];

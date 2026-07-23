@@ -1,7 +1,13 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ yazi ripdrag ];
+  programs.yazi = {
+    enable = true;
+    enableFishIntegration = true;
+    extraPackages = with pkgs; [ ripdrag ];
+  };
+
+  home.packages = with pkgs; [ ripdrag ];
 
   xdg.configFile."yazi" = {
     source = ./config;
