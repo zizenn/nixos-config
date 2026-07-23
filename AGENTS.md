@@ -22,37 +22,67 @@ theme-wallpaper          # matugen from wallpaper (interactive fzf picker)
 theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 ```
 
-## Structure
+## Structure (dendritic pattern)
+
+Every `.nix` file under `modules/` is a top-level flake-parts module (auto-imported by `outputs.nix`), contributing to `nixos.modules.base` (NixOS) and/or `homeManager.modules.base` (home-manager). The directory tree is purely organizational — each `.nix` file is independent regardless of location.
 
 ```
 /
-├── flake.nix                       # single-host flake entrypoint
-├── AGENTS.md                       # this file
+├── flake.nix                       # flake entrypoint → outputs.nix
+├── outputs.nix                     # flake-parts evaluation, auto-imports all .nix from modules/
+├── AGENTS.md
 ├── modules/
-│   ├── system/                     # system-scope (NixOS), imported by flake.nix
-│   │   ├── configuration.nix       # top-level NixOS config, imports all modules below
-│   │   ├── hardware-configuration.nix  # auto-generated, do not edit
-│   │   ├── boot.nix
-│   │   ├── desktop.nix             # Niri, Ly, portals
-│   │   ├── hardware.nix            # GPU, Bluetooth
-│   │   ├── locale.nix
-│   │   ├── networking.nix
-│   │   ├── nix.nix
-│   │   ├── programs.nix            # system packages, fonts, users, nh
-│   │   ├── security.nix            # doas (no sudo)
-│   │   └── services.nix            # pipewire, logind, udev, systemd services
+│   ├── _hardware-configuration.nix # auto-generated, excluded from auto-import (_ prefix)
+│   ├── nix-port.nix                # host config: wires nixos.modules.base + homeManager.modules.base into lib.nixosSystem
 │   │
-│   └── home/                       # user-scope (home-manager), imported by flake.nix
-│       ├── default.nix             # top-level HM config, imports all modules below
-│       ├── packages.nix            # user package list
-│       ├── editors/                # neovim, zed, opencode
-│       ├── desktop/                # niri, waybar, rofi, wleave, kitty, mako, ...
-│       ├── mail/                   # aerc
-│       ├── theme/                  # matugen, gtk, qt, fastfetch
-│       ├── dev/                    # git, jujutsu
-│       ├── shell/                  # shell
-│       ├── core/                   # env, scripts
-│       └── apps/                   # obs, yazi
+│   ├── infra/                      # flake-parts infrastructure (option declarations)
+│   │   ├── nixos.nix               # declares nixos.modules option (lazyAttrsOf deferredModule)
+│   │   └── home-manager.nix        # declares homeManager.modules option + programs.home-manager.enable
+│   │
+│   ├── boot.nix                    # systemd-boot, zen kernel, sysctl, mitigations=off
+│   ├── locale.nix                  # timezone, stateVersion
+│   ├── networking.nix              # hostName, networkmanager, firewall
+│   ├── nix.nix                     # GC, optimise, experimental-features, max-jobs
+│   ├── security.nix                # doas (no sudo), allowUnfree
+│   ├── programs.nix                # fish, firefox, nh, fonts, system packages, user definition
+│   ├── editors.nix                 # neovim (+runtimePackages), zed, opencode, .clang-format
+│   ├── dev.nix                     # git, jujutsu, gh, lazygit, devenv, cargo
+│   ├── shell.nix                   # fish aliases, starship, fzf, zoxide, cli tools
+│   ├── apps.nix                    # obs-studio, yazi, steam, media apps
+│   ├── mail.nix                    # aerc config, binds, accounts, mail2obsidian
+│   ├── misc.nix                    # env vars, MIME defaults, pkgadd/pkgdel scripts
+│   │
+│   ├── audio/
+│   │   └── pipewire.nix            # pipewire, pulse, wireplumber
+│   ├── hardware/
+│   │   ├── gpu.nix                 # amdgpu, mesa
+│   │   └── bluetooth.nix           # bluetooth enable
+│   ├── services/
+│   │   ├── ssh.nix                 # openssh
+│   │   ├── logind.nix              # power/lid switch
+│   │   ├── udev.nix                # USB power control, BFQ rules
+│   │   ├── usb-resume.nix          # fix USB input after resume
+│   │   ├── tailscale.nix           # tailscale
+│   │   └── misc.nix                # upower, blueman, udisks2, fstrim, kmscon
+│   ├── desktop/
+│   │   ├── niri.nix                # Niri compositor (system) + Ly + hypridle/hyprlock (HM)
+│   │   ├── portals.nix             # xdg-desktop-portal
+│   │   ├── kitty.nix               # kitty terminal
+│   │   ├── mako.nix                # notifications
+│   │   ├── waybar.nix              # waybar bar
+│   │   ├── rofi.nix                # rofi launcher
+│   │   ├── wleave.nix              # wleave logout
+│   │   └── wallpaper.nix           # wallpaper-pick, theme-wallpaper scripts
+│   ├── theme/
+│   │   ├── gtk.nix                 # GTK theme, icons, cursor
+│   │   ├── qt.nix                  # Qt/Kvantum theme
+│   │   ├── matugen.nix             # matugen CLI + template symlinks
+│   │   ├── kanagawa-dragon.nix     # static kanagawa-dragon palette files
+│   │   └── fastfetch.nix           # fastfetch config
+│   │
+│   └── (supporting files: niri/*.kdl, waybar/*.jsonc, rofi/*.rasi, wleave/*.json,
+│        neovim/nvim/, aerc/*.conf, zed/tasks.json, matugen/templates/,
+│        kanagawa-dragon/*, core/scripts/, gtk/*.css, qt/*, fastfetch/*.jsonc)
 ```
 
 ## Conventions
@@ -62,7 +92,7 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 - `hardware-configuration.nix` is regenerated by `nixos-generate-config` — make changes in `configuration.nix` instead
 - Nixpkgs tracks `nixos-unstable`; home-manager tracks `master` (stable releases pin-point via flake.lock)
 - `system.stateVersion` and `home.stateVersion` remain at `26.05`
-- Theme generation: matugen templates live in `modules/home/theme/matugen/templates/`, static kanagawa-dragon outputs in `modules/home/theme/matugen/kanagawa-dragon/`
+- Theme generation: matugen templates live in `modules/theme/matugen/templates/`, static kanagawa-dragon outputs in `modules/theme/kanagawa-dragon/`
 - Theme switching: `theme-wallpaper` (runs matugen from wallpaper → Material You) or `theme-kanagawa` (applies static kanagawa-dragon palette)
 - Desktop: Niri compositor; login via `services.ly` (TUI display manager)
 - `xdg.configFile` is the standard mechanism for symlinking dotfile directories (avoid manual symlinks)
@@ -93,20 +123,20 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 
 | What | Where |
 |---|---|
-| System packages | `modules/system/programs.nix` → `environment.systemPackages` |
-| User packages | `modules/home/packages.nix` (imported by `modules/home/default.nix`) |
-| `allowUnfree` | set in both `modules/system/security.nix` and `home.nix` |
-| Niri config (KDL) | `modules/home/desktop/niri/default.nix` → `~/.config/niri/config.kdl` |
-| Hypridle | `modules/home/desktop/niri/hypridle.conf` |
-| Hyprlock template | `modules/home/theme/matugen/templates/hyprlock.conf` → `~/.config/hypr/hyprlock.conf` |
-| Login manager (Ly) | `modules/system/desktop.nix` → `services.ly` |
-| Neovim | `modules/home/editors/neovim/nvim/` (symlinked to `~/.config/nvim`) |
-| Neovim runtime deps | `modules/home/editors/neovim/default.nix` → `neovimRuntimePackages` (LSPs, formatters, DAP) |
-| udev rules | `modules/system/services.nix` → `services.udev.extraRules` |
-| USB input resume fix | `modules/system/services.nix` → `systemd.services.fix-usb-input-after-resume` |
-| Systemd services | `modules/system/services.nix` |
-| Nix tuning | `modules/system/nix.nix` — GC, optimise, parallel builds, caches |
-| Kernel tuning | `modules/system/boot.nix` — zen kernel, sysctl, mitigations off |
+| System packages | `modules/programs.nix` → `environment.systemPackages` |
+| User packages | `modules/apps.nix` + `modules/misc.nix` + per-feature modules (e.g. `editors.nix`, `shell.nix`) |
+| `allowUnfree` | set in both `modules/security.nix` and `modules/infra/home-manager.nix` |
+| Niri config (KDL) | `modules/desktop/niri.nix` → `./niri/*.kdl` → `~/.config/niri/config.kdl` |
+| Hypridle | `modules/desktop/niri.nix` → `./niri/hypridle.conf` → `~/.config/hypr/hypridle.conf` |
+| Hyprlock template | `modules/theme/matugen/templates/hyprlock.conf` → `~/.config/hypr/hyprlock.conf` |
+| Login manager (Ly) | `modules/desktop/niri.nix` → `services.ly` |
+| Neovim | `modules/editors.nix` → `./neovim/nvim/` (symlinked to `~/.config/nvim`) |
+| Neovim runtime deps | `modules/editors.nix` → `neovimRuntimePackages` (LSPs, formatters, DAP) |
+| udev rules | `modules/services/udev.nix` → `services.udev.extraRules` |
+| USB input resume fix | `modules/services/usb-resume.nix` → `systemd.services.fix-usb-input-after-resume` |
+| Systemd services | `modules/services/misc.nix` |
+| Nix tuning | `modules/nix.nix` — GC, optimise, parallel builds, caches |
+| Kernel tuning | `modules/boot.nix` — zen kernel, sysctl, mitigations off |
 
 ## Testing / verification
 

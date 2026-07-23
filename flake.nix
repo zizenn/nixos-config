@@ -3,9 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
+      flake = false;
     };
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
@@ -14,16 +18,5 @@
     wlctl.url = "github:aashish-thapa/wlctl";
   };
 
-  outputs =
-    { nixpkgs, home-manager, ... }@inputs:
-    {
-      nixosConfigurations.nix-port = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          home-manager.nixosModules.home-manager
-          ./modules/system/configuration.nix
-        ];
-      };
-    };
+  outputs = inputs: import ./outputs.nix inputs;
 }
