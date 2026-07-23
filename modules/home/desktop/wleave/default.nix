@@ -8,4 +8,6 @@ in
     [ "__ICONS__" ]
     [ iconsDir ]
     (builtins.readFile ./layout.json);
+
+  home.packages = with pkgs; [ wleave wl-clipboard ];
 }

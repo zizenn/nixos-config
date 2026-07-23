@@ -11,4 +11,6 @@
     "waybar-zen/config.jsonc".source = ./zen/config.jsonc;
     "waybar-zen/style.css".source = ./zen/style.css;
   };
+
+  home.packages = with pkgs; [ wttrbar ];
 }

@@ -20,4 +20,6 @@
     source = ./cliphist-rofi-img;
     executable = true;
   };
+
+  home.packages = with pkgs; [ rofi ];
 }

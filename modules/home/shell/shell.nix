@@ -48,6 +48,26 @@
     '';
   };
 
+  home.packages = with pkgs; [
+    bat
+    bc
+    broot
+    btop
+    catimg
+    cava
+    chafa
+    cmatrix
+    eza
+    fd
+    glow
+    ncdu
+    pv
+    ripgrep
+    tldr
+    unzip
+    zip
+  ];
+
   programs.starship = {
   enable = true;
   enableFishIntegration = true;

@@ -17,4 +17,6 @@ ${builtins.readFile ./scripts/theme-wallpaper}
       '';
     };
   };
+
+  home.packages = with pkgs; [ feh ];
 }

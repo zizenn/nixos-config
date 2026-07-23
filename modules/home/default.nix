@@ -1,36 +1,16 @@
 {
-  config,
-  pkgs,
-  lib,
-  inputs,
   ...
 }:
 {
   imports = [
-    ./shell/shell.nix
-    ./dev/git.nix
-    ./dev/jujutsu.nix
-    ./apps/obs.nix
-    ./editors/opencode.nix
-    ./desktop/kitty.nix
-    ./desktop/niri
-    ./editors/neovim
-    ./desktop/rofi
-    ./desktop/waybar
-    ./apps/yazi
-    ./desktop/wallpaper.nix
-    ./theme/matugen
-    ./theme/matugen/kanagawa-dragon.nix
-    ./desktop/mako.nix
-    ./desktop/wleave
-    ./theme/fastfetch
-    ./mail/aerc
-    ./editors/zed
-    ./theme/gtk
-    ./theme/qt
-    ./core/scripts
-    ./core/env.nix
-    ./packages.nix
+    ./apps
+    ./core
+    ./desktop
+    ./dev
+    ./editors
+    ./mail
+    ./shell
+    ./theme
   ];
 
   programs.man.enable = true;

@@ -40,82 +40,23 @@ let
   };
 
 in
-
 {
   home.packages = with pkgs; [
-    bat
-    bc
-    bluetui
-    broot
-    awww
-    btop
-    cargo
-    catimg
-    cava
-    chafa
-    claude-code
-    cmatrix
-    cppman
-    devenv
-    eza
-    fastfetch
-    fd
-    feh
-    fzf
-    gemini-cli
-    gh
     glaxnimate
-    glow
-    herdr
-    hypridle
-    hyprlock
-    jq
     kdePackages.kdenlive
-    lazygit
-    lynx
-    matugen
     mediainfo
-    ncdu
-    nix-search-cli
-    nodejs_26
     obsidian
     ollama
-    opencode
     pandoc
-    papirus-icon-theme
     pavucontrol
     proton-pass
     protonmail-desktop
-    pv
-    python3
-    ripgrep
-    rofi
-    socat
     steam
-    swaylock
-    tldr
-    unzip
-    uv
     vesktop
     vlc
-    wiremix
-    wleave
-    wl-clipboard
-    wttrbar
-    yazi
     zathura
-    zip
-    zoxide
 
     inputs.zen-browser.packages.${system}.default
-    inputs.wlctl.packages.${system}.default
     modrinth-app-fixed
-
-    kdePackages.qt6ct
-    libsForQt5.qt5ct
-    libsForQt5.qtstyleplugin-kvantum
-    rose-pine-cursor
-    ntfs3g
-    libnotify
   ];
 }

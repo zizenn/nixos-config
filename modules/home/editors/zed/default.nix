@@ -6,6 +6,8 @@
     installRemoteServer = true;
   };
 
+  home.packages = with pkgs; [ claude-code gemini-cli ];
+
   xdg.configFile = {
     # ensure themes directory exists for matugen to write into
     "zed/themes/.keep".text = "";

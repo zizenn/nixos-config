@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  home.packages = with pkgs; [ opencode ];
+
   xdg.configFile."opencode/opencode.jsonc" = {
     text = ''
       {

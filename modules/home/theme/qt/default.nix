@@ -12,6 +12,12 @@
     };
   };
 
+  home.packages = with pkgs; [
+    kdePackages.qt6ct
+    libsForQt5.qt5ct
+    libsForQt5.qtstyleplugin-kvantum
+  ];
+
   xdg.configFile = {
     "Kvantum/kvantum.kvconfig".source = ./kvantum.kvconfig;
     "Kvantum/Matugen.kvconfig" = {
