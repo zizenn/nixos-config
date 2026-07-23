@@ -1,4 +1,0 @@
-[[manager.prepend_keymap]]
-desc = "Drag selected files out"
-on = ["<C-d>"]
-run = "shell ripdrag -- %s"

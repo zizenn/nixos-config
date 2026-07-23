@@ -1,18 +1,42 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [ ripdrag ];
+
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
-    extraPackages = with pkgs; [ ripdrag ];
-  };
 
-  home.packages = with pkgs; [ ripdrag ];
+    plugins = {
+      drag = pkgs.yaziPlugins.drag;
+      ouch = pkgs.yaziPlugins.ouch;
+    };
 
-  xdg.configFile."yazi" = {
-    source = ./config;
-    recursive = true;
-    force = true;
+    settings = {
+      mgr = {
+        ratio = [ 1 3 4 ];
+        sort_by = "natural";
+        sort_sensitive = false;
+        sort_reverse = false;
+        sort_dir_first = true;
+        show_hidden = false;
+      };
+      input = {
+        cursor_blink = true;
+      };
+    };
+
+    keymap = {
+      manager = {
+        prepend_keymap = [
+          {
+            on = [ "<C-d>" ];
+            run = "plugin drag";
+            desc = "Drag selected files out of Yazi via ripdrag";
+          }
+        ];
+      };
+    };
   };
 
   xdg.desktopEntries.yazi = {
