@@ -6,6 +6,8 @@
     enableFishIntegration = true;
   };
 
+  home.packages = with pkgs; [ ripdrag ];
+
   xdg.configFile."yazi" = {
     source = ./config;
     recursive = true;
