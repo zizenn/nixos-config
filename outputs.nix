@@ -19,6 +19,7 @@ inputs: let
 
   evaluation = inputs.flake-parts.lib.evalFlakeModule {inherit inputs;} {
     imports = modules;
+    systems = ["x86_64-linux"];
   };
 in
   {inherit evaluation;} // evaluation.config.processedFlake
