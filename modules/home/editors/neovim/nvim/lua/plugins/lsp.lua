@@ -22,6 +22,18 @@ return {
         vim.lsp.enable(server)
       end
 
+      vim.lsp.config.nixd = {
+        capabilities = capabilities,
+        settings = {
+          nixd = {
+            formatting = {
+              command = { "nixfmt" },
+            },
+          },
+        },
+      }
+      vim.lsp.enable("nixd")
+
       -- Enable inlay hints (e.g. deduced types, parameter names) for all LSP servers
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)

@@ -39,4 +39,13 @@ in {
     source = ./nvim;
     recursive = true;
   };
+
+  # Fallback clang-format style: Google with 6-space indent
+  # Project-local .clang-format files in parent directories take precedence
+  home.file.".clang-format".text = ''
+    BasedOnStyle: Google
+    IndentWidth: 6
+    ContinuationIndentWidth: 6
+    AccessModifierOffset: -6
+  '';
 }

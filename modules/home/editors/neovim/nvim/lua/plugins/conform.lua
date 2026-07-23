@@ -16,6 +16,7 @@ return {
                               -- FIX 1: Changed hyphens to underscores to match conform's internal names
                               c = { "clang_format" },
                               cpp = { "clang_format" },
+                              nix = { "nixfmt" },
                         },
 
                         format_on_save = {
@@ -35,11 +36,9 @@ return {
                                     prepend_args = { "--indent-size", "6" },
 
                               },
-                              -- FIX 2: Switched key name to underscore and added full indentation rules
+                              nixfmt = {},
                               ["clang_format"] = {
-                                    prepend_args = {
-                                          "-style={BasedOnStyle: LLVM, IndentWidth: 6, ContinuationIndentWidth: 6, AccessModifierOffset: -6}"
-                                    },
+                                    prepend_args = { "-style=file" },
                               },
                         },
                   })
