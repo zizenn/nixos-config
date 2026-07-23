@@ -7,7 +7,6 @@
 
   programs.niri = {
     enable = true;
-    enableXWayland = true;
   };
 
   xdg.portal = {

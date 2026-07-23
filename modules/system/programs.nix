@@ -51,6 +51,7 @@
     steam-run
     temurin-bin-21
     temurin-bin-17
+    xwayland
   ];
 
   users.users.zizenn = {

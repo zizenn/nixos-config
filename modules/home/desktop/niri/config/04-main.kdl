@@ -8,10 +8,7 @@ spawn-at-startup "awww-daemon"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 spawn-at-startup "ollama" "serve"
-
-xwayland {
-    enable
-}
+spawn-at-startup "Xwayland" ":0"
 
 hotkey-overlay {
     skip-at-startup
