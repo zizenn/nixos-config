@@ -8,10 +8,9 @@
       enable32Bit = true;
       extraPackages = with pkgs; [
         mesa
-        mesa.drivers
         libva
         vulkan-loader
-        vaapiVdpau
+        libva-vdpau-driver
         libvdpau-va-gl
       ];
     };

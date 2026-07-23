@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   shardLibPath = lib.makeLibraryPath (with pkgs; [
@@ -15,9 +15,12 @@ let
     libsoup_3
     openssl
   ]);
+  shardBin = "${config.home.homeDirectory}/.local/bin/shard";
 in
 {
   home.packages = [ pkgs.appimage-run ];
+
+  home.sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
 
   home.file.".local/bin/shard" = {
     executable = true;
@@ -49,7 +52,7 @@ in
 
   xdg.desktopEntries.shard = {
     name = "Shard";
-    exec = "shard %U";
+    exec = "${shardBin} %U";
     terminal = false;
     categories = [ "Game" ];
     comment = "Experimental Minecraft launcher";
