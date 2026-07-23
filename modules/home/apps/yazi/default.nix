@@ -1,15 +1,28 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
+let
+  inherit (lib) importTOML;
+in
 {
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
+
+    settings = importTOML ./config/yazi.toml;
+    keymap = importTOML ./config/keymap.toml;
+    theme = importTOML ./config/theme.toml;
+
+    extraPackages = [ ripdrag ];
   };
 
-  home.packages = with pkgs; [ ripdrag ];
+  xdg.configFile."yazi/drag.sh" = {
+    source = ./config/drag.sh;
+    executable = true;
+    force = true;
+  };
 
-  xdg.configFile."yazi" = {
-    source = ./config;
+  xdg.configFile."yazi/plugins/ouch.yazi" = {
+    source = ./config/plugins/ouch.yazi;
     recursive = true;
     force = true;
   };
