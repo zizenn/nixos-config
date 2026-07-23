@@ -30,7 +30,7 @@
       manager = {
         prepend_keymap = [
           {
-            on = [ "<C-d>" ];
+            on = [ "<C-g>" ];
             run = "plugin drag";
             desc = "Drag selected files out of Yazi via ripdrag";
           }
