@@ -49,9 +49,6 @@
     cliphist
     man-pages
     steam-run
-    appimage-run
-    curl
-    jq
     temurin-bin-21
     temurin-bin-17
   ];

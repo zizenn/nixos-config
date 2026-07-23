@@ -6,19 +6,8 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [
-        mesa
-        libva
-        vulkan-loader
-        libva-vdpau-driver
-        libvdpau-va-gl
-      ];
+      extraPackages = with pkgs; [ mesa libva vulkan-loader ];
     };
-  };
-
-  environment.variables = {
-    VDPAU_DRIVER = "radeonsi";
-    LIBVA_DRIVER_NAME = "radeonsi";
   };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
