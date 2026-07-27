@@ -1,6 +1,6 @@
-output "DP-3" {
+output "HDMI-A-1" {
     mode "1920x1080@200.000"
-    scale 1
+    scale 0.95
     transform "normal"
     position x=1280 y=0
 }
