@@ -5,27 +5,20 @@
       pyright clang-tools tree-sitter stylua prettier
       python3Packages.autopep8 python3Packages.debugpy nixd nixfmt
     ];
-    neovimRuntimeEnv = pkgs.buildEnv {
-      name = "neovim-runtime-env";
-      paths = neovimRuntimePackages;
-    };
-    nvim = pkgs.writeShellScriptBin "nvim" ''
-      export PATH="${neovimRuntimeEnv}/bin:${pkgs.gnumake}/bin:${pkgs.gcc}/bin''${PATH:+:$PATH}"
-      exec ${pkgs.neovim}/bin/nvim "$@"
-    '';
   in {
     programs.neovim = {
       enable = true;
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;
+      extraPackages = neovimRuntimePackages ++ (with pkgs; [gnumake gcc]);
     };
     programs.zed-editor = {
       enable = true;
       installRemoteServer = true;
     };
     home.packages = with pkgs; [
-      nvim opencode gemini-cli
+      opencode gemini-cli
     ];
     xdg.configFile = {
       "nvim".source = ./neovim/nvim;
