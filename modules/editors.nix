@@ -4,6 +4,7 @@
       lua-language-server typescript-language-server vscode-langservers-extracted
       pyright clang-tools tree-sitter stylua prettier
       python3Packages.autopep8 python3Packages.debugpy nixd nixfmt
+      gnumake gcc
     ];
     neovimRuntimeEnv = pkgs.buildEnv {
       name = "neovim-runtime-env";
