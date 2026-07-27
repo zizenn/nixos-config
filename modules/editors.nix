@@ -9,12 +9,8 @@
       name = "neovim-runtime-env";
       paths = neovimRuntimePackages;
     };
-    neovimBuildEnv = pkgs.buildEnv {
-      name = "neovim-build-env";
-      paths = with pkgs; [gnumake gcc];
-    };
     nvim = pkgs.writeShellScriptBin "nvim" ''
-      export PATH="${neovimBuildEnv}/bin:${neovimRuntimeEnv}/bin''${PATH:+:$PATH}"
+      export PATH="${neovimRuntimeEnv}/bin:${pkgs.gnumake}/bin:${pkgs.gcc}/bin''${PATH:+:$PATH}"
       exec ${pkgs.neovim}/bin/nvim "$@"
     '';
   in {
