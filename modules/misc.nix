@@ -11,7 +11,7 @@
       XCURSOR_SIZE = "24";
     };
     home.packages = with pkgs; [
-      bluetui herdr ntfs3g wiremix
+      awww bluetui herdr ntfs3g wiremix
     ];
     home.file = {
       ".local/bin/pkgadd" = {
@@ -30,6 +30,8 @@ ${builtins.readFile ./core/scripts/pkgdel}
       };
     };
     xdg.configFile."herdr/config.toml".text = ''
+      onboarding = false
+
       [theme]
       name = "terminal"
 

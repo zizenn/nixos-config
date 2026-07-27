@@ -4,7 +4,7 @@ binds {
     Mod+T hotkey-overlay-title="kitty" { spawn "kitty"; }
     Mod+Return hotkey-overlay-title="kitty" { spawn "kitty"; }
     Alt+Space hotkey-overlay-title="rofi" { spawn-sh "rofi -show drun"; }
-    Mod+W hotkey-overlay-title="skwd-wall" { spawn-sh "QSG_RHI_BACKEND=opengl skwd wall toggle"; }
+    Mod+W hotkey-overlay-title="wallpaper" { spawn "kitty" "--class" "fzf-float" "-e" "wallpaper-pick"; }
     Mod+V hotkey-overlay-title="clipboard" { spawn-sh "~/.local/bin/cliphist-rofi-img"; }
     Mod+O hotkey-overlay-title="obsidian" { spawn "obsidian"; }
     Mod+P hotkey-overlay-title="wleave" { spawn "wleave"; }
