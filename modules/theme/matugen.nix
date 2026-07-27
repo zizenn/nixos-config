@@ -13,7 +13,6 @@
       "matugen/templates/mako.conf".source = ./matugen/templates/mako.conf;
       "matugen/templates/wleave.css".source = ./matugen/templates/wleave.css;
       "matugen/templates/hyprlock.conf".source = ./matugen/templates/hyprlock.conf;
-      "matugen/templates/sddm.conf".source = ./matugen/templates/sddm.conf;
       "matugen/templates/gtk.css".source = ./matugen/templates/gtk.css;
       "matugen/templates/gtk4.css".source = ./matugen/templates/gtk4.css;
       "matugen/templates/kvantum/Matugen.kvconfig".source = ./matugen/templates/kvantum/Matugen.kvconfig;

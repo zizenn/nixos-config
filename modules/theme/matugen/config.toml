@@ -39,10 +39,6 @@ output_path = ["~/.config/mako/config"]
 input_path = "~/.config/matugen/templates/wleave.css"
 output_path = ["~/.config/wleave/style.css"]
 
-[templates.sddm]
-input_path = "~/.config/matugen/templates/sddm.conf"
-output_path = ["/var/lib/sddm-themes/where_is_my_sddm_theme/theme.conf"]
-
 [templates.hyprlock]
 input_path = "~/.config/matugen/templates/hyprlock.conf"
 output_path = ["~/.config/hypr/hyprlock.conf"]
