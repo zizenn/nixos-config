@@ -1,6 +1,6 @@
 {lib, ...}: {
   nixos.modules.base = {
-    time.timeZone = "Asia/Dhaka";
+    time.timeZone = "Australia/Adelaide";
     system.stateVersion = "26.05";
   };
 }

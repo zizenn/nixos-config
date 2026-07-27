@@ -16,6 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     wlctl.url = "github:aashish-thapa/wlctl";
+    skwd-wall.url = "github:liixini/skwd-wall";
   };
 
   outputs = inputs: import ./outputs.nix inputs;
