@@ -1,7 +1,7 @@
 {config, lib, inputs, ...}: let
   flake = config;
 in {
-  flake.nixosConfigurations.nix-port = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.zizenn-hack = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = {inherit inputs;};
     modules = [
