@@ -1,6 +1,6 @@
 scan_timeout = 50
 command_timeout = 2000
-format = "$directory$git_branch$git_status$fill${"\n"}$character"
+format = "$directory$git_branch$git_status$fill\n$character"
 fill.symbol = " "
 continuation_prompt = "[▸▹ ](dimmed white)"
 directory = {

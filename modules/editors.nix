@@ -4,14 +4,17 @@
       lua-language-server typescript-language-server vscode-langservers-extracted
       pyright clang-tools tree-sitter stylua prettier
       python3Packages.autopep8 python3Packages.debugpy nixd nixfmt
-      gnumake gcc
     ];
     neovimRuntimeEnv = pkgs.buildEnv {
       name = "neovim-runtime-env";
       paths = neovimRuntimePackages;
     };
+    neovimBuildEnv = pkgs.buildEnv {
+      name = "neovim-build-env";
+      paths = with pkgs; [gnumake gcc];
+    };
     nvim = pkgs.writeShellScriptBin "nvim" ''
-      export PATH="${neovimRuntimeEnv}/bin''${PATH:+:$PATH}"
+      export PATH="${neovimBuildEnv}/bin:${neovimRuntimeEnv}/bin''${PATH:+:$PATH}"
       exec ${pkgs.neovim}/bin/nvim "$@"
     '';
   in {
