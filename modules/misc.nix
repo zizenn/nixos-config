@@ -8,6 +8,7 @@
       NSS_SSL_CBC_RANDOM_IV = "0";
       QT_STYLE_OVERRIDE = "kvantum";
       QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
+      DISPLAY = ":0";
       XCURSOR_SIZE = "24";
     };
     home.packages = with pkgs; [
