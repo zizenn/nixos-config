@@ -20,7 +20,6 @@
         enable = true;
         openFirewall = true;
       };
-      prismlauncher.enable = true;
     };
 
     documentation = {
