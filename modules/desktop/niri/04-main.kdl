@@ -1,5 +1,3 @@
-active-color "#000000" // matugen:active-color
-
 cursor {
     xcursor-theme "rose-pine-cursor"
     xcursor-size 24
