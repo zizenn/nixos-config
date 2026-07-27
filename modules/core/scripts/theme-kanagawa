@@ -44,6 +44,8 @@ cp -f "$KD/vesktop.css" ~/.config/vesktop/themes/matugen.theme.css
 mkdir -p ~/.config/Kvantum
 cp -f "$KD/kvantum/Matugen.kvconfig" ~/.config/Kvantum/Matugen.kvconfig
 
+cp -f "$KD/starship.toml" ~/.config/starship/matugen.toml
+
 for SOCK in /tmp/kitty-zizenn-*
     set -q SOCK; or continue
     [ -S "$SOCK" ] && kitty @ --to="unix:$SOCK" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null
