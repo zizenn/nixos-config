@@ -29,6 +29,11 @@ ${builtins.readFile ./core/scripts/pkgdel}
         '';
       };
     };
+    xdg.configFile."herdr/config.toml".text = ''
+      [keys]
+      prefix = "ctrl+space"
+    '';
+
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {
