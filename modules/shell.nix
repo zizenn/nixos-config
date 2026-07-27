@@ -28,6 +28,7 @@
         sudo = "doas";
       };
       interactiveShellInit = ''
+        set -gx STARSHIP_CONFIG ~/.config/starship/matugen.toml
         set -gx MANROFFOPT "-c"
         set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
         set -gx FZF_DEFAULT_COMMAND "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"

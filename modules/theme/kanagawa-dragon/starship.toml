@@ -1,0 +1,27 @@
+scan_timeout = 50
+command_timeout = 2000
+format = "$directory$git_branch$git_status$fill${"\n"}$character"
+fill.symbol = " "
+continuation_prompt = "[▸▹ ](dimmed white)"
+directory = {
+  style = "bold #8ba4b0"
+  format = "[$path]($style)[$read_only]($read_only_style) "
+  truncate_to_repo = true
+}
+character = {
+  success_symbol = "[❯](bold #8ea4a2)"
+  error_symbol = "[❯](bold #E82424)"
+  vimcmd_symbol = "[❮](bold #8ba4b0)"
+}
+git_branch = {
+  format = "[△ $branch]($style) "
+  style = "italic #8ba4b0"
+}
+git_status = {
+  format = "[$all_status$ahead_behind]($style) "
+  style = "bold #625e5a"
+}
+cmd_duration = {
+  format = "[$duration]($style)"
+  style = "italic dimmed #8ea4a2"
+}
