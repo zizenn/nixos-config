@@ -5,7 +5,7 @@
         executable = true;
         text = ''
 #!${pkgs.fish}/bin/fish
-${builtins.readFile ./core/scripts/theme-kanagawa}
+${builtins.readFile ../core/scripts/theme-kanagawa}
         '';
       };
       ".config/matugen/kanagawa-dragon/kitty.conf".source = ./kanagawa-dragon/kitty.conf;

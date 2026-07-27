@@ -1,5 +1,5 @@
 output "DP-3" {
-    mode "1920x1080@260.004"
+    mode "1920x1080@200.00"
     scale 1
     transform "normal"
     position x=1280 y=0

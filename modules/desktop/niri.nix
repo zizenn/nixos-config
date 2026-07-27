@@ -1,12 +1,12 @@
-{lib, inputs, ...}: let
-  inherit (inputs.nixpkgs.stdenv.hostPlatform) system;
-in {
+{lib, inputs, ...}: {
   nixos.modules.base = {pkgs, ...}: {
     programs.niri.enable = true;
     services.displayManager.ly.enable = true;
   };
 
-  homeManager.modules.base = {pkgs, ...}: {
+  homeManager.modules.base = {pkgs, ...}: let
+    system = pkgs.stdenv.hostPlatform.system;
+  in {
     home.packages = with pkgs; [
       hypridle hyprlock swaylock inputs.wlctl.packages.${system}.default
     ];
