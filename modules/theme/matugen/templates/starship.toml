@@ -3,25 +3,25 @@ command_timeout = 2000
 format = "$directory$git_branch$git_status$fill\n$character"
 fill.symbol = " "
 continuation_prompt = "[▸▹ ](dimmed white)"
-directory = {
-  style = "bold {{colors.primary.default.hex}}"
-  format = "[$path]($style)[$read_only]($read_only_style) "
-  truncate_to_repo = true
-}
-character = {
-  success_symbol = "[❯](bold {{colors.tertiary.default.hex}})"
-  error_symbol = "[❯](bold {{colors.error.default.hex}})"
-  vimcmd_symbol = "[❮](bold {{colors.primary.default.hex}})"
-}
-git_branch = {
-  format = "[△ $branch]($style) "
-  style = "italic {{colors.primary.default.hex}}"
-}
-git_status = {
-  format = "[$all_status$ahead_behind]($style) "
-  style = "bold {{colors.on_surface_variant.default.hex}}"
-}
-cmd_duration = {
-  format = "[$duration]($style)"
-  style = "italic dimmed {{colors.tertiary.default.hex}}"
-}
+
+[directory]
+style = "bold {{colors.primary.default.hex}}"
+format = "[$path]($style)[$read_only]($read_only_style) "
+truncate_to_repo = true
+
+[character]
+success_symbol = "[❯](bold {{colors.tertiary.default.hex}})"
+error_symbol = "[❯](bold {{colors.error.default.hex}})"
+vimcmd_symbol = "[❮](bold {{colors.primary.default.hex}})"
+
+[git_branch]
+format = "[△ $branch]($style) "
+style = "italic {{colors.primary.default.hex}}"
+
+[git_status]
+format = "[$all_status$ahead_behind]($style) "
+style = "bold {{colors.on_surface_variant.default.hex}}"
+
+[cmd_duration]
+format = "[$duration]($style)"
+style = "italic dimmed {{colors.tertiary.default.hex}}"
