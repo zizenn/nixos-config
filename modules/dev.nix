@@ -4,7 +4,7 @@
       enable = true;
       settings = {
         user = {
-          name = "zizenn";
+          name = "zizenn-pc";
           email = "zizenn.69@gmail.com";
         };
         core.editor = "nvim";
@@ -14,7 +14,7 @@
       enable = true;
       settings = {
         user = {
-          name = "sakif";
+          name = "zizenn-pc";
           email = "zizenn.69@gmail.com";
         };
         ui.default-editor = "nvim";
