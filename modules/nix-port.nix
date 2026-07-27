@@ -7,6 +7,7 @@ in {
     modules = [
       (import "${inputs.home-manager}/nixos")
       ./_hardware-configuration.nix
+      inputs.skwd-wall.nixosModules.default
     ] ++ flake.nixos.modules.base.imports
     ++ [{
       home-manager = {
