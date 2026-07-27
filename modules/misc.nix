@@ -30,6 +30,12 @@ ${builtins.readFile ./core/scripts/pkgdel}
       };
     };
     xdg.configFile."herdr/config.toml".text = ''
+      [theme]
+      name = "terminal"
+
+      [ui]
+      toast = { delivery = "terminal" }
+
       [keys]
       prefix = "ctrl+space"
     '';

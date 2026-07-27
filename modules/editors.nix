@@ -25,7 +25,7 @@
       installRemoteServer = true;
     };
     home.packages = with pkgs; [
-      nvim opencode claude-code gemini-cli
+      nvim opencode gemini-cli
     ];
     xdg.configFile = {
       "nvim".source = ./neovim/nvim;
