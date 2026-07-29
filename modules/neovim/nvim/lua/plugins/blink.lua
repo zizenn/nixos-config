@@ -3,7 +3,6 @@ return {
 	dependencies = {
 		"onsails/lspkind.nvim",
 		"L3MON4D3/LuaSnip",
-		{ "Kaiser-Yang/blink-cmp-copilot", version = "*" },
 	},
 	version = "*",
 	event = { "BufReadPre", "BufNewFile" },
@@ -133,7 +132,7 @@ return {
 		},
 
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "copilot" },
+			default = { "lsp", "path", "snippets", "buffer" },
 			providers = {
 				lsp = {
 					min_keyword_length = 0,
@@ -148,12 +147,6 @@ return {
 				buffer = {
 					min_keyword_length = 5,
 					max_items = 5,
-				},
-				copilot = {
-					name = "copilot",
-					module = "blink-cmp-copilot",
-					score_offset = 100,
-					async = true,
 				},
 			},
 		},
