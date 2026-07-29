@@ -1,49 +1,23 @@
 return {
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		opts = {
-			panel = {
-				enabled = true,
-				auto_refresh = false,
-				keymap = {
-					jump_prev = "[[",
-					jump_next = "]]",
-					accept = "<CR>",
-					refresh = "gr",
-					open = "<M-CR>",
-				},
-				layout = {
-					position = "bottom",
-					ratio = 0.4,
-				},
-			},
-			suggestion = {
-				enabled = true,
-				auto_trigger = true,
-				debounce = 75,
-				keymap = {
-					accept = "<M-l>",
-					accept_word = false,
-					accept_line = false,
-					next = "<M-]>",
-					prev = "<M-[>",
-					dismiss = "<C-]>",
-				},
-			},
-			filetypes = {
-				yaml = false,
-				markdown = false,
-				help = false,
-				gitcommit = false,
-				gitrebase = false,
-				hgcommit = false,
-				svn = false,
-				cvs = false,
-				["."] = false,
-			},
-			copilot_node_command = "node",
-		},
-	},
+	"github/copilot.vim",
+	cmd = "Copilot",
+	event = "InsertEnter",
+	config = function()
+		vim.g.copilot_filetypes = {
+			yaml = false,
+			markdown = false,
+			help = false,
+			gitcommit = false,
+			gitrebase = false,
+			hgcommit = false,
+			svn = false,
+			cvs = false,
+			["."] = false,
+		}
+		vim.g.copilot_no_tab_map = true
+		vim.keymap.set("i", "<M-l>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
+		vim.keymap.set("i", "<M-]>", "<Cmd>call copilot#Next()<CR>")
+		vim.keymap.set("i", "<M-[>", "<Cmd>call copilot#Previous()<CR>")
+		vim.keymap.set("i", "<C-]>", "<Cmd>call copilot#Dismiss()<CR>")
+	end,
 }
