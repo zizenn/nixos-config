@@ -1,5 +1,5 @@
-{lib, ...}: {
-  nixos.modules.base = {pkgs, ...}: {
+{ pkgs, lib, ... }: {
+  nixos.modules.base = { pkgs, ... }: {
     programs = {
       fish.enable = true;
       dconf.enable = true;
@@ -29,16 +29,29 @@
       nixos.enable = false;
     };
 
-    fonts.packages = with pkgs; [nerd-fonts.jetbrains-mono];
+    fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
     environment.systemPackages = with pkgs; [
-      vim wget xdg-utils brightnessctl playerctl cliphist
-      man-pages steam-run temurin-bin-21 temurin-bin-17 xwayland
+      vim
+      wget
+      xdg-utils
+      brightnessctl
+      playerctl
+      cliphist
+      man-pages
+      steam-run
+      temurin-bin-21
+      temurin-bin-17
+      xwayland-satellite
     ];
 
     users.users.zizenn = {
       isNormalUser = true;
-      extraGroups = ["wheel" "networkmanager" "video"];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "video"
+      ];
       shell = pkgs.fish;
     };
   };
