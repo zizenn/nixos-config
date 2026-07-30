@@ -20,6 +20,10 @@
         enable = true;
         openFirewall = true;
       };
+      steam = {
+        enable = true;
+        gamescopeSession.enable = true;
+      };
     };
 
     documentation = {
@@ -39,7 +43,7 @@
       playerctl
       cliphist
       man-pages
-      steam-run
+      # steam-run is bundled with programs.steam.enable
       temurin-bin-21
       temurin-bin-17
       xwayland-satellite

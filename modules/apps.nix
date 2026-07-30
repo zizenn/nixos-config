@@ -37,7 +37,7 @@
     };
     home.packages = with pkgs; [
       glaxnimate kdePackages.kdenlive mediainfo obsidian ollama
-      pandoc pavucontrol proton-pass protonmail-desktop steam vesktop
+      pandoc pavucontrol proton-pass protonmail-desktop vesktop
       vlc zathura inputs.zen-browser.packages.${system}.default ripdrag
     ];
     xdg.desktopEntries.yazi = {
