@@ -9,28 +9,14 @@
     "buttons": [
         {
             "label": "lock",
-            "action": [
-                {
-                    "$DESKTOP_SESSION": "hyprland",
-                    "shell": "loginctl lock-session"
-                },
-                {
-                    "executable": "hyprlock"
-                }
-            ],
+            "action": "swaylock",
             "text": "Lock",
             "keybind": "l",
             "icon": "__ICONS__/lock.svg"
         },
         {
             "label": "logout",
-            "action": [
-                {
-                    "$DESKTOP_SESSION": "hyprland",
-                    "shell": "hyprctl dispatch exit"
-                },
-                "loginctl terminate-user $USER"
-            ],
+            "action": "loginctl terminate-user $USER",
             "text": "Logout",
             "keybind": "e",
             "icon": "__ICONS__/logout.svg"

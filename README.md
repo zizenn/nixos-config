@@ -90,7 +90,7 @@
 | **Bar** | [Waybar](https://github.com/Alexays/Waybar) (dual config: main + zen) |
 | **Launcher** | [Rofi](https://github.com/davatorium/rofi) (drun + clipboard + wallpaper) |
 | **Notifications** | [Mako](https://github.com/emersion/mako) |
-| **Lock Screen** | [Hyprlock](https://github.com/hyprwm/hyprlock) |
+| **Lock Screen** | [Swaylock](https://github.com/swaywm/swaylock) |
 | **Power Menu** | [Wleave](https://github.com/AMNatty/wleave) |
 | **Wallpaper** | Awww daemon + custom `wallpaper-pick` script |
 | **Clipboard** | [Cliphist](https://github.com/sentriz/cliphist) with rofi image preview |
@@ -195,7 +195,6 @@ The entire desktop follows colors extracted from the current wallpaper via [`mat
 - Zed
 - Mako
 - Wleave
-- Hyprlock
 - GTK3/4
 - Kvantum (QT)
 - Obsidian
@@ -344,7 +343,7 @@ Available packages: `bat`, `brightnessctl`, `cliphist`, `eza`, `fastfetch`,
         ├── core/                 # Env vars, scripts
         ├── shell/                # Fish, Starship
         ├── desktop/
-        │   ├── niri/             # Config.kdl, hypridle, window rules
+        │   ├── niri/             # Config.kdl, swayidle, window rules
         │   ├── waybar/           # Main + zen config & style
         │   ├── rofi/             # Glass theme, clipboard, wallpaper
         │   ├── wleave/           # Power menu

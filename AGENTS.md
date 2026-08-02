@@ -65,7 +65,7 @@ Every `.nix` file under `modules/` is a top-level flake-parts module (auto-impor
 │   │   ├── tailscale.nix           # tailscale
 │   │   └── misc.nix                # upower, blueman, udisks2, fstrim, kmscon
 │   ├── desktop/
-│   │   ├── niri.nix                # Niri compositor (system) + Ly + hypridle/hyprlock (HM)
+│   │   ├── niri.nix                # Niri compositor (system) + Ly + swayidle/swaylock (HM)
 │   │   ├── portals.nix             # xdg-desktop-portal
 │   │   ├── kitty.nix               # kitty terminal
 │   │   ├── mako.nix                # notifications
@@ -127,8 +127,8 @@ Every `.nix` file under `modules/` is a top-level flake-parts module (auto-impor
 | User packages | `modules/apps.nix` + `modules/misc.nix` + per-feature modules (e.g. `editors.nix`, `shell.nix`) |
 | `allowUnfree` | set in both `modules/security.nix` and `modules/infra/home-manager.nix` |
 | Niri config (KDL) | `modules/desktop/niri.nix` → `./niri/*.kdl` → `~/.config/niri/config.kdl` |
-| Hypridle | `modules/desktop/niri.nix` → `./niri/hypridle.conf` → `~/.config/hypr/hypridle.conf` |
-| Hyprlock template | `modules/theme/matugen/templates/hyprlock.conf` → `~/.config/hypr/hyprlock.conf` |
+| Idle/lock (swayidle) | `modules/desktop/niri/04-main.kdl` → `spawn-at-startup "swayidle" ...` |
+| Swaylock config | `modules/desktop/niri.nix` → `programs.swaylock.settings` → `~/.config/swaylock/config` |
 | Login manager (Ly) | `modules/desktop/niri.nix` → `services.ly` |
 | Neovim | `modules/editors.nix` → `./neovim/nvim/` (symlinked to `~/.config/nvim`) |
 | Neovim runtime deps | `modules/editors.nix` → `neovimRuntimePackages` (LSPs, formatters, DAP) |
