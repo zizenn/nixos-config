@@ -27,4 +27,5 @@ matugen image (realpath $WALLPAPER_LINK) -q --source-color-index 0
 or notify-send "wallpaper" "matugen failed"
 notify-send -i $SELECTED_PATH "wallpaper" "Set to $SELECTED"
 pkill waybar
-waybar
+waybar & disown
+exit
