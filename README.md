@@ -207,11 +207,11 @@ For SSH sessions or a fixed palette, run `theme-kanagawa` to apply pre-generated
 ## 📦 Package Management
 
 ```
-pkgadd   # search nixpkgs → fzf pick → add to a module → commit → nh os switch
-pkgdel   # list current packages → fzf pick → remove → commit → nh os switch
+pkgadd   # search nixpkgs → fzf pick → add to a module → commit → rebuild
+pkgdel   # list current packages → fzf pick → remove → commit → rebuild
 ```
 
-Both handle git commits and trigger `nh os switch` automatically.
+Both handle git commits and trigger a rebuild automatically.
 
 > **Note:** LSPs, formatters, and DAP debuggers are wrapped into neovim's runtime (not installed globally). C++ toolchains are managed through `devenv` shells.
 
@@ -261,8 +261,9 @@ cd ~/nixos
 # Generate hardware config (adjust for your machine)
 nixos-generate-config --show-hardware-config > modules/_hardware-configuration.nix
 
-# Rebuild (system + home-manager)
-nh os switch        # or: os  (alias)
+# Rebuild (system + home-manager, wired into the NixOS module)
+nixos-rebuild switch --flake ~/nixos#zizenn-hack
+# run as root (this setup uses doas; `sudo` is aliased to it in fish)
 ```
 
 > **Note:** This config is a single-user setup (user `zizenn`, hostname `zizenn-hack`). Adjust `_hardware-configuration.nix` for your hardware.
@@ -308,7 +309,6 @@ Every `.nix` file under `modules/` is a top-level flake-parts module, auto-impor
 
 - [Niri](https://github.com/YaLTeR/niri) — the scrollable-tiling Wayland compositor
 - [Matugen](https://github.com/InioX/matugen) — Material You color extraction
-- [Waybar Themes](https://github.com/HANCORE-linux/waybar-themes) — base waybar styling (tweaked with matugen colors)
 - [Nixpkgs](https://github.com/NixOS/nixpkgs) — the package set
 - [Home Manager](https://github.com/nix-community/home-manager) — declarative user config
 - [Zen Kernel](https://github.com/zen-kernel/zen-kernel) — desktop-optimized Linux kernel
