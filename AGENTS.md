@@ -49,7 +49,7 @@ Every `.nix` file under `modules/` is a top-level flake-parts module (auto-impor
 │   ├── dev.nix                     # git, jujutsu, gh, lazygit, devenv, cargo
 │   ├── shell.nix                   # fish aliases, starship, fzf, zoxide, cli tools
 │   ├── apps.nix                    # obs-studio, yazi, steam, media apps
-│   ├── mail.nix                    # aerc config, binds, accounts, mail2obsidian
+│   ├── mail.nix                    # aerc config, binds, accounts
 │   ├── misc.nix                    # env vars, MIME defaults, pkgadd/pkgdel scripts
 │   │
 │   ├── audio/
