@@ -15,7 +15,6 @@ ${builtins.readFile ../core/scripts/theme-kanagawa}
       ".config/matugen/kanagawa-dragon/waybar.css".source = ./kanagawa-dragon/waybar.css;
       ".config/matugen/kanagawa-dragon/mako.conf".source = ./kanagawa-dragon/mako.conf;
       ".config/matugen/kanagawa-dragon/wleave.css".source = ./kanagawa-dragon/wleave.css;
-      ".config/matugen/kanagawa-dragon/hyprlock.conf".source = ./kanagawa-dragon/hyprlock.conf;
       ".config/matugen/kanagawa-dragon/gtk.css".source = ./kanagawa-dragon/gtk.css;
       ".config/matugen/kanagawa-dragon/gtk4.css".source = ./kanagawa-dragon/gtk4.css;
       ".config/matugen/kanagawa-dragon/obsidian.css".source = ./kanagawa-dragon/obsidian.css;

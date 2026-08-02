@@ -26,9 +26,6 @@ cp -f "$KD/mako.conf" ~/.config/mako/config
 mkdir -p ~/.config/wleave
 cp -f "$KD/wleave.css" ~/.config/wleave/style.css
 
-mkdir -p ~/.config/hypr
-cp -f "$KD/hyprlock.conf" ~/.config/hypr/hyprlock.conf
-
 mkdir -p ~/.config/gtk-3.0
 cp -f "$KD/gtk.css" ~/.config/gtk-3.0/gtk.css
 

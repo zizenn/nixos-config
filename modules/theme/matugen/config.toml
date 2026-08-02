@@ -39,10 +39,6 @@ output_path = ["~/.config/mako/config"]
 input_path = "~/.config/matugen/templates/wleave.css"
 output_path = ["~/.config/wleave/style.css"]
 
-[templates.hyprlock]
-input_path = "~/.config/matugen/templates/hyprlock.conf"
-output_path = ["~/.config/hypr/hyprlock.conf"]
-
 [templates.gtk3]
 input_path = "~/.config/matugen/templates/gtk.css"
 output_path = ["~/.config/gtk-3.0/gtk.css"]

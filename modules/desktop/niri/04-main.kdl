@@ -3,6 +3,7 @@ cursor {
     xcursor-size 24
 }
 
+spawn-at-startup "swayidle" "timeout" "900" "swaylock" "timeout" "960" "niri msg action power-off-monitors" "before-sleep" "swaylock" "after-resume" "niri msg action power-on-monitors" "lock" "swaylock"
 spawn-at-startup "waybar"
 spawn-at-startup "awww-daemon"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"

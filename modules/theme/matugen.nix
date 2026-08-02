@@ -12,7 +12,6 @@
       "matugen/templates/vesktop.css".source = ./matugen/templates/vesktop.css;
       "matugen/templates/mako.conf".source = ./matugen/templates/mako.conf;
       "matugen/templates/wleave.css".source = ./matugen/templates/wleave.css;
-      "matugen/templates/hyprlock.conf".source = ./matugen/templates/hyprlock.conf;
       "matugen/templates/gtk.css".source = ./matugen/templates/gtk.css;
       "matugen/templates/gtk4.css".source = ./matugen/templates/gtk4.css;
       "matugen/templates/starship.toml".source = ./matugen/templates/starship.toml;
