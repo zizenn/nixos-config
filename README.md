@@ -88,7 +88,7 @@
 | **Prompt** | [Starship](https://starship.rs) (transient, vi-mode) |
 | **Multiplexer** | [Herdr](https://github.com/quantonganh/herdr) |
 | **File Manager** | [Yazi](https://yazi-rs.github.io) (terminal) |
-| **CLI tools** | bat, eza, fd, ripgrep, fzf, zoxide, glow, btop, ncdu, broot, cava |
+| **CLI tools** | bat, eza, fd, ripgrep, fzf, zoxide, btop, ncdu, cava |
 
 ### Development
 
