@@ -1,7 +1,8 @@
 { pkgs, lib, ... }: {
   nixos.modules.base = { pkgs, ... }: {
-    programs = {
-      fish.enable = true;
+programs = {
+        droidcam.enable = true;
+        fish.enable = true;
       dconf.enable = true;
       firefox.enable = true;
       ccache.enable = true;
