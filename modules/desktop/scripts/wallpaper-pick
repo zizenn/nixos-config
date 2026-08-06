@@ -1,5 +1,4 @@
-set -q XDG_PICTURES_DIR; or set XDG_PICTURES_DIR "$HOME/Pictures"
-set WALLPAPER_DIR "$XDG_PICTURES_DIR/Wallpapers"
+set WALLPAPER_DIR "$HOME/nixos/modules/_personal/wallpapers"
 set WALLPAPER_LINK "$HOME/.wallpaper"
 
 mkdir -p $WALLPAPER_DIR

@@ -219,11 +219,11 @@ Both handle git commits and trigger a rebuild automatically.
 
 ## 📬 Email
 
-Aerc is configured for Gmail over IMAP/SMTP using an app password (no OAuth, no age):
+Aerc is configured for Gmail over IMAP/SMTP using an app password (no OAuth, no age). This part of the config is private (in `modules/_personal/`):
 
 1. Create a [Gmail app password](https://myaccount.google.com/apppasswords)
-2. Store it in `~/.config/aerc/app-password` (one line, `chmod 600`)
-3. Aerc reads it via `source-cred-cmd = cat ~/.config/aerc/app-password`
+2. Store it in `modules/_personal/aerc/app-password` (one line, `chmod 600`) — read at runtime, never pushed
+3. Aerc reads it via `source-cred-cmd = cat ~/nixos/modules/_personal/aerc/app-password`
 
 Launch with `SUPER + A`.
 

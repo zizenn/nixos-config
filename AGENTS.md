@@ -54,7 +54,9 @@ Every `.nix` file under `modules/` is a top-level flake-parts module (auto-impor
 │   ├── _personal/                  # 🔒 PRIVATE — gitignored, never pushed to GitHub
 │   │   ├── apps.nix                #   prismlauncher, obs-studio, kdenlive, glaxnimate, proton*
 │   │   ├── programs.nix            #   steam, droidcam, localsend
-│   │   └── mail.nix                #   aerc config, binds, accounts (mode 600)
+│   │   ├── mail.nix                #   aerc config, binds, accounts (mode 600)
+│   │   ├── aerc/app-password       #   🔑 aerc credentials (read at runtime, mode 600)
+│   │   └── wallpapers/             #   wallpaper images (wallpaper-pick reads from here)
 │   │
 │   ├── audio/
 │   │   └── pipewire.nix            # pipewire, pulse, wireplumber
