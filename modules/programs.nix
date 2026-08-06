@@ -1,7 +1,6 @@
 { pkgs, lib, ... }: {
   nixos.modules.base = { pkgs, ... }: {
 programs = {
-        droidcam.enable = true;
         fish.enable = true;
       dconf.enable = true;
       firefox.enable = true;
@@ -15,15 +14,7 @@ programs = {
         enable = true;
         clean.enable = true;
         clean.extraArgs = "--keep-since 4d --keep 3";
-        flake = "/home/zizenn/nixos";
-      };
-      localsend = {
-        enable = true;
-        openFirewall = true;
-      };
-      steam = {
-        enable = true;
-        gamescopeSession.enable = true;
+        flake = "path:/home/zizenn/nixos";
       };
     };
 

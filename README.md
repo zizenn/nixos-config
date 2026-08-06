@@ -272,7 +272,7 @@ nixos-rebuild switch --flake ~/nixos#zizenn-hack
 
 ## 📁 Directory Structure
 
-Every `.nix` file under `modules/` is a top-level flake-parts module, auto-imported by `outputs.nix`, contributing to `nixos.modules.base` (NixOS) and/or `homeManager.modules.base` (home-manager).
+Every `.nix` file under `modules/` is a top-level flake-parts module, auto-imported by `outputs.nix`, contributing to `nixos.modules.base` (NixOS) and/or `homeManager.modules.base` (home-manager). Modules in `_personal/` are gitignored and only exist on your machine — clone this repo anywhere and it evaluates fine without them. Rebuilds use the `path:` flake ref (`programs.nh.flake`) so those private modules are included locally.
 
 ```
 /
@@ -291,10 +291,10 @@ Every `.nix` file under `modules/` is a top-level flake-parts module, auto-impor
 │   ├── editors.nix               # Neovim (+ wrapped LSP/formatter/DAP), Zed, Opencode
 │   ├── dev.nix                   # Git, Jujutsu, gh, lazygit, devenv, cargo
 │   ├── shell.nix                 # Fish aliases, Starship, fzf, zoxide, CLI tools
-│   ├── apps.nix                  # Obs-studio, yazi, steam, media apps
-│   ├── mail.nix                  # Aerc config
+│   ├── apps.nix                  # Yazi, obsidian, ollama, vlc, vesktop, zen-browser, ...
 │   ├── misc.nix                  # Env vars, MIME defaults, pkgadd/pkgdel
 │   ├── swap.nix                  # 16 GiB swapfile + hibernation
+│   ├── _personal/                # 🔒 private modules (gitignored, not pushed to GitHub)
 │   ├── infra/                    # flake-parts infrastructure (option declarations)
 │   ├── audio/                    # PipeWire
 │   ├── hardware/                 # amdgpu, Bluetooth

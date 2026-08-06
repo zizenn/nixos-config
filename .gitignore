@@ -1,0 +1,4 @@
+# Private modules — never pushed to GitHub.
+# Files here are auto-imported locally (via `path:` flake ref) but
+# excluded from the public repo (git filtering).
+/modules/_personal/

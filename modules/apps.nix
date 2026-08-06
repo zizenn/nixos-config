@@ -2,13 +2,6 @@
   homeManager.modules.base = {pkgs, inputs, ...}: let
     inherit (pkgs.stdenv.hostPlatform) system;
   in {
-    programs.prismlauncher.enable = true;
-    programs.obs-studio = {
-      enable = true;
-      plugins = with pkgs.obs-studio-plugins; [
-        wlrobs obs-pipewire-audio-capture obs-vkcapture obs-vaapi
-      ];
-    };
     programs.yazi = {
       enable = true;
       enableFishIntegration = true;
@@ -36,8 +29,8 @@
       };
     };
     home.packages = with pkgs; [
-      glaxnimate kdePackages.kdenlive mediainfo obsidian ollama
-      pandoc pavucontrol proton-pass protonmail-desktop vesktop
+      mediainfo obsidian ollama
+      pandoc pavucontrol vesktop
       vlc zathura inputs.zen-browser.packages.${system}.default ripdrag
     ];
     xdg.desktopEntries.yazi = {
