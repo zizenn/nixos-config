@@ -24,6 +24,7 @@
 - [Theming](#-theming)
 - [Package Management](#-package-management)
 - [Email](#-email)
+- [Private Config](#-private-config)
 - [Performance](#-performance)
 - [Installation](#-installation)
 - [Directory Structure](#-directory-structure)
@@ -211,7 +212,7 @@ pkgadd   # search nixpkgs → fzf pick → add to a module → commit → rebuil
 pkgdel   # list current packages → fzf pick → remove → commit → rebuild
 ```
 
-Both handle git commits and trigger a rebuild automatically.
+Both handle git commits and trigger a rebuild automatically. Put personal/private packages in `modules/_personal/` (gitignored) and public ones in the regular modules.
 
 > **Note:** LSPs, formatters, and DAP debuggers are wrapped into neovim's runtime (not installed globally). C++ toolchains are managed through `devenv` shells.
 
@@ -226,6 +227,36 @@ Aerc is configured for Gmail over IMAP/SMTP using an app password (no OAuth, no 
 3. Aerc reads it via `source-cred-cmd = cat ~/nixos/modules/_personal/aerc/app-password`
 
 Launch with `SUPER + A`.
+
+---
+
+## 🔒 Private Config
+
+This repo is public, but parts of it are personal. Anything under `modules/_personal/` is **gitignored** — it lives only on this machine, is never pushed to GitHub, and is invisible to anyone cloning the repo. It's still auto-imported locally like any other module, so private apps and secrets work exactly like the public ones.
+
+### What lives there
+
+| Thing | Where |
+|---|---|
+| Personal apps (steam, droidcam, localsend, prismlauncher, kdenlive, obs, ...) | `modules/_personal/apps.nix`, `modules/_personal/programs.nix` |
+| Email (aerc config + app password) | `modules/_personal/mail.nix`, `modules/_personal/aerc/` |
+| Wallpapers (used by `wallpaper-pick`) | `modules/_personal/wallpapers/` |
+
+### Adding your own private stuff
+
+Drop any `.nix` file into `modules/_personal/` — same module syntax as everywhere else (`nixos.modules.base` for system options, `homeManager.modules.base` for user options). To add a secret, place the file in `_personal/` and read it **at runtime** (e.g. `cat ~/nixos/modules/_personal/aerc/app-password`). Never embed credentials in public modules — that's what `_personal/` is for.
+
+### Why rebuilds need `path:`
+
+`os` rebuilds the whole system (NixOS + home-manager, which runs as a NixOS module) with:
+
+```fish
+nh os switch path:/home/zizenn/nixos
+```
+
+The `path:` prefix tells Nix to include gitignored files. A bare path like `/home/zizenn/nixos` (or a stale `NH_FLAKE` env var) makes Nix filter the flake through git and **silently drop `_personal/`**. Fresh logins get the right value automatically from `programs.nh.flake`; if personal apps ever go missing after a rebuild, run the command above explicitly — it's the same alias `os`, just guaranteed to use `path:`.
+
+> Verify what GitHub sees: `nix flake check .` evaluates the repo exactly as a fresh clone would — without `_personal/`.
 
 ---
 
@@ -268,6 +299,8 @@ nixos-rebuild switch --flake ~/nixos#zizenn-hack
 
 > **Note:** This config is a single-user setup (user `zizenn`, hostname `zizenn-hack`). Adjust `_hardware-configuration.nix` for your hardware.
 
+> **Private modules:** `modules/_personal/` is gitignored, so a fresh clone has none of it. To use your own personal modules/secrets/wallpapers, recreate that folder locally (see [Private Config](#-private-config)) and rebuild with `nh os switch path:~/nixos`.
+
 ---
 
 ## 📁 Directory Structure
@@ -294,7 +327,11 @@ Every `.nix` file under `modules/` is a top-level flake-parts module, auto-impor
 │   ├── apps.nix                  # Yazi, obsidian, ollama, vlc, vesktop, zen-browser, ...
 │   ├── misc.nix                  # Env vars, MIME defaults, pkgadd/pkgdel
 │   ├── swap.nix                  # 16 GiB swapfile + hibernation
-│   ├── _personal/                # 🔒 private modules (gitignored, not pushed to GitHub)
+│   ├── _personal/                # 🔒 private modules (gitignored, not pushed)
+│   │   ├── apps.nix              #   personal apps: steam, kdenlive, obs, prismlauncher, ...
+│   │   ├── programs.nix          #   droidcam, localsend, steam (system modules)
+│   │   ├── mail.nix + aerc/      #   aerc config + app password (mode 600)
+│   │   └── wallpapers/           #   wallpaper images (wallpaper-pick reads from here)
 │   ├── infra/                    # flake-parts infrastructure (option declarations)
 │   ├── audio/                    # PipeWire
 │   ├── hardware/                 # amdgpu, Bluetooth
