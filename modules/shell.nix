@@ -12,8 +12,7 @@
       enable = true;
       shellAliases = {
         conf = "cd ~/nixos";
-        home = "nh home switch";
-        os = "nh os switch";
+        os = "nh os switch path:/home/zizenn/nixos";
         ls = "eza -l --icons=always --git --group-directories-first";
         lt = "eza --tree --level=2 --icons=always";
         tree = "eza -T";
