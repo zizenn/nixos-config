@@ -29,6 +29,10 @@
     "word_highlight": "#8992a733",
     "word_highlight_strong": "#8ea4a233",
 
+    "cursor_block": "#8ba4b0",
+    "cursor_beam": "#8ea4a2",
+    "cursor_underline": "#8992a7",
+
     "git_added": "#8ba4b0",
     "git_modified": "#8992a7",
     "git_deleted": "#E82424"
