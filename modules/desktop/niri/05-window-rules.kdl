@@ -35,9 +35,14 @@ window-rule {
 }
 
 window-rule {
-    match app-id="yazi-float"
+    match app-id=r#"^yazi-float$"#
+    match app-id=r#"^bluetui-float$"#
+    match app-id=r#"^wlctl-float$"#
+    match app-id=r#"^wiremix-float$"#
     open-floating true
-    default-column-width { fixed 1280; }
+    default-floating-position x=8 y=8 relative-to="top-right"
+    default-column-width { proportion 0.3; }
+    default-window-height { proportion 0.8; }
 }
 
 window-rule {

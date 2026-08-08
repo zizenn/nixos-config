@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Hide bluetooth module when no bluetooth controller is present.
+if [ ! -d /sys/class/bluetooth ] || [ -z "$(ls /sys/class/bluetooth)" ]; then
+    exit 0
+fi
+
+connected=$(timeout 5 bluetoothctl devices Connected 2>/dev/null | grep -c '^Device')
+if [ "$connected" -gt 0 ]; then
+    printf '{"text": "connected", "tooltip": "%s connected"}\n' "$connected"
+else
+    printf '{"text": "default", "tooltip": "No devices connected"}\n'
+fi

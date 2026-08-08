@@ -13,7 +13,7 @@
     "backlight",
     "pulseaudio",
     "network",
-    "bluetooth",
+    "custom/bluetooth",
     "custom/separator",
     "tray",
     "custom/power"
@@ -65,7 +65,7 @@
     "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "interval": 3,
-    "on-click": "kitty --class wlctl-float -e wlctl"
+    "on-click": "waybar-wifi"
   },
   "battery": {
     "format": "{icon}",
@@ -83,12 +83,15 @@
       "critical": 15
     }
   },
-  "bluetooth": {
-    "format": "",
-    "format-disabled": "",
-    "format-connected": "",
-    "tooltip-format": "{num_connections} connected",
-    "on-click": "kitty --class bluetui-float -e bluetui"
+  "custom/bluetooth": {
+    "exec": "waybar-bt",
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "connected": ""
+    },
+    "on-click": "kitty --class bluetui-float -e bluetui",
+    "tooltip": true
   },
   "pulseaudio": {
     "format": "{icon}",

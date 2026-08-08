@@ -60,7 +60,7 @@ window#waybar {
 #battery,
 #backlight,
 #network,
-#bluetooth,
+#custom-bluetooth,
 #pulseaudio,
 #custom-power {
   color: @fg;

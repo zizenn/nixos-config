@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Open wlctl only if a physical network card is present, otherwise do nothing.
+for iface in /sys/class/net/*/; do
+    if [ -e "$iface/device" ]; then
+        exec kitty --class wlctl-float -e wlctl
+    fi
+done
+exit 0
