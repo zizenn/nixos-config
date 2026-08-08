@@ -41,7 +41,7 @@ window-rule {
     match app-id=r#"^wiremix-float$"#
     open-floating true
     default-floating-position x=8 y=8 relative-to="top-right"
-    default-column-width { proportion 0.3; }
+    default-column-width { proportion 0.45; }
     default-window-height { proportion 0.8; }
 }
 
