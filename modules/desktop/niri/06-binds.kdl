@@ -10,6 +10,8 @@ binds {
     Mod+P hotkey-overlay-title="wleave" { spawn "wleave"; }
     Mod+E hotkey-overlay-title="yazi" { spawn "kitty" "--class" "yazi-float" "-e" "yazi"; }
     Mod+A hotkey-overlay-title="aerc" { spawn "kitty" "--class" "aerc-todo" "-e" "aerc"; }
+    Mod+S hotkey-overlay-title="sound" { spawn "kitty" "--class" "wiremix-float" "-e" "wiremix"; }
+    Mod+N hotkey-overlay-title="network" { spawn "kitty" "--class" "wlctl-float" "-e" "wlctl"; }
 
     Mod+U { toggle-overview; }
 
