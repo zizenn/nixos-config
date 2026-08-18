@@ -72,7 +72,7 @@
       };
     };
     home.packages = with pkgs; [
-      bat bc broot btop catimg cava chafa cmatrix
+      bat bc broot (btop.override {rocmSupport = true;}) catimg cava chafa cmatrix
       eza fd glow ncdu pv ripgrep tldr unzip zip
     ];
   };
