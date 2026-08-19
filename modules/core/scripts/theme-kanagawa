@@ -41,6 +41,9 @@ cp -f "$KD/vesktop.css" ~/.config/vesktop/themes/matugen.theme.css
 mkdir -p ~/.config/Kvantum
 cp -f "$KD/kvantum/Matugen.kvconfig" ~/.config/Kvantum/Matugen.kvconfig
 
+mkdir -p ~/.config/swaylock
+cp -f "$KD/swaylock.conf" ~/.config/swaylock/config
+
 mkdir -p ~/.config/starship
 cp -f "$KD/starship.toml" ~/.config/starship/matugen.toml
 

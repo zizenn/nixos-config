@@ -55,5 +55,9 @@ output_path = ["~/.config/Kvantum/Matugen.kvconfig"]
 input_path = "~/.config/matugen/templates/starship.toml"
 output_path = ["~/.config/starship/matugen.toml"]
 
+[templates.swaylock]
+input_path = "~/.config/matugen/templates/swaylock.conf"
+output_path = ["~/.config/swaylock/config"]
+
 [hooks]
 post_run = "for SOCK in /tmp/kitty-zizenn-* 2>/dev/null; do [ -S \"$SOCK\" ] && kitty @ --to=\"unix:$SOCK\" set-colors --all --configured ~/.config/kitty/current-colors.conf 2>/dev/null; done; makoctl reload 2>/dev/null; pkill waybar 2>/dev/null; waybar & disown; kvantummanager --set Matugen 2>/dev/null; true"

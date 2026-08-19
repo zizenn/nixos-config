@@ -20,6 +20,7 @@ ${builtins.readFile ../core/scripts/theme-kanagawa}
       ".config/matugen/kanagawa-dragon/obsidian.css".source = ./kanagawa-dragon/obsidian.css;
       ".config/matugen/kanagawa-dragon/vesktop.css".source = ./kanagawa-dragon/vesktop.css;
       ".config/matugen/kanagawa-dragon/starship.toml".source = ./kanagawa-dragon/starship.toml;
+      ".config/matugen/kanagawa-dragon/swaylock.conf".source = ./kanagawa-dragon/swaylock.conf;
       ".config/matugen/kanagawa-dragon/kvantum/Matugen.kvconfig".source = ./kanagawa-dragon/kvantum/Matugen.kvconfig;
       ".config/matugen/kanagawa-dragon/kvantum/Matugen.svg".source = ./kanagawa-dragon/kvantum/Matugen.svg;
     };
