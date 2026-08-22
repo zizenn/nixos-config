@@ -1,38 +1,84 @@
+#!/usr/bin/env fish
+
 set CONFIG_PATH $HOME/nixos
-set CONFIG_FILE $CONFIG_PATH/modules/home/packages.nix
+set PERSONAL_DIR $CONFIG_PATH/modules/_personal
 
-set CURRENT_PKGS (sed -n '/^[[:space:]]*home\.packages = with pkgs; \[/,/^\s*\];/{
-    /^[[:space:]]*home\.packages/d
-    /^\s*\];/d
-    /^[[:space:]]*#/d
-    /^[[:space:]]*$/d
-    s/^[[:space:]]*//
-    s/[[:space:]]*$//
-    p
-}' $CONFIG_FILE)
+# Collect all packages from all _personal/*.nix files
+set ALL_PKGS
+for file in $PERSONAL_DIR/*.nix
+    set pkgs_in_file (sed -n '/^[[:space:]]*home\.packages = with pkgs; \[/,/^\s*\];/{
+        /^[[:space:]]*home\.packages/d
+        /^\s*\];/d
+        /^[[:space:]]*#/d
+        /^[[:space:]]*$/d
+        s/^[[:space:]]*//
+        s/[[:space:]]*$//
+        p
+    }' $file)
+    for p in $pkgs_in_file
+        set ALL_PKGS $ALL_PKGS "$p\t(basename $file .nix)"
+    end
+    
+    # Also check for programs section
+    set progs_in_file (sed -n '/^[[:space:]]*programs\s*=\s*{/,/^\s*\};/{
+        /^[[:space:]]*programs/d
+        /^\s*\};/d
+        /^[[:space:]]*#/d
+        /^[[:space:]]*$/d
+        s/^\s*//
+        s/\s*\..*$//
+        p
+    }' $file)
+    for p in $progs_in_file
+        set ALL_PKGS $ALL_PKGS "$p\t(basename $file .nix) [program]"
+    end
+end
 
-set SELECTED_PKG (printf '%s\n' $CURRENT_PKGS | fzf \
+if test -z "$ALL_PKGS"
+    echo "No packages found in _personal modules"
+    exit 0
+end
+
+set SELECTED_LINE (printf '%s\n' $ALL_PKGS | fzf \
     --height=80% \
     --reverse \
-    --header='Select package to remove')
+    --header='Select package to remove (showing source file)')
 
-if test -z "$SELECTED_PKG"
+if test -z "$SELECTED_LINE"
     echo "Aborted."
     exit 0
 end
 
-set PKG_PATTERN (echo $SELECTED_PKG | sed 's/\./\\\./g')
-set LINE_NUM (rg -n "^\s+$PKG_PATTERN(\s+#.*)?\s*\$" $CONFIG_FILE | head -1 | cut -d: -f1)
+set SELECTED_PKG (echo $SELECTED_LINE | cut -f1)
+set SOURCE_FILE (echo $SELECTED_LINE | cut -f2 | sed 's/ \[program\]$//')
 
-if test -z "$LINE_NUM"
-    echo "Could not find $SELECTED_PKG in $CONFIG_FILE"
+set TARGET_FILE $PERSONAL_DIR/$SOURCE_FILE.nix
+
+if not test -f $TARGET_FILE
+    echo "Could not find $TARGET_FILE"
     exit 1
 end
 
-sed -i "$LINE_NUM d" $CONFIG_FILE
+# Check if it's a program or home.package
+if string match -q '\[program\]' "$SELECTED_LINE"
+    # Remove from programs section
+    set PKG_PATTERN (echo $SELECTED_PKG | sed 's/\./\\\./g')
+    set LINE_NUM (rg -n "^\s+$PKG_PATTERN\s*\.\s*enable" $TARGET_FILE | head -1 | cut -d: -f1)
+else
+    # Remove from home.packages section
+    set PKG_PATTERN (echo $SELECTED_PKG | sed 's/\./\\\./g')
+    set LINE_NUM (rg -n "^\s+$PKG_PATTERN(\s+#.*)?\s*\$" $TARGET_FILE | head -1 | cut -d: -f1)
+end
+
+if test -z "$LINE_NUM"
+    echo "Could not find $SELECTED_PKG in $TARGET_FILE"
+    exit 1
+end
+
+sed -i "$LINE_NUM d" $TARGET_FILE
 
 cd $CONFIG_PATH
-git add packages.nix
-git commit -m "feat: remove $SELECTED_PKG" >/dev/null 2>&1
+git add $TARGET_FILE
+git commit -m "feat: remove $SELECTED_PKG from $SOURCE_FILE" >/dev/null 2>&1
 
 nh home switch

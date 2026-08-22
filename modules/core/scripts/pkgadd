@@ -1,6 +1,9 @@
+#!/usr/bin/env fish
+
 set CONFIG_PATH $HOME/nixos
-set CONFIG_FILE $CONFIG_PATH/modules/home/packages.nix
+set PERSONAL_DIR $CONFIG_PATH/modules/_personal
 set PKG_LIST /tmp/nix_packages_list.txt
+set CATEGORIZE_SCRIPT $CONFIG_PATH/modules/core/scripts/categorize-package.py
 
 if not test -f $PKG_LIST
     echo "Building index (this will take a moment)..."
@@ -20,15 +23,38 @@ end
 
 set CLEAN_PKG (echo $SELECTED_PKG | cut -d. -f2)
 
-if rg -q "^\s+$CLEAN_PKG\b" $CONFIG_FILE
-    echo "$CLEAN_PKG already in packages.nix"
+# Check if already exists in any _personal file
+set FOUND_FILE (rg -l "^\s+$CLEAN_PKG\b" $PERSONAL_DIR/*.nix 2>/dev/null | head -1)
+if test -n "$FOUND_FILE"
+    echo "$CLEAN_PKG already in (basename $FOUND_FILE)"
     exit 0
 end
 
-sed -i "/^\s*\];/i\    $CLEAN_PKG" $CONFIG_FILE
+# Use LLM to categorize the package
+set CATEGORY (python3 $CATEGORIZE_SCRIPT "$CLEAN_PKG" $PERSONAL_DIR)
+
+if test -z "$CATEGORY"
+    echo "Failed to categorize package"
+    exit 1
+end
+
+# Determine target file
+set TARGET_FILE $PERSONAL_DIR/$CATEGORY.nix
+if not test -f $TARGET_FILE
+    echo "Creating new file: $TARGET_FILE"
+    echo '{ ... }: {' > $TARGET_FILE
+    echo '  homeManager.modules.base = { pkgs, ... }: {' >> $TARGET_FILE
+    echo '    home.packages = with pkgs; [' >> $TARGET_FILE
+    echo '    ];' >> $TARGET_FILE
+    echo '  };' >> $TARGET_FILE
+    echo '}' >> $TARGET_FILE
+end
+
+# Add package to the appropriate section in the file
+python3 $CONFIG_PATH/modules/core/scripts/add-package.py "$CLEAN_PKG" "$TARGET_FILE"
 
 cd $CONFIG_PATH
-git add packages.nix
-git commit -m "feat: add $CLEAN_PKG" >/dev/null 2>&1
+git add $TARGET_FILE
+git commit -m "feat: add $CLEAN_PKG to $CATEGORY" >/dev/null 2>&1
 
 nh home switch
