@@ -52,6 +52,11 @@ window-rule {
 }
 
 window-rule {
+    match app-id="^kitty-clock&"
+    open-fullscreen true
+}
+
+window-rule {
     match app-id=r#"^(kitty|obsidian|zen(-browser)?|waybar|rofi)$"#
     geometry-corner-radius 0
     clip-to-geometry true

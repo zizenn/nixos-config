@@ -2,7 +2,6 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+T hotkey-overlay-title="kitty" { spawn "kitty"; }
-    Mod+Return hotkey-overlay-title="kitty" { spawn "kitty"; }
     Alt+Space hotkey-overlay-title="rofi" { spawn-sh "rofi -show drun"; }
     Mod+W hotkey-overlay-title="wallpaper" { spawn "kitty" "--class" "fzf-float" "-e" "wallpaper-pick"; }
     Mod+V hotkey-overlay-title="clipboard" { spawn-sh "~/.local/bin/cliphist-rofi-img"; }
@@ -12,6 +11,7 @@ binds {
     Mod+A hotkey-overlay-title="aerc" { spawn "kitty" "--class" "aerc-todo" "-e" "aerc"; }
     Mod+S hotkey-overlay-title="sound" { spawn "kitty" "--class" "wiremix-float" "-e" "wiremix"; }
     Mod+N hotkey-overlay-title="network" { spawn "kitty" "--class" "wlctl-float" "-e" "wlctl"; }
+    Mod+C hotkey-overlay-title="clock" { spawn "kitty" "--class" "kitty-clock" "clock-rs"; }
 
     Mod+U { toggle-overview; }
 
