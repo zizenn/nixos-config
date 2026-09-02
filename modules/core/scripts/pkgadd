@@ -53,8 +53,4 @@ end
 # Add package to the appropriate section in the file
 python3 $CONFIG_PATH/modules/core/scripts/add-package.py "$CLEAN_PKG" "$TARGET_FILE"
 
-cd $CONFIG_PATH
-git add $TARGET_FILE
-git commit -m "feat: add $CLEAN_PKG to $CATEGORY" >/dev/null 2>&1
-
 nh os switch
