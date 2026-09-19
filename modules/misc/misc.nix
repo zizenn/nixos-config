@@ -19,14 +19,14 @@
         executable = true;
         text = ''
 #!${pkgs.fish}/bin/fish
-${builtins.readFile ./core/scripts/pkgadd}
+${builtins.readFile ../core/scripts/pkgadd}
         '';
       };
       ".local/bin/pkgdel" = {
         executable = true;
         text = ''
 #!${pkgs.fish}/bin/fish
-${builtins.readFile ./core/scripts/pkgdel}
+${builtins.readFile ../core/scripts/pkgdel}
         '';
       };
     };

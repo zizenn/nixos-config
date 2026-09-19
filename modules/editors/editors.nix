@@ -38,7 +38,7 @@
         opencode
       ];
       xdg.configFile = {
-        "nvim".source = ./neovim/nvim;
+        "nvim".source = ../neovim/nvim;
         "nvim".recursive = true;
         "opencode/opencode.jsonc".text = ''
           {
@@ -81,7 +81,7 @@
         '';
         "opencode/opencode.jsonc".force = true;
         "zed/themes/.keep".text = "";
-        "zed/tasks.json".source = ./zed/tasks.json;
+        "zed/tasks.json".source = ../zed/tasks.json;
       };
       home.file.".clang-format".text = ''
         BasedOnStyle: Google

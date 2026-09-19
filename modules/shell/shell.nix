@@ -44,12 +44,12 @@
       settings = {
         scan_timeout = 50;
         command_timeout = 2000;
-        format = "$directory$git_branch$git_status$fill${"\n"}$character";
+        format = "$$directory$$git_branch$$git_status$$fill" + "\n" + "$$character";
         fill.symbol = " ";
         continuation_prompt = "[▸▹ ](dimmed white)";
         directory = {
           style = "bold blue";
-          format = "[$path]($style)[$read_only]($read_only_style) ";
+          format = "[$$path]($$style)[$$read_only]($$read_only_style) ";
           truncate_to_repo = true;
         };
         character = {
@@ -58,15 +58,15 @@
           vimcmd_symbol = "[❮](green bold)";
         };
         git_branch = {
-          format = "[△ $branch]($style) ";
+          format = "[△ $$branch]($$style) ";
           style = "italic bright-blue";
         };
         git_status = {
-          format = "[$all_status$ahead_behind]($style) ";
+          format = "[$$all_status$$ahead_behind]($$style) ";
           style = "bold bright-black";
         };
         cmd_duration = {
-          format = "[$duration]($style)";
+          format = "[$$duration]($$style)";
           style = "italic dimmed yellow";
         };
       };
