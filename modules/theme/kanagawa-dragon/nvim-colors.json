@@ -14,13 +14,17 @@
     "on_primary": "#0d0c0c",
     "primary_container": "#2a3a3e",
     "on_primary_container": "#b8c8d0",
+    "primary_fixed_dim": "#6b8a90",
+    "inverse_primary": "#a8c4d0",
 
     "secondary": "#8992a7",
     "secondary_container": "#2a2a3e",
     "on_secondary_container": "#b8b8c8",
+    "secondary_fixed_dim": "#697287",
 
     "tertiary": "#8ea4a2",
     "tertiary_container": "#2a3a3a",
+    "tertiary_fixed_dim": "#6e8482",
 
     "error": "#E82424",
     "error_container": "#3a1a1a",

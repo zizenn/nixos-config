@@ -1,15 +1,16 @@
-{lib, ...}: {
-  homeManager.modules.base = {pkgs, ...}: {
+{ lib, ... }: {
+  homeManager.modules.base = { pkgs, ... }: {
     home.file = {
       ".local/bin/theme-kanagawa" = {
         executable = true;
         text = ''
-#!${pkgs.fish}/bin/fish
-${builtins.readFile ../core/scripts/theme-kanagawa}
+          #!${pkgs.fish}/bin/fish
+          ${builtins.readFile ../core/scripts/theme-kanagawa}
         '';
       };
       ".config/matugen/kanagawa-dragon/kitty.conf".source = ./kanagawa-dragon/kitty.conf;
       ".config/matugen/kanagawa-dragon/nvim-colors.json".source = ./kanagawa-dragon/nvim-colors.json;
+      ".cache/matugen/themes/nvim-colors.json".source = ./kanagawa-dragon/nvim-colors.json;
       ".config/matugen/kanagawa-dragon/rofi-colors.rasi".source = ./kanagawa-dragon/rofi-colors.rasi;
       ".config/matugen/kanagawa-dragon/zed-theme.json".source = ./kanagawa-dragon/zed-theme.json;
       ".config/matugen/kanagawa-dragon/waybar.css".source = ./kanagawa-dragon/waybar.css;
@@ -21,8 +22,10 @@ ${builtins.readFile ../core/scripts/theme-kanagawa}
       ".config/matugen/kanagawa-dragon/vesktop.css".source = ./kanagawa-dragon/vesktop.css;
       ".config/matugen/kanagawa-dragon/starship.toml".source = ./kanagawa-dragon/starship.toml;
       ".config/matugen/kanagawa-dragon/swaylock.conf".source = ./kanagawa-dragon/swaylock.conf;
-      ".config/matugen/kanagawa-dragon/kvantum/Matugen.kvconfig".source = ./kanagawa-dragon/kvantum/Matugen.kvconfig;
-      ".config/matugen/kanagawa-dragon/kvantum/Matugen.svg".source = ./kanagawa-dragon/kvantum/Matugen.svg;
+      ".config/matugen/kanagawa-dragon/kvantum/Matugen.kvconfig".source =
+        ./kanagawa-dragon/kvantum/Matugen.kvconfig;
+      ".config/matugen/kanagawa-dragon/kvantum/Matugen.svg".source =
+        ./kanagawa-dragon/kvantum/Matugen.svg;
     };
   };
 }

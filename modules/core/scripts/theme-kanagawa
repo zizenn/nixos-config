@@ -8,8 +8,8 @@ end
 mkdir -p ~/.config/kitty
 cp -f "$KD/kitty.conf" ~/.config/kitty/current-colors.conf
 
-mkdir -p ~/.cache/matugen/themes
-cp -f "$KD/nvim-colors.json" ~/.cache/matugen/themes/nvim-colors.json
+mkdir -p ~/.cache/matugen
+cp -f "$KD/nvim-colors.json" ~/.cache/matugen/nvim-colors.json
 
 mkdir -p ~/.config/rofi
 cp -f "$KD/rofi-colors.rasi" ~/.config/rofi/colors.rasi
