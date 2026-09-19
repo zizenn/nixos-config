@@ -22,6 +22,7 @@ inputs: let
     ./modules/apps
     ./modules/theme
     ./modules/misc
+    ./modules/_personal
   ];
 
   evaluation = inputs.flake-parts.lib.evalFlakeModule {inherit inputs;} {
