@@ -8,7 +8,7 @@
 | User | `zizenn` |
 | Git remote | `origin git@github.com:zizenn/nixos-config.git` |
 | Git identity | `sakif` <zizenn@proton.me> |
-| Default editor | `nvim` (`vi`/`vim` aliased) |
+| Default editor | `nvim` (`vi`/`vim`/`v` aliased) |
 | State version | `26.05` |
 | Platform | `x86_64-linux` (AMD, bare metal) |
 
@@ -51,11 +51,11 @@ Every `.nix` file under `modules/` is a top-level flake-parts module (auto-impor
 │   ├── apps.nix                    # yazi, obsidian, ollama, vlc, vesktop, zen-browser, ...
 │   ├── misc.nix                    # env vars, MIME defaults, pkgadd/pkgdel scripts
 │   │
-│   ├── _personal/                  # 🔒 PRIVATE — gitignored, never pushed to GitHub
-│   │   ├── apps.nix                #   prismlauncher, obs-studio, kdenlive, glaxnimate, proton*
-│   │   ├── programs.nix            #   steam, droidcam, localsend
+│   ├── _personal/                  # PRIVATE — gitignored, never pushed to GitHub
+│   │   ├── apps.nix                #   obs-studio, kdenlive, glaxnimate, proton*
+│   │   ├── programs.nix            #   droidcam, localsend
 │   │   ├── mail.nix                #   aerc config, binds, accounts (mode 600)
-│   │   ├── aerc/app-password       #   🔑 aerc credentials (read at runtime, mode 600)
+│   │   ├── aerc/app-password       #   aerc credentials (read at runtime, mode 600)
 │   │   └── wallpapers/             #   wallpaper images (wallpaper-pick reads from here)
 │   │
 │   ├── audio/
