@@ -1,5 +1,5 @@
-{lib, ...}: {
-  nixos.modules.base = {pkgs, ...}: {
+{ lib, ... }: {
+  nixos.modules.base = { pkgs, ... }: {
     boot = {
       loader = {
         systemd-boot = {
@@ -7,6 +7,7 @@
           configurationLimit = 10;
         };
         efi.canTouchEfiVariables = true;
+        timeout = 5;
       };
       kernelPackages = pkgs.linuxPackages_zen;
       kernelParams = [
@@ -25,7 +26,7 @@
         "kernel.numa_balancing" = 0;
         "kernel.unprivileged_userns_clone" = 1;
       };
-      initrd.availableKernelModules = [];
+      initrd.availableKernelModules = [ ];
     };
   };
 }
