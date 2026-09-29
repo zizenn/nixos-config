@@ -6,10 +6,6 @@
       firefox.enable = true;
       ccache.enable = true;
       ssh.setXAuthLocation = true;
-      java = {
-        enable = true;
-        package = pkgs.temurin-bin-21;
-      };
       nh = {
         enable = true;
         clean.enable = true;
@@ -35,9 +31,7 @@
       playerctl
       cliphist
       man-pages
-      # steam-run is bundled with programs.steam.enable
-      temurin-bin-21
-      temurin-bin-17
+      steam-run
       xwayland-satellite
     ];
 

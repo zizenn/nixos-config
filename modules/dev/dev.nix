@@ -1,5 +1,5 @@
-{lib, ...}: {
-  homeManager.modules.base = {pkgs, ...}: {
+{ lib, ... }: {
+  homeManager.modules.base = { pkgs, ... }: {
     programs.git = {
       enable = true;
       settings = {
@@ -21,8 +21,18 @@
       };
     };
     home.packages = with pkgs; [
-      gh lazygit lazyjj devenv cargo cppman jq
-      nix-search-cli nodejs_26 python3 socat uv
+      gh
+      lazygit
+      lazyjj
+      devenv
+      cargo
+      cppman
+      jq
+      nix-search-cli
+      nodejs_26
+      python3
+      socat
+      uv
     ];
   };
 }
