@@ -74,10 +74,7 @@ Every `.nix` file under `modules/` is a top-level flake-parts module (auto-impor
 │   │   ├── niri.nix                # Niri compositor (system) + Ly + swayidle/swaylock (HM)
 │   │   ├── portals.nix             # xdg-desktop-portal
 │   │   ├── kitty.nix               # kitty terminal
-│   │   ├── mako.nix                # notifications
-│   │   ├── waybar.nix              # waybar bar
-│   │   ├── rofi.nix                # rofi launcher
-│   │   ├── wleave.nix              # wleave logout
+│   │   ├── noctalia.nix            # Noctalia shell (bar, notifications, launcher, logout)
 │   │   └── wallpaper.nix           # wallpaper-pick, theme-wallpaper scripts
 │   ├── theme/
 │   │   ├── gtk.nix                 # GTK theme, icons, cursor
@@ -86,7 +83,7 @@ Every `.nix` file under `modules/` is a top-level flake-parts module (auto-impor
 │   │   ├── kanagawa-dragon.nix     # static kanagawa-dragon palette files
 │   │   └── fastfetch.nix           # fastfetch config
 │   │
-│   └── (supporting files: niri/*.kdl, waybar/*.jsonc, rofi/*.rasi, wleave/*.json,
+│   └── (supporting files: niri/*.kdl,
 │        neovim/nvim/, _personal/aerc/*.conf, zed/tasks.json, matugen/templates/,
 │        kanagawa-dragon/*, core/scripts/, gtk/*.css, qt/*, fastfetch/*.jsonc)
 ```

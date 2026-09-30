@@ -1,15 +1,13 @@
-{lib, inputs, ...}: {
+{ ... }: {
   nixos.modules.base = {pkgs, ...}: {
     programs.niri.enable = true;
     services.displayManager.ly.enable = true;
   };
 
-  homeManager.modules.base = {pkgs, ...}: let
-    system = pkgs.stdenv.hostPlatform.system;
-  in {
+  homeManager.modules.base = {pkgs, ...}: {
     home.packages = with pkgs; [
       # swaylock kept as emergency fallback; idle+lock is handled by Noctalia
-      swaylock inputs.wlctl.packages.${system}.default
+      swaylock
     ];
 
     xdg.configFile = {

@@ -52,4 +52,4 @@ modules/
 
 ## Keys
 
-`SUPER+T` kitty · `ALT+Space` rofi · `SUPER+W` wallpaper · `SUPER+V` clipboard · `SUPER+O` obsidian · `SUPER+P` power menu · `SUPER+E` yazi · `SUPER+A` aerc · `SUPER+Q` close window · `SUPER+U` overview · `SUPER+SHIFT+S` screenshot
+`SUPER+T` kitty · `ALT+Space` launcher · `SUPER+W` wallpaper · `SUPER+V` clipboard · `SUPER+O` obsidian · `SUPER+P` power menu · `SUPER+E` yazi · `SUPER+A` aerc · `SUPER+Q` close window · `SUPER+U` overview · `SUPER+SHIFT+S` screenshot

@@ -37,7 +37,7 @@ window-rule {
 window-rule {
     match app-id=r#"^yazi-float$"#
     match app-id=r#"^bluetui-float$"#
-    match app-id=r#"^wlctl-float$"#
+    match app-id=r#"^nmtui-float$"#
     match app-id=r#"^wiremix-float$"#
     open-floating true
     default-floating-position x=8 y=8 relative-to="top-right"

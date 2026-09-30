@@ -16,6 +16,10 @@ ${builtins.readFile ./scripts/theme-wallpaper}
         '';
       };
     };
-    home.packages = with pkgs; [feh];
+    home.packages = with pkgs; [
+      feh
+      # notify-send is used by wallpaper-pick and theme-kanagawa
+      libnotify
+    ];
   };
 }
