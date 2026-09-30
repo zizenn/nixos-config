@@ -6,10 +6,7 @@
         niri
         fish
         neovim
-        waybar
-        rofi
-        wleave
-        mako
+        noctalia
         wl-clipboard
         cliphist
         firefox

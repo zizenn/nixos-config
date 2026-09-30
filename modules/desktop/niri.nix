@@ -8,7 +8,8 @@
     system = pkgs.stdenv.hostPlatform.system;
   in {
     home.packages = with pkgs; [
-      swayidle swaylock inputs.wlctl.packages.${system}.default
+      # swaylock kept as emergency fallback; idle+lock is handled by Noctalia
+      swaylock inputs.wlctl.packages.${system}.default
     ];
 
     xdg.configFile = {

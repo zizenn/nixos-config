@@ -56,21 +56,40 @@ window-rule {
     open-fullscreen true
 }
 
+// Floating Noctalia settings window.
 window-rule {
-    match app-id=r#"^(kitty|obsidian|zen(-browser)?|waybar|rofi)$"#
-    geometry-corner-radius 0
-    clip-to-geometry true
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 920; }
+}
+
+// Blurred Noctalia backdrop inside Niri's overview.
+layer-rule {
+    match namespace="^noctalia-backdrop"
+    place-within-backdrop true
+}
+
+// Realistic blur on Noctalia surfaces (samples windows behind, not just wallpaper).
+layer-rule {
+    match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
     background-effect {
-        xray true
+        xray false
+    }
+}
+
+layer-rule {
+    match namespace="noctalia-window-switcher"
+    background-effect {
         blur true
-        noise 0.03
-        saturation 1.0
+        xray false
     }
 }
 
 window-rule {
-    match app-id="mako"
+    match app-id=r#"^(kitty|obsidian|zen(-browser)?)$"#
     geometry-corner-radius 0
+    clip-to-geometry true
     background-effect {
         xray true
         blur true

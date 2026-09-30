@@ -2,11 +2,12 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+T hotkey-overlay-title="kitty" { spawn "kitty"; }
-    Alt+Space hotkey-overlay-title="rofi" { spawn-sh "rofi -show drun"; }
-    Mod+W hotkey-overlay-title="wallpaper" { spawn "kitty" "--class" "fzf-float" "-e" "wallpaper-pick"; }
-    Mod+V hotkey-overlay-title="clipboard" { spawn-sh "~/.local/bin/cliphist-rofi-img"; }
+    Alt+Space hotkey-overlay-title="launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+W hotkey-overlay-title="wallpaper" { spawn-sh "noctalia msg panel-toggle wallpaper"; }
+    Mod+V hotkey-overlay-title="clipboard" { spawn-sh "noctalia msg panel-toggle clipboard"; }
     Mod+O hotkey-overlay-title="obsidian" { spawn "obsidian"; }
-    Mod+P hotkey-overlay-title="wleave" { spawn "wleave"; }
+    Mod+P hotkey-overlay-title="session" { spawn-sh "noctalia msg panel-toggle session"; }
+    Mod+X hotkey-overlay-title="control-center" { spawn-sh "noctalia msg panel-toggle control-center"; }
     Mod+E hotkey-overlay-title="yazi" { spawn "kitty" "--class" "yazi-float" "-e" "yazi"; }
     Mod+A hotkey-overlay-title="aerc" { spawn "kitty" "--class" "aerc-todo" "-e" "aerc"; }
     Mod+S hotkey-overlay-title="sound" { spawn "kitty" "--class" "wiremix-float" "-e" "wiremix"; }
@@ -84,23 +85,23 @@ binds {
     Mod+Shift+9 { move-column-to-workspace 9; }
 
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
-    Super+Alt+L hotkey-overlay-title="swaylock" { spawn "swaylock"; }
+    Super+Alt+L hotkey-overlay-title="lock" { spawn-sh "noctalia msg session lock"; }
 
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-    XF86AudioPlay  allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop  allow-when-locked=true { spawn-sh "playerctl stop"; }
-    XF86AudioPrev  allow-when-locked=true { spawn-sh "playerctl previous"; }
-    XF86AudioNext  allow-when-locked=true { spawn-sh "playerctl next"; }
-    XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "-e4" "-n2" "set" "5%+"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "-e4" "-n2" "set" "5%-"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "noctalia msg mic-mute"; }
+    XF86AudioPlay  allow-when-locked=true { spawn-sh "noctalia msg media toggle"; }
+    XF86AudioStop  allow-when-locked=true { spawn-sh "noctalia msg media stop"; }
+    XF86AudioPrev  allow-when-locked=true { spawn-sh "noctalia msg media previous"; }
+    XF86AudioNext  allow-when-locked=true { spawn-sh "noctalia msg media next"; }
+    XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "noctalia msg brightness-up"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "noctalia msg brightness-down"; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
-    Mod+Shift+S { screenshot; }
+    Print { spawn-sh "noctalia msg screenshot-region"; }
+    Ctrl+Print { spawn-sh "noctalia msg screenshot-fullscreen"; }
+    Alt+Print { spawn-sh "noctalia msg screenshot-annotate"; }
+    Mod+Shift+S { spawn-sh "noctalia msg screenshot-region"; }
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     Mod+M { quit; }
