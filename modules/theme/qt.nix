@@ -15,11 +15,9 @@
     ];
     xdg.configFile = {
       "Kvantum/kvantum.kvconfig".source = ./qt/kvantum.kvconfig;
-      "Kvantum/Matugen.kvconfig" = {
-        source = ./qt/Matugen.kvconfig;
-        force = true;
-      };
-      "Kvantum/Matugen.svg".source = ./qt/Matugen.svg;
+      # NOTE: Kvantum/Noctalia.kvconfig is rendered by Noctalia's kvantum
+      # user template and must stay writable — do NOT manage it here.
+      "Kvantum/Noctalia.svg".source = ./qt/Noctalia.svg;
     };
   };
 }

@@ -22,7 +22,9 @@ set SELECTED_PATH "$WALLPAPER_DIR/$SELECTED"
 ln -sf (realpath $SELECTED_PATH) $WALLPAPER_LINK
 noctalia msg wallpaper-set (realpath $WALLPAPER_LINK)
 or notify-send "wallpaper" "noctalia wallpaper-set failed"
-matugen image (realpath $WALLPAPER_LINK) -q --source-color-index 0
-or notify-send "wallpaper" "matugen failed"
+# Drive the palette from the new wallpaper; Noctalia re-renders all
+# app templates itself.
+noctalia msg color-scheme-set wallpaper m3-tonal-spot
+or notify-send "wallpaper" "noctalia color-scheme-set failed"
 notify-send -i $SELECTED_PATH "wallpaper" "Set to $SELECTED"
 exit

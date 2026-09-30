@@ -1,0 +1,58 @@
+# Dotfile-managed Noctalia theming (see App Theming docs).
+#
+# The [theme] core (mode / source / scheme) stays GUI-managed in
+# settings.toml. This file owns template wiring, the wallpaper browse
+# directory and the overview backdrop. Edits apply live; force with:
+#   noctalia msg config-reload && noctalia msg templates-apply
+
+[theme.templates]
+enable_builtin_templates = true
+builtin_ids = ["kitty"]
+
+# Wallpaper picker panel browses the repo wallpapers dir.
+[wallpaper]
+directory = "/home/zizenn/nixos/modules/_personal/wallpapers"
+
+# Blurred wallpaper in Niri overview (needs the noctalia-backdrop
+# layer-rule in niri config).
+[backdrop]
+enabled = true
+
+# --- User templates (ported from the old matugen set) ---
+
+[theme.templates.user.gtk3]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/gtk.css"
+output_path = "$XDG_CONFIG_HOME/gtk-3.0/gtk.css"
+
+[theme.templates.user.gtk4]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/gtk.css"
+output_path = "$XDG_CONFIG_HOME/gtk-4.0/gtk.css"
+
+[theme.templates.user.kvantum]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/Noctalia.kvconfig"
+output_path = "$XDG_CONFIG_HOME/Kvantum/Noctalia.kvconfig"
+post_hook = "kvantummanager --set Noctalia"
+
+[theme.templates.user.starship]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/starship.toml"
+output_path = "$XDG_CONFIG_HOME/starship/noctalia.toml"
+
+[theme.templates.user.nvim]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/nvim-colors.json"
+output_path = "$XDG_CACHE_HOME/noctalia/nvim-colors.json"
+
+[theme.templates.user.zed]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/zed.json"
+output_path = "$XDG_CONFIG_HOME/zed/themes/noctalia.json"
+
+[theme.templates.user.obsidian]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/obsidian.css"
+output_path = "~/Documents/vault/.obsidian/snippets/noctalia.css"
+
+[theme.templates.user.vesktop]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/vesktop.css"
+output_path = "$XDG_CONFIG_HOME/vesktop/themes/noctalia.theme.css"
+
+[theme.templates.user.swaylock]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/swaylock.conf"
+output_path = "$XDG_CONFIG_HOME/swaylock/config"

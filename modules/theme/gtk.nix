@@ -28,15 +28,8 @@
         gtk-decoration-layout = "menu:";
       };
     };
-    home.file = {
-      ".config/gtk-3.0/gtk.css" = {
-        source = ./gtk/gtk3-override.css;
-        force = true;
-      };
-      ".config/gtk-4.0/gtk.css" = {
-        source = ./gtk/gtk4-override.css;
-        force = true;
-      };
-    };
+    # NOTE: gtk.css color files are owned by Noctalia's gtk user
+    # templates (see ../theme/noctalia/theme.toml) and must stay
+    # writable — do NOT manage them here.
   };
 }

@@ -1,20 +1,20 @@
 /**
- * @name system24 (matugen)
- * @description tui-style discord theme (system24) with matugen-driven dynamic colors
- * @author refact0r (base theme), matugen color overrides
+ * @name system24 (noctalia)
+ * @description tui-style discord theme (system24) with noctalia-driven dynamic colors
+ * @author refact0r (base theme), noctalia color overrides
  * @version 1.0.0
  * @source https://github.com/refact0r/system24
  *
  * Place generated output at:
- *   ~/.config/vesktop/themes/matugen-system24.theme.css
- * matugen template source:
- *   ~/.config/matugen/templates/vesktop.css
+ *   ~/.config/vesktop/themes/noctalia-system24.theme.css
+ * noctalia template source:
+ *   ~/.config/noctalia/templates/vesktop.css
  *
  * This imports system24's compiled stylesheet (which correctly targets
  * Discord's real, hashed classnames) and overrides only its color tokens
- * with matugen-generated Material You colors. Layout/behavior options
+ * with noctalia-generated Material You colors. Layout/behavior options
  * below are system24 defaults — tweak freely, they're independent of
- * matugen and won't be touched on regeneration since they live in the
+ * noctalia and won't be touched on regeneration since they live in the
  * `body { ... }` block, not the `:root` color block.
  */
 
@@ -53,7 +53,7 @@ body {
     --label-font-weight: 500;
 }
 
-/* === matugen color mapping === */
+/* === noctalia color mapping === */
 :root {
     --colors: on;
 
