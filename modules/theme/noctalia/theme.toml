@@ -31,7 +31,10 @@ output_path = "$XDG_CONFIG_HOME/gtk-4.0/gtk.css"
 [theme.templates.user.kvantum]
 input_path = "$XDG_CONFIG_HOME/noctalia/templates/Noctalia.kvconfig"
 output_path = "$XDG_CONFIG_HOME/Kvantum/Noctalia.kvconfig"
-post_hook = "kvantummanager --set Noctalia"
+# NOTE: no post_hook on purpose. `kvantummanager --set` spawns the
+# manager GUI and hangs instead of exiting, so it can't be used as a
+# hook — and Kvantum offers no silent reload. Qt apps pick up the
+# re-rendered theme on (re)launch, same as GTK.
 
 [theme.templates.user.starship]
 input_path = "$XDG_CONFIG_HOME/noctalia/templates/starship.toml"
