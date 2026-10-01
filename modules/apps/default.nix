@@ -1,6 +1,3 @@
 { ... }: {
-  imports = [
-    ./apps.nix
-    ./spotify.nix
-  ];
+  imports = [ ./apps.nix ];
 }
