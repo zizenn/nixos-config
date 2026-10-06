@@ -1,8 +1,8 @@
 -- loading plugins
--- hl.plugin.load("/run/current-system/sw/lib/libscrolloverview.so")
+hl.plugin.load("/run/current-system/sw/lib/libscrolloverview.so")
 
 -- imports
--- require("modules.plugins")
+require("modules.plugins")
 require("modules.monitors")
 require("modules.perms")
 require("modules.programs")

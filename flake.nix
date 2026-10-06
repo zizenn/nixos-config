@@ -1,5 +1,5 @@
 {
-  description = "zizenn's NixOS configuration";
+  description = "zizenn's nix inputs";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -29,10 +29,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.hyprland.follows = "hyprland";
       inputs.flake-parts.follows = "flake-parts";
-    };
-    hyprland-scroll-overview = {
-      url = "github:yayuuu/hyprland-scroll-overview";
-      inputs.hyprland.follows = "hyprland";
     };
   };
 
