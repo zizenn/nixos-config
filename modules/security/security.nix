@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ ... }: {
   nixos.modules.base = {
     security.doas = {
       enable = true;
@@ -12,5 +12,6 @@
     };
     security.sudo.enable = false;
     nixpkgs.config.allowUnfree = true;
+    security.polkit.enable = true;
   };
 }
