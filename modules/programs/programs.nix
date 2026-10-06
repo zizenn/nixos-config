@@ -29,7 +29,6 @@
       xdg-utils
       brightnessctl
       playerctl
-      cliphist
       man-pages
       steam-run
       xwayland-satellite

@@ -8,7 +8,6 @@
         neovim
         noctalia
         wl-clipboard
-        cliphist
         firefox
         vesktop
         obs-studio

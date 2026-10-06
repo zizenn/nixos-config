@@ -1,6 +1,6 @@
 { ... }: {
   imports = [
-    ./niri.nix
+    ./hyprland.nix
     ./kitty.nix
     ./noctalia.nix
     ./wallpaper.nix
