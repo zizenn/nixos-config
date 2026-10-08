@@ -1,0 +1,6 @@
+# 6-space indent to match the rest of the setup.
+# Lives next to Cargo.toml (rustfmt searches upward from the file
+# being formatted). Picked up by `cargo fmt`, `rustfmt`, and
+# rust-analyzer's format-on-save alike.
+hard_tabs = false
+tab_spaces = 6
