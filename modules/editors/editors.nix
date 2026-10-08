@@ -16,24 +16,10 @@
       home.packages = with pkgs; [
         opencode
 
-        # nvim stuff (lsp)
-        lua-language-server
-        typescript-language-server
-        vscode-langservers-extracted
-        pyright
-        clang-tools
-        tree-sitter
-        stylua
-        prettier
-        python3Packages.autopep8
-        python3Packages.debugpy
-        nixd
-        nixfmt
-        rust-analyzer
-
-        # c stuff
-        gnumake
-        gcc
+        # NOTE: no LSPs / formatters / toolchains here on purpose.
+        # Each project's devenv.nix provides its own (see
+        # modules/dev/templates/). Open nvim from inside the
+        # activated devenv shell and lspconfig picks them up from PATH.
       ];
       xdg.configFile = {
         "nvim".source = ../neovim/nvim;

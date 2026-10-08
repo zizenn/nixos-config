@@ -49,8 +49,8 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 │   ├── nix/nix.nix                 # GC, optimise, experimental-features, max-jobs
 │   ├── security/security.nix       # doas (no sudo), allowUnfree
 │   ├── programs/programs.nix       # fish, firefox, nh, fonts, system packages, user definition
-│   ├── editors/editors.nix         # neovim (+runtimePackages), zed, opencode, .clang-format
-│   ├── dev/dev.nix                 # git, jujutsu, gh, lazygit, devenv, cargo
+│   ├── editors/editors.nix         # neovim, zed, opencode (toolchains are per-project via devenv)
+│   ├── dev/dev.nix                 # git, jujutsu, gh, lazygit, devenv, cargo (+ devenv templates/)
 │   ├── shell/shell.nix             # fish aliases, starship, fzf, zoxide, cli tools
 │   ├── apps/apps.nix               # yazi, obsidian, ollama, vlc, vesktop, zen-browser, ...
 │   ├── misc/misc.nix               # env vars, MIME defaults
@@ -61,7 +61,8 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 │   ├── swap/swap.nix               # /swapfile
 │   │
 │   └── (supporting files: desktop/niri/*.kdl, desktop/hypr/**,
-│        modules/neovim/nvim/, _personal/aerc/*.conf, modules/zed/tasks.json,
+│        modules/neovim/nvim/, modules/dev/templates/*/devenv.nix,
+│        _personal/aerc/*.conf, modules/zed/tasks.json,
 │        desktop/scripts/*, core/scripts/theme-kanagawa, theme/noctalia/*,
 │        theme/qt/*, theme/fastfetch/*)
 ```
@@ -78,8 +79,8 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 - Theme switching: `theme-wallpaper` (Noctalia palette from wallpaper) or `theme-kanagawa` (Noctalia Kanagawa builtin)
 - Desktop: Hyprland + Niri (pick at login); login via `services.ly` (TUI display manager)
 - `xdg.configFile` is the standard mechanism for symlinking dotfile directories (avoid manual symlinks)
-- **neovim is self-contained**: LSPs, formatters, and DAP are wrapped into neovim's runtime environment — they are NOT on the global PATH. Only accessible when `nvim` runs.
-- **C++ development uses `devenv`**: gcc, cmake, gdb, lldb, make are NOT in home packages. Use `devenv` shells for C++ projects. ccache is configured via nix.
+- **neovim toolchains are per-project**: LSPs, formatters, debuggers, and compilers come from each project's `devenv.nix` (copy a starter from `modules/dev/templates/`), NOT the global PATH. Open `nvim` from inside the activated devenv shell — the `devenv hook fish` auto-activates on `cd` after `devenv allow` — so lspconfig finds them.
+- **All language toolchains live in `devenv`**: gcc, cmake, gdb, lldb, make, rust-analyzer, pyright, clangd, nixd, etc. are NOT in home packages. Use `devenv` shells per project. ccache is configured via nix.
 - Indentation: 6 spaces globally (`shiftwidth=6`, `tabstop=6`, `softtabstop=6`), enforced by formatters (stylua, prettier, autopep8, clang-format with `--indent-width 6` / `--tab-width 6` / etc.)
 - clangd is provided by the Nix `clang-tools` package, not Mason.
 - `documentation.doc.enable = false` and `documentation.nixos.enable = false` — man pages are kept; HTML/info docs are not built.
@@ -114,7 +115,7 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 | Swaylock config | `modules/theme/noctalia/templates/swaylock.conf` (Noctalia template) |
 | Login manager (Ly) | `modules/desktop/niri.nix` → `services.ly` |
 | Neovim | `modules/editors/editors.nix` → `modules/neovim/nvim/` (symlinked to `~/.config/nvim`) |
-| Neovim runtime deps | `modules/editors/editors.nix` → `neovimRuntimePackages` (LSPs, formatters, DAP) |
+| Neovim per-project toolchains | `modules/dev/templates/<lang>/devenv.nix` (LSPs, formatters, DAP per project) |
 | udev rules | `modules/services/udev.nix` → `services.udev.extraRules` |
 | USB input resume fix | `modules/services/usb-resume.nix` → `systemd.services.fix-usb-input-after-resume` |
 | Systemd services | `modules/services/misc.nix` |
