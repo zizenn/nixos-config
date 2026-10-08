@@ -25,8 +25,10 @@
         oc = "opencode";
         leet = "nvim leetcode.nvim";
         sudo = "doas";
+        kitty-single = "kitty --single-instance --listen-on unix:/tmp/kitty-zizenn";
       };
       interactiveShellInit = ''
+        set -gx KITTY_LISTEN_ON unix:/tmp/kitty-zizenn
         set -gx STARSHIP_CONFIG ~/.config/starship/noctalia.toml
         set -gx MANROFFOPT "-c"
         set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"

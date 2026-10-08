@@ -1,7 +1,7 @@
 local mainMod = "SUPER"
 
--- terminal
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty"))
+-- terminal (single-instance daemon: instant OS window via shared socket/GPU cache)
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty --single-instance --listen-on unix:/tmp/kitty-zizenn"))
 
 -- close
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
@@ -16,10 +16,10 @@ hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("noctalia msg session lock"))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
 
 -- apps binds
--- the floating apps
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("kitty --class yazi-float -e yazi"))
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("kitty --class aerc-todo -e aerc"))
-hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("kitty --class wiremix-float -e wiremix"))
+-- the floating apps (reuse same single-instance daemon)
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class yazi-float -e yazi"))
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class aerc-todo -e aerc"))
+hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class wiremix-float -e wiremix"))
 -- normal apps
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("obsidian"))
 
