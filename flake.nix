@@ -1,15 +1,11 @@
 {
-  description = "zizenn's nix inputs";
+  description = "zizenn's NixOS config";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      flake = false;
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
@@ -28,9 +24,16 @@
       url = "github:silicalet/hyprland-scroll-overview/d704b35e5b6028cf684506dd54b547dbfaa11a27";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.hyprland.follows = "hyprland";
-      inputs.flake-parts.follows = "flake-parts";
     };
   };
 
-  outputs = inputs: import ./outputs.nix inputs;
+  outputs =
+    { self, nixpkgs, home-manager, ... }@inputs:
+    {
+      nixosConfigurations.zizenn-hack = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [ ./configuration.nix ];
+      };
+    };
 }

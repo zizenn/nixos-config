@@ -1,38 +1,41 @@
-{ lib, ... }: {
-  homeManager.modules.base = { pkgs, ... }: {
-    programs.git = {
-      enable = true;
-      settings = {
-        user = {
-          name = "zizenn-pc";
-          email = "zizenn.69@gmail.com";
+{ ... }:
+{
+  home-manager.users.zizenn =
+    { pkgs, ... }:
+    {
+      programs.git = {
+        enable = true;
+        settings = {
+          user = {
+            name = "zizenn-pc";
+            email = "zizenn.69@gmail.com";
+          };
+          core.editor = "nvim";
         };
-        core.editor = "nvim";
       };
-    };
-    programs.jujutsu = {
-      enable = true;
-      settings = {
-        user = {
-          name = "zizenn-pc";
-          email = "zizenn.69@gmail.com";
+      programs.jujutsu = {
+        enable = true;
+        settings = {
+          user = {
+            name = "zizenn-pc";
+            email = "zizenn.69@gmail.com";
+          };
+          ui.default-editor = "nvim";
         };
-        ui.default-editor = "nvim";
       };
+      home.packages = with pkgs; [
+        gh
+        lazygit
+        lazyjj
+        devenv
+        cargo
+        cppman
+        jq
+        nix-search-cli
+        nodejs_26
+        python3
+        socat
+        uv
+      ];
     };
-    home.packages = with pkgs; [
-      gh
-      lazygit
-      lazyjj
-      devenv
-      cargo
-      cppman
-      jq
-      nix-search-cli
-      nodejs_26
-      python3
-      socat
-      uv
-    ];
-  };
 }

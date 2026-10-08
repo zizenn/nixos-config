@@ -1,5 +1,6 @@
-{ lib, ... }: {
-  homeManager.modules.base =
+{ ... }:
+{
+  home-manager.users.zizenn =
     { pkgs, inputs, ... }:
     let
       inherit (pkgs.stdenv.hostPlatform) system;

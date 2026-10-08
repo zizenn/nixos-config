@@ -1,17 +1,17 @@
 # zizenn dotfiles
 
-NixOS · Niri · Material You
+NixOS · Hyprland / Niri · Noctalia
 
-My NixOS + home-manager config. Every `.nix` file in `modules/` is auto-imported — system stuff in `nixos.modules.base`, user stuff in `homeManager.modules.base`.
+My NixOS + home-manager config. Plain flake, plain modules — no frameworks.
 
 ## What you get
 
-- **Desktop** — Niri (scrollable tiling), Ly login, Waybar, Rofi, Mako, Kitty, Fish, Starship
-- **Theming** — Material You colors from your wallpaper via `theme-wallpaper` (matugen), or static Kanagawa Dragon via `theme-kanagawa`
+- **Desktop** — Hyprland + Niri (pick at login), Ly login, Noctalia shell, Kitty, Fish, Starship
+- **Theming** — Noctalia owns it all (`theme-wallpaper` from wallpaper, or `theme-kanagawa` for Kanagawa)
 - **Editor** — Neovim with wrapped LSPs/formatters/DAP, plus Zed and Opencode
 - **Dev** — git, jujutsu, lazygit, gh, cargo, devenv (C++ lives in devenv shells only)
 - **Apps** — zen browser, firefox, obsidian, ollama, vesktop, vlc, yazi, zathura, ...
-- **Extras** — zen kernel, `doas` (no sudo), auto-lock on sleep, USB-input resume fix
+- **Extras** — zen kernel, `doas` (no sudo), USB-input resume fix
 
 ## Rebuild
 
@@ -26,29 +26,31 @@ The `path:` ref is important — it includes your gitignored `_personal/` module
 ```bash
 git clone git@github.com:zizenn/nixos-config.git ~/nixos
 cd ~/nixos
-nixos-generate-config --show-hardware-config > modules/_hardware-configuration.nix
+nixos-generate-config --show-hardware-config > hardware-configuration.nix
 nixos-rebuild switch --flake ~/nixos#zizenn-hack
 ```
 
 ## Private stuff (`modules/_personal/`)
 
-Anything in `modules/_personal/` is **gitignored** — local only, never pushed, but auto-imported like any other module. Perfect for personal apps (steam, kdenlive, obs, prismlauncher), secrets (aerc app password), and wallpapers. Just drop a `.nix` file in there. Run `nix flake check .` to see exactly what the repo looks like publicly.
-
-## Packages
-
-```fish
-pkgadd   # search nixpkgs → fzf pick → add to a module → rebuild
-pkgdel   # list installed → fzf pick → remove → rebuild
-```
+Anything in `modules/_personal/` is **gitignored** — local only, never pushed, but imported like any other module. Perfect for personal apps (steam, kdenlive, obs, prismlauncher), secrets (aerc app password), and wallpapers. Just drop a `.nix` file in there and add it to `modules/_personal/default.nix`. Run `nix flake check path:.` to see exactly what the repo looks like publicly.
 
 ## Structure
 
 ```
+flake.nix                  # inputs + nixosConfigurations.zizenn-hack
+configuration.nix          # hardware + home-manager + base.nix
+base.nix                   # imports every modules/ folder
+hardware-configuration.nix # generated, don't edit by hand
 modules/
-├── *.nix            # one flake-parts module each (auto-imported)
-├── _personal/       # 🔒 private — gitignored, never pushed
-└── desktop/ theme/ services/ hardware/ audio/ infra/
+├── apps/apps.nix          # plain NixOS modules — system options at the
+├── audio/pipewire.nix     #   top level, user options under
+├── boot/boot.nix          #   home-manager.users.zizenn
+├── desktop/               #   (hyprland, kitty, niri, noctalia, portals, wallpaper)
+├── ...                    #   dev, editors, hardware, locale, misc,
+└── _personal/             # 🔒 private — gitignored, never pushed
 ```
+
+To add a module: write a plain NixOS module under `modules/`, import it in the folder's `default.nix`, rebuild.
 
 ## Keys
 

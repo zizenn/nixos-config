@@ -4,7 +4,7 @@
 
 | Context | Value |
 |---|---|
-| Hostname | `nix-port` |
+| Hostname | `zizenn-hack` |
 | User | `zizenn` |
 | Git remote | `origin git@github.com:zizenn/nixos-config.git` |
 | Git identity | `sakif` <zizenn@proton.me> |
@@ -22,70 +22,48 @@ theme-wallpaper          # matugen from wallpaper (interactive fzf picker)
 theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 ```
 
-## Structure (dendritic pattern)
+## Structure (plain flake, plain modules)
 
-Every `.nix` file under `modules/` is a top-level flake-parts module (auto-imported by `outputs.nix`), contributing to `nixos.modules.base` (NixOS) and/or `homeManager.modules.base` (home-manager). The directory tree is purely organizational — each `.nix` file is independent regardless of location.
+`flake.nix` defines `nixosConfigurations.zizenn-hack` from `./configuration.nix`. Every file under `modules/` is a plain NixOS module: system options at the top level, user options under `home-manager.users.zizenn` (home-manager runs as a NixOS module). Each folder has a `default.nix` entry point importing its files; root `base.nix` imports every folder, and `configuration.nix` imports `base.nix`.
 
 ```
 /
-├── flake.nix                       # flake entrypoint → outputs.nix
-├── outputs.nix                     # flake-parts evaluation, auto-imports all .nix from modules/
+├── flake.nix                       # inputs + nixosConfigurations.zizenn-hack
+├── configuration.nix               # hardware + home-manager + base.nix
+├── base.nix                        # imports every modules/ folder
+├── hardware-configuration.nix      # generated, don't edit by hand
 ├── AGENTS.md
 ├── modules/
-│   ├── _hardware-configuration.nix # auto-generated, excluded from auto-import (_ prefix)
-│   ├── nix-port.nix                # host config: wires nixos.modules.base + homeManager.modules.base into lib.nixosSystem
-│   │
-│   ├── infra/                      # flake-parts infrastructure (option declarations)
-│   │   ├── nixos.nix               # declares nixos.modules option (lazyAttrsOf deferredModule)
-│   │   └── home-manager.nix        # declares homeManager.modules option + programs.home-manager.enable
-│   │
-│   ├── boot.nix                    # systemd-boot, zen kernel, sysctl, mitigations=off
-│   ├── locale.nix                  # timezone, stateVersion
-│   ├── networking.nix              # hostName, networkmanager, firewall
-│   ├── nix.nix                     # GC, optimise, experimental-features, max-jobs
-│   ├── security.nix                # doas (no sudo), allowUnfree
-│   ├── programs.nix                # fish, firefox, nh, fonts, system packages, user definition
-│   ├── editors.nix                 # neovim (+runtimePackages), zed, opencode, .clang-format
-│   ├── dev.nix                     # git, jujutsu, gh, lazygit, devenv, cargo
-│   ├── shell.nix                   # fish aliases, starship, fzf, zoxide, cli tools
-│   ├── apps.nix                    # yazi, obsidian, ollama, vlc, vesktop, zen-browser, ...
-│   ├── misc.nix                    # env vars, MIME defaults, pkgadd/pkgdel scripts
-│   │
 │   ├── _personal/                  # PRIVATE — gitignored, never pushed to GitHub
-│   │   ├── apps.nix                #   obs-studio, kdenlive, glaxnimate, proton*
-│   │   ├── programs.nix            #   droidcam, localsend
+│   │   ├── default.nix             #   entry point (conditionally imported)
+│   │   ├── apps.nix                #   blender, kdenlive, proton*, ...
+│   │   ├── programs.nix            #   obs-studio, steam, localsend, ...
 │   │   ├── mail.nix                #   aerc config, binds, accounts (mode 600)
 │   │   ├── aerc/app-password       #   aerc credentials (read at runtime, mode 600)
 │   │   └── wallpapers/             #   wallpaper images (wallpaper-pick reads from here)
 │   │
-│   ├── audio/
-│   │   └── pipewire.nix            # pipewire, pulse, wireplumber
-│   ├── hardware/
-│   │   ├── gpu.nix                 # amdgpu, mesa
-│   │   └── bluetooth.nix           # bluetooth enable
-│   ├── services/
-│   │   ├── ssh.nix                 # openssh
-│   │   ├── logind.nix              # power/lid switch
-│   │   ├── udev.nix                # USB power control, BFQ rules
-│   │   ├── usb-resume.nix          # fix USB input after resume
-│   │   ├── tailscale.nix           # tailscale
-│   │   └── misc.nix                # upower, blueman, udisks2, fstrim, kmscon
-│   ├── desktop/
-│   │   ├── niri.nix                # Niri compositor (system) + Ly + swayidle/swaylock (HM)
-│   │   ├── portals.nix             # xdg-desktop-portal
-│   │   ├── kitty.nix               # kitty terminal
-│   │   ├── noctalia.nix            # Noctalia shell (bar, notifications, launcher, logout)
-│   │   └── wallpaper.nix           # wallpaper-pick, theme-wallpaper scripts
-│   ├── theme/
-│   │   ├── gtk.nix                 # GTK theme, icons, cursor
-│   │   ├── qt.nix                  # Qt/Kvantum theme
-│   │   ├── matugen.nix             # matugen CLI + template symlinks
-│   │   ├── kanagawa-dragon.nix     # static kanagawa-dragon palette files
-│   │   └── fastfetch.nix           # fastfetch config
+│   ├── audio/pipewire.nix          # pipewire, pulse, wireplumber
+│   ├── boot/boot.nix               # systemd-boot, zen kernel, sysctl, mitigations=off
+│   ├── locale/locale.nix           # timezone, stateVersion
+│   ├── networking/networking.nix   # hostName, networkmanager, firewall
+│   ├── nix/nix.nix                 # GC, optimise, experimental-features, max-jobs
+│   ├── security/security.nix       # doas (no sudo), allowUnfree
+│   ├── programs/programs.nix       # fish, firefox, nh, fonts, system packages, user definition
+│   ├── editors/editors.nix         # neovim (+runtimePackages), zed, opencode, .clang-format
+│   ├── dev/dev.nix                 # git, jujutsu, gh, lazygit, devenv, cargo
+│   ├── shell/shell.nix             # fish aliases, starship, fzf, zoxide, cli tools
+│   ├── apps/apps.nix               # yazi, obsidian, ollama, vlc, vesktop, zen-browser, ...
+│   ├── misc/misc.nix               # env vars, MIME defaults
+│   ├── hardware/                   # gpu.nix (amdgpu, mesa), bluetooth.nix, rgb.nix (openrgb)
+│   ├── services/                   # ssh, logind, udev, usb-resume, tailscale, ollama, flatpak, misc
+│   ├── desktop/                    # hyprland, niri, kitty, noctalia, portals, wallpaper
+│   ├── theme/                      # gtk, qt, noctalia templates, fastfetch
+│   ├── swap/swap.nix               # /swapfile
 │   │
-│   └── (supporting files: niri/*.kdl,
-│        neovim/nvim/, _personal/aerc/*.conf, zed/tasks.json, matugen/templates/,
-│        kanagawa-dragon/*, core/scripts/, gtk/*.css, qt/*, fastfetch/*.jsonc)
+│   └── (supporting files: desktop/niri/*.kdl, desktop/hypr/**,
+│        modules/neovim/nvim/, _personal/aerc/*.conf, modules/zed/tasks.json,
+│        desktop/scripts/*, core/scripts/theme-kanagawa, theme/noctalia/*,
+│        theme/qt/*, theme/fastfetch/*)
 ```
 
 ## Conventions
@@ -94,11 +72,11 @@ Every `.nix` file under `modules/` is a top-level flake-parts module (auto-impor
 - `nh` replaces raw `nixos-rebuild` / `home-manager` — flake ref is baked into `programs.nh.flake` as `path:/home/zizenn/nixos` (the `path:` ref makes local builds include gitignored `_personal/` files; a bare `.` ref would exclude them via git filtering)
 - **`_personal/` is private**: any `.nix` file under `modules/_personal/` is gitignored (`.gitignore`), never pushed to GitHub, but auto-imported locally like any other module. Never commit secrets or personal apps outside it. To check what the public repo sees, evaluate with a bare ref (`nix flake check .`)
 - `hardware-configuration.nix` is regenerated by `nixos-generate-config` — make changes in `configuration.nix` instead
-- Nixpkgs tracks `nixos-unstable`; home-manager tracks `master` (stable releases pin-point via flake.lock)
+- Nixpkgs tracks `nixos-unstable`; home-manager tracks `master` (exact revs pinned in `flake.lock`)
 - `system.stateVersion` and `home.stateVersion` remain at `26.05`
-- Theme generation: matugen templates live in `modules/theme/matugen/templates/`, static kanagawa-dragon outputs in `modules/theme/kanagawa-dragon/`
-- Theme switching: `theme-wallpaper` (runs matugen from wallpaper → Material You) or `theme-kanagawa` (applies static kanagawa-dragon palette)
-- Desktop: Niri compositor; login via `services.ly` (TUI display manager)
+- Theme generation: Noctalia templates live in `modules/theme/noctalia/templates/`, rendered from `modules/theme/noctalia/theme.toml`
+- Theme switching: `theme-wallpaper` (Noctalia palette from wallpaper) or `theme-kanagawa` (Noctalia Kanagawa builtin)
+- Desktop: Hyprland + Niri (pick at login); login via `services.ly` (TUI display manager)
 - `xdg.configFile` is the standard mechanism for symlinking dotfile directories (avoid manual symlinks)
 - **neovim is self-contained**: LSPs, formatters, and DAP are wrapped into neovim's runtime environment — they are NOT on the global PATH. Only accessible when `nvim` runs.
 - **C++ development uses `devenv`**: gcc, cmake, gdb, lldb, make are NOT in home packages. Use `devenv` shells for C++ projects. ccache is configured via nix.
@@ -127,20 +105,21 @@ Every `.nix` file under `modules/` is a top-level flake-parts module (auto-impor
 
 | What | Where |
 |---|---|
-| System packages | `modules/programs.nix` → `environment.systemPackages` |
-| User packages | `modules/apps.nix` + `modules/misc.nix` + per-feature modules (e.g. `editors.nix`, `shell.nix`) |
-| `allowUnfree` | set in both `modules/security.nix` and `modules/infra/home-manager.nix` |
+| System packages | `modules/programs/programs.nix` → `environment.systemPackages` |
+| User packages | `modules/apps/apps.nix` + `modules/misc/misc.nix` + per-feature modules (e.g. `editors/editors.nix`, `shell/shell.nix`) |
+| `allowUnfree` | `modules/security/security.nix` |
 | Niri config (KDL) | `modules/desktop/niri.nix` → `./niri/*.kdl` → `~/.config/niri/config.kdl` |
+| Hyprland config (Lua) | `modules/desktop/hyprland.nix` → `./hypr/` → `~/.config/hypr/` |
 | Idle/lock (swayidle) | `modules/desktop/niri/04-main.kdl` → `spawn-at-startup "swayidle" ...` |
-| Swaylock config | `modules/desktop/niri.nix` → `programs.swaylock.settings` → `~/.config/swaylock/config` |
+| Swaylock config | `modules/theme/noctalia/templates/swaylock.conf` (Noctalia template) |
 | Login manager (Ly) | `modules/desktop/niri.nix` → `services.ly` |
-| Neovim | `modules/editors.nix` → `./neovim/nvim/` (symlinked to `~/.config/nvim`) |
-| Neovim runtime deps | `modules/editors.nix` → `neovimRuntimePackages` (LSPs, formatters, DAP) |
+| Neovim | `modules/editors/editors.nix` → `modules/neovim/nvim/` (symlinked to `~/.config/nvim`) |
+| Neovim runtime deps | `modules/editors/editors.nix` → `neovimRuntimePackages` (LSPs, formatters, DAP) |
 | udev rules | `modules/services/udev.nix` → `services.udev.extraRules` |
 | USB input resume fix | `modules/services/usb-resume.nix` → `systemd.services.fix-usb-input-after-resume` |
 | Systemd services | `modules/services/misc.nix` |
-| Nix tuning | `modules/nix.nix` — GC, optimise, parallel builds, caches |
-| Kernel tuning | `modules/boot.nix` — zen kernel, sysctl, mitigations off |
+| Nix tuning | `modules/nix/nix.nix` — GC, optimise, parallel builds, caches |
+| Kernel tuning | `modules/boot/boot.nix` — zen kernel, sysctl, mitigations off |
 
 ## Testing / verification
 

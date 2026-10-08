@@ -1,25 +1,28 @@
-{lib, ...}: {
-  homeManager.modules.base = {pkgs, ...}: {
-    home.file = {
-      ".local/bin/wallpaper-pick" = {
-        executable = true;
-        text = ''
-#!${pkgs.fish}/bin/fish
-${builtins.readFile ./scripts/wallpaper-pick}
-        '';
+{ ... }:
+{
+  home-manager.users.zizenn =
+    { pkgs, ... }:
+    {
+      home.file = {
+        ".local/bin/wallpaper-pick" = {
+          executable = true;
+          text = ''
+            #!${pkgs.fish}/bin/fish
+            ${builtins.readFile ./scripts/wallpaper-pick}
+          '';
+        };
+        ".local/bin/theme-wallpaper" = {
+          executable = true;
+          text = ''
+            #!${pkgs.fish}/bin/fish
+            ${builtins.readFile ./scripts/theme-wallpaper}
+          '';
+        };
       };
-      ".local/bin/theme-wallpaper" = {
-        executable = true;
-        text = ''
-#!${pkgs.fish}/bin/fish
-${builtins.readFile ./scripts/theme-wallpaper}
-        '';
-      };
+      home.packages = with pkgs; [
+        feh
+        # notify-send is used by wallpaper-pick and theme-kanagawa
+        libnotify
+      ];
     };
-    home.packages = with pkgs; [
-      feh
-      # notify-send is used by wallpaper-pick and theme-kanagawa
-      libnotify
-    ];
-  };
 }

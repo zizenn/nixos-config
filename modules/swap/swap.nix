@@ -1,11 +1,12 @@
-{...}: {
-  nixos.modules.base = {...}: {
-    boot.initrd.systemd.enable = true;
+{ ... }:
+{
+  boot.initrd.systemd.enable = true;
 
-    swapDevices = [{
+  swapDevices = [
+    {
       device = "/swapfile";
       size = 16 * 1024;
-      options = ["discard"];
-    }];
-  };
+      options = [ "discard" ];
+    }
+  ];
 }

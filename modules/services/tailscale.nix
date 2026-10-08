@@ -1,5 +1,4 @@
-{lib, ...}: {
-  nixos.modules.base = {
-    services.tailscale.enable = true;
-  };
+{ ... }:
+{
+  services.tailscale.enable = true;
 }
