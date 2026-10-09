@@ -1,7 +1,6 @@
 -- --- UI & Layout ---
 vim.opt.number = true -- Show absolute line number for current line
 vim.opt.relativenumber = true -- Show relative line numbers for easy jumping
-vim.opt.termguicolors = true -- Enable 24-bit RGB colors in terminal
 vim.opt.signcolumn = "yes" -- Keep sign column open to prevent text shifting
 vim.opt.cursorline = true -- Highlight the current cursor line
 vim.opt.scrolloff = 8
