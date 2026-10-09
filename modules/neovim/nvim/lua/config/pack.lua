@@ -88,8 +88,8 @@ vim.pack.add({
 -- Each module runs its own setup() on require. Order matters only where one
 -- setup reads another (icons mock + theme first, notify before noice,
 -- luasnip + blink before lsp).
-require("plugins.mini")
 require("plugins.matugen")
+require("plugins.mini")
 require("plugins.notify")
 require("plugins.luasnip")
 require("plugins.blink")
