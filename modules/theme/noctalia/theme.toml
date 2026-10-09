@@ -13,8 +13,8 @@ builtin_ids = ["kitty"]
 [wallpaper]
 directory = "/home/zizenn/nixos/modules/_personal/wallpapers"
 
-# Blurred wallpaper in Niri overview (needs the noctalia-backdrop
-# layer-rule in niri config).
+# Blurred wallpaper behind Noctalia overview (needs a matching
+# noctalia-backdrop layerrule in the Hyprland config).
 [backdrop]
 enabled = true
 

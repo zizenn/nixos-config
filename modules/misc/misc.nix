@@ -15,8 +15,6 @@
         XCURSOR_SIZE = "24";
       };
       home.packages = with pkgs; [
-        awww
-        bluetui
         herdr
         ntfs3g
         wiremix

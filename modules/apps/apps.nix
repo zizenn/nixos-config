@@ -41,9 +41,7 @@
       home.packages = with pkgs; [
         mediainfo
         obsidian
-        ollama
         pandoc
-        pavucontrol
         vesktop
         vlc
         zathura

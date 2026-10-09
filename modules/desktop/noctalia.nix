@@ -6,8 +6,8 @@
   # Noctalia Settings GUI (or `programs.noctalia.settings` if we later
   # pin the upstream flake for its home-manager module).
 
-  # Required for Noctalia's wifi / bluetooth / power-profile / battery features
-  # (networkmanager, bluetooth and upower are already enabled elsewhere).
+  # Required for Noctalia's wifi / power-profile / battery features
+  # (networkmanager and upower are already enabled elsewhere).
   services.power-profiles-daemon.enable = true;
 
   home-manager.users.zizenn =

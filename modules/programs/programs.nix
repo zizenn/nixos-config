@@ -3,7 +3,6 @@
   programs = {
     fish.enable = true;
     dconf.enable = true;
-    firefox.enable = true;
     ccache.enable = true;
     ssh.setXAuthLocation = true;
     nh = {
