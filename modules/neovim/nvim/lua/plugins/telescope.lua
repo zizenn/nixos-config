@@ -42,4 +42,6 @@ telescope.setup({
   },
 })
 
-telescope.load_extension("fzf")
+-- fzf is a native build (see PackChanged hook in config/pack.lua); if the
+-- build artifact is missing, keep the rest of the config alive.
+pcall(telescope.load_extension, "fzf")

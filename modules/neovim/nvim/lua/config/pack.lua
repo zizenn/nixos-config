@@ -15,10 +15,18 @@ vim.api.nvim_create_autocmd("PackChanged", {
         vim.cmd.packadd("nvim-treesitter")
       end
       pcall(vim.cmd, "TSUpdate")
-    elseif ev.data.spec.name == "telescope-fzf-native.nvim" and ev.data.path then
-      vim.system({ "make" }, { cwd = ev.data.path }):wait()
-    elseif ev.data.spec.name == "LuaSnip" and ev.data.path then
-      vim.system({ "make", "install_jsregexp" }, { cwd = ev.data.path }):wait()
+    elseif
+      (ev.data.spec.name == "telescope-fzf-native.nvim" or ev.data.spec.name == "LuaSnip")
+      and ev.data.path
+    then
+      local cmd = ev.data.spec.name == "LuaSnip" and { "make", "install_jsregexp" } or { "make" }
+      local result = vim.system(cmd, { cwd = ev.data.path }):wait()
+      if result.code ~= 0 then
+        vim.notify(
+          ("vim.pack: build failed for %s:\n%s"):format(ev.data.spec.name, result.stderr),
+          vim.log.levels.ERROR
+        )
+      end
     end
   end,
 })
@@ -38,8 +46,7 @@ vim.pack.add({
   gh("onsails/lspkind.nvim"),
   gh("L3MON4D3/LuaSnip"),
   gh("rafamadriz/friendly-snippets"),
-  { src = gh("nvim-treesitter/nvim-treesitter"), version = "master" },
-  { src = gh("nvim-treesitter/nvim-treesitter-textobjects"), version = "master" },
+  gh("nvim-treesitter/nvim-treesitter"),
   gh("nvim-treesitter/nvim-treesitter-context"),
   gh("stevearc/conform.nvim"),
   gh("mfussenegger/nvim-lint"),
