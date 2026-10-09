@@ -1,7 +1,7 @@
--- loading plugins
-hl.plugin.load("/run/current-system/sw/lib/libscrolloverview.so")
+-- plugins are imported in modules.plugins
 
 -- imports
+
 -- require("modules.plugins")
 require("modules.monitors")
 require("modules.perms")
@@ -16,5 +16,5 @@ require("modules.misc")
 require("modules.input")
 require("modules.binds")
 
--- For Noctalia Color templates
+-- noctalia color themeing
 require("noctalia").apply_theme()

@@ -1,4 +1,5 @@
 -- scroll overview
+hl.plugin.load("/run/current-system/sw/lib/libscrolloverview.so")
 hl.config({
 	plugin = {
 		scrolloverview = {
