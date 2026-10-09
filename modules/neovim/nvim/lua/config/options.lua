@@ -32,6 +32,13 @@ vim.opt.updatetime = 250 -- Faster completion and diagnostic updates
 -- --- Autocompletion Setup ---
 vim.opt.completeopt = "menu,menuone,noselect" -- Standard options for LSP completion
 
+-- --- Folding (native treesitter, replaces nvim-ufo) ---
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+
 -- --- Diagnostics (Inline Lint/Error Display) ---
 	vim.diagnostic.config({
 	virtual_text = { prefix = "▎", spacing = 2 },

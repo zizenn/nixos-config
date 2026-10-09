@@ -1,10 +1,3 @@
-return {
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      preset = "modern",
-    },
-
-  },
-}
+require("which-key").setup({
+  preset = "modern",
+})

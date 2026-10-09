@@ -1,12 +1,5 @@
-return {
-  {
-    "mikavilpas/yazi.nvim",
-    event = "VeryLazy",
-
-    opts = {
-      keymaps = {
-        show_help = "<f1>",
-      },
-    },
+require("yazi").setup({
+  keymaps = {
+    show_help = "<f1>",
   },
-}
+})

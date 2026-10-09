@@ -62,7 +62,7 @@ map("n", "<leader>y", "<cmd>Yazi<cr>", { desc = "Open Yazi" })
 
 -- dashboard
 map("n", "<leader>th", function()
-	Snacks.dashboard.open()
+	require("snacks").dashboard.open()
 end, { desc = "Dashboard: Open Home Screen" })
 
 -- which-key
