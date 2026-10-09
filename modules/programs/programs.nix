@@ -32,6 +32,9 @@
     man-pages
     steam-run
     xwayland-satellite
+    # Required by nvim-treesitter (main branch) to build/install parsers.
+    # GUI-launched nvim must find it on PATH for :TSInstall/:TSUpdate.
+    tree-sitter
   ];
 
   users.users.zizenn = {
