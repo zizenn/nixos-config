@@ -1,7 +1,8 @@
 local mainMod = "SUPER"
 
 -- terminal (single-instance daemon: instant OS window via shared socket/GPU cache)
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty --single-instance --listen-on unix:/tmp/kitty-zizenn"))
+-- wrapped in `uwsm app --` so it lands in app-graphical.slice, not the compositor unit
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("uwsm app -- kitty --single-instance --listen-on unix:/tmp/kitty-zizenn"))
 
 -- close
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
@@ -17,11 +18,11 @@ hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
 
 -- apps binds
 -- the floating apps (reuse same single-instance daemon)
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class yazi-float -e yazi"))
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class aerc-todo -e aerc"))
-hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class wiremix-float -e wiremix"))
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("uwsm app -- kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class yazi-float -e yazi"))
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("uwsm app -- kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class aerc-todo -e aerc"))
+hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("uwsm app -- kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class wiremix-float -e wiremix"))
 -- normal apps
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("obsidian"))
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("uwsm app -- obsidian"))
 
 -- window stuff
 hl.bind(mainMod .. " + G", hl.dsp.window.float({ action = "toggle" }))
@@ -81,8 +82,9 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("noctalia msg media stop"), { locked =
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("noctalia msg media toggle"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("noctalia msg media previous"), { locked = true })
 
--- exit hyprland
+-- exit hyprland (uwsm stop tears down the systemd session cleanly;
+-- hyprctl fallback covers plain non-uwsm launches)
 hl.bind(
 	mainMod .. " + M",
-	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
+	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || uwsm stop || hyprctl dispatch exit")
 )

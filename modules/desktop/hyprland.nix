@@ -2,6 +2,11 @@
 {
   programs.hyprland = {
     enable = true;
+    # Launch via UWSM (Universal Wayland Session Manager): provides the
+    # "Hyprland (uwsm-managed)" session in ly, wires the compositor into
+    # graphical-session.target / xdg-desktop-autostart.target, and enables
+    # `uwsm app --` launches. Pick the uwsm-managed entry in ly.
+    withUWSM = true;
     xwayland.enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage =
@@ -41,5 +46,12 @@
         source = ./hypr;
         recursive = true;
       };
+
+      # Session-wide env for the UWSM-managed session, so systemd user
+      # services (not just Hyprland itself) see these. Mirrors ./hypr/modules/env.lua.
+      xdg.configFile."uwsm/env".text = ''
+        export XCURSOR_SIZE=18
+        export HYPRCURSOR_SIZE=18
+      '';
     };
 }
