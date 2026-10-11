@@ -14,7 +14,7 @@ hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"
 hl.bind(mainMod .. " + COMMA", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("noctalia msg screenshot-region"))
 hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("noctalia msg session lock"))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
+hl.bind(mainMod .. " + code:47", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
 
 -- apps binds
 -- the floating apps (reuse same single-instance daemon)
@@ -85,6 +85,6 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("noctalia msg media previous"), { locke
 -- exit hyprland (uwsm stop tears down the systemd session cleanly;
 -- hyprctl fallback covers plain non-uwsm launches)
 hl.bind(
-	mainMod .. " + M",
+	mainMod .. " + code:117",
 	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || uwsm stop || hyprctl dispatch exit")
 )

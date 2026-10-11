@@ -6,6 +6,7 @@ telescope.setup({
     prompt_prefix = "  ",
     selection_caret = "▎",
     layout_strategy = "horizontal",
+
     layout_config = {
       width = 0.85,
       height = 0.80,
@@ -14,11 +15,13 @@ telescope.setup({
         prompt_position = "top",
       },
     },
+
     borderchars = {
       prompt = { "─", "│", "─", "│", "┌", "┐", "└", "┘" },
       results = { "─", "│", "─", "│", "┌", "┐", "└", "┘" },
       preview = { "─", "│", "─", "│", "┌", "┐", "└", "┘" },
     },
+
     mappings = {
       i = {
         ["<C-j>"] = actions.move_selection_next,
@@ -27,11 +30,16 @@ telescope.setup({
         ["<CR>"] = actions.select_default,
       },
     },
+
+    file_ignore_patterns = {
+      "^%.git/",
+    },
   },
   pickers = {
     find_files = { hidden = true },
     live_grep = { additional_args = { "--hidden" } },
   },
+
   extensions = {
     fzf = {
       fuzzy = true,
@@ -42,6 +50,4 @@ telescope.setup({
   },
 })
 
--- fzf is a native build (see PackChanged hook in config/pack.lua); if the
--- build artifact is missing, keep the rest of the config alive.
 pcall(telescope.load_extension, "fzf")
