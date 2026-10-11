@@ -22,7 +22,6 @@
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono ];
 
   environment.systemPackages = with pkgs; [
-    vim
     wget
     xdg-utils
     brightnessctl
@@ -33,6 +32,7 @@
     tree-sitter # required for nvim
     feh
     libnotify
+    wl-clipboard
   ];
 
   users.users.zizenn = {

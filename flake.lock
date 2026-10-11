@@ -49,27 +49,6 @@
         "type": "github"
       }
     },
-    "flake-parts": {
-      "inputs": {
-        "nixpkgs-lib": [
-          "scrolloverview",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1790898470,
-        "narHash": "sha256-zTwuwezD0w3hpga6a6P8emidzAZFyWqlNeRBlpWOOl8=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "024633cd702b10285db5cb19b40ad48d2399ba60",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -479,38 +458,29 @@
         "type": "github"
       }
     },
+    "ranma": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1791684952,
+        "narHash": "sha256-W3I07qgpX6BAEXrhBt5QekQ8YXQSe7HzyxYbr0KwJtE=",
+        "owner": "masshirodev",
+        "repo": "ranma",
+        "rev": "5a97e971ce974a513aa7bed9264222811b91b49a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "masshirodev",
+        "repo": "ranma",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "nixpkgs": "nixpkgs",
-        "scrolloverview": "scrolloverview",
+        "ranma": "ranma",
         "zen-browser": "zen-browser"
-      }
-    },
-    "scrolloverview": {
-      "inputs": {
-        "flake-parts": "flake-parts",
-        "hyprland": [
-          "hyprland"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1791117333,
-        "narHash": "sha256-mUmAuu+FTKrktTFC8wX3WPBltwUHY4AepwzwxbSKxhM=",
-        "owner": "silicalet",
-        "repo": "hyprland-scroll-overview",
-        "rev": "d704b35e5b6028cf684506dd54b547dbfaa11a27",
-        "type": "github"
-      },
-      "original": {
-        "owner": "silicalet",
-        "repo": "hyprland-scroll-overview",
-        "rev": "d704b35e5b6028cf684506dd54b547dbfaa11a27",
-        "type": "github"
       }
     },
     "systems": {
