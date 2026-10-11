@@ -8,7 +8,6 @@
     nh = {
       enable = true;
       clean.enable = true;
-      clean.extraArgs = "--keep-since 4d --keep 3";
       flake = "path:/home/zizenn/nixos";
     };
   };
@@ -31,9 +30,9 @@
     man-pages
     steam-run
     xwayland-satellite
-    # Required by nvim-treesitter (main branch) to build/install parsers.
-    # GUI-launched nvim must find it on PATH for :TSInstall/:TSUpdate.
-    tree-sitter
+    tree-sitter # required for nvim
+    feh
+    libnotify
   ];
 
   users.users.zizenn = {

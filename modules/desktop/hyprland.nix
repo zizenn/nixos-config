@@ -2,26 +2,12 @@
 {
   programs.hyprland = {
     enable = true;
-    # Launch via UWSM (Universal Wayland Session Manager): provides the
-    # "Hyprland (uwsm-managed)" session in ly, wires the compositor into
-    # graphical-session.target / xdg-desktop-autostart.target, and enables
-    # `uwsm app --` launches. Pick the uwsm-managed entry in ly.
     withUWSM = true;
     xwayland.enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage =
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
-
-  services.displayManager.ly.enable = true;
-
-  # ScrollOverview plugin (niri-style scrollable overview), built against
-  # the same Hyprland as above (inputs.hyprland.follows). Load it from your
-  # own hyprland.conf with:
-  #   plugin = /run/current-system/sw/lib/libscrolloverview.so
-  environment.systemPackages = [
-    inputs.scrolloverview.packages.${pkgs.stdenv.hostPlatform.system}.scrolloverview
-  ];
 
   # Hyprland's binary cache, so you don't build Hyprland from source.
   nix.settings = {
@@ -36,8 +22,6 @@
     {
       home.packages = with pkgs; [
         quickshell
-        # swaylock kept as emergency fallback; idle+lock is handled by Noctalia
-        swaylock
         wl-clipboard
       ];
 

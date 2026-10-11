@@ -1,2 +1,0 @@
-#!/usr/bin/env fish
-kitty --hold sh -c "clock-rs"

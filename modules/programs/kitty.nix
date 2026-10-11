@@ -31,8 +31,5 @@
           "ctrl+down" = "neighboring_window down";
         };
       };
-      # NOTE: kitty colors come from Noctalia's builtin kitty template
-      # (~/.config/kitty/themes/noctalia.conf, included above) — do NOT
-      # manage a colors file here, the template output must stay writable.
     };
 }

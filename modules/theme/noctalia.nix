@@ -1,19 +1,8 @@
 { ... }:
 {
-  # Noctalia owns theming now: palette source (wallpaper / builtin /
-  # community / custom) is picked in Noctalia Settings or via
-  # `noctalia msg color-scheme-set`, and Noctalia renders all app
-  # templates + reload hooks from theme.toml on every change.
   home-manager.users.zizenn =
-    { pkgs, ... }:
+    { ... }:
     {
-      home.file.".local/bin/theme-kanagawa" = {
-        executable = true;
-        text = ''
-          #!${pkgs.fish}/bin/fish
-          ${builtins.readFile ../core/scripts/theme-kanagawa}
-        '';
-      };
       xdg.configFile = {
         "noctalia/theme.toml".source = ./noctalia/theme.toml;
         "noctalia/templates/gtk.css".source = ./noctalia/templates/gtk.css;

@@ -1,6 +1,0 @@
-{
-  "lldb": {
-    "adapter": "lldb-vscode",
-    "args": ["--working-dir", "${workspaceFolder}"]
-  }
-}

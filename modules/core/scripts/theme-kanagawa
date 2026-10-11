@@ -1,5 +1,0 @@
-# Static Kanagawa theme via Noctalia's builtin palette.
-# Noctalia re-renders all app templates itself on palette change.
-noctalia msg color-scheme-set builtin Kanagawa
-and notify-send "theme" "Applied Kanagawa (Noctalia builtin)"
-or notify-send "theme" "noctalia color-scheme-set failed"
