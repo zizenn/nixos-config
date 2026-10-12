@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    amane.url = "github:MystiaFin/amane";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -17,11 +18,6 @@
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ranma = {
-      url = "github:masshirodev/ranma";
-      flake = false;
     };
   };
 

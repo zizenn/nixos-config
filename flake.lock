@@ -1,5 +1,23 @@
 {
   "nodes": {
+    "amane": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1791795731,
+        "narHash": "sha256-0xL+N1tNrFudySvMWai0Dxw6glCPBp5RgzDjkFE/ngE=",
+        "owner": "MystiaFin",
+        "repo": "amane",
+        "rev": "56c2c5f445b0e4b68fbdfb61637ac0ccc0c0ee1e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MystiaFin",
+        "repo": "amane",
+        "type": "github"
+      }
+    },
     "aquamarine": {
       "inputs": {
         "hyprutils": [
@@ -422,6 +440,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1789286504,
+        "narHash": "sha256-eiEK7cKZORNEvX0GeF3RtNEF/JXhgf2RqSp3230q13E=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ef34387ddd751e1ab8857adf4676492d32eb24ec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1790578696,
         "narHash": "sha256-ZoxIApko70jCdbH3l20HWXOBaT2HZd87orzd2yJ9dVE=",
         "owner": "nixos",
@@ -458,28 +492,12 @@
         "type": "github"
       }
     },
-    "ranma": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1791684952,
-        "narHash": "sha256-W3I07qgpX6BAEXrhBt5QekQ8YXQSe7HzyxYbr0KwJtE=",
-        "owner": "masshirodev",
-        "repo": "ranma",
-        "rev": "5a97e971ce974a513aa7bed9264222811b91b49a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "masshirodev",
-        "repo": "ranma",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
+        "amane": "amane",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
-        "nixpkgs": "nixpkgs",
-        "ranma": "ranma",
+        "nixpkgs": "nixpkgs_2",
         "zen-browser": "zen-browser"
       }
     },
