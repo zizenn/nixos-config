@@ -5,6 +5,5 @@
     ./noctalia.nix
     ./theme.nix
     ./kitty.nix
-    ./ranma.nix
   ];
 }
