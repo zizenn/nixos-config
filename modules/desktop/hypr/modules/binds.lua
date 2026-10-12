@@ -31,11 +31,6 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 -- resize
 hl.bind(mainMod .. " + R", hl.dsp.layout("colresize +conf"))
 
--- overview (RN IT ISNT WORKING CUZ PLUGIN IS BROKE)
-hl.bind("SUPER + Y", function()
-	hl.plugin.scrolloverview.overview("toggle all")
-end)
-
 -- focusing and moving windows
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. "+ SHIFT + H", hl.dsp.window.swap({ direction = "left" }))

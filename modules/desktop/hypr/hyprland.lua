@@ -1,8 +1,5 @@
--- plugins are imported in modules.plugins
-
 -- imports
-
--- require("modules.plugins")
+require("modules.plugins")
 require("modules.monitors")
 require("modules.perms")
 require("modules.programs")
