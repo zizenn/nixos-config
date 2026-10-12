@@ -15,16 +15,7 @@
           core.editor = "nvim";
         };
       };
-      programs.jujutsu = {
-        enable = true;
-        settings = {
-          user = {
-            name = "zizenn-pc";
-            email = "zizenn.69@gmail.com";
-          };
-          ui.default-editor = "nvim";
-        };
-      };
+
       home.packages = with pkgs; [
         gh
         lazygit

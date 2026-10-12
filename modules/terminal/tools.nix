@@ -6,7 +6,6 @@
       home.packages = with pkgs; [
         bat
         bc
-        broot
         (btop.override { rocmSupport = true; })
         catimg
         cava

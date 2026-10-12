@@ -1,10 +1,7 @@
 { ... }:
 {
   home-manager.users.zizenn =
-    { pkgs, inputs, ... }:
-    let
-      inherit (pkgs.stdenv.hostPlatform) system;
-    in
+    { pkgs, ... }:
     {
       programs.yazi = {
         enable = true;
@@ -28,15 +25,6 @@
           };
           input.cursor_blink = true;
         };
-        keymap = {
-          manager.prepend_keymap = [
-            {
-              on = [ "<C-g>" ];
-              run = "plugin drag";
-              desc = "Drag selected files out of Yazi via ripdrag";
-            }
-          ];
-        };
       };
       home.packages = with pkgs; [
         mediainfo
@@ -44,7 +32,7 @@
       ];
       xdg.desktopEntries.yazi = {
         name = "yazi";
-        exec = "kitty --class yazi-float -e yazi %u";
+        exec = "kitty -e yazi %u";
         terminal = false;
         mimeType = [ "inode/directory" ];
       };
