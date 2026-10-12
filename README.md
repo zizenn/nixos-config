@@ -42,12 +42,12 @@ configuration.nix          # hardware + home-manager + base.nix
 base.nix                   # imports every modules/ folder
 hardware-configuration.nix # generated, don't edit by hand
 modules/
-├── apps/apps.nix          # plain NixOS modules — system options at the
-├── audio/pipewire.nix     #   top level, user options under
-├── boot/boot.nix          #   home-manager.users.zizenn
-├── desktop/               #   (hyprland, kitty, niri, noctalia, portals, wallpaper)
-├── ...                    #   dev, editors, hardware, locale, misc,
-└── _personal/             # 🔒 private — gitignored, never pushed
+├── core/                 # boot, system, networking, nix, security, services
+├── hardware/             # gpu, audio (pipewire), usb, power
+├── desktop/              # hyprland, session, noctalia, theme, kitty, ranma
+├── terminal/             # shell, tools, dev, editors, yazi (+ neovim/, templates/)
+├── apps/                 # gui apps + centralized MIME defaults
+└── _personal/            # 🔒 private — gitignored, never pushed
 ```
 
 To add a module: write a plain NixOS module under `modules/`, import it in the folder's `default.nix`, rebuild.

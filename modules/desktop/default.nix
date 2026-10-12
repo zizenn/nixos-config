@@ -1,8 +1,10 @@
 { ... }: {
   imports = [
     ./hyprland.nix
-    ./ly.nix
+    ./session.nix
     ./noctalia.nix
-    ./portals.nix
+    ./theme.nix
+    ./kitty.nix
+    ./ranma.nix
   ];
 }
