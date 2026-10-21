@@ -42,7 +42,7 @@ configuration.nix          # hardware + home-manager + base.nix
 base.nix                   # imports every modules/ folder
 hardware-configuration.nix # generated, don't edit by hand
 modules/
-├── core/                 # boot, system, networking, nix, security, services
+├── core/                 # boot, system, networking, nix, nix-ld, security, services
 ├── hardware/             # gpu, audio (pipewire), usb, power
 ├── desktop/              # hyprland, session, noctalia, theme, kitty, ranma
 ├── terminal/             # shell, tools, dev, editors, yazi (+ neovim/, templates/)

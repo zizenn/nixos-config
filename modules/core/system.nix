@@ -36,7 +36,6 @@
     wget
     xdg-utils
     man-pages
-    steam-run
     ntfs3g
   ];
 

@@ -48,6 +48,7 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 │   │   ├── system.nix              #   locale, user, fonts, docs, nh, core packages
 │   │   ├── networking.nix          #   hostName, networkmanager, firewall
 │   │   ├── nix.nix                 #   GC, optimise, experimental-features, caches
+│   │   ├── nix-ld.nix              #   nix-ld (run foreign prebuilt binaries)
 │   │   ├── security.nix            #   doas (no sudo), allowUnfree, polkit
 │   │   └── services.nix            #   openssh, tailscale, flatpak
 │   │
