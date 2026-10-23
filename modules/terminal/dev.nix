@@ -19,12 +19,8 @@
       home.packages = with pkgs; [
         gh
         lazygit
-        lazyjj
         devenv
         cppman
-        jq
-        nix-search-cli
-        socat
       ];
     };
 }
