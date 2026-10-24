@@ -4,4 +4,4 @@ matugen.setup({
   palette_path = vim.fn.expand("~/.cache/noctalia/nvim-colors.json"),
 })
 matugen.load()
-vim.g.colors_name = "matugen"
+vim.g.colors_name = "noctalia"

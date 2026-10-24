@@ -49,8 +49,6 @@
         enable = true;
         enableFishIntegration = true;
         enableTransience = true;
-        # NOTE: the prompt itself is rendered by Noctalia's starship user
-        # template into $STARSHIP_CONFIG — settings here would be shadowed.
       };
     };
 }

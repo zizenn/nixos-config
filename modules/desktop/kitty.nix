@@ -18,7 +18,7 @@
           confirm_os_window_close = 0;
           allow_remote_control = "socket-only";
           listen_on = "unix:/tmp/kitty-zizenn";
-          include = "themes/matugen.conf";
+          include = "themes/noctalia.conf";
           enabled_layouts = "tall,splits,stack";
         };
         keybindings = {
