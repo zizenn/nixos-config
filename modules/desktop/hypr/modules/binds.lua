@@ -19,8 +19,8 @@ hl.bind(mainMod .. " + code:47", hl.dsp.exec_cmd("noctalia msg panel-toggle sess
 -- apps binds
 -- the floating apps (reuse same single-instance daemon)
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("uwsm app -- kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class yazi-float -e yazi"))
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("uwsm app -- kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class aerc-todo -e aerc"))
-hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("uwsm app -- kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class wiremix-float -e wiremix"))
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("uwsm app -- kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class yazi-float -e aerc"))
+hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("uwsm app -- kitty --single-instance --listen-on unix:/tmp/kitty-zizenn --class yazi-float -e wiremix"))
 -- normal apps
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("uwsm app -- obsidian"))
 
