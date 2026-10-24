@@ -1,0 +1,381 @@
+[audio]
+enable_overdrive = true
+
+[backdrop]
+enabled = true
+
+[bar]
+order = [ "mainPanel" ]
+
+    [bar.mainPanel]
+    background_opacity = 0.4999999888241291
+    capsule = true
+    capsule_radius = 0
+    center = [ "active_window" ]
+    end = [ "tray", "group:g1" ]
+    font_family = "JetBrainsMono Nerd Font"
+    font_scale = 0.89999998733401299
+    font_weight = 400
+    padding = 4
+    radius = 0
+    reserve_space = false
+    scale = 0.95000000670552254
+    shadow = false
+    smart_auto_hide = true
+    start = [ "clock", "workspaces" ]
+    thickness = 33
+
+        [[bar.mainPanel.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        enabled = true
+        fill = "surface_variant"
+        id = "g1"
+        members = [ "volume", "notifications", "session" ]
+        opacity = 1.0
+        padding = 6.0
+        radius = 0.0
+        widget_spacing = 10
+
+[calendar]
+enabled = true
+
+    [calendar.account.personal_google]
+    color = "primary"
+    name = "cal"
+    type = "google"
+
+[control_center]
+hidden_tabs = [ "power", "network", "bluetooth", "screen-time" ]
+width = 790
+
+    [[control_center.shortcuts]]
+    type = "caffeine"
+
+    [[control_center.shortcuts]]
+    type = "nightlight"
+
+    [[control_center.shortcuts]]
+    type = "notification"
+
+    [[control_center.shortcuts]]
+    type = "power_profile"
+
+[desktop_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "desktop-widget-0000000000000004", "desktop-widget-0000000000000006", "desktop-widget-0000000000000007" ]
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000004]
+    box_height = 352.0
+    box_width = 496.0
+    cx = 1608.0
+    cy = 364.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "calendar"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000004.settings]
+        background_radius = 0
+        show_week_numbers = false
+
+    [desktop_widgets.widget.desktop-widget-0000000000000006]
+    box_height = 368.0
+    box_width = 240.0
+    cx = 1480.0
+    cy = 740.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000006.settings]
+        background_radius = 0
+        bands = 32
+        show_when_idle = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000007]
+    box_height = 368.0
+    box_width = 240.0
+    cx = 1736.0
+    cy = 740.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "sysmon"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000007.settings]
+        background_radius = 0
+        stat = "cpu_usage"
+        stat2 = "cpu_temp"
+
+[dock]
+radius = 0
+
+[hooks]
+colors_changed = "hyprctl reload; pkill -SIGUSR1 nvim"
+
+[keybinds]
+down = [ "Down", "Alt+j" ]
+left = [ "Left", "Alt+h" ]
+right = [ "Right", "Alt+l" ]
+up = [ "Up", "Alt+k" ]
+
+[location]
+auto_locate = true
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [
+    "lockscreen-login-box@FALLBACK",
+    "lockscreen-login-box@output-0",
+    "lockscreen-login-box@HDMI-A-1",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-widget-0000000000000002"
+]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@FALLBACK"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "FALLBACK"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@FALLBACK".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@output-0"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 898.0
+    output = "output-0"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@output-0".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 960.0
+    cy = 396.5
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "clock"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+    box_height = 160.0
+    box_width = 288.0
+    cx = 960.0
+    cy = 532.0
+    output = "HDMI-A-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "weather"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+        show_forecast = true
+
+[nightlight]
+enabled = true
+
+[plugins]
+enabled = [ "h465855hgg/lyrics", "mezoahmedii/quranwidget" ]
+
+[shell]
+avatar_path = "/home/zizenn/Pictures/pfp/psyduck_broken-laptop.jpg"
+corner_radius_scale = 0.0
+font_family = "JetBrainsMono NFM"
+launch_apps_as_systemd_services = true
+panel_anchor_bar = "mainPanel"
+password_style = "random"
+polkit_agent = true
+time_format = "{:%I:%M %p}"
+
+    [shell.launcher]
+    categories = false
+    compact = true
+
+    [shell.panel]
+    transparency_mode = "glass"
+
+    [shell.session]
+    grid = true
+
+[theme]
+builtin = "Kanagawa"
+community_palette = "Oxocarbon"
+mode = "dark"
+shell_mode = "dark"
+source = "builtin"
+wallpaper_scheme = "soft"
+
+    [theme.templates]
+    builtin_ids = [ "hyprland", "kitty", "starship" ]
+    enable_builtin_templates = true
+
+        [theme.templates.user.gtk3]
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/gtk.css"
+        output_path = "$XDG_CONFIG_HOME/gtk-3.0/gtk.css"
+
+        [theme.templates.user.gtk4]
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/gtk.css"
+        output_path = "$XDG_CONFIG_HOME/gtk-4.0/gtk.css"
+
+        [theme.templates.user.kvantum]
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/Noctalia.kvconfig"
+        output_path = "$XDG_CONFIG_HOME/Kvantum/Noctalia.kvconfig"
+
+        [theme.templates.user.nvim]
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/nvim-colors.json"
+        output_path = "$XDG_CACHE_HOME/noctalia/nvim-colors.json"
+
+        [theme.templates.user.obsidian]
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/obsidian.css"
+        output_path = "~/Documents/vault/.obsidian/snippets/noctalia.css"
+
+        [theme.templates.user.starship]
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/starship.toml"
+        output_path = "$XDG_CONFIG_HOME/starship/noctalia.toml"
+
+        [theme.templates.user.swaylock]
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/swaylock.conf"
+        output_path = "$XDG_CONFIG_HOME/swaylock/config"
+
+        [theme.templates.user.vesktop]
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/vesktop.css"
+        output_path = "$XDG_CONFIG_HOME/vesktop/themes/noctalia.theme.css"
+
+        [theme.templates.user.zed]
+        input_path = "$XDG_CONFIG_HOME/noctalia/templates/zed.json"
+        output_path = "$XDG_CONFIG_HOME/zed/themes/noctalia.json"
+
+[wallpaper]
+directory = "/home/zizenn/nixos/modules/_personal/wallpapers"
+
+    [wallpaper.default]
+    path = "/home/zizenn/nixos/modules/_personal/wallpapers/star_space.png"
+
+    [wallpaper.last]
+    path = "/home/zizenn/nixos/modules/_personal/wallpapers/star_space.png"
+
+    [wallpaper.monitor.HDMI-A-1]
+    fill_color = "primary"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/zizenn/nixos/modules/_personal/wallpapers/star_space.png"
+
+    [[wallpaper.favorite]]
+    builtin_palette = "Kanagawa"
+    palette_source = "builtin"
+    path = "/home/zizenn/nixos/modules/_personal/wallpapers/star_space.png"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/zizenn/nixos/modules/_personal/wallpapers/cat_rain.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "soft"
+
+    [[wallpaper.favorite]]
+    palette_source = "wallpaper"
+    path = "/home/zizenn/nixos/modules/_personal/wallpapers/katana_cat.png"
+    theme_mode = "dark"
+    wallpaper_scheme = "soft"
+
+[widget.clock]
+font_scale = 0.87000000000000011
+format = "{:%I:%M %p}"
+
+[widget.taskbar]
+group_by_workspace = true
+minimal = true
+
+[widget.volume]
+font_scale = 0.75
+font_weight = 100
+
+[widget.workspaces]
+focused_color = "error"
+hide_when_empty = true
+show_labels = false
+urgent_color = "primary"

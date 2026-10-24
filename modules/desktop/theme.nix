@@ -16,8 +16,6 @@
         GTK_USE_PORTAL = "1";
         QT_STYLE_OVERRIDE = "kvantum";
         QT_QPA_PLATFORMTHEME = lib.mkForce "qt6ct";
-        # Matches XCURSOR_SIZE/HYPRCURSOR_SIZE in hypr/modules/env.lua
-        # and uwsm/env in hyprland.nix.
         XCURSOR_SIZE = "18";
       };
 
@@ -44,9 +42,6 @@
           gtk-decoration-layout = "menu:";
         };
       };
-      # NOTE: gtk.css color files are owned by Noctalia's gtk user
-      # templates (see ./noctalia/theme.toml) and must stay
-      # writable — do NOT manage them here.
 
       qt = {
         enable = true;
@@ -63,8 +58,6 @@
       ];
       xdg.configFile = {
         "Kvantum/kvantum.kvconfig".source = ./qt/kvantum.kvconfig;
-        # NOTE: Kvantum/Noctalia.kvconfig is rendered by Noctalia's kvantum
-        # user template and must stay writable — do NOT manage it here.
         "Kvantum/Noctalia.svg".source = ./qt/Noctalia.svg;
       };
     };

@@ -18,10 +18,8 @@
           confirm_os_window_close = 0;
           allow_remote_control = "socket-only";
           listen_on = "unix:/tmp/kitty-zizenn";
-          include = "themes/noctalia.conf";
+          include = "themes/matugen.conf";
           enabled_layouts = "tall,splits,stack";
-          active_border_color = "#11111b";
-          inactive_border_color = "#11111b";
         };
         keybindings = {
           "ctrl+shift+enter" = "launch --location=vsplit";

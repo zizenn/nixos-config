@@ -21,7 +21,6 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        quickshell
         wl-clipboard
       ];
 
@@ -31,8 +30,6 @@
         recursive = true;
       };
 
-      # Session-wide env for the UWSM-managed session, so systemd user
-      # services (not just Hyprland itself) see these. Mirrors ./hypr/modules/env.lua.
       xdg.configFile."uwsm/env".text = ''
         export XCURSOR_SIZE=18
         export HYPRCURSOR_SIZE=18
