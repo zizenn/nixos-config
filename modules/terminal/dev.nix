@@ -1,7 +1,5 @@
 { ... }:
 {
-  programs.ccache.enable = true;
-
   home-manager.users.zizenn =
     { pkgs, ... }:
     {

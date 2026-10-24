@@ -81,7 +81,7 @@ theme-kanagawa           # apply kanagawa dragon palette (works via SSH)
 - Desktop: Hyprland + Niri (pick at login); login via `services.ly` (TUI display manager)
 - `xdg.configFile` is the standard mechanism for symlinking dotfile directories (avoid manual symlinks)
 - **neovim toolchains are per-project**: LSPs, formatters, debuggers, and compilers come from each project's `devenv.nix` (copy a starter from `modules/terminal/templates/`), NOT the global PATH. Open `nvim` from inside the activated devenv shell — the `devenv hook fish` auto-activates on `cd` after `devenv allow` — so lspconfig finds them.
-- **All language toolchains live in `devenv`**: gcc, cmake, gdb, lldb, make, rust-analyzer, pyright, clangd, nixd, etc. are NOT in home packages. Use `devenv` shells per project. ccache is configured via nix.
+- **All language toolchains live in `devenv`**: gcc, cmake, gdb, lldb, make, rust-analyzer, pyright, clangd, nixd, etc. are NOT in home packages. Use `devenv` shells per project.
 - Indentation: 6 spaces globally (`shiftwidth=6`, `tabstop=6`, `softtabstop=6`), enforced by formatters (stylua, prettier, autopep8, clang-format with `--indent-width 6` / `--tab-width 6` / etc.)
 - clangd is provided by the Nix `clang-tools` package, not Mason.
 - `documentation.doc.enable = false` and `documentation.nixos.enable = false` — man pages are kept; HTML/info docs are not built.
