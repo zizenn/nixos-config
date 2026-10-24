@@ -10,32 +10,24 @@ order = [ "mainPanel" ]
     [bar.mainPanel]
     background_opacity = 0.4999999888241291
     capsule = true
+    capsule_group = []
+    capsule_opacity = 0.0
     capsule_radius = 0
     center = [ "active_window" ]
-    end = [ "tray", "group:g1" ]
+    end = [ "tray", "volume", "notifications", "clock", "session" ]
     font_family = "JetBrainsMono Nerd Font"
     font_scale = 0.89999998733401299
     font_weight = 400
+    margin_edge = 4
+    margin_ends = 83
     padding = 4
     radius = 0
-    reserve_space = false
+    reserve_space = true
     scale = 0.95000000670552254
     shadow = false
-    smart_auto_hide = true
-    start = [ "clock", "workspaces" ]
-    thickness = 33
-
-        [[bar.mainPanel.capsule_group]]
-        accordion = false
-        accordion_direction = "end"
-        enabled = true
-        fill = "surface_variant"
-        id = "g1"
-        members = [ "volume", "notifications", "session" ]
-        opacity = 1.0
-        padding = 6.0
-        radius = 0.0
-        widget_spacing = 10
+    smart_auto_hide = false
+    start = [ "workspaces" ]
+    thickness = 30
 
 [calendar]
 enabled = true
@@ -134,15 +126,9 @@ up = [ "Up", "Alt+k" ]
 auto_locate = true
 
 [lockscreen_widgets]
-enabled = true
+enabled = false
 schema_version = 2
-widget_order = [
-    "lockscreen-login-box@FALLBACK",
-    "lockscreen-login-box@output-0",
-    "lockscreen-login-box@HDMI-A-1",
-    "lockscreen-widget-0000000000000001",
-    "lockscreen-widget-0000000000000002"
-]
+widget_order = [ "lockscreen-login-box@HDMI-A-1" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -199,6 +185,7 @@ widget_order = [
         show_keyboard_layout = true
         show_login_button = true
         show_media = true
+        show_password_reveal = true
         show_session_buttons = true
         show_unlock_hint = true
         show_weather = true
@@ -264,7 +251,7 @@ enabled = [ "h465855hgg/lyrics", "mezoahmedii/quranwidget" ]
 [shell]
 avatar_path = "/home/zizenn/Pictures/pfp/psyduck_broken-laptop.jpg"
 corner_radius_scale = 0.0
-font_family = "JetBrainsMono NFM"
+font_family = "JetBrainsMono NF"
 launch_apps_as_systemd_services = true
 panel_anchor_bar = "mainPanel"
 password_style = "random"
@@ -272,8 +259,11 @@ polkit_agent = true
 time_format = "{:%I:%M %p}"
 
     [shell.launcher]
+    app_grid = true
     categories = false
     compact = true
+    layout = "simple"
+    show_icons = false
 
     [shell.panel]
     transparency_mode = "glass"
@@ -287,10 +277,23 @@ community_palette = "Oxocarbon"
 mode = "dark"
 shell_mode = "dark"
 source = "builtin"
-wallpaper_scheme = "soft"
+wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "hyprland", "kitty", "starship" ]
+    builtin_ids = [ "gtk3", "gtk4", "hyprland", "kcolorscheme", "kitty", "qt", "starship" ]
+    community_ids = [
+        "zen-browser",
+        "blender",
+        "libreoffice",
+        "prismlauncher",
+        "steam",
+        "obs",
+        "hyprtoolkit",
+        "fzf",
+        "herdr",
+        "lazygit",
+        "yazi"
+    ]
     enable_builtin_templates = true
 
         [theme.templates.user.gtk3]
@@ -333,16 +336,16 @@ wallpaper_scheme = "soft"
 directory = "/home/zizenn/nixos/modules/_personal/wallpapers"
 
     [wallpaper.default]
-    path = "/home/zizenn/nixos/modules/_personal/wallpapers/star_space.png"
+    path = "/home/zizenn/nixos/modules/_personal/wallpapers/gojo.png"
 
     [wallpaper.last]
-    path = "/home/zizenn/nixos/modules/_personal/wallpapers/star_space.png"
+    path = "/home/zizenn/nixos/modules/_personal/wallpapers/gojo.png"
 
     [wallpaper.monitor.HDMI-A-1]
     fill_color = "primary"
 
     [wallpaper.monitors.HDMI-A-1]
-    path = "/home/zizenn/nixos/modules/_personal/wallpapers/star_space.png"
+    path = "/home/zizenn/nixos/modules/_personal/wallpapers/gojo.png"
 
     [[wallpaper.favorite]]
     builtin_palette = "Kanagawa"
@@ -352,15 +355,12 @@ directory = "/home/zizenn/nixos/modules/_personal/wallpapers"
 
     [[wallpaper.favorite]]
     palette_source = "wallpaper"
-    path = "/home/zizenn/nixos/modules/_personal/wallpapers/cat_rain.png"
-    theme_mode = "dark"
-    wallpaper_scheme = "soft"
-
-    [[wallpaper.favorite]]
-    palette_source = "wallpaper"
     path = "/home/zizenn/nixos/modules/_personal/wallpapers/katana_cat.png"
     theme_mode = "dark"
-    wallpaper_scheme = "soft"
+    wallpaper_scheme = "m3-content"
+
+    [[wallpaper.favorite]]
+    path = "/home/zizenn/nixos/modules/_personal/wallpapers/cat_rain.png"
 
 [widget.clock]
 font_scale = 0.87000000000000011
@@ -372,10 +372,15 @@ minimal = true
 
 [widget.volume]
 font_scale = 0.75
-font_weight = 100
+font_weight = 400
 
 [widget.workspaces]
-focused_color = "error"
+active_pill_size = 2.9500000000000002
+color = "shadow"
+empty_color = "on_primary"
+focused_color = "primary"
+font_weight = 700
 hide_when_empty = true
-show_labels = false
-urgent_color = "primary"
+inactive_pill_size = 2.2000000000000002
+show_labels = true
+urgent_color = "error"
