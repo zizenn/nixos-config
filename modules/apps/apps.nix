@@ -14,6 +14,7 @@
         vlc
         zathura
         inputs.zen-browser.packages.${system}.default
+        librewolf
       ];
     };
 }
